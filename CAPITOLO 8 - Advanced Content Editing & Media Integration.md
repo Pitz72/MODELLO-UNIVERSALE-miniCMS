@@ -23,11 +23,15 @@ Il `MediaPicker` è il ponte tra l'editor di news e la libreria media.
 - **Search & Filter**: Ricerca testuale in tempo reale sulla lista dei file e filtraggio automatico per il tipo di dato richiesto dal form (es. solo immagini per la cover, solo audio per il podcast).
 - **Selection Callback**: Restituzione dell'URL relativo al componente genitore, con chiusura automatica del modale.
 
-## 3. Rich Text Editor & Sanitizzazione
-L'editor di testo è il cuore dell'interfaccia. Per garantire la pulizia del codice e la coerenza del layout:
-- **Paste Protection (Advanced)**: Intercettazione dell'evento `paste` con rimozione di stili inline, classi CSS estranee e attributi non necessari (tipici di Word o Wikipedia).
-- **Markdown Support**: Convertitore integrato per trasformare automaticamente testi formattati in Markdown nel corrispondente HTML semantico durante l'incollaggio.
-- **State Reset (Key Strategy)**: L'uso di `key={id}` nel componente React per garantire la pulizia dei buffer interni e l'inizializzazione corretta del cursore ad ogni cambio di contenuto.
+## 3. Rich Text Editor & Formattazione (UX Avanzata)
+L'editor di testo è il cuore dell'interfaccia. Pur rinunciando a pesanti dipendenze esterne in favore di soluzioni native-React, le evoluzioni architetturali (v1.7.9) prevedono l'implementazione obbligatoria dei seguenti pattern UX:
+- **Sticky Actions**: La toolbar di formattazione deve utilizzare `sticky top-0 z-30` (o simili) affinché non scompaia mai dallo schermo durante la scrittura di articoli molto lunghi.
+- **Keyboard Shortcuts**: L'intercettazione nativa degli eventi tastiera (es. `Ctrl+K`) per innescare modali specifici (es. inserimento link) senza costringere l'uso del mouse.
+- **Metriche in Real-Time**: Il rendering di una status bar a piè di pagina con contatori istantanei di parole e caratteri, fornendo metriche vitali per il targeting SEO.
+- **Interoperabilità Tabelle**: Funzioni native per l'inserimento di griglie di dati compatibili con i plugin di Typography del frontend pubblico.
+- **State Reset (Key Strategy)**: L'uso rigido di `key={id}` nel componente genitore React per garantire la pulizia istantanea dei buffer interni al caricamento di un nuovo articolo.
+- **Paste Protection**: Intercettazione pro-attiva dell'evento `paste` con rimozione di stili inline, script e attributi pericolosi (generati tipicamente incollando da Word o Wikipedia).
+- **Markdown Paster**: Conversione silenziosa "in volo" se il testo intercettato segue notazioni Markdown verso l'HTML semantico compatibile.
 
 ## 4. Gestione degli URL e Portabilità
 - **Relative Path Strategy**: Nel database vengono salvati solo percorsi relativi (es. `/api/uploads/file.jpg`).

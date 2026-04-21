@@ -39,7 +39,7 @@ echo '  <language>it-IT</language>' . "\n";
 
 try {
     $stmt = $pdo->prepare(
-        "SELECT title, slug, excerpt, content, cover_image, category, published_at
+        "SELECT id, title, slug, excerpt, content, cover_image, category, published_at
          FROM articles
          WHERE status = 'published'
            AND (published_at IS NULL OR published_at = '' OR published_at <= :now)
@@ -53,13 +53,14 @@ try {
         // Formato data secondo RFC 822 (obbligatorio per RSS 2.0)
         $pubDate  = date(DATE_RSS, strtotime($article['published_at'] ?? 'now'));
         $item_url = $base_url . '/' . rawurlencode($article['category']) . '/' . rawurlencode($article['slug']);
+        $guid     = 'urn:tuosito:article:' . $article['id'];
 
         echo '  <item>' . "\n";
         echo '    <title>' . htmlspecialchars($article['title']) . '</title>' . "\n";
         echo '    <link>' . htmlspecialchars($item_url) . '</link>' . "\n";
         echo '    <description>' . htmlspecialchars($article['excerpt']) . '</description>' . "\n";
         echo '    <pubDate>' . $pubDate . '</pubDate>' . "\n";
-        echo '    <guid>' . htmlspecialchars($item_url) . '</guid>' . "\n";
+        echo '    <guid isPermaLink="false">' . htmlspecialchars($guid) . '</guid>' . "\n";
 
         // Enclosure per immagine (utile per aggregatori che mostrano preview)
         if (!empty($article['cover_image'])) {
@@ -116,7 +117,12 @@ $img_url = str_starts_with($article['cover_image'], 'http')
 ```
 
 ### 2.5 GUID Univoco
-Il tag `<guid>` identifica univocamente ogni articolo nel feed. Usare l'URL dell'articolo come GUID garantisce univocità e stabilità nel tempo (l'URL non cambia dopo la pubblicazione, grazie alla logica di auto-slug che non rigenera per articoli esistenti — vedi Capitolo 9).
+Il tag `<guid>` identifica univocamente ogni articolo nel feed. **Mai usare l'URL dell'articolo come GUID**. 
+L'esperienza reale (Incidente Titan Desktop v1.7.3) ha dimostrato che qualora vi sia in futuro un refactoring delle URL (es. cambio struttura categorie nel CMS), i bot degli aggregatori e i bot di Telegram considereranno tutti gli articoli con nuova URL come contenuti "nuovi", ri-pubblicandoli e generando spam gravissimo.
+
+**Soluzione Definitiva**: Usare uno standard URN crittografico, totalmente svincolato dal nome dominio o dal percorso cartelle, basato sull'ID nativo di database: 
+`<guid isPermaLink="false">urn:tuosito:article:{id}</guid>`.
+In questo modo anche se l'URL e le tassonomie cambiano 100 volte, il bot tratterà il contenuto come "entità già vista".
 
 ## 3. Feed RSS per Podcast (Podcast App)
 

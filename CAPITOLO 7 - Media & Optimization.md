@@ -30,11 +30,10 @@ L'`index.php` nella root pubblica intercetta tutte le richieste, estrae lo slug 
 SitoRuntime include ancora `rebuild_seo_cache.php`, uno script di manutenzione che rigenera file JSON di cache SEO per entità pre-esistenti nel database. Utile per migrazioni e fix straordinari. Da eliminare dopo l'uso in produzione.
 
 ## 3. Ottimizzazione Media & Compression
-### 3.1 Normalizzazione delle Immagini (PHP GD)
-Non è permesso servire immagini "grezze" caricate dall'utente. Il backend PHP deve:
-- Ridimensionare a max 1920px (larghezza) o 1080px (altezza).
-- Applicare una compressione del 85% per JPEG/WebP.
-- Convertire (opzionale) in formati moderni come WebP per ridurre il peso del 30-50% rispetto al JPEG.
+### 3.1 Normalizzazione Immagini e Auto-WebP (PHP GD)
+Non è permesso servire immagini "grezze" caricate dall'utente. Il backend PHP (script di upload) implementa due passi inderogabili:
+- **Ridimensionamento geometrico**: Scale-down proporzionale a max 1920px (larghezza) o 1080px (altezza) sulle raw-images.
+- **Transcodifica obbligatoria WebP**: Rende trasparente all'utente la conversione on-the-fly (`imagewebp()`) dei formati grafici con compressione lossy/lossless automatizzata, riducendo drasticamente il payload di carico (30-50%). Dal branch `v1.6.3` in poi questo pattern è diventato lo standard ufficiale del miniCMS rimuovendo la natura opzionale.
 
 ### 3.2 Sharp (Node.js) per Image Processing Build-Time
 **SimonePizziWebSite** introduce `sharp` come dipendenza Node.js per il processing di immagini in fase di build o come utility script. Sharp è più performante di PHP GD per batch processing e supporta formati moderni (AVIF, WebP) con qualità superiore. Non è un'alternativa al backend PHP per upload live — è complementare per pre-processing di asset statici.

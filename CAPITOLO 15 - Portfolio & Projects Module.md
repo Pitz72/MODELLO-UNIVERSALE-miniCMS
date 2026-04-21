@@ -110,6 +110,10 @@ Ogni progetto può avere fino a due pulsanti di azione che puntano a risorse est
 
 Il `rel="noopener noreferrer"` è obbligatorio per i link `target="_blank"`: previene l'accesso alla `window.opener` della pagina madre da parte della pagina di destinazione (vulnerabilità tabnapping).
 
+### 4.1 Switch Dinamico Web / Email
+Una feature avanzata introdotta nella gestione dei CTA (SimonePizziWebSite v1.7.x) è il toggle "Tipo di Link" lato Editor. Spesso un CTA in un progetto personale non punta a un sito web, ma deve aprire il client email.
+L'editor include uno switch (Web URL / Email) che, se impostato su Email, aggiunge automaticamente il prefisso protocollare `mailto:` alla stringa salvata nel DB ignorando l'`https://`, garantendo che l'autore non compia errori di distrazione fornendo una UX sicura.
+
 ## 5. Il Pattern di Slug Avanzato (Normalizzazione Accenti Italiani)
 
 Scoperto in `articles.php` di SimonePizziWebSite, questo pattern risolve un problema reale: le parole italiane con accenti generano slug malformati.
@@ -173,20 +177,18 @@ La lista admin dei progetti espone:
 - **Filtro per categoria**: segmentazione visiva della lista
 
 ## 7. Strategie di Categoria
+Inizialmente (sino alla v1.6.0), le categorie erano progettate in modo statico: stringhe fisse definite all'interno del codice React (`PROJECT_CATEGORIES`).
 
-Le categorie sono stringhe fisse definite nel codice (non in database). Questo approccio è deliberato: le categorie di un portfolio cambiano raramente e la gestione da DB aggiungerebbe complessità non necessaria.
+Tuttavia, l'esperienza in produzione su SimonePizziWebSite ha dimostrato che un portfolio in crescita richiede flessibilità editoriale totale. Con la **v1.7.10**, l'architettura è stata migrata verso un modello nativamente **DB-driven e Dinamico**.
 
-```typescript
-// Categorie fisse in constants.ts o direttamente nel componente
-const PROJECT_CATEGORIES = [
-  { value: 'progetti-software', label: 'Software' },
-  { value: 'videogiochi',       label: 'Videogiochi' },
-  { value: 'narrativa',         label: 'Narrativa' },
-  { value: 'altro',             label: 'Altro' },
-];
-```
+### Sistema Relazionale Categorie e Tag
+Il database si è arricchito delle tabelle `categories` e `tags`, assieme a tabelle pivot per relazioni molti-a-molti (`article_tags`).
+Il frontend non possiede più array hardcoded, ma effettua il fetching all'avvio chiamando endpoints specifici (es. `GET /api/categories.php`).
 
-Per cambiare le categorie basta aggiornare questa lista nel codice frontend e, se necessario, aggiornare i record esistenti con un'unica query SQL.
+**Perché questa migrazione è stata vitale:**
+1. L'amministratore può modificare, rinominare o depotenziare categorie dal volo tramite pannello admin senza richiedere una nuova "build" di Vite.
+2. Introduce il supporto al **Multi-Tagging** per l'incrocio dimensionale dei contenuti.
+3. Il frontend mappa in UI istantaneamente questi nuovi filtri, rendendo la navigazione della libreria estremamente flessibile.
 
 ## 8. `auth_helper.php` — Il Pattern Minimale
 

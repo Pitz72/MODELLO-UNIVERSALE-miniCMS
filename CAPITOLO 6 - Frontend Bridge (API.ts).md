@@ -47,5 +47,13 @@ return data;
 ## 5. TypeScript Integration (Type Safety)
 Ogni metodo dell'oggetto API deve (dove possibile) essere tipizzato. Questo garantisce che il frontend conosca esattamente la struttura dei dati (es. `NewsArticle[]`, `UserRole`, `StatsResponse`) riducendo errori di runtime dovuti a proprietà mancanti o rinominate.
 
+## 6. Scalabilità e Paginazione Backend-driven
+Nei primi stadi di vita di un portfolio o blog, fetching globali (es. estrattore massivo di tutti gli articoli array-based) sono tollerabili. Tuttavia, l'esperienza operativa di SimonePizziWebSite (giunto alla v1.7.12) manifesta come tale ingenuità causi degradazione prestazionale e memory issues (rallentamento del Time to Interactive React).
+
+Lo standard del Modello Universale eleva l'approccio alla **paginazione nativa server-side**:
+- **Parametrizzazione Query**: Le API GET di liste (articoli, log, item) devono accettare query params tipizzati `?page=N&limit=10`. Le query backend devono forzare stringhe di `LIMIT :limit OFFSET :offs`.
+- **Custom React Hooks**: Il bridge usa hook specializzati (come `useFetchArticles`) che conservano lo step matematico e lo stato `hasMore`. La logica "Carica altro" non sostituisce lo scope del JS, ma *appensa* linearmente i nuovi frame JSON ricevuti.
+- **Strategie Pre-Fetch Limitizzate**: Sezioni UI ad alta densità (come vetrine e griglie Home Page) limitizzano *at runtime* la chiamata (es. `slice(0, 7)`) garantendo un mounting fulmineo.
+
 ---
 *Prossimo Capitolo: Media & Optimization - Caching, ridimensionamento e SEO.*

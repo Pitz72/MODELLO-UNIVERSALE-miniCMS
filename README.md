@@ -19,7 +19,7 @@ L'obiettivo è uno standard di sviluppo per Web App moderne leggere che sia:
 | **SitoRuntime** (Runtime Radio) | MySQL (migrato da SQLite) | v2.6.2 | Radio web, Speakers, Podcast, Quill Editor, CORS |
 | **DISINTELLIGENZA** | SQLite | v0.5.4 | Festival con votazioni e iscrizioni (base originale) |
 | **FDCA** | SQLite | fork di DISINTELLIGENZA | Festival concorso musicale (fork identico) |
-| **SimonePizziWebSite** | SQLite | v1.6.0 | Portfolio personale, Projects, Articles, RSS, SEO Engine |
+| **SimonePizziWebSite** | MySQL (migrato) | v1.7.13 | Portfolio personale, Projects, Dynamic Tags, Pagination, RSS URN, SEO Engine |
 
 ---
 

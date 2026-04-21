@@ -35,13 +35,25 @@ value={published_at.replace(' ', 'T').slice(0, 16)}
 onChange={e => setPublishedAt(e.target.value.replace('T', ' ') + ':00')}
 ```
 
+### 2.3 UX della Tabella di Gestione (Admin)
+Mentre le API formiscono i dati bruti, la dashboard amministrativa (rivisitata architetturalmente in SimonePizziWebSite v1.7.x) impone standard visivi di proporzione per la tabella articoli (`ArticlesList.tsx`), vitali per non asfissiare l'editing:
+- **Contenimento Titolo**: La main column (Titolo) non deve eccedere il 45% della table-grid.
+- **Badge Cromatico Categoria**: Rendere esplicita una colonna per la "Categoria" (15% di footprint) decorata con badge a colori sfalsati per la selezione rapida con lo sguardo.
+- **Metadati Fissi**: Riservare il 20% alle Date di pubblicazione ed un 20% allo Stato dinamicamente calcolato (Bozza/Programmato).
+- **Icon Actions**: Condensare l'edit/delete in action-button con icona standardizzata a fine riga (senza label text) per salvare la responsività da tablet.
+
 ## 3. Workflow Editoriale e Integrità
 - **Auto-Slug**: Lo slug deve essere rigenerato solo alla creazione o se esplicitamente richiesto, per evitare di rompere i link esistenti (SEO integrity) in caso di modifica del titolo.
 - **Rich Text Reset**: Durante il passaggio tra la modifica di due contenuti diversi, il componente editor deve essere forzatamente rimosso e reinserito (`key={item.id}`) per pulire i buffer interni e prevenire perdite di dati cross-articolo.
 - **Anteprima Immediata**: Il form deve mostrare una miniatura (preview) dell'immagine di copertina selezionata, con possibilità di rimozione istantanea prima del salvataggio.
 
-## 4. Gestione Multicategoria e Tagging
-Il sistema deve supportare la categorizzazione fissa (dropdown) unita al tagging libero (input a virgola), permettendo al frontend di filtrare i contenuti con logiche di "Related Content" basate sui tag comuni.
+## 4. Gestione Categorie Sincrone e Tagging Relazionale
+Storicamente (fino alle versioni 1.6), il tagging veniva gestito come campo testuale e organizzato visivamente dividendo con la virgola. Questa pratica (flat-string) rende i filtri globali fragili e non scalabili.
+
+Dalla versione 1.7.12 (SimonePizziWebSite), lo standard miniCMS decreta il passaggio esclusivo all'architettura **RDBMS Multi-Tagging Relazionale**:
+1. Abbandono stringhe statiche per la generazione delle tabelle relazionali: `tags` e `article_tags` (per le relazioni Many-to-Many).
+2. L'editor React per la generazione/scrittura degli articoli fa il preload dei `tags` censiti sul database popolando un sistema **Select Multiplo API-driven**, annullando il tasso d'errore (typo) dell'editor.
+3. Questo permette al filesystem SQL di creare rotte parametriche iper-semantiche e query combinate (es: `articoli categoria X e tag Y`) a costo misero.
 
 ## 5. Security & Visibility (Bypass Logic)
 

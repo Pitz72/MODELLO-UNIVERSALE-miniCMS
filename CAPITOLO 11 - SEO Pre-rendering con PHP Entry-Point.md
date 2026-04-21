@@ -22,6 +22,12 @@ index.php → legge index.html compilato da Vite → inietta meta tag → serve 
 Bot → "ho trovato contenuto, indexo"
 ```
 
+> [!WARNING]
+> **I Limiti della Soluzione (Incidente "Sito Invisibile")**
+> L'esperienza sul campo (SimonePizziWebSite v1.7.x) ha dimostrato che il trick dello Swap PHP è una soluzione eccellente per **Social Bot** (Telegram, Facebook, Twitter, iMessage) che si accontentano dei meta-tag nell'<head>. 
+> Tuttavia, **NON è sufficiente per l'indicizzazione organica su Google (SEO puro)**. I moderni crawler come Googlebot cercano l'HTML renderizzato semantico nel `<body>`. Trovando solo un `<div id="root">`, Google indicizzerà pochissime pagine (es. 1 su 30). 
+> Per risolvere l'indicizzazione SEO profonda di una SPA, l'architettura miniCMS consiglia l'integrazione di plugin per **Static Prerendering** in fase di build (come `vite-plugin-prerender`), pur mantenendo l'infrastruttura di deploy immutata.
+
 ## 2. Il Meccanismo: Build Rename Strategy
 
 Il trick sta nel **rinominare** l'`index.html` generato da Vite in modo che `index.php` possa occupare quella posizione come entry-point principale.
