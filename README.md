@@ -1,12 +1,12 @@
-# React + PHP: The Thin Stack
+﻿# React + PHP: The Thin Stack
 ## Il protocollo miniCMS per Web App moderne
-### A cura di Simone Pizzi — Prima Edizione
+### A cura di Simone Pizzi â€” Seconda Edizione
 
 ---
 
 Questo repository raccoglie le migliori pratiche, le architetture e le logiche software sviluppate e affinate attraverso quattro progetti reali: **SitoRuntime**, **DISINTELLIGENZA**, **FDCA** e **SimonePizziWebSite**.
 
-L'obiettivo è uno standard di sviluppo per Web App moderne leggere che sia:
+L'obiettivo Ã¨ uno standard di sviluppo per Web App moderne leggere che sia:
 1. **Sicuro**: Protezione dei dati sensibili e prevenzione degli attacchi comuni.
 2. **Performante**: Caching intelligente e database ottimizzati.
 3. **Scalabile**: Passaggio documentato e testato da SQLite a MySQL.
@@ -25,19 +25,19 @@ L'obiettivo è uno standard di sviluppo per Web App moderne leggere che sia:
 
 ## Struttura del Manuale
 
-### Parte I — La Visione
-*Il perché. La filosofia che guida ogni decisione tecnica.*
+### Parte I â€” La Visione
+*Il perchÃ©. La filosofia che guida ogni decisione tecnica.*
 
 - [Capitolo 1: Manifesto](./CAPITOLO%201%20-%20Manifesto.md)
 
-### Parte II — L'Architettura
+### Parte II â€” L'Architettura
 *Le fondamenta. Struttura del progetto, database, stack tecnologico.*
 
 - [Capitolo 2: Architettura e Struttura Progetto](./CAPITOLO%202%20-%20Architettura%20e%20Struttura%20Progetto.md)
 - [Capitolo 3: Database Strategy](./CAPITOLO%203%20-%20Database%20Strategy.md)
 - [Capitolo 4: Frontend Dependencies](./CAPITOLO%204%20-%20Frontend%20Dependencies.md)
 
-### Parte III — I Componenti
+### Parte III â€” I Componenti
 *I mattoni. Backend, frontend, media, editor: i building block del sistema.*
 
 - [Capitolo 5: Backend Logic (PHP)](./CAPITOLO%205%20-%20Backend%20Logic%20(PHP).md)
@@ -45,7 +45,7 @@ L'obiettivo è uno standard di sviluppo per Web App moderne leggere che sia:
 - [Capitolo 7: Media & Optimization](./CAPITOLO%207%20-%20Media%20%26%20Optimization.md)
 - [Capitolo 8: Advanced Content Editing & Media Integration](./CAPITOLO%208%20-%20Advanced%20Content%20Editing%20%26%20Media%20Integration.md)
 
-### Parte IV — Il Flusso Operativo
+### Parte IV â€” Il Flusso Operativo
 *Come i contenuti vivono. Dal ciclo di vita alla distribuzione, passando per sicurezza e SEO.*
 
 - [Capitolo 9: Content Lifecycle](./CAPITOLO%209%20-%20Content%20Lifecycle.md)
@@ -54,7 +54,7 @@ L'obiettivo è uno standard di sviluppo per Web App moderne leggere che sia:
 - [Capitolo 12: RSS Feed & Syndication](./CAPITOLO%2012%20-%20RSS%20Feed%20%26%20Syndication.md)
 - [Capitolo 13: Newsletter & Email System](./CAPITOLO%2013%20-%20Newsletter%20%26%20Email%20System.md)
 
-### Parte V — I Casi Reali
+### Parte V â€” I Casi Reali
 *Dove la teoria incontra la produzione. Pattern estratti da progetti reali, con le loro cicatrici.*
 
 - [Capitolo 14: Database Evolution - Da SQLite a MySQL](./CAPITOLO%2014%20-%20Database%20Evolution%20-%20Da%20SQLite%20a%20MySQL.md)
@@ -69,4 +69,6 @@ L'obiettivo è uno standard di sviluppo per Web App moderne leggere che sia:
 - [Boilerplate Checklist](./BOILERPLATE-CHECKLIST.md)
 
 ---
-*Prima Edizione — Marzo 2026*
+*Seconda Edizione â€” Maggio 2026*
+
+- [CAPITOLO 19 - Social Interactions & Reactions](CAPITOLO%2019%20-%20Social%20Interactions%20&%20Reactions.md)

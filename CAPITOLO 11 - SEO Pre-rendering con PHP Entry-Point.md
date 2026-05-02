@@ -194,5 +194,44 @@ if (!$article) {
 
 Il `.htaccess` del Modello Universale (Capitolo 2) gestisce già il routing. Apache serve `index.php` come documento predefinito se presente, prima di `index.html`. Non è necessario alcun aggiornamento delle regole RewriteRule.
 
+
+## 7. Dynamic Sitemap & Robots.txt (v2.0)
+
+L'evoluzione naturale dal prerendering statico è la generazione dinamica dei file di servizio SEO. Questo elimina la necessità di rigenerare file fisici ogni volta che un articolo viene pubblicato o modificato.
+
+### 7.1 Mappatura via .htaccess
+Invece di avere file sitemap.xml e obots.txt reali, usiamo Apache per dirottare le richieste verso script PHP:
+
+`pache
+# SEO Files — SEMPRE serviti da PHP (contenuto dinamico real-time)
+RewriteRule ^sitemap\.xml$ sitemap.php [L,NC]
+RewriteRule ^robots\.txt$ robots.php [L,NC]
+`
+
+### 7.2 Robots.php Dinamico
+Garantisce che il link alla Sitemap punti sempre al dominio corretto, calcolato dinamicamente:
+
+`php
+header("Content-Type: text/plain; charset=utf-8");
+ = (!empty(['HTTPS']) && ['HTTPS'] !== 'off') ? "https://" : "http://";
+  =  . ['HTTP_HOST'];
+
+echo "User-agent: *" . PHP_EOL;
+echo "Allow: /" . PHP_EOL;
+echo "Disallow: /admin/" . PHP_EOL;
+echo PHP_EOL;
+echo "Sitemap: /sitemap.xml" . PHP_EOL;
+`
+
+### 7.3 Sitemap.php Dinamica
+Recupera categorie, sottocategorie e articoli direttamente dal database.
+
+**Vantaggi Chiave:**
+1.  **Real-time:** Un nuovo articolo appare nella sitemap istantaneamente.
+2.  **Lastmod Preciso:** Il campo <lastmod> delle categorie viene calcolato in base alla data dell'ultimo articolo pubblicato in quella categoria.
+3.  **Zero Manutenzione:** Non serve più uno script di prerendering o una build manuale per aggiornare la SEO.
+4.  **BaseUrl Dinamico:** Lo stesso script funziona su localhost, staging e produzione senza modifiche.
+
 ---
+
 *Prossimo Capitolo: RSS Feed & Syndication - Come generare feed XML per aggregatori e podcast app.*

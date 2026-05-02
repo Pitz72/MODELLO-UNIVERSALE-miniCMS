@@ -1,4 +1,4 @@
-# CAPITOLO 5: Backend Logic (PHP) (v1.2 - ADVANCED)
+﻿# CAPITOLO 5: Backend Logic (PHP) (v2.0 - ADVANCED)
 
 Il backend del miniCMS funge da motore di elaborazione dati e guardiano della sicurezza. Questa sezione definisce gli standard per la manipolazione delle stringhe, l'elaborazione dei file e la gestione delle risposte.
 
@@ -15,13 +15,13 @@ function createSlug($string) {
 ```
 
 ### 1.2 Algoritmo Avanzato (con Normalizzazione Accenti Italiani)
-Il pattern base produce slug malformati con parole italiane che contengono accenti (es. `"caffè"` → `"caff-"`). Il pattern avanzato, implementato in **SimonePizziWebSite**, risolve il problema con una mappa esplicita:
+Il pattern base produce slug malformati con parole italiane che contengono accenti (es. `"caffÃ¨"` â†’ `"caff-"`). Il pattern avanzato, implementato in **SimonePizziWebSite**, risolve il problema con una mappa esplicita:
 
 ```php
 function generateSlug($title, $pdo) {
     // Mappa esplicita accenti italiani e francesi comuni
-    $accents      = ['à','è','é','ì','ò','ù','À','È','É','Ì','Ò','Ù',
-                     'â','ê','î','ô','û','ä','ë','ï','ö','ü'];
+    $accents      = ['Ã ','Ã¨','Ã©','Ã¬','Ã²','Ã¹','Ã€','Ãˆ','Ã‰','ÃŒ','Ã’','Ã™',
+                     'Ã¢','Ãª','Ã®','Ã´','Ã»','Ã¤','Ã«','Ã¯','Ã¶','Ã¼'];
     $replacements = ['a','e','e','i','o','u','a','e','e','i','o','u',
                      'a','e','i','o','u','a','e','i','o','u'];
 
@@ -40,12 +40,12 @@ function generateSlug($title, $pdo) {
 Usare sempre il pattern avanzato per siti con contenuto italiano.
 
 ### 1.3 Strategia Anti-Collisione
-In fase di creazione, il backend deve verificare l'esistenza dello slug. Se presente, viene aggiunto un suffisso temporale per garantire l'unicità senza errori di database.
+In fase di creazione, il backend deve verificare l'esistenza dello slug. Se presente, viene aggiunto un suffisso temporale per garantire l'unicitÃ  senza errori di database.
 ```php
 $stmt = $pdo->prepare("SELECT count(*) FROM news WHERE slug = ?");
 $stmt->execute([$slug]);
 if ($stmt->fetchColumn() > 0) {
-    $slug .= '-' . time(); // Aggiunge timestamp per unicità assoluta
+    $slug .= '-' . time(); // Aggiunge timestamp per unicitÃ  assoluta
 }
 ```
 
@@ -80,10 +80,10 @@ elseif ($method === 'PATCH') { Auth::check(); /* ... */ }
 elseif ($method === 'DELETE') { Auth::check(); /* ... */ }
 ```
 
-**Nota**: In progetti più vecchi (DISINTELLIGENZA, SitoRuntime prima del refactor), tutte le operazioni di modifica usavano POST con un campo `action` nel body. Il pattern RESTful con metodi separati è più leggibile e permette al frontend TypeScript di essere più espressivo.
+**Nota**: In progetti piÃ¹ vecchi (DISINTELLIGENZA, SitoRuntime prima del refactor), tutte le operazioni di modifica usavano POST con un campo `action` nel body. Il pattern RESTful con metodi separati Ã¨ piÃ¹ leggibile e permette al frontend TypeScript di essere piÃ¹ espressivo.
 
-## 4. Il Pattern auth_helper.php (Autenticazione Inline)
-SimonePizziWebSite introduce un pattern più snello per la gestione dell'autenticazione: un file `auth_helper.php` che incapsula `session_start()`, l'header `Content-Type` e la classe `Auth` in un unico include:
+## 4. Il Pattern auth_helper.php (v2.0) (Autenticazione Inline)
+SimonePizziWebSite introduce un pattern piÃ¹ snello per la gestione dell'autenticazione: un file `auth_helper.php` che incapsula `session_start()`, l'header `Content-Type` e la classe `Auth` in un unico include:
 
 ```php
 <?php
@@ -111,10 +111,10 @@ require_once 'auth_helper.php'; // Gestisce session_start() e Content-Type per t
 Auth::check();
 ```
 
-**Vantaggio**: `session_start()` e `header()` vengono chiamati una volta sola nel file helper — meno rischi di "headers already sent" dovuti a spazi o BOM nel file PHP.
+**Vantaggio**: `session_start()` e `header()` vengono chiamati una volta sola nel file helper â€” meno rischi di "headers already sent" dovuti a spazi o BOM nel file PHP.
 
 ## 5. Elaborazione Media e Ottimizzazione Immagini
-Il caricamento di un file non è un semplice spostamento (`move_uploaded_file`), ma un processo di trasformazione.
+Il caricamento di un file non Ã¨ un semplice spostamento (`move_uploaded_file`), ma un processo di trasformazione.
 
 ### 5.1 Polimorfismo dei Percorsi
 Il sistema deve mappare il `type` di upload a percorsi fisici e pubblici differenti, applicando logiche di sicurezza specifiche per ogni categoria:
@@ -123,21 +123,21 @@ Il sistema deve mappare il `type` di upload a percorsi fisici e pubblici differe
 - **audio/participants/**: Caricamento aperto (se abilitato), cartella isolata.
 
 ### 5.2 Auto-Resize & Trasparenza
-Ogni immagine caricata dall'admin deve essere normalizzata (es. max 1920px) per preservare lo spazio su disco e la velocità di caricamento del frontend.
+Ogni immagine caricata dall'admin deve essere normalizzata (es. max 1920px) per preservare lo spazio su disco e la velocitÃ  di caricamento del frontend.
 - **PNG/WebP**: Il backend deve preservare il canale Alpha (`imagealphablending`, `imagesavealpha`).
-- **Qualità**: Standard fissato a 85% per JPEG/WebP per un bilanciamento ottimale peso/qualità.
+- **QualitÃ **: Standard fissato a 85% per JPEG/WebP per un bilanciamento ottimale peso/qualitÃ .
 
 ## 6. Sicurezza dell'Input e Output
-- **Sanitizzazione Nomi**: Ogni file caricato deve essere rinominato usando `uniqid()` e pulito da caratteri speciali per evitare vulnerabilità di esecuzione script.
+- **Sanitizzazione Nomi**: Ogni file caricato deve essere rinominato usando `uniqid()` e pulito da caratteri speciali per evitare vulnerabilitÃ  di esecuzione script.
 - **JSON Integrity**: Ogni risposta deve essere preceduta da `header('Content-Type: application/json')`. In caso di errore, deve essere inviato il codice HTTP corretto (`400`, `401`, `403`, `500`) unito a un messaggio JSON descrittivo.
 - **FILTER_SANITIZE_STRING deprecato** (PHP 8.1+): Usare `strip_tags(trim($var))` in alternativa.
 
 ## 7. CORS Management
-SitoRuntime include un file dedicato `cors.php` per la gestione degli header CORS, utile quando il frontend è servito da un dominio diverso dall'API (es. sviluppo locale con Vite proxy):
+SitoRuntime include un file dedicato `cors.php` per la gestione degli header CORS, utile quando il frontend Ã¨ servito da un dominio diverso dall'API (es. sviluppo locale con Vite proxy):
 
 ```php
 <?php
-// cors.php — da includere prima di qualsiasi output nelle API pubbliche
+// cors.php â€” da includere prima di qualsiasi output nelle API pubbliche
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Methods: GET, POST, OPTIONS");
 header("Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With");
@@ -149,10 +149,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 }
 ```
 
-**Nota**: In produzione con frontend e API sullo stesso dominio, questo file non è necessario. Limitare `Access-Control-Allow-Origin: *` all'ambiente di sviluppo; in produzione specificare il dominio esatto.
+**Nota**: In produzione con frontend e API sullo stesso dominio, questo file non Ã¨ necessario. Limitare `Access-Control-Allow-Origin: *` all'ambiente di sviluppo; in produzione specificare il dominio esatto.
 
 ## 8. Buffer Management
 Per evitare che errori PHP (Notice/Warning) sporchino l'output JSON rendendolo invalido per il frontend, il Modello Universale suggerisce l'uso di `ob_start()` o la disattivazione dei log a schermo in produzione (`display_errors = 0`).
 
 ---
 *Prossimo Capitolo: Frontend Bridge (API.ts) - La connessione tipizzata tra React e PHP, il pattern Double Read.*
+
