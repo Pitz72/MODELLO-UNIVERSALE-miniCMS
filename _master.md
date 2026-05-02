@@ -1,8 +1,8 @@
-﻿---
+---
 title: "React + PHP: The Thin Stack"
 subtitle: "Il protocollo miniCMS per Web App moderne"
 author: "Simone Pizzi"
-date: "Maggio 2026 â€” Seconda Edizione"
+date: "Maggio 2026 — Seconda Edizione"
 lang: it
 book: true
 classoption: [oneside]
@@ -20,68 +20,67 @@ footnotes-pretty: true
 code-block-font-size: \footnotesize
 ...
 
-
 \part{La Visione}
 
 # CAPITOLO 1: Manifesto
 
-## PerchÃ© Esiste Questo Protocollo
+## Perché Esiste Questo Protocollo
 
 Esiste una tensione irrisolta al centro dello sviluppo web moderno.
 
-Da un lato, il frontend ha raggiunto una maturitÃ  estetica e funzionale straordinaria: React, TypeScript, Tailwind. Animazioni fluide, componenti riutilizzabili, type safety, hot reload. L'esperienza di sviluppo Ã¨ diventata un piacere, e il prodotto finale â€” quando fatto bene â€” Ã¨ visivamente e funzionalmente superiore a qualsiasi soluzione del passato.
+Da un lato, il frontend ha raggiunto una maturità estetica e funzionale straordinaria: React, TypeScript, Tailwind. Animazioni fluide, componenti riutilizzabili, type safety, hot reload. L'esperienza di sviluppo è diventata un piacere, e il prodotto finale — quando fatto bene — è visivamente e funzionalmente superiore a qualsiasi soluzione del passato.
 
-Dall'altro lato, questa rivoluzione ha portato con sÃ© una complessitÃ  infrastrutturale sproporzionata rispetto ai bisogni reali della maggioranza dei siti. Node.js, database cloud, container, pipeline CI/CD, micro-servizi, CMS headless con piani in abbonamento. L'overhead tecnico e il costo operativo sono diventati la norma anche per siti che potrebbero girare perfettamente su un hosting da 5 euro al mese.
+Dall'altro lato, questa rivoluzione ha portato con sé una complessità infrastrutturale sproporzionata rispetto ai bisogni reali della maggioranza dei siti. Node.js, database cloud, container, pipeline CI/CD, micro-servizi, CMS headless con piani in abbonamento. L'overhead tecnico e il costo operativo sono diventati la norma anche per siti che potrebbero girare perfettamente su un hosting da 5 euro al mese.
 
-Questo protocollo nasce da una domanda precisa: **Ã¨ possibile avere la potenza estetica e tecnica di React senza abbandonare la semplicitÃ , il controllo e l'economicitÃ  di un backend PHP con SQLite?**
+Questo protocollo nasce da una domanda precisa: **è possibile avere la potenza estetica e tecnica di React senza abbandonare la semplicità, il controllo e l'economicità di un backend PHP con SQLite?**
 
-La risposta, costruita su anni di lavoro reale su progetti reali, Ã¨ sÃ¬.
+La risposta, costruita su anni di lavoro reale su progetti reali, è sì.
 
----
+\newpage
 
 ## Il Principio Fondativo: La Separazione dei Piani
 
-Il Modello Universale non Ã¨ una tecnologia. Ãˆ un'architettura mentale.
+Il Modello Universale non è una tecnologia. È un'architettura mentale.
 
 Separa con nettezza due piani che spesso vengono confusi:
 
-**Il Piano della Presentazione** appartiene a React. Ãˆ il luogo della forma, dell'interazione, dell'animazione, della tipografia, della palette colori. Ãˆ dove vive il talento estetico, dove Tailwind traduce l'intenzione visiva in CSS preciso, dove framer-motion aggiunge peso e respiro ai movimenti. Questo piano Ã¨ compilato, ottimizzato, servito come asset statico.
+**Il Piano della Presentazione** appartiene a React. È il luogo della forma, dell'interazione, dell'animazione, della tipografia, della palette colori. È dove vive il talento estetico, dove Tailwind traduce l'intenzione visiva in CSS preciso, dove framer-motion aggiunge peso e respiro ai movimenti. Questo piano è compilato, ottimizzato, servito come asset statico.
 
-**Il Piano dei Dati** appartiene a PHP e SQLite (o MySQL quando necessario). Ãˆ il luogo della persistenza, della logica di business, della sicurezza, del ciclo di vita dei contenuti. Non Ã¨ "il backend" nel senso pesante del termine â€” nessun framework, nessun ORM, nessuna dipendenza esterna. Solo PHP nativo, PDO, e un database file-based che non richiede configurazione server.
+**Il Piano dei Dati** appartiene a PHP e SQLite (o MySQL quando necessario). È il luogo della persistenza, della logica di business, della sicurezza, del ciclo di vita dei contenuti. Non è "il backend" nel senso pesante del termine — nessun framework, nessun ORM, nessuna dipendenza esterna. Solo PHP nativo, PDO, e un database file-based che non richiede configurazione server.
 
-Questi due piani comunicano attraverso un contratto preciso: le API REST. Il frontend non sa niente del database. Il backend non sa niente di React. La loro separazione Ã¨ la fonte di tutta la scalabilitÃ  e la manutenibilitÃ  del sistema.
+Questi due piani comunicano attraverso un contratto preciso: le API REST. Il frontend non sa niente del database. Il backend non sa niente di React. La loro separazione è la fonte di tutta la scalabilità e la manutenibilità del sistema.
 
----
+\newpage
 
-## Cosa Non Ãˆ Questo Protocollo
+## Cosa Non È Questo Protocollo
 
-Non Ã¨ un framework. Non impone strutture di codice rigide, non richiede dipendenze specifiche, non vincola le scelte stilistiche.
+Non è un framework. Non impone strutture di codice rigide, non richiede dipendenze specifiche, non vincola le scelte stilistiche.
 
-Non Ã¨ un CMS tradizionale. Non c'Ã¨ un'interfaccia visual builder, non ci sono temi preconfezionati, non c'Ã¨ un marketplace di plugin. Ogni sito costruito con questo protocollo Ã¨ unico, fatto a mano, tailor-made per il suo scopo.
+Non è un CMS tradizionale. Non c'è un'interfaccia visual builder, non ci sono temi preconfezionati, non c'è un marketplace di plugin. Ogni sito costruito con questo protocollo è unico, fatto a mano, tailor-made per il suo scopo.
 
-Non Ã¨ una soluzione enterprise. Non Ã¨ progettato per gestire milioni di utenti simultanei, flussi di dati complessi o architetture distribuite. Ãˆ progettato per siti che devono essere eccellenti, veloci, sicuri e mantenibili da un team piccolo â€” o anche da una persona sola.
+Non è una soluzione enterprise. Non è progettato per gestire milioni di utenti simultanei, flussi di dati complessi o architetture distribuite. È progettato per siti che devono essere eccellenti, veloci, sicuri e mantenibili da un team piccolo — o anche da una persona sola.
 
-Non Ã¨ per chi vuole un sito in 10 minuti. Ãˆ per chi vuole capire cosa sta costruendo.
+Non è per chi vuole un sito in 10 minuti. È per chi vuole capire cosa sta costruendo.
 
----
+\newpage
 
 ## I Valori che Guidano Ogni Decisione
 
 **Controllo totale.** Chi costruisce un sito con questo protocollo possiede ogni riga del suo stack. Nessun vendor lock-in, nessun aggiornamento forzato che rompe la produzione, nessuna dipendenza da un servizio esterno per la sopravvivenza del sito.
 
-**Leggerezza come principio, non come compromesso.** SQLite non Ã¨ la scelta "economica" rispetto a MySQL â€” Ã¨ la scelta giusta per il 90% dei casi d'uso. La semplicitÃ  non Ã¨ una limitazione da superare: Ã¨ un obiettivo da raggiungere e difendere.
+**Leggerezza come principio, non come compromesso.** SQLite non è la scelta "economica" rispetto a MySQL — è la scelta giusta per il 90% dei casi d'uso. La semplicità non è una limitazione da superare: è un obiettivo da raggiungere e difendere.
 
-**La sicurezza come architettura, non come patch.** Le decisioni di sicurezza sono integrate nel design del sistema: database fuori dalla root pubblica, clean-dist.js che non lascia mai il database nel deploy, sessioni PHP con cookie httponly, password mai in chiaro. Non sono misure aggiunte dopo â€” sono la struttura stessa.
+**La sicurezza come architettura, non come patch.** Le decisioni di sicurezza sono integrate nel design del sistema: database fuori dalla root pubblica, clean-dist.js che non lascia mai il database nel deploy, sessioni PHP con cookie httponly, password mai in chiaro. Non sono misure aggiunte dopo — sono la struttura stessa.
 
-**La documentazione come parte del codice.** Un sistema che non si capisce Ã¨ un sistema che non si puÃ² mantenere. Questo protocollo Ã¨ documentato con la stessa cura con cui Ã¨ costruito, perchÃ© la conoscenza deve rimanere accessibile anche quando il contesto cambia.
+**La documentazione come parte del codice.** Un sistema che non si capisce è un sistema che non si può mantenere. Questo protocollo è documentato con la stessa cura con cui è costruito, perché la conoscenza deve rimanere accessibile anche quando il contesto cambia.
 
-**L'esperienza reale come unico validatore.** Ogni pattern documentato in questo manuale Ã¨ stato estratto da codice che gira in produzione. Le lezioni piÃ¹ importanti â€” il crash del WAL in produzione, l'attacco DDoS che ha messo in ginocchio Runtime Radio, la migrazione SQLite/MySQL forzata dal traffico crescente â€” sono incidenti reali, non scenari ipotetici. La teoria senza la cicatrice non insegna abbastanza.
+**L'esperienza reale come unico validatore.** Ogni pattern documentato in questo manuale è stato estratto da codice che gira in produzione. Le lezioni più importanti — il crash del WAL in produzione, l'attacco DDoS che ha messo in ginocchio Runtime Radio, la migrazione SQLite/MySQL forzata dal traffico crescente — sono incidenti reali, non scenari ipotetici. La teoria senza la cicatrice non insegna abbastanza.
 
----
+\newpage
 
-## A Chi Ãˆ Rivolto
+## A Chi È Rivolto
 
-A chiunque voglia costruire un sito web che sia una cosa viva â€” non un template, non un WordPress personalizzato, non un sito generato da un builder.
+A chiunque voglia costruire un sito web che sia una cosa viva — non un template, non un WordPress personalizzato, non un sito generato da un builder.
 
 Al developer che conosce React e vuole un backend senza dover imparare un framework intero.
 
@@ -89,37 +88,35 @@ Al freelance che deve consegnare un sito veloce, mantenibile e sicuro a un clien
 
 All'autore, al musicista, al festival, alla radio che vuole una presenza digitale propria, controllata, indipendente dai capricci delle piattaforme.
 
-A chiunque creda che il web possa essere ancora un posto fatto da persone, per persone â€” senza intermediari.
+A chiunque creda che il web possa essere ancora un posto fatto da persone, per persone — senza intermediari.
 
----
+\newpage
 
 ## Come Usare Questo Manuale
 
-Il manuale Ã¨ organizzato in capitoli tematici indipendenti. Non Ã¨ necessario leggerlo dall'inizio alla fine â€” ogni capitolo Ã¨ una reference autonoma.
+Il manuale è organizzato in capitoli tematici indipendenti. Non è necessario leggerlo dall'inizio alla fine — ogni capitolo è una reference autonoma.
 
-Per iniziare un nuovo progetto da zero, la **BOILERPLATE-CHECKLIST** Ã¨ il punto di partenza pratico.
+Per iniziare un nuovo progetto da zero, la **BOILERPLATE-CHECKLIST** è il punto di partenza pratico.
 
 Per migliorare un progetto esistente, i capitoli specifici (Database Strategy, Security & Auth, SEO Pre-rendering) offrono pattern applicabili chirurgicamente.
 
-Per imparare dalla storia, i capitoli con la voce esperienziale (WAL disaster, DDoS su Runtime Radio, migrazione MySQL) sono la lettura piÃ¹ onesta che questo manuale puÃ² offrire.
+Per imparare dalla storia, i capitoli con la voce esperienziale (WAL disaster, DDoS su Runtime Radio, migrazione MySQL) sono la lettura più onesta che questo manuale può offrire.
 
 Il codice non mente. Le cicatrici nemmeno.
 
----
+\newpage
 
-*"La perfezione si raggiunge non quando non c'Ã¨ piÃ¹ niente da aggiungere, ma quando non c'Ã¨ piÃ¹ niente da togliere."*
-*â€” Antoine de Saint-ExupÃ©ry*
+*"La perfezione si raggiunge non quando non c'è più niente da aggiungere, ma quando non c'è più niente da togliere."*
+*— Antoine de Saint-Exupéry*
 
----
-*Prossimo Capitolo: Architettura e Struttura Progetto â€” dove le idee diventano cartelle.*
-
-
+\newpage
+*Prossimo Capitolo: Architettura e Struttura Progetto — dove le idee diventano cartelle.*
 
 \part{L'Architettura}
 
 # CAPITOLO 2: Architettura e Struttura Progetto (v1.2 - ADVANCED)
 
-Questa sezione definisce l'architettura fisica e logica del sistema, garantendo sicurezza dei dati, portabilitÃ  e scalabilitÃ .
+Questa sezione definisce l'architettura fisica e logica del sistema, garantendo sicurezza dei dati, portabilità e scalabilità.
 
 ## 1. Topologia delle Cartelle e Asset Separation
 Il Modello Universale impone una separazione netta tra i file sorgente (Build-time) e i file di runtime (Persistent-data).
@@ -127,15 +124,15 @@ Il Modello Universale impone una separazione netta tra i file sorgente (Build-ti
 ### 1.1 Struttura Fisica (Root)
 ```text
 /
-â”œâ”€â”€ public/                 # Contenuto pubblico e Entry Point API
-â”‚   â”œâ”€â”€ .htaccess           # Routing SPA (Cruciale per React Router)
-â”‚   â”œâ”€â”€ index.php           # SEO Engine (Capitolo 11) â€” entry-point PHP
-â”‚   â””â”€â”€ api/                # Core Backend PHP (Vedi 1.2)
-â”œâ”€â”€ src/                    # Frontend React 19 / TS
-â”œâ”€â”€ scripts/                # Utility Tools (Build, Clean, Migration)
-â”œâ”€â”€ .env.local              # Configurazione locale (VITE_API_URL)
-â”œâ”€â”€ package.json            # Gestione dipendenze e Script di automazione
-â””â”€â”€ clean-dist.js           # Script di sanitizzazione post-build (SECURITY)
+├── public/                 # Contenuto pubblico e Entry Point API
+│   ├── .htaccess           # Routing SPA (Cruciale per React Router)
+│   ├── index.php           # SEO Engine (Capitolo 11) — entry-point PHP
+│   └── api/                # Core Backend PHP (Vedi 1.2)
+├── src/                    # Frontend React 19 / TS
+├── scripts/                # Utility Tools (Build, Clean, Migration)
+├── .env.local              # Configurazione locale (VITE_API_URL)
+├── package.json            # Gestione dipendenze e Script di automazione
+└── clean-dist.js           # Script di sanitizzazione post-build (SECURITY)
 ```
 
 ### 1.2 Anatomia dell'Area API (public/api/)
@@ -145,10 +142,10 @@ La cartella `api/` deve essere configurata per gestire la persistenza senza dipe
 - **uploads/**: Asset caricati dall'utente (immagini, audio). Deve essere esclusa dai backup del codice sorgente.
 
 ## 2. Meccanismi di Sicurezza in Build (The Clean-Dist Logic)
-Uno dei rischi maggiori Ã¨ il "Database Overwrite" durante il deploy. Il sistema implementa uno script `clean-dist.js` eseguito post-build che:
+Uno dei rischi maggiori è il "Database Overwrite" durante il deploy. Il sistema implementa uno script `clean-dist.js` eseguito post-build che:
 1. Analizza la cartella `dist/api/`.
 2. Rimuove ricorsivamente ogni file con estensione `.sqlite`, `.sqlite3`, `.db` o `.bak`.
-3. Notifica l'operatore con log di sicurezza (`ðŸš¨ SECURITY: Removed...`).
+3. Notifica l'operatore con log di sicurezza (`🚨 SECURITY: Removed...`).
 4. **Regola Progettuale**: La cartella `dist/` generata deve essere "database-free". Il DB deve essere inizializzato sul server o migrato manualmente, mai sovrascritto dalla build automatica.
 
 Il pattern esatto del build script varia per sito:
@@ -172,7 +169,7 @@ Per permettere a React Router di funzionare in armonia con le API PHP su server 
 </IfModule>
 ```
 
-**Nota**: Apache serve `index.php` prima di `index.html` per prioritÃ  predefinita. Questo Ã¨ il meccanismo che permette al SEO Engine (Capitolo 11) di intercettare le richieste senza modificare le regole di rewrite.
+**Nota**: Apache serve `index.php` prima di `index.html` per priorità predefinita. Questo è il meccanismo che permette al SEO Engine (Capitolo 11) di intercettare le richieste senza modificare le regole di rewrite.
 
 ## 4. Inizializzazione Dinamica del File System
 Il backend PHP non deve dare per scontato l'esistenza delle cartelle di runtime. Ogni script di inizializzazione (`init_db.php`) o la classe `Database` devono implementare la logica di **Auto-Scaffolding**:
@@ -183,7 +180,7 @@ $paths = [__DIR__ . '/.data', __DIR__ . '/.cache', __DIR__ . '/uploads'];
 foreach ($paths as $path) {
     if (!is_dir($path)) {
         mkdir($path, 0755, true);
-        // Protezione immediata se Ã¨ la cartella .data
+        // Protezione immediata se è la cartella .data
         if (basename($path) === '.data') {
             file_put_contents($path . '/.htaccess', "Order allow,deny\nDeny from all");
         }
@@ -191,33 +188,33 @@ foreach ($paths as $path) {
 }
 ```
 
-In **SimonePizziWebSite** questo auto-scaffolding Ã¨ integrato direttamente in `db.php` (connessione lazy), mentre in altri siti Ã¨ in `init_db.php`. Entrambi i pattern sono validi; il primo Ã¨ piÃ¹ robusto perchÃ© si attiva ad ogni connessione.
+In **SimonePizziWebSite** questo auto-scaffolding è integrato direttamente in `db.php` (connessione lazy), mentre in altri siti è in `init_db.php`. Entrambi i pattern sono validi; il primo è più robusto perché si attiva ad ogni connessione.
 
 ## 5. Gestione degli Ambienti (Env Strategy)
 - **Local Dev**: React punta a `http://localhost/tuo-progetto/public/api`.
-- **Production**: React punta a `/api` (percorso relativo, garantendo la compatibilitÃ  con SSL e domini diversi).
+- **Production**: React punta a `/api` (percorso relativo, garantendo la compatibilità con SSL e domini diversi).
 - **Vite Config**: Utilizzo del proxy in fase di sviluppo per evitare errori CORS continui.
 
 ## 6. Il Pattern Fork (FDCA / DISINTELLIGENZA)
-FDCA e DISINTELLIGENZA condividono **identica struttura PHP** (stessi file, stessa logica). Questo Ã¨ un pattern deliberato: quando due progetti condividono la stessa base funzionale (es. festival con votazioni), si parte da un fork del progetto piÃ¹ maturo.
+FDCA e DISINTELLIGENZA condividono **identica struttura PHP** (stessi file, stessa logica). Questo è un pattern deliberato: quando due progetti condividono la stessa base funzionale (es. festival con votazioni), si parte da un fork del progetto più maturo.
 
-**Vantaggi**: Nessuna dipendenza condivisa â€” ogni progetto evolve indipendentemente.
-**Rischio**: Bugfix e miglioramenti vanno applicati manualmente a entrambi i fork. Per questo Ã¨ fondamentale mantenere una documentazione (questo manuale) come fonte di veritÃ  comune.
+**Vantaggi**: Nessuna dipendenza condivisa — ogni progetto evolve indipendentemente.
+**Rischio**: Bugfix e miglioramenti vanno applicati manualmente a entrambi i fork. Per questo è fondamentale mantenere una documentazione (questo manuale) come fonte di verità comune.
 
----
+\newpage
 *Prossimo Capitolo: Database Strategy - Dettagli avanzati su lock, indici, migrazioni e la vera storia del WAL.*
 
 
 # CAPITOLO 3: Database Strategy (v1.2 - ADVANCED)
 
-Il database Ã¨ il cuore pulsante del miniCMS. Questa sezione definisce le strategie di ottimizzazione, integritÃ  e migrazione per garantire performance "zero-latency" anche su hosting condivisi.
+Il database è il cuore pulsante del miniCMS. Questa sezione definisce le strategie di ottimizzazione, integrità e migrazione per garantire performance "zero-latency" anche su hosting condivisi.
 
 ## 1. Architettura di Connessione (Agnostic PDO)
 Il sistema utilizza un wrapper PDO che astrae il motore sottostante.
 
 ### 1.1 Configurazione Ottimale SQLite
 Per evitare il problema dei "file lock" comuni su Apache/PHP, il Modello Universale impone:
-- **Journal Mode: DELETE**: PiÃ¹ lento di WAL ma infinitamente piÃ¹ stabile su hosting condivisi dove il locking del file system Ã¨ imprevedibile.
+- **Journal Mode: DELETE**: Più lento di WAL ma infinitamente più stabile su hosting condivisi dove il locking del file system è imprevedibile.
 - **Busy Timeout**: Impostato a 5000ms per gestire tentativi di scrittura simultanei (es. Newsletter + Admin).
 
 ```php
@@ -228,7 +225,7 @@ self::$pdo->exec("PRAGMA busy_timeout=5000;");
 self::$pdo->exec("PRAGMA foreign_keys = ON;");
 ```
 
-**âš ï¸ PerchÃ© DELETE e non WAL**: SitoRuntime ha tentato di usare `journal_mode=WAL` in produzione per migliorare le performance sotto carico. Il WAL ha causato problemi gravi su hosting condiviso Apache: il file di lock `.sqlite-wal` rimaneva "appeso" corrompendo le letture. Ãˆ stato necessario uno script di emergenza (`emergency_revert_wal.php`) per tornare a DELETE. **Questa Ã¨ la lezione: usare sempre DELETE mode su hosting condiviso.**
+**⚠️ Perché DELETE e non WAL**: SitoRuntime ha tentato di usare `journal_mode=WAL` in produzione per migliorare le performance sotto carico. Il WAL ha causato problemi gravi su hosting condiviso Apache: il file di lock `.sqlite-wal` rimaneva "appeso" corrompendo le letture. È stato necessario uno script di emergenza (`emergency_revert_wal.php`) per tornare a DELETE. **Questa è la lezione: usare sempre DELETE mode su hosting condiviso.**
 
 ### 1.2 Auto-Scaffolding della Cartella .data
 La classe `Database` in **SimonePizziWebSite** integra la creazione automatica della cartella `.data/` e del relativo `.htaccess` di protezione direttamente nella connessione lazy:
@@ -283,32 +280,32 @@ Le query di lettura devono essere istantanee. Il Modello Universale impone la cr
 
 ## 3. Ciclo di Vita delle Migrazioni (Safe-Schema Update)
 Le modifiche allo schema devono essere atomiche e reversibili.
-- **AtomicitÃ **: Ogni script di migrazione deve utilizzare le transazioni (`beginTransaction`).
+- **Atomicità**: Ogni script di migrazione deve utilizzare le transazioni (`beginTransaction`).
 - **Idempotenza**: Lo script deve verificare l'esistenza di colonne o tabelle prima di tentare la creazione (`IF NOT EXISTS`, `PRAGMA table_info`).
 - **Protezione**: Gli script di migrazione (`update_db_vX.X.X.php`) devono essere protetti da controllo sessione admin per evitare esecuzioni non autorizzate.
 - **Nomenclatura**: Il pattern di naming dei siti reali: `update_db_v0.4.2.php`, `update_db_v0.5.4.php`. Numerazione semantica (Major.Minor.Patch) allineata alla versione del progetto in `package.json`.
 
 ## 4. Normalizzazione Dati (The "Round" Rule)
 Per evitare errori di precisione nei calcoli (es. durata podcast o bitrate), il sistema impone la normalizzazione lato backend prima del salvataggio:
-- **Date**: Formato ISO 8601 (`Y-m-d H:i:s`) per compatibilitÃ  SQL e JS.
+- **Date**: Formato ISO 8601 (`Y-m-d H:i:s`) per compatibilità SQL e JS.
 - **Numerici**: Interi puri o arrotondati a zero decimali per evitare bug di virgola mobile tra PHP e SQLite.
 - **Booleani**: Sempre `INTEGER` in SQLite (`0` o `1`). In MySQL `TINYINT(1)`.
 
-## 5. Manutenzione e IntegritÃ 
+## 5. Manutenzione e Integrità
 - **VACUUM**: Da eseguire mensilmente o post-cancellazione massiva per ricostruire il file database e ridurne il peso fisico.
 - **Backup**: Ogni operazione di migrazione deve essere preceduta da una copia fisica del file `.sqlite` in una cartella di backup protetta.
-- **optimize_db.php**: SitoRuntime include uno script dedicato alla manutenzione (`VACUUM`, `ANALYZE`, verifica integritÃ ) eseguibile manualmente dall'admin.
+- **optimize_db.php**: SitoRuntime include uno script dedicato alla manutenzione (`VACUUM`, `ANALYZE`, verifica integrità) eseguibile manualmente dall'admin.
 
 ## 6. Quando Passare a MySQL
-Vedi Capitolo 14 per la storia completa e il processo di migrazione. In sintesi: rimani su SQLite finchÃ© il traffico Ã¨ gestibile (< 50 scritture/ora) e non ci sono vincoli di hosting. La migrazione Ã¨ documentata con script reali, testati in produzione.
+Vedi Capitolo 14 per la storia completa e il processo di migrazione. In sintesi: rimani su SQLite finché il traffico è gestibile (< 50 scritture/ora) e non ci sono vincoli di hosting. La migrazione è documentata con script reali, testati in produzione.
 
----
+\newpage
 *Prossimo Capitolo: Frontend Dependencies - La matrice delle dipendenze, le regole di scelta e il costo di ogni libreria.*
 
 
 # CAPITOLO 4: Frontend Dependencies (v1.0)
 
-Le dipendenze frontend sono scelte architetturali, non solo dichiarazioni in `package.json`. Ogni libreria aggiunta ha un costo â€” dimensione del bundle, superficie di aggiornamento, complessitÃ  di integrazione â€” e deve guadagnarsi il suo posto. Questo capitolo documenta le scelte fatte nei 4 siti di riferimento, con le motivazioni che le guidano.
+Le dipendenze frontend sono scelte architetturali, non solo dichiarazioni in `package.json`. Ogni libreria aggiunta ha un costo — dimensione del bundle, superficie di aggiornamento, complessità di integrazione — e deve guadagnarsi il suo posto. Questo capitolo documenta le scelte fatte nei 4 siti di riferimento, con le motivazioni che le guidano.
 
 ## 1. Il Core Stack (Ogni Progetto)
 
@@ -316,20 +313,20 @@ Queste dipendenze sono presenti in tutti e 4 i siti senza eccezioni:
 
 | Libreria | Versione | Ruolo |
 | :--- | :--- | :--- |
-| `react` + `react-dom` | ^19.2.x | Framework UI â€” componenti, stato, rendering |
+| `react` + `react-dom` | ^19.2.x | Framework UI — componenti, stato, rendering |
 | `react-router-dom` | ^7.x | Client-side routing, React Router v7 (API stabile) |
 | `typescript` | ~5.x | Type safety a compile time |
-| `vite` | ^7.x | Build tool â€” dev server HMR, bundle ottimizzato |
+| `vite` | ^7.x | Build tool — dev server HMR, bundle ottimizzato |
 | `@vitejs/plugin-react` | ^5.x | Plugin Vite per JSX/TSX transform |
-| `lucide-react` | ^0.5xx | Libreria icone SVG â€” tree-shakeable, React-native |
+| `lucide-react` | ^0.5xx | Libreria icone SVG — tree-shakeable, React-native |
 
-React 19 introduce significativi miglioramenti al rendering concorrente e alle Server Components. Per il Modello Universale (solo SPA client-side), la differenza pratica con v18 Ã¨ minima, ma mantenere l'ultima versione stabile Ã¨ la scelta corretta per nuovi progetti.
+React 19 introduce significativi miglioramenti al rendering concorrente e alle Server Components. Per il Modello Universale (solo SPA client-side), la differenza pratica con v18 è minima, ma mantenere l'ultima versione stabile è la scelta corretta per nuovi progetti.
 
 ## 2. Tailwind CSS: v3 vs v4
 
 I 4 siti usano versioni diverse di Tailwind, con configurazione significativamente diversa.
 
-### SitoRuntime â€” Tailwind v3 (Setup Classico)
+### SitoRuntime — Tailwind v3 (Setup Classico)
 
 ```json
 // devDependencies
@@ -345,7 +342,7 @@ Richiede `tailwind.config.js` e `postcss.config.js` espliciti. Il file CSS di in
 @tailwind utilities;
 ```
 
-### SimonePizziWebSite, DISINTELLIGENZA, FDCA â€” Tailwind v4
+### SimonePizziWebSite, DISINTELLIGENZA, FDCA — Tailwind v4
 
 ```json
 // devDependencies
@@ -353,12 +350,12 @@ Richiede `tailwind.config.js` e `postcss.config.js` espliciti. Il file CSS di in
 "@tailwindcss/vite": "^4.x"  // o "@tailwindcss/postcss"
 ```
 
-Tailwind v4 usa il plugin Vite nativo â€” nessun `postcss.config.js` separato, nessun `tailwind.config.js` obbligatorio. Il file CSS:
+Tailwind v4 usa il plugin Vite nativo — nessun `postcss.config.js` separato, nessun `tailwind.config.js` obbligatorio. Il file CSS:
 ```css
 @import "tailwindcss";
 ```
 
-**Quando usare v4**: Per tutti i nuovi progetti. La migrazione da v3 a v4 richiede attenzione alle classi rinominate (es. `shadow-sm` â†’ `shadow-xs`).
+**Quando usare v4**: Per tutti i nuovi progetti. La migrazione da v3 a v4 richiede attenzione alle classi rinominate (es. `shadow-sm` → `shadow-xs`).
 
 ### @tailwindcss/typography
 
@@ -372,7 +369,7 @@ Presente in tutti i siti come devDependency. Aggiunge la classe `prose` che appl
 
 ## 3. Rendering del Contenuto
 
-### showdown â€” Markdown â†’ HTML
+### showdown — Markdown → HTML
 
 **Usato in:** SimonePizziWebSite, SitoRuntime, DISINTELLIGENZA (3/4 siti)
 
@@ -388,9 +385,9 @@ const converter = new showdown.Converter({ tables: true, strikethrough: true });
 const html = converter.makeHtml(markdownContent);
 ```
 
-**Non usare mai showdown senza dompurify** â€” l'HTML generato da contenuto non trusted deve essere sanificato.
+**Non usare mai showdown senza dompurify** — l'HTML generato da contenuto non trusted deve essere sanificato.
 
-### dompurify â€” Sanitizzazione XSS
+### dompurify — Sanitizzazione XSS
 
 **Usato in:** SimonePizziWebSite, SitoRuntime (2/4 siti, sempre accoppiato con showdown o Quill)
 
@@ -409,15 +406,15 @@ const converter = new showdown.Converter();
 const rawHtml = converter.makeHtml(markdownContent);
 const safeHtml = DOMPurify.sanitize(rawHtml);
 
-// Solo ora Ã¨ sicuro usare dangerouslySetInnerHTML
+// Solo ora è sicuro usare dangerouslySetInnerHTML
 <div dangerouslySetInnerHTML={{ __html: safeHtml }} />
 ```
 
-**Regola assoluta**: `showdown` + `dangerouslySetInnerHTML` senza `DOMPurify` in mezzo Ã¨ una vulnerabilitÃ  XSS. I due vanno sempre in coppia.
+**Regola assoluta**: `showdown` + `dangerouslySetInnerHTML` senza `DOMPurify` in mezzo è una vulnerabilità XSS. I due vanno sempre in coppia.
 
-### react-quill-new â€” Rich Text Editor WYSIWYG
+### react-quill-new — Rich Text Editor WYSIWYG
 
-**Usato in:** SitoRuntime (1/4 siti â€” solo dove serve editing visivo avanzato)
+**Usato in:** SitoRuntime (1/4 siti — solo dove serve editing visivo avanzato)
 
 ```json
 "react-quill-new": "^3.7.0",
@@ -425,11 +422,11 @@ const safeHtml = DOMPurify.sanitize(rawHtml);
 "quill-magic-url": "^4.2.0"
 ```
 
-`react-quill-new` Ã¨ il fork mantenuto di `react-quill`, necessario perchÃ© la versione originale non supporta React 19. Output in HTML (non Markdown), quindi richiede comunque `DOMPurify` lato rendering.
+`react-quill-new` è il fork mantenuto di `react-quill`, necessario perché la versione originale non supporta React 19. Output in HTML (non Markdown), quindi richiede comunque `DOMPurify` lato rendering.
 
 Il modulo `quill-image-drop-module` aggiunge drag & drop di immagini nell'editor. `quill-magic-url` converte automaticamente URL incollati in link cliccabili.
 
-**Quando usarlo**: Solo quando il progetto richiede un editor visivo tipo Word per i redattori â€” es. radio web, sito editoriale. Per un portfolio o blog tecnico, un'area textarea con Markdown Ã¨ piÃ¹ semplice e altrettanto efficace.
+**Quando usarlo**: Solo quando il progetto richiede un editor visivo tipo Word per i redattori — es. radio web, sito editoriale. Per un portfolio o blog tecnico, un'area textarea con Markdown è più semplice e altrettanto efficace.
 
 ## 4. Animazioni & Effetti Visivi
 
@@ -463,7 +460,7 @@ import { motion } from 'framer-motion';
 </motion.ul>
 ```
 
-framer-motion Ã¨ pesante (~100KB gzip). Giustificato quando le animazioni sono parte integrante dell'identitÃ  visiva del sito. Per siti dove le animazioni sono marginali, CSS transitions native sono la scelta corretta.
+framer-motion è pesante (~100KB gzip). Giustificato quando le animazioni sono parte integrante dell'identità visiva del sito. Per siti dove le animazioni sono marginali, CSS transitions native sono la scelta corretta.
 
 ### typewriter-effect
 
@@ -473,7 +470,7 @@ framer-motion Ã¨ pesante (~100KB gzip). Giustificato quando le animazioni sono
 "typewriter-effect": "^2.22.0"
 ```
 
-Effetto macchina da scrivere per headline animati â€” specifico per portfolio/presentazioni personali.
+Effetto macchina da scrivere per headline animati — specifico per portfolio/presentazioni personali.
 
 ### tailwindcss-animate
 
@@ -501,17 +498,17 @@ Gestisce dinamicamente `<title>`, `<meta>`, `<link>` nel `<head>` del documento 
 import { Helmet } from 'react-helmet-async';
 
 <Helmet>
-  <title>{article.title} â€” Runtime Radio</title>
+  <title>{article.title} — Runtime Radio</title>
   <meta name="description" content={article.excerpt} />
   <meta property="og:image" content={article.cover_image} />
 </Helmet>
 ```
 
-**PerchÃ© `react-helmet-async` e non `react-helmet`**: La versione originale (`react-helmet`) non Ã¨ piÃ¹ mantenuta e ha problemi di memory leak con React 18+. `react-helmet-async` Ã¨ il fork attivo e compatibile con React 19.
+**Perché `react-helmet-async` e non `react-helmet`**: La versione originale (`react-helmet`) non è più mantenuta e ha problemi di memory leak con React 18+. `react-helmet-async` è il fork attivo e compatibile con React 19.
 
-**Limitazione importante**: `react-helmet-async` gestisce i meta tag per gli utenti con JavaScript attivo (browser reali). I crawler dei social media e dei motori di ricerca richiedono il **PHP SEO Engine** (Capitolo 11) per ricevere meta tag corretti, perchÃ© non eseguono JavaScript.
+**Limitazione importante**: `react-helmet-async` gestisce i meta tag per gli utenti con JavaScript attivo (browser reali). I crawler dei social media e dei motori di ricerca richiedono il **PHP SEO Engine** (Capitolo 11) per ricevere meta tag corretti, perché non eseguono JavaScript.
 
-SitoRuntime non usa `react-helmet-async` perchÃ© delega tutto il SEO all'engine PHP lato server.
+SitoRuntime non usa `react-helmet-async` perché delega tutto il SEO all'engine PHP lato server.
 
 ## 6. Utilities
 
@@ -530,7 +527,7 @@ import { clsx } from 'clsx';
 const classes = clsx('base-class', isActive && 'active', error && 'text-red-500');
 ```
 
-`tailwind-merge` risolve i conflitti tra classi Tailwind (es. `text-sm text-lg` â†’ `text-lg`):
+`tailwind-merge` risolve i conflitti tra classi Tailwind (es. `text-sm text-lg` → `text-lg`):
 ```typescript
 import { twMerge } from 'tailwind-merge';
 const cn = (...inputs) => twMerge(clsx(inputs)); // Pattern helper classico
@@ -544,9 +541,9 @@ const cn = (...inputs) => twMerge(clsx(inputs)); // Pattern helper classico
 "date-fns": "^4.1.0"
 ```
 
-UtilitÃ  per la formattazione e manipolazione delle date. Alternativa a `dayjs` e `moment.js` (quest'ultimo deprecato). Usato in DISINTELLIGENZA per formattare le date del festival e delle iscrizioni nel frontend.
+Utilità per la formattazione e manipolazione delle date. Alternativa a `dayjs` e `moment.js` (quest'ultimo deprecato). Usato in DISINTELLIGENZA per formattare le date del festival e delle iscrizioni nel frontend.
 
-Gli altri siti gestiscono la formattazione date lato PHP (con `date()` e `strtotime()`), riducendo la complessitÃ  frontend.
+Gli altri siti gestiscono la formattazione date lato PHP (con `date()` e `strtotime()`), riducendo la complessità frontend.
 
 ## 7. Build-Time Optimization
 
@@ -558,7 +555,7 @@ Gli altri siti gestiscono la formattazione date lato PHP (con `date()` e `strtot
 "sharp": "^0.34.5"
 ```
 
-`sharp` Ã¨ una libreria Node.js per la manipolazione di immagini ad alte prestazioni. Nel contesto del Modello Universale, viene usato nel `clean-dist.js` post-build per ottimizzare automaticamente le immagini nella cartella `dist/` prima del deploy.
+`sharp` è una libreria Node.js per la manipolazione di immagini ad alte prestazioni. Nel contesto del Modello Universale, viene usato nel `clean-dist.js` post-build per ottimizzare automaticamente le immagini nella cartella `dist/` prima del deploy.
 
 ```javascript
 // Esempio di utilizzo in clean-dist.js
@@ -569,52 +566,50 @@ await sharp('input.jpg')
   .toFile('output.webp');
 ```
 
-Ãˆ tecnicamente una `dependency` invece che `devDependency` perchÃ© il build script (`postbuild`) la richiede al momento della build â€” ma non viene mai inclusa nel bundle React (non Ã¨ importata da nessun file `.tsx`).
+È tecnicamente una `dependency` invece che `devDependency` perché il build script (`postbuild`) la richiede al momento della build — ma non viene mai inclusa nel bundle React (non è importata da nessun file `.tsx`).
 
 ## 8. Matrice delle Dipendenze per Sito
 
 | Libreria | SitoRuntime | DISINTELLIGENZA | FDCA | SimonePizziWebSite |
 | :--- | :---: | :---: | :---: | :---: |
-| React 19 | âœ“ | âœ“ | âœ“ | âœ“ |
-| react-router-dom v7 | âœ“ | âœ“ | âœ“ | âœ“ |
-| framer-motion | âœ“ | âœ“ | âœ“ | âœ“ |
-| showdown | âœ“ | âœ“ | â€” | âœ“ |
-| dompurify | âœ“ | â€” | â€” | âœ“ |
-| lucide-react | âœ“ | âœ“ | âœ“ | âœ“ |
-| Tailwind v3 | âœ“ | â€” | â€” | â€” |
-| Tailwind v4 | â€” | âœ“ | âœ“ | âœ“ |
-| @tailwindcss/typography | âœ“ | âœ“ | âœ“ | âœ“ |
-| react-helmet-async | â€” | âœ“ | âœ“ | âœ“ |
-| react-quill-new | âœ“ | â€” | â€” | â€” |
-| clsx + tailwind-merge | â€” | âœ“ | âœ“ | âœ“ |
-| sharp | â€” | â€” | â€” | âœ“ |
-| date-fns | â€” | âœ“ | âœ“ | â€” |
-| typewriter-effect | â€” | â€” | â€” | âœ“ |
-| tailwindcss-animate | â€” | âœ“ | âœ“ | â€” |
+| React 19 | ✓ | ✓ | ✓ | ✓ |
+| react-router-dom v7 | ✓ | ✓ | ✓ | ✓ |
+| framer-motion | ✓ | ✓ | ✓ | ✓ |
+| showdown | ✓ | ✓ | — | ✓ |
+| dompurify | ✓ | — | — | ✓ |
+| lucide-react | ✓ | ✓ | ✓ | ✓ |
+| Tailwind v3 | ✓ | — | — | — |
+| Tailwind v4 | — | ✓ | ✓ | ✓ |
+| @tailwindcss/typography | ✓ | ✓ | ✓ | ✓ |
+| react-helmet-async | — | ✓ | ✓ | ✓ |
+| react-quill-new | ✓ | — | — | — |
+| clsx + tailwind-merge | — | ✓ | ✓ | ✓ |
+| sharp | — | — | — | ✓ |
+| date-fns | — | ✓ | ✓ | — |
+| typewriter-effect | — | — | — | ✓ |
+| tailwindcss-animate | — | ✓ | ✓ | — |
 
 ## 9. Regole per i Nuovi Progetti
 
-1. **Parti dal minimo**: Core stack + framer-motion + lucide-react. Aggiungi solo quando la funzionalitÃ  Ã¨ richiesta concretamente.
+1. **Parti dal minimo**: Core stack + framer-motion + lucide-react. Aggiungi solo quando la funzionalità è richiesta concretamente.
 
-2. **showdown richiede sempre dompurify**: Mai usare l'uno senza l'altro quando il contenuto Ã¨ user-generated o proviene dal DB.
+2. **showdown richiede sempre dompurify**: Mai usare l'uno senza l'altro quando il contenuto è user-generated o proviene dal DB.
 
-3. **react-quill-new solo per editor WYSIWYG**: Per semplici aree di testo Markdown, un `<textarea>` Ã¨ sufficiente e mantiene il bundle piccolo.
+3. **react-quill-new solo per editor WYSIWYG**: Per semplici aree di testo Markdown, un `<textarea>` è sufficiente e mantiene il bundle piccolo.
 
-4. **react-helmet-async per SEO client-side, PHP engine per SEO crawler**: I due si complementano â€” non sono alternativi.
+4. **react-helmet-async per SEO client-side, PHP engine per SEO crawler**: I due si complementano — non sono alternativi.
 
-5. **Tailwind v4 per nuovi progetti**: La configurazione Ã¨ piÃ¹ semplice. Verificare la compatibilitÃ  delle classi se si migra da v3.
+5. **Tailwind v4 per nuovi progetti**: La configurazione è più semplice. Verificare la compatibilità delle classi se si migra da v3.
 
----
+\newpage
 *Capitoli correlati: Cap 2 (Struttura Progetto) per la configurazione Vite, Cap 7 (Media & Optimization) per sharp nel dettaglio, Cap 11 (SEO Pre-rendering) per il rapporto tra react-helmet-async e PHP engine.*
 
----
+\newpage
 *Prossimo Capitolo: Backend Logic (PHP) - CRUD unificato, gestione dei buffer e sanitizzazione degli input.*
-
-
 
 \part{I Componenti}
 
-# CAPITOLO 5: Backend Logic (PHP) (v1.2 - ADVANCED)
+﻿# CAPITOLO 5: Backend Logic (PHP) (v2.0 - ADVANCED)
 
 Il backend del miniCMS funge da motore di elaborazione dati e guardiano della sicurezza. Questa sezione definisce gli standard per la manipolazione delle stringhe, l'elaborazione dei file e la gestione delle risposte.
 
@@ -698,7 +693,7 @@ elseif ($method === 'DELETE') { Auth::check(); /* ... */ }
 
 **Nota**: In progetti piÃ¹ vecchi (DISINTELLIGENZA, SitoRuntime prima del refactor), tutte le operazioni di modifica usavano POST con un campo `action` nel body. Il pattern RESTful con metodi separati Ã¨ piÃ¹ leggibile e permette al frontend TypeScript di essere piÃ¹ espressivo.
 
-## 4. Il Pattern auth_helper.php (Autenticazione Inline)
+## 4. Il Pattern auth_helper.php (v2.0) (Autenticazione Inline)
 SimonePizziWebSite introduce un pattern piÃ¹ snello per la gestione dell'autenticazione: un file `auth_helper.php` che incapsula `session_start()`, l'header `Content-Type` e la classe `Auth` in un unico include:
 
 ```php
@@ -770,19 +765,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 ## 8. Buffer Management
 Per evitare che errori PHP (Notice/Warning) sporchino l'output JSON rendendolo invalido per il frontend, il Modello Universale suggerisce l'uso di `ob_start()` o la disattivazione dei log a schermo in produzione (`display_errors = 0`).
 
----
+\newpage
 *Prossimo Capitolo: Frontend Bridge (API.ts) - La connessione tipizzata tra React e PHP, il pattern Double Read.*
+
 
 
 # CAPITOLO 6: Frontend Bridge (API.ts) (v1.1 - ADVANCED)
 
-Il "Bridge" tra React e PHP Ã¨ il punto di snodo critico per la stabilitÃ  dell'applicazione. Questa sezione definisce gli standard per la gestione delle chiamate asincrone, la cattura degli errori parlanti e la sincronizzazione dello stato.
+Il "Bridge" tra React e PHP è il punto di snodo critico per la stabilità dell'applicazione. Questa sezione definisce gli standard per la gestione delle chiamate asincrone, la cattura degli errori parlanti e la sincronizzazione dello stato.
 
 ## 1. Architettura del Wrapper Universale
 Invece di chiamate `fetch` isolate, il sistema utilizza un oggetto `api` centralizzato che incapsula la logica di base degli URL e degli header.
 
 ### 1.1 Il Pattern "Double Read" (Response Cloning)
-Per estrarre messaggi di errore dal server senza perdere la possibilitÃ  di gestire lo stato HTTP, il Modello Universale impone il clonaggio della risposta:
+Per estrarre messaggi di errore dal server senza perdere la possibilità di gestire lo stato HTTP, il Modello Universale impone il clonaggio della risposta:
 
 ```typescript
 async function handleResponse(res: Response) {
@@ -821,21 +817,21 @@ return data;
 ```
 
 ## 5. TypeScript Integration (Type Safety)
-Ogni metodo dell'oggetto API deve (dove possibile) essere tipizzato. Questo garantisce che il frontend conosca esattamente la struttura dei dati (es. `NewsArticle[]`, `UserRole`, `StatsResponse`) riducendo errori di runtime dovuti a proprietÃ  mancanti o rinominate.
+Ogni metodo dell'oggetto API deve (dove possibile) essere tipizzato. Questo garantisce che il frontend conosca esattamente la struttura dei dati (es. `NewsArticle[]`, `UserRole`, `StatsResponse`) riducendo errori di runtime dovuti a proprietà mancanti o rinominate.
 
-## 6. ScalabilitÃ  e Paginazione Backend-driven
-Nei primi stadi di vita di un portfolio o blog, fetching globali (es. estrattore massivo di tutti gli articoli array-based) sono tollerabili. Tuttavia, l'esperienza operativa di SimonePizziWebSite (giunto alla v1.7.12) manifesta come tale ingenuitÃ  causi degradazione prestazionale e memory issues (rallentamento del Time to Interactive React).
+## 6. Scalabilità e Paginazione Backend-driven
+Nei primi stadi di vita di un portfolio o blog, fetching globali (es. estrattore massivo di tutti gli articoli array-based) sono tollerabili. Tuttavia, l'esperienza operativa di SimonePizziWebSite (giunto alla v1.7.12) manifesta come tale ingenuità causi degradazione prestazionale e memory issues (rallentamento del Time to Interactive React).
 
 Lo standard del Modello Universale eleva l'approccio alla **paginazione nativa server-side**:
 - **Parametrizzazione Query**: Le API GET di liste (articoli, log, item) devono accettare query params tipizzati `?page=N&limit=10`. Le query backend devono forzare stringhe di `LIMIT :limit OFFSET :offs`.
 - **Custom React Hooks**: Il bridge usa hook specializzati (come `useFetchArticles`) che conservano lo step matematico e lo stato `hasMore`. La logica "Carica altro" non sostituisce lo scope del JS, ma *appensa* linearmente i nuovi frame JSON ricevuti.
-- **Strategie Pre-Fetch Limitizzate**: Sezioni UI ad alta densitÃ  (come vetrine e griglie Home Page) limitizzano *at runtime* la chiamata (es. `slice(0, 7)`) garantendo un mounting fulmineo.
+- **Strategie Pre-Fetch Limitizzate**: Sezioni UI ad alta densità (come vetrine e griglie Home Page) limitizzano *at runtime* la chiamata (es. `slice(0, 7)`) garantendo un mounting fulmineo.
 
----
+\newpage
 *Prossimo Capitolo: Media & Optimization - Caching, ridimensionamento e SEO.*
 
 
-# CAPITOLO 7: Media & Optimization (v1.2 - ADVANCED)
+# CAPITOLO 7: Media & Optimization (v1.3 - ADVANCED)
 
 Per garantire un'esperienza utente istantanea e un'indicizzazione SEO perfetta, il Modello Universale adotta strategie di caching aggressivo e pre-rendering dei metadati.
 
@@ -844,7 +840,7 @@ Il database non deve essere interrogato per query di sola lettura ripetitive. Il
 
 ### 1.1 Cache Paginata (Listings)
 Ogni richiesta di lista (es. `news.php?page=1`) genera un file univoco in `.cache/` (es. `news_p1_l10.json`).
-- **ValiditÃ **: Il file viene servito direttamente se creato meno di 300 secondi fa.
+- **Validità**: Il file viene servito direttamente se creato meno di 300 secondi fa.
 - **Header di Tracciamento**: Il sistema deve inviare `X-Cache: HIT` o `X-Cache: MISS` per monitorare l'efficienza del sistema.
 
 ### 1.2 Invalidazione Intelligente
@@ -858,33 +854,29 @@ L'`index.php` nella root pubblica intercetta tutte le richieste, estrae lo slug 
 
 **Flusso**:
 1. Apache riceve richiesta `/categoria/mio-slug`
-2. `.htaccess` â†’ nessun file fisico trovato â†’ passa a `index.php`
+2. `.htaccess` -> nessun file fisico trovato -> passa a `index.php`
 3. `index.php` interroga SQLite per `slug = 'mio-slug'`
 4. Inietta meta tag nell'HTML di Vite via `str_replace('</head>', $seoBlock, $html)`
 5. Serve HTML completo al browser/bot
 
-### 2.2 Il Rebuild Cache SEO (Per RetrocompatibilitÃ )
-SitoRuntime include ancora `rebuild_seo_cache.php`, uno script di manutenzione che rigenera file JSON di cache SEO per entitÃ  pre-esistenti nel database. Utile per migrazioni e fix straordinari. Da eliminare dopo l'uso in produzione.
+## 3. Ottimizzazione Media & Smart Upload
+Il miniCMS evolve verso una gestione professionale degli asset per massimizzare il punteggio PageSpeed e la sicurezza del server.
 
-## 3. Ottimizzazione Media & Compression
-### 3.1 Normalizzazione Immagini e Auto-WebP (PHP GD)
-Non Ã¨ permesso servire immagini "grezze" caricate dall'utente. Il backend PHP (script di upload) implementa due passi inderogabili:
-- **Ridimensionamento geometrico**: Scale-down proporzionale a max 1920px (larghezza) o 1080px (altezza) sulle raw-images.
-- **Transcodifica obbligatoria WebP**: Rende trasparente all'utente la conversione on-the-fly (`imagewebp()`) dei formati grafici con compressione lossy/lossless automatizzata, riducendo drasticamente il payload di carico (30-50%). Dal branch `v1.6.3` in poi questo pattern Ã¨ diventato lo standard ufficiale del miniCMS rimuovendo la natura opzionale.
+### 3.1 Smart Upload & Anti-Spoofing
+Non è sufficiente controllare l'estensione del file. Il sistema implementa una **validazione MIME rigorosa**:
+- **Anti-Spoofing**: Utilizzo di `finfo_file()` per verificare il magic byte reale del file, impedendo il caricamento di script malevoli mascherati da immagini (es. `shell.php.jpg`).
+- **Sottocartelle Dinamiche**: Per evitare il rallentamento del file system (limitazione degli inode per cartella), gli upload vengono smistati automaticamente in cartelle basate sulla data: `uploads/YYYY/MM/`. Il database memorizza il path relativo completo.
 
-### 3.2 Sharp (Node.js) per Image Processing Build-Time
-**SimonePizziWebSite** introduce `sharp` come dipendenza Node.js per il processing di immagini in fase di build o come utility script. Sharp Ã¨ piÃ¹ performante di PHP GD per batch processing e supporta formati moderni (AVIF, WebP) con qualitÃ  superiore. Non Ã¨ un'alternativa al backend PHP per upload live â€” Ã¨ complementare per pre-processing di asset statici.
+### 3.2 Normalizzazione Immagini e Auto-WebP (PHP GD)
+Non è permesso servire immagini "grezze" caricate dall'utente. Il backend PHP (script di upload) implementa due passi inderogabili:
+- **Ridimensionamento geometrico**: Scale-down proporzionale automatico a **max 1920px** (larghezza) o 1080px (altezza). Questo abbatte il peso dei file caricati da smartphone o fotocamere professionali (spesso >10MB) a pochi KB.
+- **Transcodifica obbligatoria WebP**: Conversione on-the-fly via PHP GD (`imagewebp()`). Il formato WebP garantisce una riduzione del peso del 30-50% rispetto a JPG/PNG mantenendo una qualità visiva eccellente.
 
-```json
-// package.json
-"dependencies": {
-    "sharp": "^0.34.5"
-}
-```
+### 3.3 Sharp (Node.js) per Image Processing Build-Time
+**SimonePizziWebSite** introduce `sharp` come dipendenza Node.js per il processing di immagini in fase di build o come utility script. Sharp è più performante di PHP GD per batch processing e supporta formati moderni (AVIF, WebP) con qualità superiore. Non è un'alternativa al backend PHP per upload live — è complementare per pre-processing di asset statici.
 
-### 3.3 Cache Control sui File Statici
-Tramite `.htaccess`, i file nella cartella `uploads/` devono essere serviti con header di cache a lungo termine (`Expires`, `Cache-Control: max-age=31536000`), poichÃ© una volta caricati non cambiano mai nome (grazie all'hash `uniqid()`).
-
+### 3.4 Cache Control sui File Statici
+Tramite `.htaccess`, i file nella cartella `uploads/` devono essere serviti con header di cache a lungo termine:
 ```apacheconf
 <IfModule mod_expires.c>
     ExpiresActive On
@@ -896,13 +888,20 @@ Tramite `.htaccess`, i file nella cartella `uploads/` devono essere serviti con 
 ```
 
 ## 4. Manutenzione e Rebuilding
-Il sistema deve includere script protetti (`rebuild_seo_cache.php`, `optimize_db.php`) per operazioni di manutenzione straordinaria:
-- **rebuild_seo_cache.php**: Rigenera i file JSON SEO per tutte le entitÃ  del database. Da eseguire dopo una migrazione o un cambio di struttura metadati.
-- **optimize_db.php**: Esegue `VACUUM` e `ANALYZE` sul database. Riduce il peso del file e ottimizza i piani di query.
+Il sistema include script protetti per operazioni straordinarie:
+- **rebuild_seo_cache.php**: Rigenera i file JSON SEO.
+- **optimize_db.php**: Esegue `VACUUM` e `ANALYZE` (SQLite) o `OPTIMIZE TABLE` (MySQL).
 
-**Entrambi vanno eliminati dal server dopo l'uso** â€” includono output HTML non JSON e possono esporre informazioni interne se accessibili pubblicamente.
+## 5. Portabilità Dati: Full Content Exporter
+Per prevenire il vendor lock-in e facilitare i backup migratori, il miniCMS include un **Full Content Exporter** nell'area admin:
+- **Meccanismo**: Genera dinamicamente un file **ZIP** contenente l'intero database (dump SQL o file .sqlite) e la cartella `uploads/` completa.
+- **Sicurezza**: Lo script di export deve verificare i permessi admin e cancellare lo ZIP temporaneo dopo il download per non occupare spazio inutile e non esporre dati sensibili.
 
----
+## 6. Benefici Tecnici
+- **PageSpeed**: L'uso combinato di WebP, Resize e Caching JSON porta il punteggio LCP (Largest Contentful Paint) sotto i 1.2s.
+- **Sicurezza**: La validazione MIME frena l'80% degli attacchi di tipo RCE (Remote Code Execution) legati agli upload.
+
+\newpage
 *Prossimo Capitolo: Advanced Content Editing & Media Integration - L'editor definitivo.*
 
 
@@ -949,12 +948,15 @@ L'editor di testo Ã¨ il cuore dell'interfaccia. Pur rinunciando a pesanti dipe
 - **Miniature (Lazy Loading)**: Caricamento differito delle miniature nella griglia media per non appesantire il browser in librerie con centinaia di file.
 - **Transizioni**: Uso di animazioni CSS (`animate-in`, `fade-in`) per rendere fluida l'apertura dei modali e il caricamento delle liste.
 
----
+\newpage
 *Conclusione: Il Modello Universale miniCMS Ã¨ ora un sistema completo, sicuro e scalabile, pronto per essere impiegato come standard universale.*
 
----
+\newpage
 *Prossimo Capitolo: Content Lifecycle - Il ciclo di vita dei contenuti, dalla bozza alla pubblicazione programmata, con il pattern di bypass admin.*
 
+
+
+\part{Il Flusso Operativo}
 
 
 \part{Il Flusso Operativo}
@@ -974,7 +976,7 @@ Mentre il database salva uno stato "statico" (`status`), l'applicazione deve cal
 | `published` | `<= NOW()` | **PUBBLICATO** | Visibile a tutti. |
 
 ## 2. Implementazione della "Programmazione Reale"
-La programmazione non richiede cron job. La visibilitÃ  Ã¨ controllata dalla query SQL e riflessa nella logica React.
+La programmazione non richiede cron job. La visibilità è controllata dalla query SQL e riflessa nella logica React.
 
 ### 2.1 Logica Frontend (React)
 Per fornire feedback immediato all'amministratore, la tabella di gestione deve calcolare lo stato al volo:
@@ -1001,12 +1003,12 @@ Mentre le API formiscono i dati bruti, la dashboard amministrativa (rivisitata a
 - **Contenimento Titolo**: La main column (Titolo) non deve eccedere il 45% della table-grid.
 - **Badge Cromatico Categoria**: Rendere esplicita una colonna per la "Categoria" (15% di footprint) decorata con badge a colori sfalsati per la selezione rapida con lo sguardo.
 - **Metadati Fissi**: Riservare il 20% alle Date di pubblicazione ed un 20% allo Stato dinamicamente calcolato (Bozza/Programmato).
-- **Icon Actions**: Condensare l'edit/delete in action-button con icona standardizzata a fine riga (senza label text) per salvare la responsivitÃ  da tablet.
+- **Icon Actions**: Condensare l'edit/delete in action-button con icona standardizzata a fine riga (senza label text) per salvare la responsività da tablet.
 
-## 3. Workflow Editoriale e IntegritÃ 
+## 3. Workflow Editoriale e Integrità
 - **Auto-Slug**: Lo slug deve essere rigenerato solo alla creazione o se esplicitamente richiesto, per evitare di rompere i link esistenti (SEO integrity) in caso di modifica del titolo.
 - **Rich Text Reset**: Durante il passaggio tra la modifica di due contenuti diversi, il componente editor deve essere forzatamente rimosso e reinserito (`key={item.id}`) per pulire i buffer interni e prevenire perdite di dati cross-articolo.
-- **Anteprima Immediata**: Il form deve mostrare una miniatura (preview) dell'immagine di copertina selezionata, con possibilitÃ  di rimozione istantanea prima del salvataggio.
+- **Anteprima Immediata**: Il form deve mostrare una miniatura (preview) dell'immagine di copertina selezionata, con possibilità di rimozione istantanea prima del salvataggio.
 
 ## 4. Gestione Categorie Sincrone e Tagging Relazionale
 Storicamente (fino alle versioni 1.6), il tagging veniva gestito come campo testuale e organizzato visivamente dividendo con la virgola. Questa pratica (flat-string) rende i filtri globali fragili e non scalabili.
@@ -1020,7 +1022,7 @@ Dalla versione 1.7.12 (SimonePizziWebSite), lo standard miniCMS decreta il passa
 
 Gli endpoint API devono implementare una logica di "Bypass" per gli utenti autenticati:
 - **Pubblico**: `WHERE status = 'published' AND published_at <= NOW()`
-- **Admin**: nessun filtro â€” lista completa con bozze e articoli programmati nel futuro
+- **Admin**: nessun filtro — lista completa con bozze e articoli programmati nel futuro
 
 Questo permette all'amministratore di testare la visualizzazione di un articolo programmato semplicemente navigando sul sito dopo aver effettuato il login, senza alcun meccanismo di preview separato.
 
@@ -1041,7 +1043,7 @@ if ($article) {
     $is_published = $article['status'] === 'published' &&
                     (empty($article['published_at']) || strtotime($article['published_at']) <= $ita_now_time);
 
-    // Fingere il 404 â€” non 403 â€” per non rivelare l'esistenza di bozze a utenti non autenticati
+    // Fingere il 404 — non 403 — per non rivelare l'esistenza di bozze a utenti non autenticati
     if (!$is_admin && !$is_published) {
         http_response_code(404);
         echo json_encode(['error' => 'Articolo non trovato']);
@@ -1052,7 +1054,7 @@ if ($article) {
 }
 ```
 
-**Principio chiave**: il 404 simulato (anzichÃ© il 403) Ã¨ una misura di sicurezza deliberata. Un 403 confermerebbe l'esistenza del contenuto; un 404 lo nega.
+**Principio chiave**: il 404 simulato (anziché il 403) è una misura di sicurezza deliberata. Un 403 confermerebbe l'esistenza del contenuto; un 404 lo nega.
 
 ### 5.2 Bypass per Lista (via Parametro Admin)
 
@@ -1065,7 +1067,7 @@ $is_admin_dashboard = isset($_SESSION['user_id']) &&
                       $_GET['admin'] === 'true';
 
 if (!$is_admin_dashboard) {
-    // Filtri pubblici: solo pubblicati e giÃ  usciti
+    // Filtri pubblici: solo pubblicati e già usciti
     $conditions[] = "status = 'published'";
     $conditions[] = "(published_at IS NULL OR published_at = '' OR published_at <= ?)";
     $params[] = $ita_now_str; // Stringa datetime calcolata all'inizio dello script
@@ -1073,11 +1075,11 @@ if (!$is_admin_dashboard) {
 // Se $is_admin_dashboard === true: nessun filtro, lista completa
 ```
 
-Il doppio controllo (`session + parametro`) Ã¨ fondamentale: il parametro `?admin=true` da solo sarebbe bypassabile da chiunque.
+Il doppio controllo (`session + parametro`) è fondamentale: il parametro `?admin=true` da solo sarebbe bypassabile da chiunque.
 
 ### 5.3 Accesso per ID (Editor Admin)
 
-Un terzo pattern â€” fetch per ID anzichÃ© slug â€” serve esclusivamente al form di editing in dashboard. Richiede autenticazione obbligatoria:
+Un terzo pattern — fetch per ID anziché slug — serve esclusivamente al form di editing in dashboard. Richiede autenticazione obbligatoria:
 
 ```php
 // GET /api/articles.php?id=42 (solo admin editor)
@@ -1089,9 +1091,9 @@ if (isset($_GET['id'])) {
 }
 ```
 
-Questo endpoint bypassa il filtro sullo stato perchÃ© Ã¨ progettato per caricare nel form anche le bozze mai pubblicate.
+Questo endpoint bypassa il filtro sullo stato perché è progettato per caricare nel form anche le bozze mai pubblicate.
 
----
+\newpage
 *Prossimo Capitolo: Security & Auth - Gestione sessioni, ruoli e protezione avanzata.*
 
 
@@ -1151,7 +1153,7 @@ Per evitare che errori PHP involontari (Notice/Warning) rompano l'output JSON e 
 - `error_reporting(0);` in produzione.
 - Cattura delle eccezioni via `try-catch` e restituzione di messaggi di errore "parlanti" ma generici.
 
----
+\newpage
 
 ## 6. Caso Reale: L'Attacco DDoS a Runtime Radio (Febbraio 2026)
 
@@ -1236,38 +1238,40 @@ L'incidente non Ã¨ stato risolto in solitudine. Carlo Santagostino, Walter Sba
 
 5. **La cache non Ã¨ solo una ottimizzazione di performance â€” Ã¨ un layer di sicurezza.** Un sistema che risponde alle richieste ripetitive senza interrogare il database Ã¨ intrinsecamente piÃ¹ resiliente agli attacchi volumetrici.
 
----
+\newpage
 *Prossimo Capitolo: SEO Pre-rendering con PHP Entry-Point - Il motore SEO invisibile che trasforma una SPA in un sito indicizzabile.*
+
+
 
 
 # CAPITOLO 11: SEO Pre-rendering con PHP Entry-Point (v1.0)
 
-Il problema fondamentale delle Single Page Application (SPA) React Ã¨ che i bot di Google, Facebook, Twitter e LinkedIn vedono solo un `<div id="root"></div>` vuoto: JavaScript non viene eseguito al momento della scansione. Il Modello Universale risolve questo problema con un **PHP Entry-Point** che inietta i meta tag corretti nell'HTML prima che arrivi al bot, senza rinunciare alla potenza di React.
+Il problema fondamentale delle Single Page Application (SPA) React è che i bot di Google, Facebook, Twitter e LinkedIn vedono solo un `<div id="root"></div>` vuoto: JavaScript non viene eseguito al momento della scansione. Il Modello Universale risolve questo problema con un **PHP Entry-Point** che inietta i meta tag corretti nell'HTML prima che arrivi al bot, senza rinunciare alla potenza di React.
 
-Questo capitolo documenta il pattern reale implementato in **SimonePizziWebSite (v1.4.0)** e menzionato in forma piÃ¹ semplice in SitoRuntime.
+Questo capitolo documenta il pattern reale implementato in **SimonePizziWebSite (v1.4.0)** e menzionato in forma più semplice in SitoRuntime.
 
 ## 1. Il Problema e la Soluzione
 
 ### Il Problema
 ```
-Bot Google â†’ richiede /videogiochi/mio-articolo
-Server â†’ serve index.html (solo <div id="root">)
-Bot â†’ "non c'Ã¨ contenuto, ignoro"
+Bot Google → richiede /videogiochi/mio-articolo
+Server → serve index.html (solo <div id="root">)
+Bot → "non c'è contenuto, ignoro"
 ```
 
 ### La Soluzione: The Swap Trick
 ```
-Bot Google â†’ richiede /videogiochi/mio-articolo
-Server â†’ Apache â†’ index.php (invece di index.html!)
-index.php â†’ query SQLite â†’ estrae title, description, image dell'articolo
-index.php â†’ legge index.html compilato da Vite â†’ inietta meta tag â†’ serve HTML completo
-Bot â†’ "ho trovato contenuto, indexo"
+Bot Google → richiede /videogiochi/mio-articolo
+Server → Apache → index.php (invece di index.html!)
+index.php → query SQLite → estrae title, description, image dell'articolo
+index.php → legge index.html compilato da Vite → inietta meta tag → serve HTML completo
+Bot → "ho trovato contenuto, indexo"
 ```
 
 > [!WARNING]
 > **I Limiti della Soluzione (Incidente "Sito Invisibile")**
-> L'esperienza sul campo (SimonePizziWebSite v1.7.x) ha dimostrato che il trick dello Swap PHP Ã¨ una soluzione eccellente per **Social Bot** (Telegram, Facebook, Twitter, iMessage) che si accontentano dei meta-tag nell'<head>. 
-> Tuttavia, **NON Ã¨ sufficiente per l'indicizzazione organica su Google (SEO puro)**. I moderni crawler come Googlebot cercano l'HTML renderizzato semantico nel `<body>`. Trovando solo un `<div id="root">`, Google indicizzerÃ  pochissime pagine (es. 1 su 30). 
+> L'esperienza sul campo (SimonePizziWebSite v1.7.x) ha dimostrato che il trick dello Swap PHP è una soluzione eccellente per **Social Bot** (Telegram, Facebook, Twitter, iMessage) che si accontentano dei meta-tag nell'<head>.
+> Tuttavia, **NON è sufficiente per l'indicizzazione organica su Google (SEO puro)**. I moderni crawler come Googlebot cercano l'HTML renderizzato semantico nel `<body>`. Trovando solo un `<div id="root">`, Google indicizzerà pochissime pagine (es. 1 su 30).
 > Per risolvere l'indicizzazione SEO profonda di una SPA, l'architettura miniCMS consiglia l'integrazione di plugin per **Static Prerendering** in fase di build (come `vite-plugin-prerender`), pur mantenendo l'infrastruttura di deploy immutata.
 
 ## 2. Il Meccanismo: Build Rename Strategy
@@ -1285,7 +1289,7 @@ Vite genera `dist/index.html`, lo script di build lo rinomina in `dist/index_rea
 "build": "tsc && vite build",
 "postbuild": "node clean-dist.js"
 ```
-Qui `index.php` Ã¨ giÃ  nella cartella `public/` e Vite compila tutti gli asset statici nella stessa cartella (o la struttura Ã¨ organizzata diversamente). Il risultato Ã¨ identico: `index.php` Ã¨ il file servito da Apache.
+Qui `index.php` è già nella cartella `public/` e Vite compila tutti gli asset statici nella stessa cartella (o la struttura è organizzata diversamente). Il risultato è identico: `index.php` è il file servito da Apache.
 
 ## 3. Il Codice di index.php (Analisi Completa)
 
@@ -1314,7 +1318,7 @@ $slug = null;
 if (isset($uri_parts[0]) && $uri_parts[0] === 'admin') {
     $slug = null;
 } elseif (count($uri_parts) == 2) {
-    // URL tipo /categoria/mio-slug â†’ prende l'ultimo segmento
+    // URL tipo /categoria/mio-slug → prende l'ultimo segmento
     $slug = end($uri_parts);
 } elseif (count($uri_parts) == 1 && $uri_parts[0] !== '') {
     // URL corto tipo /mio-slug
@@ -1401,26 +1405,26 @@ echo $htmlContent;
 
 ### 4.1 Connessione Diretta al DB (No Include Esterno)
 `index.php` non deve fare `require_once 'api/db.php'`. Connette direttamente tramite PDO per due motivi:
-- SemplicitÃ : evita dipendenze da path relativi che cambiano in base alla posizione del file.
+- Semplicità: evita dipendenze da path relativi che cambiano in base alla posizione del file.
 - Performance: connessione read-only, niente sessioni, niente CORS headers.
 
 ### 4.2 Sanitizzazione dello Slug
 L'uso di `strip_tags(trim($slug))` al posto del deprecato `FILTER_SANITIZE_STRING` garantisce:
-- CompatibilitÃ  PHP 8.1+.
+- Compatibilità PHP 8.1+.
 - Rimozione di eventuali tag HTML iniettati via URL.
 
 ### 4.3 Fallback Silenzioso
-Il blocco `try-catch` intorno alla query NON mostra errori all'utente. Se il DB non Ã¨ raggiungibile, serve i meta default. Questo Ã¨ fondamentale: un errore del SEO Engine non deve rompere l'intera applicazione.
+Il blocco `try-catch` intorno alla query NON mostra errori all'utente. Se il DB non è raggiungibile, serve i meta default. Questo è fondamentale: un errore del SEO Engine non deve rompere l'intera applicazione.
 
 ### 4.4 Bypass Admin
-Le rotte `/admin/*` non vengono processate dal motore SEO. L'area admin non ha bisogno di Open Graph e include giÃ  il proprio ciclo di autenticazione React.
+Le rotte `/admin/*` non vengono processate dal motore SEO. L'area admin non ha bisogno di Open Graph e include già il proprio ciclo di autenticazione React.
 
 ### 4.5 Immagine Assoluta
 I bot di social richiedono URL assoluti per `og:image`. La logica trasforma i path relativi (come `/api/uploads/copertina.jpg`) in `https://dominio.com/api/uploads/copertina.jpg`.
 
-## 5. Estensione a PiÃ¹ EntitÃ 
+## 5. Estensione a Più Entità
 
-Il pattern si estende facilmente a piÃ¹ tipi di contenuto. Basta aggiungere query successive:
+Il pattern si estende facilmente a più tipi di contenuto. Basta aggiungere query successive:
 
 ```php
 // Prima: cercare tra gli articoli
@@ -1434,15 +1438,54 @@ if (!$article) {
 
 ## 6. Configurazione Apache (.htaccess)
 
-Il `.htaccess` del Modello Universale (Capitolo 2) gestisce giÃ  il routing. Apache serve `index.php` come documento predefinito se presente, prima di `index.html`. Non Ã¨ necessario alcun aggiornamento delle regole RewriteRule.
+Il `.htaccess` del Modello Universale (Capitolo 2) gestisce già il routing. Apache serve `index.php` come documento predefinito se presente, prima di `index.html`. Non è necessario alcun aggiornamento delle regole RewriteRule.
 
----
+
+## 7. Dynamic Sitemap & Robots.txt (v2.0)
+
+L'evoluzione naturale dal prerendering statico è la generazione dinamica dei file di servizio SEO. Questo elimina la necessità di rigenerare file fisici ogni volta che un articolo viene pubblicato o modificato.
+
+### 7.1 Mappatura via .htaccess
+Invece di avere file sitemap.xml e obots.txt reali, usiamo Apache per dirottare le richieste verso script PHP:
+
+`pache
+# SEO Files — SEMPRE serviti da PHP (contenuto dinamico real-time)
+RewriteRule ^sitemap\.xml$ sitemap.php [L,NC]
+RewriteRule ^robots\.txt$ robots.php [L,NC]
+`
+
+### 7.2 Robots.php Dinamico
+Garantisce che il link alla Sitemap punti sempre al dominio corretto, calcolato dinamicamente:
+
+`php
+header("Content-Type: text/plain; charset=utf-8");
+ = (!empty(['HTTPS']) && ['HTTPS'] !== 'off') ? "https://" : "http://";
+  =  . ['HTTP_HOST'];
+
+echo "User-agent: *" . PHP_EOL;
+echo "Allow: /" . PHP_EOL;
+echo "Disallow: /admin/" . PHP_EOL;
+echo PHP_EOL;
+echo "Sitemap: /sitemap.xml" . PHP_EOL;
+`
+
+### 7.3 Sitemap.php Dinamica
+Recupera categorie, sottocategorie e articoli direttamente dal database.
+
+**Vantaggi Chiave:**
+1.  **Real-time:** Un nuovo articolo appare nella sitemap istantaneamente.
+2.  **Lastmod Preciso:** Il campo <lastmod> delle categorie viene calcolato in base alla data dell'ultimo articolo pubblicato in quella categoria.
+3.  **Zero Manutenzione:** Non serve più uno script di prerendering o una build manuale per aggiornare la SEO.
+4.  **BaseUrl Dinamico:** Lo stesso script funziona su localhost, staging e produzione senza modifiche.
+
+\newpage
+
 *Prossimo Capitolo: RSS Feed & Syndication - Come generare feed XML per aggregatori e podcast app.*
 
 
 # CAPITOLO 12: RSS Feed & Syndication (v1.0)
 
-Il feed RSS Ã¨ il canale di distribuzione automatica dei contenuti verso aggregatori, lettori di notizie, podcast app e motori di ricerca. Tutti i siti del Modello Universale implementano almeno un feed: **SimonePizziWebSite** (`rss.php`), **SitoRuntime** (`feed_news_rss.php`), **DISINTELLIGENZA** e **FDCA** (`feed.php`). Questo capitolo consolida il pattern standard.
+Il feed RSS è il canale di distribuzione automatica dei contenuti verso aggregatori, lettori di notizie, podcast app e motori di ricerca. Tutti i siti del Modello Universale implementano almeno un feed: **SimonePizziWebSite** (`rss.php`), **SitoRuntime** (`feed_news_rss.php`), **DISINTELLIGENZA** e **FDCA** (`feed.php`). Questo capitolo consolida il pattern standard.
 
 ## 1. Struttura del Feed RSS Standard
 
@@ -1551,10 +1594,10 @@ $item_url = $base_url . '/' . rawurlencode($article['category']) . '/' . rawurle
 `rawurlencode()` gestisce spazi, accenti e caratteri speciali nei category slug. Non usare `urlencode()` (sostituisce gli spazi con `+` invece che `%20`).
 
 ### 2.4 Enclosure per Immagini
-Il tag `<enclosure>` permette agli aggregatori di mostrare l'immagine di anteprima dell'articolo nel feed. Richiede URL assoluto â€” i path relativi (`/api/uploads/...`) non funzionano:
+Il tag `<enclosure>` permette agli aggregatori di mostrare l'immagine di anteprima dell'articolo nel feed. Richiede URL assoluto — i path relativi (`/api/uploads/...`) non funzionano:
 ```php
 $img_url = str_starts_with($article['cover_image'], 'http')
-    ? $article['cover_image']                                   // GiÃ  assoluto
+    ? $article['cover_image']                                   // Già assoluto
     : $base_url . '/' . ltrim($article['cover_image'], '/');    // Rendi assoluto
 ```
 
@@ -1564,7 +1607,7 @@ L'esperienza reale (Incidente Titan Desktop v1.7.3) ha dimostrato che qualora vi
 
 **Soluzione Definitiva**: Usare uno standard URN crittografico, totalmente svincolato dal nome dominio o dal percorso cartelle, basato sull'ID nativo di database: 
 `<guid isPermaLink="false">urn:tuosito:article:{id}</guid>`.
-In questo modo anche se l'URL e le tassonomie cambiano 100 volte, il bot tratterÃ  il contenuto come "entitÃ  giÃ  vista".
+In questo modo anche se l'URL e le tassonomie cambiano 100 volte, il bot tratterà il contenuto come "entità già vista".
 
 ## 3. Feed RSS per Podcast (Podcast App)
 
@@ -1587,12 +1630,12 @@ echo '  </item>' . "\n";
 
 ## 4. Registrazione del Feed nel Routing
 
-Il feed deve essere accessibile tramite URL dedicato. Con il `.htaccess` del Modello Universale (che reindirizza tutto a `index.php`), i file PHP fisici sono giÃ  serviti direttamente â€” non servono configurazioni aggiuntive per `rss.php` o `feed.php`.
+Il feed deve essere accessibile tramite URL dedicato. Con il `.htaccess` del Modello Universale (che reindirizza tutto a `index.php`), i file PHP fisici sono già serviti direttamente — non servono configurazioni aggiuntive per `rss.php` o `feed.php`.
 
 **URL consigliati**:
-- `/api/rss.php` â€” feed notizie standard
-- `/api/feed.php` â€” alias alternativo
-- `/api/feed_news_rss.php` â€” naming esplicito SitoRuntime
+- `/api/rss.php` — feed notizie standard
+- `/api/feed.php` — alias alternativo
+- `/api/feed_news_rss.php` — naming esplicito SitoRuntime
 
 ## 5. Integrazione nel Frontend (Discovery)
 
@@ -1604,460 +1647,163 @@ Il feed RSS deve essere **annunciato** nell'`<head>` HTML per permettere ai brow
       href="/api/rss.php" />
 ```
 
----
+\newpage
 *Prossimo Capitolo: Newsletter & Email System - La lista email come asset posseduto, indipendente dalle piattaforme.*
 
 
-# CAPITOLO 13: Newsletter & Email System (v1.0)
+# CAPITOLO 13: Newsletter & Email System (v2.0)
 
-La newsletter Ã¨ uno degli strumenti di fidelizzazione piÃ¹ diretti e indipendenti dalle piattaforme. A differenza dei social media, una lista email Ã¨ un asset *posseduto* â€” non soggetta a algoritmi, shadowban o chiusure di account. Questo capitolo documenta il pattern completo implementato in SitoRuntime (Runtime Radio).
+La newsletter è uno degli strumenti di fidelizzazione più diretti e indipendenti dalle piattaforme. Il Modello Universale implementa un sistema professionale completo basato su **SimonePizziWebSite (v1.7.4)**, con supporto a Double Opt-in, gestione template dark-mode e tracking degli invii.
 
-## 1. Schema del Database
+## 1. Schema del Database (Evoluto)
 
-La tabella `subscribers` Ã¨ volutamente minimale. L'iscrizione richiede solo un'email valida â€” niente nome, niente dati aggiuntivi â€” in linea con il principio del minimo dato necessario per la conformitÃ  GDPR.
+Rispetto alla v1.0, lo schema include token di sicurezza univoci per ogni utente, necessari per la conformità GDPR e la protezione contro le iscrizioni bot.
 
-```sql
--- SQLite
+`sql
 CREATE TABLE IF NOT EXISTS subscribers (
-    id        INTEGER PRIMARY KEY AUTOINCREMENT,
-    email     TEXT UNIQUE NOT NULL,
-    is_active INTEGER DEFAULT 1,
-    created_at TEXT DEFAULT (datetime('now'))
+    id                INT AUTO_INCREMENT PRIMARY KEY,
+    email             VARCHAR(255) UNIQUE NOT NULL,
+    name              VARCHAR(100) NULL,
+    status            ENUM('pending', 'confirmed', 'unsubscribed') DEFAULT 'pending',
+    confirm_token     VARCHAR(64) NULL,
+    unsubscribe_token VARCHAR(64) NOT NULL,
+    confirmed_at      DATETIME NULL,
+    created_at        DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
--- MySQL (equivalente)
-CREATE TABLE IF NOT EXISTS subscribers (
-    id         INT AUTO_INCREMENT PRIMARY KEY,
-    email      VARCHAR(255) UNIQUE NOT NULL,
-    is_active  TINYINT(1) DEFAULT 1,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+-- Tabella Storico Invii
+CREATE TABLE IF NOT EXISTS newsletter_sends (
+    id              INT AUTO_INCREMENT PRIMARY KEY,
+    subject         VARCHAR(255) NOT NULL,
+    body            TEXT NOT NULL,
+    sent_at         DATETIME DEFAULT CURRENT_TIMESTAMP,
+    recipient_count INT DEFAULT 0
 );
-```
+`
 
-Il campo `is_active` permette la **disiscrizione morbida**: l'utente viene marcato come inattivo senza cancellare il record, preservando la storia dell'iscrizione e prevenendo re-iscrizioni accidentali.
+## 2. Architettura Double Opt-in
 
-## 2. Architettura degli Endpoint
+Per garantire la qualità della lista e la conformità normativa, il sistema segue il flusso Double Opt-in:
 
-Il file `newsletter.php` gestisce piÃ¹ azioni via query string `?action=`. La struttura ha un gate chiaro: le azioni pubbliche vengono servite immediatamente, quelle admin richiedono autenticazione.
+1.  **Iscrizione:** L'utente inserisce l'email. Lo stato è pending. Viene generato un confirm_token.
+2.  **Verifica:** Viene inviata un'email transazionale con un link di conferma unico.
+3.  **Conferma:** Solo al click sul link, lo stato passa a confirmed e viene registrata la data confirmed_at.
 
-```
-GET/POST ?action=subscribe  â†’ pubblico
-GET      ?action=unsubscribe â†’ pubblico (via link email)
-GET      ?action=count       â†’ admin only
-POST     ?action=send        â†’ admin only
-```
+### Generazione Token Sicuri
+`php
+     = bin2hex(random_bytes(32));
+ = bin2hex(random_bytes(32));
+`
 
-```php
-<?php
-require_once 'cors.php';
-require_once 'auth_utils.php';
-session_start();
+## 3. Invio Newsletter e Composizione (v2.0)
 
-// Lazy DB Connection â€” caricata solo se necessario
-function getDB() {
-    static $pdo = null;
-    if ($pdo === null) {
-        require_once 'db.php';
-        $pdo = Database::connect();
-    }
-    return $pdo;
-}
+### 3.1 Template HTML Professionale (Dark Theme)
+Le newsletter moderne devono essere leggibili su client che supportano la dark mode. Il template di riferimento usa un design "Cyber-Dark" coerente con l'estetica del Modello Universale:
 
-$input = json_decode(file_get_contents('php://input'), true);
-$action = $_GET['action'] ?? '';
+- **Sfondo:** #0a0a0a con container #111.
+- **Tipografia:** Font di sistema puliti (Segoe UI, Arial).
+- **Accent Color:** #22c55e (Verde Cyber).
+- **Responsive:** Layout table-based a 600px per massima compatibilità (Outlook/Gmail).
 
-// --- AZIONI PUBBLICHE (prima del gate admin) ---
-// ...
+### 3.2 Gestione Unsubscribe (GDPR)
+Ogni email include un link di disiscrizione univoco in fondo. La disiscrizione è immediata (one-click) tramite l'unsubscribe_token, senza richiedere login all'utente.
 
-// --- GATE ADMIN ---
-if (!isLoggedIn() || $_SESSION['role'] !== 'admin') {
-    http_response_code(403);
-    echo json_encode(['success' => false, 'error' => 'Forbidden']);
-    exit;
-}
+`php
+ = "https://tuosito.it/newsletter/disiscritto?token=" . urlencode();
+`
 
-// --- AZIONI ADMIN ---
-// ...
-```
+## 4. Tracking e Storico (Admin)
 
-## 3. Iscrizione Pubblica
+L'interfaccia admin permette di:
+- Visualizzare le statistiche (Totali, Confermati, In attesa, Disiscritti).
+- Consultare lo storico degli invii effettuati (
+ewsletter_sends).
+- Approvare manualmente un iscritto se necessario (es. assistenza clienti).
 
-```php
-if ($action === 'subscribe') {
-    $email = filter_var($input['email'] ?? '', FILTER_VALIDATE_EMAIL);
+## 5. Protezione Anti-Spam e Rate Limiting
 
-    if (!$email) {
-        echo json_encode(['success' => false, 'error' => 'Email non valida']);
-        exit;
-    }
+- **Mailing Limit:** L'invio cicla sugli iscritti con un piccolo delay (es. usleep(100000)) per evitare di essere contrassegnati come spam dai provider.
+- **Header SMTP:** Utilizzo di Reply-To reale per permettere all'utente di rispondere alla newsletter, mantenendo il From tecnico per i server di posta.
 
-    try {
-        $stmt = getDB()->prepare("INSERT INTO subscribers (email) VALUES (?)");
-        $stmt->execute([$email]);
-        echo json_encode(['success' => true, 'message' => 'Iscrizione completata']);
-    } catch (PDOException $e) {
-        if ($e->getCode() == 23000) { // UNIQUE constraint violation
-            echo json_encode(['success' => true, 'message' => 'Sei giÃ  iscritto!']);
-        } else {
-            echo json_encode(['success' => false, 'error' => 'Errore database']);
-        }
-    }
-    exit;
-}
-```
-
-**Note implementative:**
-- `FILTER_VALIDATE_EMAIL` Ã¨ la validazione lato server â€” obbligatoria anche se il form frontend valida giÃ .
-- Il codice di errore `23000` (UNIQUE constraint violation) viene gestito silenziosamente restituendo un successo: l'utente giÃ  iscritto non deve sapere che il suo indirizzo Ã¨ giÃ  nel database (misura anti-enumeration minima).
-- La risposta Ã¨ sempre JSON â€” questo endpoint Ã¨ chiamato da React via `fetch()`.
-
-## 4. Disiscrizione GDPR-Compliant
-
-La disiscrizione avviene via link personalizzato nell'email. A differenza della subscribe (che riceve JSON da React), questa action restituisce HTML diretto â€” perchÃ© viene visitata dal browser dell'utente che clicca il link nell'email.
-
-```php
-if ($action === 'unsubscribe') {
-    $email = filter_var($_GET['email'] ?? '', FILTER_VALIDATE_EMAIL);
-
-    if (!$email) {
-        echo "Email non valida.";
-        exit;
-    }
-
-    try {
-        $stmt = getDB()->prepare("UPDATE subscribers SET is_active = 0 WHERE email = ?");
-        $stmt->execute([$email]);
-        echo "<h1>Disiscrizione completata</h1>
-              <p>Ti abbiamo rimosso dalla newsletter. Ci dispiace vederti andare!</p>";
-    } catch (PDOException $e) {
-        echo "Errore durante la disiscrizione.";
-    }
-    exit;
-}
-```
-
-La URL di disiscrizione nell'email ha questa forma:
-```
-https://runtimeradio.com/api/newsletter.php?action=unsubscribe&email=mario%40example.com
-```
-
-L'email Ã¨ `urlencode()`-ata al momento della generazione dell'email (vedi Sezione 6).
-
-## 5. Conteggio Iscritti (Admin)
-
-```php
-if ($action === 'count') {
-    try {
-        $stmt = getDB()->query("SELECT COUNT(*) FROM subscribers WHERE is_active = 1");
-        echo json_encode(['success' => true, 'count' => $stmt->fetchColumn()]);
-    } catch (PDOException $e) {
-        echo json_encode(['success' => false, 'error' => 'Database error']);
-    }
-    exit;
-}
-```
-
-Questo endpoint viene tipicamente chiamato al caricamento della dashboard admin per mostrare la dimensione della lista. Solo iscritti attivi (`is_active = 1`).
-
-## 6. Invio Newsletter (Admin)
-
-L'azione piÃ¹ complessa: genera l'HTML dell'email, personalizza il link di disiscrizione per ogni destinatario, e invia con rate limiting.
-
-### 6.1 Generazione HTML con Placeholder
-
-L'email viene costruita una volta sola come stringa HTML con un placeholder `{EMAIL_PLACEHOLDER}` nel link di disiscrizione. Il placeholder viene poi sostituito per ogni destinatario al momento dell'invio:
-
-```php
-// Costruzione HTML con placeholder
-$html .= '<a href="https://runtimeradio.com/api/newsletter.php?action=unsubscribe&email={EMAIL_PLACEHOLDER}">
-              DISISCRIVITI QUI
-          </a>';
-
-// Al momento dell'invio, per ogni destinatario:
-foreach ($subscribers as $to) {
-    $personalHtml = str_replace('{EMAIL_PLACEHOLDER}', urlencode($to), $html);
-    mail($to, $subject, $personalHtml, $headers);
-}
-```
-
-Questo pattern evita di rigenerare l'intero HTML per ogni email â€” solo la sostituzione del placeholder Ã¨ per-destinatario.
-
-### 6.2 Headers Email
-
-```php
-$headers  = "MIME-Version: 1.0\r\n";
-$headers .= "Content-type:text/html;charset=UTF-8\r\n";
-$headers .= "From: Runtime Radio <no-reply@runtimeradio.com>\r\n";
-$headers .= "Reply-To: runtimeradio@gmail.com\r\n";
-$headers .= "Return-Path: no-reply@runtimeradio.com\r\n";
-$headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-```
-
-- `From` diverso da `Reply-To`: le risposte vanno all'indirizzo reale, non al no-reply.
-- `Return-Path`: gestisce i bounce (email non consegnate) â€” usato dai server di posta.
-
-### 6.3 Rate Limiting
-
-```php
-$count = 0;
-foreach ($subscribers as $to) {
-    $personalHtml = str_replace('{EMAIL_PLACEHOLDER}', urlencode($to), $html);
-    mail($to, $subject, $personalHtml, $headers);
-    $count++;
-
-    // Pausa ogni 10 email per non sovraccaricare il mail server
-    if ($count % 10 === 0) {
-        usleep(500000); // 0.5 secondi
-    }
-}
-
-echo json_encode(['success' => true, 'message' => "Newsletter inviata a $count iscritti"]);
-```
-
-Il rate limiting con `usleep()` Ã¨ fondamentale per hosting condivisi, che spesso impongono limiti di invio per-secondo. Senza questa pausa, il server SMTP rifiuta le email dopo un certo threshold, causando una consegna parziale invisibile.
-
-### 6.4 Query degli Articoli (Ottimizzazione)
-
-L'endpoint di invio riceve un array di ID articoli dal frontend. La query che li recupera Ã¨ deliberatamente priva del campo `content`:
-
-```php
-$placeholders = str_repeat('?,', count($articleIds) - 1) . '?';
-$stmt = getDB()->prepare(
-    "SELECT id, title, slug, summary, cover_image, published_at
-     FROM news WHERE id IN ($placeholders) ORDER BY published_at DESC"
-);
-$stmt->execute($articleIds);
-```
-
-Il campo `content` (HTML completo dell'articolo) non viene mai caricato nelle email: l'email include solo titolo, excerpt/summary e link "Leggi tutto". Questo riduce la dimensione del payload e mantiene le email snelle.
-
-## 7. Struttura Email HTML (Pattern)
-
-Le email HTML devono usare **CSS inline** â€” i client email (Outlook, Gmail app) non supportano fogli di stile esterni nÃ© `<style>` in `<head>`. Il pattern segue questa struttura:
-
-```
-[Header con logo/nome]
-[Testo intro opzionale]
-[Loop articoli: immagine + titolo + excerpt + link]
-[Footer: informativa GDPR + link disiscrizione + copyright]
-```
-
-```php
-$html  = '<!DOCTYPE html><html><body style="font-family: sans-serif; background: #0f172a;">';
-$html .= '<div style="max-width: 600px; margin: 0 auto; background: #1e293b; padding: 20px;">';
-
-// Header
-$html .= '<h1 style="color: #2dd4bf; text-align: center;">Runtime Radio News</h1>';
-
-// Intro (opzionale, inserito dall'admin)
-if ($intro) {
-    $html .= '<div style="background: #334155; padding: 15px; border-radius: 6px;">';
-    $html .= nl2br(htmlspecialchars($intro)); // Preserva a-capo, escapa HTML
-    $html .= '</div>';
-}
-
-// Loop articoli
-foreach ($articles as $art) {
-    $link = "https://runtimeradio.com/news/" . $art['slug'];
-    $html .= '<h2><a href="' . $link . '" style="color: #fff;">'
-           . htmlspecialchars($art['title']) . '</a></h2>';
-    $html .= '<p>' . htmlspecialchars($art['summary']) . '</p>';
-    $html .= '<a href="' . $link . '">Leggi tutto &rarr;</a>';
-}
-
-// Footer GDPR
-$html .= '<p>I tuoi dati sono trattati in conformitÃ  al GDPR (UE 2016/679).
-          <a href="https://runtimeradio.com/privacy-policy">Privacy Policy</a></p>';
-$html .= '<a href="...?action=unsubscribe&email={EMAIL_PLACEHOLDER}">DISISCRIVITI</a>';
-$html .= '</div></body></html>';
-```
-
-## 8. Considerazioni per la ScalabilitÃ 
-
-Il pattern con `mail()` nativo di PHP funziona per liste fino a qualche migliaio di iscritti. Per volumi maggiori o per migliorare la deliverability (evitare lo spam folder), il passaggio a un servizio SMTP esterno richiede solo la sostituzione del blocco di invio:
-
-- **Brevo** (ex Sendinblue) â€” API gratuita fino a 300 email/giorno
-- **Mailgun** â€” API REST, ottima deliverability
-- **Amazon SES** â€” costo bassissimo a volume alto
-
-La struttura del codice rimane invariata: solo il metodo di consegna cambia.
-
----
-*Capitolo correlato: Cap 10 (Security & Auth) per la gestione della sessione admin che protegge gli endpoint di invio.*
-
----
-*Prossimo Capitolo: Database Evolution - La migrazione da SQLite a MySQL, documentata ora per ora dalla notte reale di febbraio 2026.*
-
-
-
+\newpage
+*Prossimo Capitolo: Social Interactions & Reactions - Come gestire l'engagement anonimo e sicuro.*
 \part{I Casi Reali}
 
-# CAPITOLO 14: Database Evolution - Da SQLite a MySQL (v1.0)
+# CAPITOLO 14: Database Evolution - Da SQLite a MySQL (v1.1)
 
-Questo capitolo documenta il percorso reale vissuto dal progetto **SitoRuntime (Runtime Radio)** nella migrazione da SQLite a MySQL, avvenuta il 24 febbraio 2026. Ãˆ una storia concreta di sfide, soluzioni e lezioni apprese â€” non un manuale teorico.
+Questo capitolo documenta il percorso reale di migrazione da SQLite a MySQL, focalizzandosi sulle best practice di connessione e sulla sicurezza dei dati sensibili.
 
-## 1. Quando e PerchÃ© Migrare
+## 1. Quando e Perchè Migrare
 
-SQLite Ã¨ perfetto per progetti leggeri o in fase di sviluppo: zero configurazione, file unico, deployabile in pochi secondi. Ma esistono soglie oltre le quali inizia a mostrare i propri limiti su hosting condivisi Apache/PHP:
+SQLite è perfetto per progetti leggeri. MySQL diventa essenziale quando:
+- **Traffico crescente**: Più utenti simultanei richiedono la gestione nativa dei lock a livello di riga.
+- **Accesso Remoto**: Necessità di gestire il DB tramite tool esterni (phpMyAdmin, TablePlus).
+- **Scalabilità**: Necessità di separare il server web dal server database.
 
-- **Traffico crescente**: piÃ¹ utenti simultanei = piÃ¹ richieste di scrittura = file lock frequenti.
-- **Hosting restrittivi**: alcuni provider limitano o bloccano SQLite per policy interne.
-- **NecessitÃ  di accesso remoto al DB**: tools di gestione visuale (es. phpMyAdmin) richiedono MySQL.
-- **Performance su query complesse**: MySQL gestisce meglio join e aggregazioni su tabelle grandi.
+## 2. La Lezione del WAL Mode
+In produzione (hosting Apache), il WAL mode di SQLite può causare corruzione dei dati se il file di lock non viene rilasciato correttamente. Il Modello Universale impone il `journal_mode=DELETE` come standard di massima affidabilità su hosting condiviso.
 
-**Regola pratica**: FinchÃ© il sito ha < 50 scritture/ora, SQLite Ã¨ piÃ¹ che sufficiente. Sopra quella soglia, o in presenza di file lock ricorrenti in produzione, valutare MySQL.
+## 3. Best Practice di Connessione MySQL
+La transizione a MySQL richiede una configurazione PDO rigorosa per garantire sicurezza e performance.
 
-## 2. La Storia del WAL (Warning reale)
-
-Prima della migrazione definitiva, SitoRuntime aveva tentato di risolvere i problemi di file lock attivando il **WAL mode** (Write-Ahead Logging) di SQLite â€” teoricamente piÃ¹ veloce e meno soggetto a lock. In pratica su hosting condiviso Apache con PHP, il WAL ha causato problemi peggiori: il file di lock WAL (`.sqlite-wal`) rimaneva "appeso" e corrompeva le letture.
-
-Esiste ancora in repo il file `emergency_revert_wal.php`, uno script d'emergenza che forza il ritorno al `journal_mode=DELETE`. Questa Ã¨ la ragione per cui il **Capitolo 3 impone DELETE mode e non WAL**: la lezione Ã¨ stata appresa a caro prezzo in produzione.
-
-## 3. Architettura della Migrazione (Il Pattern a 3 Script)
-
-La migrazione da SQLite a MySQL Ã¨ stata eseguita con 3 script dedicati, ciascuno con un ruolo preciso:
-
-### 3.1 `db_credentials.php` â€” Il File dei Segreti
+### 3.1 Il File dei Segreti (`db_credentials.php`)
+Le credenziali **non devono mai essere committate**. Il file `db_credentials.php` deve essere escluso dal controllo di versione.
 ```php
 <?php
-// ATTENZIONE: Aggiungere questo file al .gitignore.
-// NON committare credenziali nel repository.
+// public/api/db_credentials.php
 return [
-    'DB_HOST'  => 'mysql.tuohoster.com',
-    'DB_NAME'  => 'nome_database',
-    'DB_USER'  => 'utente_mysql',
-    'DB_PASS'  => 'password_sicura',
+    'DB_HOST'  => 'localhost',
+    'DB_NAME'  => 'miocms_db',
+    'DB_USER'  => 'admin',
+    'DB_PASS'  => 'password_molto_sicura',
     'DB_PORT'  => 3306,
 ];
 ```
-**Principio**: Le credenziali non devono mai essere hardcodate in `db.php` o in qualsiasi file committato. Il pattern `require __DIR__ . '/db_credentials.php'` carica un file separato, escluso dal version control tramite `.gitignore`.
 
-### 3.2 `db.php` con MySQL â€” Il Connettore Agnostico
-```php
-<?php
-class Database {
-    private static $pdo = null;
-
-    public static function connect() {
-        if (self::$pdo === null) {
-            try {
-                $config = require __DIR__ . '/db_credentials.php';
-
-                $dsn = sprintf(
-                    "mysql:host=%s;dbname=%s;port=%d;charset=utf8mb4",
-                    $config['DB_HOST'],
-                    $config['DB_NAME'],
-                    $config['DB_PORT']
-                );
-
-                self::$pdo = new PDO($dsn, $config['DB_USER'], $config['DB_PASS'], [
-                    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
-                    PDO::ATTR_DEFAULT_FETCH_MODE  => PDO::FETCH_ASSOC,
-                    PDO::ATTR_EMULATE_PREPARES    => false, // Prepared statements nativi MySQL
-                    PDO::ATTR_TIMEOUT             => 5,
-                    PDO::MYSQL_ATTR_INIT_COMMAND  => "SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci"
-                ]);
-
-            } catch (PDOException $e) {
-                http_response_code(503);
-                die(json_encode(['error' => 'Database Connection Error']));
-            }
-        }
-        return self::$pdo;
-    }
-}
-```
-
-**Differenze chiave rispetto a SQLite**:
-- `PDO::ATTR_EMULATE_PREPARES => false`: Usa prepared statements nativi di MySQL. In SQLite era impostazione di default, in MySQL va forzata esplicitamente.
-- `charset=utf8mb4` nel DSN + `SET NAMES utf8mb4`: Garantisce il corretto encoding di emoji e caratteri speciali.
-- `PDO::ATTR_TIMEOUT => 5`: Timeout connessione di 5 secondi. Con SQLite non serviva (accesso locale al file); con MySQL (rete) Ã¨ essenziale.
-- Niente `PRAGMA journal_mode` o `busy_timeout`: Queste sono direttive SQLite-only.
-
-### 3.3 `init_mysql.php` â€” Creazione Schema
-Script che crea tutte le tabelle nel database MySQL da zero. Va eseguito **una volta sola** prima della migrazione dati. Deve essere protetto da autenticazione o IP whitelist e va eliminato dopo l'uso.
-
-### 3.4 `migrate_to_mysql.php` â€” Il Trasloco Dati
-Script ONE-SHOT che:
-1. Apre una connessione a MySQL (destinazione).
-2. Apre il file SQLite caricato temporaneamente sul server (sorgente).
-3. Migra tabella per tabella con `INSERT ... ON DUPLICATE KEY UPDATE` (idempotente: ri-eseguibile senza duplicati).
-4. Stampa un riepilogo con conteggi di verifica.
-
-**Strategia di sicurezza**:
-- Lo script viene caricato sul server solo per il tempo strettamente necessario.
-- Dopo l'esecuzione, sia lo script che il file `.sqlite` vengono eliminati dal server.
-- Il `set_time_limit(120)` previene i timeout su database grandi.
+### 3.2 Configurazione PDO Avanzata
+Nel file `db.php`, la connessione deve includere parametri specifici:
+- **Charset `utf8mb4`**: Essenziale per il supporto completo a emoji e caratteri speciali (unicode).
+- **`EMULATE_PREPARES => false`**: Forza l'uso dei prepared statements nativi di MySQL. Questo è il pilastro della **sicurezza contro le SQL Injection**, poiché la query e i dati vengono inviati separatamente al server.
+- **Error Mode Exception**: Per intercettare e loggare correttamente i problemi di rete o autenticazione.
 
 ```php
-// Esempio di migrazione idempotente (tabella news)
-$stmt = $mysql->prepare("
-    INSERT INTO news (id, slug, title, summary, content, cover_image, published_at, category)
-    VALUES (?, ?, ?, ?, ?, ?, ?, ?)
-    ON DUPLICATE KEY UPDATE
-        title=VALUES(title),
-        summary=VALUES(summary),
-        content=VALUES(content),
-        updated_at=NOW()
-");
+self::$pdo = new PDO($dsn, $config['DB_USER'], $config['DB_PASS'], [
+    PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+    PDO::ATTR_DEFAULT_FETCH_MODE  => PDO::FETCH_ASSOC,
+    PDO::ATTR_EMULATE_PREPARES    => false, // Sicurezza: Prepared statements nativi
+    PDO::MYSQL_ATTR_INIT_COMMAND  => "SET NAMES utf8mb4 COLLATE utf8mb4_unicode_ci"
+]);
 ```
 
-## 4. Differenze Strutturali SQLite vs MySQL
+## 4. Checklist di Migrazione
 
-| Aspetto | SQLite | MySQL |
-| :--- | :--- | :--- |
-| Connessione | File locale | Rete (host:port) |
-| PRAGMA | `journal_mode`, `busy_timeout`, `foreign_keys` | Non applicabili |
-| Charset | Configurabile per file | `utf8mb4` per emoji e accenti |
-| AUTO_INCREMENT | `INTEGER PRIMARY KEY AUTOINCREMENT` | `INT AUTO_INCREMENT PRIMARY KEY` |
-| Boolean | `INTEGER` (0/1) | `TINYINT(1)` |
-| JSON | Stored as TEXT | Tipo nativo `JSON` disponibile |
-| Prepared Statements | Emulati di default | Nativi con `EMULATE_PREPARES=false` |
-| Concurrent writes | File lock (problematico) | Gestione nativa row-level locking |
-| Backup | Copia del file `.sqlite` | `mysqldump` o tool dedicati |
+- [ ] **Backup**: Export completo del file `.sqlite`.
+- [ ] **Schema**: Esecuzione di `init_mysql.php` per creare le tabelle.
+- [ ] **Migrazione Dati**: Uso di `migrate_to_mysql.php` con logica `ON DUPLICATE KEY UPDATE` per l'idempotenza.
+- [ ] **Sicurezza**: Verificare che `db_credentials.php` sia nel `.gitignore`.
+- [ ] **Bonifica**: Eliminazione degli script di migrazione e del file `.sqlite` dal server dopo il completamento.
 
-## 5. Il Pattern di Credenziali (Sicurezza)
+## 5. Evoluzione MySQL e Sicurezza
+L'adozione di MySQL permette di implementare policy di backup automatici (es. cronjob con `mysqldump`) e di limitare l'accesso al database solo a specifici indirizzi IP (Whitelist), aumentando drasticamente il livello di sicurezza rispetto a un file `.sqlite` potenzialmente scaricabile se non protetto correttamente via `.htaccess`.
 
-Il file `db_credentials.php` deve essere aggiunto al `.gitignore` **prima del primo commit** del progetto:
-
-```
-# .gitignore
-public/api/db_credentials.php
-```
-
-In produzione il file viene caricato manualmente sul server via FTP/SFTP, mai tramite pipeline automatiche o repository pubblici. Se per errore viene committato con credenziali reali, cambiare immediatamente la password del database.
-
-## 6. Checklist di Migrazione
-
-- [ ] Fare un backup completo del file `.sqlite` di produzione.
-- [ ] Creare il database MySQL sul provider hosting.
-- [ ] Caricare e eseguire `init_mysql.php` per creare lo schema.
-- [ ] Caricare il `.sqlite` e `migrate_to_mysql.php` sul server.
-- [ ] Eseguire `migrate_to_mysql.php` e verificare i conteggi nel riepilogo.
-- [ ] Aggiornare `db.php` con la versione MySQL.
-- [ ] Caricare `db_credentials.php` con le credenziali reali.
-- [ ] Testare tutte le API in produzione.
-- [ ] Eliminare `migrate_to_mysql.php` e il file `.sqlite` dal server.
-- [ ] Aggiungere `db_credentials.php` al `.gitignore`.
-
----
-*Prossimo Capitolo: Portfolio & Projects Module - Il modulo universale per portfolio e showcase, con ordinamento drag-and-drop.*
+\newpage
+*Prossimo Capitolo: Portfolio & Projects Module - Il modulo universale per portfolio e showcase.*
 
 
 # CAPITOLO 15: Portfolio & Projects Module (v1.0)
 
-Il modulo Portfolio Ã¨ un'entitÃ  distinta dalla News/Article, progettata per siti di tipo personale, agenzia o showcase. Documentato da **SimonePizziWebSite**, introduce pattern specifici: visibilitÃ  granulare, ordinamento manuale, pulsanti azione multipli e gestione per categorie. Ãˆ il modello di riferimento per qualsiasi sito che debba esporre un catalogo di lavori, prodotti o progetti.
+Il modulo Portfolio è un'entità distinta dalla News/Article, progettata per siti di tipo personale, agenzia o showcase. Documentato da **SimonePizziWebSite**, introduce pattern specifici: visibilità granulare, ordinamento manuale, pulsanti azione multipli e gestione per categorie. È il modello di riferimento per qualsiasi sito che debba esporre un catalogo di lavori, prodotti o progetti.
 
 ## 1. La Differenza con il Modulo News/Articles
 
 | Caratteristica | News/Articles | Projects/Portfolio |
 | :--- | :--- | :--- |
 | Identificatore URL | `slug` (testo parlante) | `id` (numerico) |
-| VisibilitÃ  | `status` (draft/published) | `is_visible` (boolean) |
+| Visibilità | `status` (draft/published) | `is_visible` (boolean) |
 | Programmazione temporale | `published_at` | Non prevista |
-| Rich Text body | SÃ¬ (HTML) | Opzionale (description breve) |
+| Rich Text body | Sì (HTML) | Opzionale (description breve) |
 | Ordinamento | Per data (automatico) | `sort_order` (manuale) |
-| CTA | â€” | `button_a` + `button_b` (URL esterni) |
+| CTA | — | `button_a` + `button_b` (URL esterni) |
 | Categorizzazione | category + tags | Solo category |
 
 ## 2. Schema Database
@@ -2084,9 +1830,9 @@ CREATE INDEX IF NOT EXISTS idx_projects_sort_order ON projects(sort_order ASC);
 
 ## 3. L'API projects.php (5 Metodi HTTP)
 
-Il modulo Projects usa **tutti e 5 i metodi HTTP**, incluso `PATCH` per aggiornamenti parziali â€” il pattern piÃ¹ pulito per operazioni di visibilitÃ  e riordinamento:
+Il modulo Projects usa **tutti e 5 i metodi HTTP**, incluso `PATCH` per aggiornamenti parziali — il pattern più pulito per operazioni di visibilità e riordinamento:
 
-### GET â€” Lista con Bypass Admin
+### GET — Lista con Bypass Admin
 ```php
 $is_admin = isset($_SESSION['user_id']);
 $conditions = [];
@@ -2105,7 +1851,7 @@ if ($category) {
 $query .= " ORDER BY category ASC, sort_order ASC, created_at ASC";
 ```
 
-### POST â€” Creazione con Auto-Sort
+### POST — Creazione con Auto-Sort
 Alla creazione, `sort_order` viene calcolato automaticamente come `MAX(sort_order) + 1` all'interno della stessa categoria. Questo garantisce che i nuovi progetti appaiano in fondo alla lista della loro categoria:
 ```php
 $stmtMax = $pdo->prepare("SELECT COALESCE(MAX(sort_order), 0) FROM projects WHERE category = ?");
@@ -2113,11 +1859,11 @@ $stmtMax->execute([$category]);
 $sort_order = (int)$stmtMax->fetchColumn() + 1;
 ```
 
-### PATCH â€” Aggiornamenti Parziali
-`PATCH` Ã¨ il metodo corretto per aggiornamenti atomici di un singolo campo. Non invia l'intero oggetto: solo il campo che cambia.
+### PATCH — Aggiornamenti Parziali
+`PATCH` è il metodo corretto per aggiornamenti atomici di un singolo campo. Non invia l'intero oggetto: solo il campo che cambia.
 
 ```php
-// Toggle visibilitÃ  singolo progetto
+// Toggle visibilità singolo progetto
 if (isset($data['is_visible'])) {
     $stmt = $pdo->prepare("UPDATE projects SET is_visible=? WHERE id=?");
     $stmt->execute([(int)$data['is_visible'], $id]);
@@ -2130,11 +1876,11 @@ if (isset($data['sort_order'])) {
 }
 ```
 
-**PerchÃ© PATCH e non POST?** Semantica HTTP: `POST` crea, `PUT` sostituisce l'intero oggetto, `PATCH` modifica parzialmente. Usare PATCH per toggle di visibilitÃ  e riordinamento Ã¨ la scelta corretta e comunica chiaramente l'intento dell'operazione.
+**Perché PATCH e non POST?** Semantica HTTP: `POST` crea, `PUT` sostituisce l'intero oggetto, `PATCH` modifica parzialmente. Usare PATCH per toggle di visibilità e riordinamento è la scelta corretta e comunica chiaramente l'intento dell'operazione.
 
 ## 4. Il Pattern dei Pulsanti CTA (button_a / button_b)
 
-Ogni progetto puÃ² avere fino a due pulsanti di azione che puntano a risorse esterne:
+Ogni progetto può avere fino a due pulsanti di azione che puntano a risorse esterne:
 - `button_a`: Pulsante principale (es. "Scopri", "Visita il sito", "Gioca ora")
 - `button_b`: Pulsante secondario opzionale (es. "GitHub", "Case Study", "App Store")
 
@@ -2154,10 +1900,10 @@ Ogni progetto puÃ² avere fino a due pulsanti di azione che puntano a risorse e
 )}
 ```
 
-Il `rel="noopener noreferrer"` Ã¨ obbligatorio per i link `target="_blank"`: previene l'accesso alla `window.opener` della pagina madre da parte della pagina di destinazione (vulnerabilitÃ  tabnapping).
+Il `rel="noopener noreferrer"` è obbligatorio per i link `target="_blank"`: previene l'accesso alla `window.opener` della pagina madre da parte della pagina di destinazione (vulnerabilità tabnapping).
 
 ### 4.1 Switch Dinamico Web / Email
-Una feature avanzata introdotta nella gestione dei CTA (SimonePizziWebSite v1.7.x) Ã¨ il toggle "Tipo di Link" lato Editor. Spesso un CTA in un progetto personale non punta a un sito web, ma deve aprire il client email.
+Una feature avanzata introdotta nella gestione dei CTA (SimonePizziWebSite v1.7.x) è il toggle "Tipo di Link" lato Editor. Spesso un CTA in un progetto personale non punta a un sito web, ma deve aprire il client email.
 L'editor include uno switch (Web URL / Email) che, se impostato su Email, aggiunge automaticamente il prefisso protocollare `mailto:` alla stringa salvata nel DB ignorando l'`https://`, garantendo che l'autore non compia errori di distrazione fornendo una UX sicura.
 
 ## 5. Il Pattern di Slug Avanzato (Normalizzazione Accenti Italiani)
@@ -2166,23 +1912,23 @@ Scoperto in `articles.php` di SimonePizziWebSite, questo pattern risolve un prob
 
 **Problema**:
 ```php
-// Input: "Il caffÃ¨ di Genova Ã¨ buono"
-// Risultato naive: "il-caff-di-genova--buono"  â† accenti rimossi male
+// Input: "Il caffè di Genova è buono"
+// Risultato naive: "il-caff-di-genova--buono"  ← accenti rimossi male
 ```
 
 **Soluzione con mappa esplicita**:
 ```php
 function generateSlug($title, $pdo) {
     // Mappa esplicita accenti italiani e francesi comuni
-    $accents      = ['Ã ','Ã¨','Ã©','Ã¬','Ã²','Ã¹','Ã€','Ãˆ','Ã‰','ÃŒ','Ã’','Ã™',
-                     'Ã¢','Ãª','Ã®','Ã´','Ã»','Ã¤','Ã«','Ã¯','Ã¶','Ã¼'];
+    $accents      = ['à','è','é','ì','ò','ù','À','È','É','Ì','Ò','Ù',
+                     'â','ê','î','ô','û','ä','ë','ï','ö','ü'];
     $replacements = ['a','e','e','i','o','u','a','e','e','i','o','u',
                      'a','e','i','o','u','a','e','i','o','u'];
 
     $title = str_replace($accents, $replacements, $title);
     $slug  = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title)));
 
-    // Anti-collisione: verifica unicitÃ  prima del salvataggio
+    // Anti-collisione: verifica unicità prima del salvataggio
     $stmt = $pdo->prepare("SELECT COUNT(*) FROM projects WHERE slug = ?");
     $stmt->execute([$slug]);
     if ($stmt->fetchColumn() > 0) {
@@ -2195,12 +1941,12 @@ function generateSlug($title, $pdo) {
 
 **Risultato**:
 ```
-"Il caffÃ¨ di Genova Ã¨ buono" â†’ "il-caffe-di-genova-e-buono"  âœ“
+"Il caffè di Genova è buono" → "il-caffe-di-genova-e-buono"  ✓
 ```
 
 Questo pattern va applicato a **tutti i moduli che generano slug** in siti con contenuto italiano.
 
-## 6. React Frontend â€” Componenti Chiave
+## 6. React Frontend — Componenti Chiave
 
 ### PortfolioGrid.tsx
 La griglia del portfolio filtra i progetti per categoria e li mostra in cards. Con dati provenienti dall'API, supporta:
@@ -2219,26 +1965,26 @@ Il form di editing del progetto nell'area admin include:
 ### ProjectsList.tsx (Admin)
 La lista admin dei progetti espone:
 - **Drag-to-sort**: invio di PATCH request ad ogni riposizionamento
-- **Toggle visibilitÃ **: PATCH istantaneo con cambio di icona (occhio aperto/chiuso)
+- **Toggle visibilità**: PATCH istantaneo con cambio di icona (occhio aperto/chiuso)
 - **Filtro per categoria**: segmentazione visiva della lista
 
 ## 7. Strategie di Categoria
 Inizialmente (sino alla v1.6.0), le categorie erano progettate in modo statico: stringhe fisse definite all'interno del codice React (`PROJECT_CATEGORIES`).
 
-Tuttavia, l'esperienza in produzione su SimonePizziWebSite ha dimostrato che un portfolio in crescita richiede flessibilitÃ  editoriale totale. Con la **v1.7.10**, l'architettura Ã¨ stata migrata verso un modello nativamente **DB-driven e Dinamico**.
+Tuttavia, l'esperienza in produzione su SimonePizziWebSite ha dimostrato che un portfolio in crescita richiede flessibilità editoriale totale. Con la **v1.7.10**, l'architettura è stata migrata verso un modello nativamente **DB-driven e Dinamico**.
 
 ### Sistema Relazionale Categorie e Tag
-Il database si Ã¨ arricchito delle tabelle `categories` e `tags`, assieme a tabelle pivot per relazioni molti-a-molti (`article_tags`).
-Il frontend non possiede piÃ¹ array hardcoded, ma effettua il fetching all'avvio chiamando endpoints specifici (es. `GET /api/categories.php`).
+Il database si è arricchito delle tabelle `categories` e `tags`, assieme a tabelle pivot per relazioni molti-a-molti (`article_tags`).
+Il frontend non possiede più array hardcoded, ma effettua il fetching all'avvio chiamando endpoints specifici (es. `GET /api/categories.php`).
 
-**PerchÃ© questa migrazione Ã¨ stata vitale:**
-1. L'amministratore puÃ² modificare, rinominare o depotenziare categorie dal volo tramite pannello admin senza richiedere una nuova "build" di Vite.
+**Perché questa migrazione è stata vitale:**
+1. L'amministratore può modificare, rinominare o depotenziare categorie dal volo tramite pannello admin senza richiedere una nuova "build" di Vite.
 2. Introduce il supporto al **Multi-Tagging** per l'incrocio dimensionale dei contenuti.
 3. Il frontend mappa in UI istantaneamente questi nuovi filtri, rendendo la navigazione della libreria estremamente flessibile.
 
-## 8. `auth_helper.php` â€” Il Pattern Minimale
+## 8. `auth_helper.php` — Il Pattern Minimale
 
-SimonePizziWebSite ha introdotto un pattern di autenticazione piÃ¹ snello rispetto agli altri siti: `auth_helper.php` Ã¨ una classe `Auth` con un unico metodo statico `check()`.
+SimonePizziWebSite ha introdotto un pattern di autenticazione più snello rispetto agli altri siti: `auth_helper.php` è una classe `Auth` con un unico metodo statico `check()`.
 
 ```php
 <?php
@@ -2270,10 +2016,10 @@ Auth::check();
 
 Il vantaggio rispetto al pattern `auth.php` standard: `session_start()` e gli header JSON vengono gestiti **una volta sola** nel file helper, non ripetuti in ogni endpoint. Riduce errori di "headers already sent".
 
----
+\newpage
 *Conclusione: Con i capitoli 14-15 il Modello Universale copre i pattern di migrazione e showcase reali emersi dai progetti di produzione.*
 
----
+\newpage
 *Prossimo Capitolo: Festival Logic - Iscrizioni e Workflow Approvazione - Il ciclo completo di gestione concorrenti per DISINTELLIGENZA e FDCA.*
 
 
@@ -2285,8 +2031,8 @@ Il Modello Universale include un sistema gestionale per concorsi e festival, foc
 Ogni iscrizione passa attraverso una pipeline di validazione obbligatoria gestita dal backend.
 
 ### 1.1 Stati di Iscrizione
-- **pending**: Stato iniziale. Il partecipante ha caricato i dati ma non Ã¨ visibile sul sito.
-- **approved**: Il partecipante Ã¨ validato, riceve l'email di conferma e viene inserito automaticamente nella newsletter.
+- **pending**: Stato iniziale. Il partecipante ha caricato i dati ma non è visibile sul sito.
+- **approved**: Il partecipante è validato, riceve l'email di conferma e viene inserito automaticamente nella newsletter.
 - **rejected**: Il partecipante viene scartato e riceve una notifica di cortesia.
 
 ## 2. Automazione Email (Transaction Emails)
@@ -2300,16 +2046,16 @@ I file audio o video caricati dagli utenti devono essere isolati (`api/uploads/a
 ## 4. Newsletter Sync Strategy
 Il sistema garantisce la crescita del database marketing inserendo l'indirizzo email dell'utente nella tabella `newsletter_subscribers` **solo nel momento dell'approvazione**. Questo assicura che il database contenga solo utenti reali e validati.
 
----
+\newpage
 *Prossimo Capitolo: Festival Logic - Votazioni e Protezione Anti-Frode.*
 
 
 # CAPITOLO 17: Festival Logic - Votazioni e Protezione Anti-Frode (v1.0)
 
-Il Modello Universale implementa un sistema di votazione pubblica robusto, progettato per prevenire manipolazioni e garantire l'equitÃ  del concorso.
+Il Modello Universale implementa un sistema di votazione pubblica robusto, progettato per prevenire manipolazioni e garantire l'equità del concorso.
 
 ## 1. La Sessione di Voto
-L'utente puÃ² esprimere una o piÃ¹ preferenze (es. da 1 a 3) in una singola chiamata API.
+L'utente può esprimere una o più preferenze (es. da 1 a 3) in una singola chiamata API.
 - **Validazione Server-Side**: Il backend verifica che i partecipanti votati siano effettivamente approvati e nel round attivo (`in_current_round = 1`).
 - **Transazione Atomica**: L'inserimento del voto e l'aggiornamento del contatore (`vote_count`) nel partecipante devono avvenire all'interno di una transazione SQL (`beginTransaction`).
 
@@ -2327,9 +2073,9 @@ I partecipanti sono visibili nella pagina pubblica di voto solo se soddisfano du
 Questo permette all'admin di attivare/disattivare interi gruppi di partecipanti (eliminatorie, semifinali, finale) semplicemente cambiando un interruttore booleano nella dashboard.
 
 ## 4. Master Switch di Votazione
-La possibilitÃ  di votare Ã¨ regolata da un interruttore globale (`voting_active`) nella tabella `settings`. Se disattivato, il backend deve restituire un errore `403 Forbidden` a chiunque tenti di inviare un voto.
+La possibilità di votare è regolata da un interruttore globale (`voting_active`) nella tabella `settings`. Se disattivato, il backend deve restituire un errore `403 Forbidden` a chiunque tenti di inviare un voto.
 
----
+\newpage
 *Prossimo Capitolo: Festival Logic - Dashboard Admin, Settings e Reporting.*
 
 
@@ -2350,19 +2096,17 @@ L'area admin deve mostrare indicatori chiave di prestazione (KPI) in tempo reale
 - **Votanti Unici**: Stima degli utenti unici basata sull'IP e sul Cookie.
 
 ## 3. Workflow di Approvazione e Ranking
-- **Approvazione**: L'admin visualizza i partecipanti in una tabella dedicata, ascolta l'audio e decide l'esito. L'approvazione Ã¨ l'unica azione che scatena l'invio dell'email di conferma ufficiale.
+- **Approvazione**: L'admin visualizza i partecipanti in una tabella dedicata, ascolta l'audio e decide l'esito. L'approvazione è l'unica azione che scatena l'invio dell'email di conferma ufficiale.
 - **Classifica (Ranking)**: Il sistema deve fornire una classifica ordinata per `vote_count`, permettendo all'admin di selezionare i finalisti da spostare nel round successivo.
 
 ## 4. Reporting Automatico
-Alla chiusura della sessione di voto (quando `voting_active` viene portato a `0`), il backend puÃ² innescare l'invio di un'email di report finale allo staff:
+Alla chiusura della sessione di voto (quando `voting_active` viene portato a `0`), il backend può innescare l'invio di un'email di report finale allo staff:
 - Riepilogo voti totali.
-- Top 20 dei partecipanti piÃ¹ votati.
+- Top 20 dei partecipanti più votati.
 - Statistiche di partecipazione geografica (facoltativo, basato sugli IP).
 
----
+\newpage
 *Fine della Documentazione Avanzata del Modello Universale Festival miniCMS.*
-
-
 
 \part{Allegati}
 
@@ -2370,12 +2114,12 @@ Alla chiusura della sessione di voto (quando `voting_active` viene portato a `0`
 
 Questa checklist riassume i passi pratici per inizializzare un nuovo progetto Web (Sito o Web App) basato sugli standard definiti nel "Modello Universale miniCMS". Per i dettagli implementativi, fare riferimento ai capitoli indicati.
 
----
+\newpage
 
 ## Fase 1: Setup Ambiente e Sicurezza Iniziale
 - [ ] Creare la struttura base delle cartelle (`public/api/`, `src/`, `scripts/`).
 - [ ] Creare il file `public/.htaccess` per il routing della SPA (React Router). *(Cap. 2)*
-- [ ] Eseguire lo scaffolding del database: cartella `public/api/.data/` con `.htaccess` â†’ `Deny from all`. *(Cap. 2)*
+- [ ] Eseguire lo scaffolding del database: cartella `public/api/.data/` con `.htaccess` → `Deny from all`. *(Cap. 2)*
 - [ ] Creare la cartella media (`public/api/uploads/`) e la cache (`public/api/.cache/`).
 - [ ] Configurare `vite.config.ts` con il proxy corretto per evitare CORS in locale.
 - [ ] Creare `.env.local` con le variabili di sviluppo (`VITE_API_URL=http://localhost/...`).
@@ -2400,11 +2144,11 @@ Questa checklist riassume i passi pratici per inizializzare un nuovo progetto We
 - [ ] Implementare `upload.php` con ridimensionamento automatico GD e sanitizzazione nomi (`uniqid()`). *(Cap. 5)*
 - [ ] Inserire il componente `MediaPicker` per il caricamento diretto di audio e immagini. *(Cap. 8)*
 - [ ] Usare l'editor "Clean-HTML" con gestione sicura dell'evento "Paste". *(Cap. 8)*
-- [ ] Implementare la logica slug con normalizzazione accenti italiani se il contenuto Ã¨ in italiano. *(Cap. 5)*
+- [ ] Implementare la logica slug con normalizzazione accenti italiani se il contenuto è in italiano. *(Cap. 5)*
 
 ## Fase 5: SEO e Syndication
-- [ ] Creare `public/index.php` come SEO Engine: query DB â†’ iniezione meta tag nell'HTML di Vite. *(Cap. 11)*
-- [ ] Aggiungere il rinomina di `index.html` â†’ `index_react.html` nel build script se index.php Ã¨ in public/. *(Cap. 2, 11)*
+- [ ] Creare `public/index.php` come SEO Engine: query DB → iniezione meta tag nell'HTML di Vite. *(Cap. 11)*
+- [ ] Aggiungere il rinomina di `index.html` → `index_react.html` nel build script se index.php è in public/. *(Cap. 2, 11)*
 - [ ] Creare `api/rss.php` con feed RSS 2.0 valido (header corretto, date RFC 822, URL assoluti). *(Cap. 12)*
 - [ ] Aggiungere tag `<link rel="alternate" type="application/rss+xml">` nell'`<head>` HTML. *(Cap. 12)*
 
@@ -2424,26 +2168,77 @@ Questa checklist riassume i passi pratici per inizializzare un nuovo progetto We
 
 ### Per Portfolio/Sito Personale (SimonePizziWebSite pattern)
 - [ ] Aggiungere tabella `projects` con `sort_order`, `is_visible`, `button_a`, `button_b`. *(Cap. 15)*
-- [ ] Implementare `projects.php` con i 5 metodi HTTP incluso PATCH per toggle visibilitÃ  e riordinamento. *(Cap. 15)*
+- [ ] Implementare `projects.php` con i 5 metodi HTTP incluso PATCH per toggle visibilità e riordinamento. *(Cap. 15)*
 - [ ] Creare componenti `PortfolioGrid.tsx`, `ProjectEditor.tsx`, `ProjectsList.tsx`. *(Cap. 15)*
 
 ### Per Festival/Concorso (FDCA / DISINTELLIGENZA pattern)
 - [ ] Aggiungere tabelle `participants`, `votes`, `settings` con master switch `registration_active` e `voting_active`. *(Cap. 16, 17)*
-- [ ] Implementare `participants.php` con workflow pending â†’ approved/rejected. *(Cap. 16)*
+- [ ] Implementare `participants.php` con workflow pending → approved/rejected. *(Cap. 16)*
 - [ ] Implementare `votes.php` con protezione IP + cookie anti-frode. *(Cap. 17)*
 
-### Per Migrazione SQLite â†’ MySQL (SitoRuntime pattern)
+### Per Migrazione SQLite → MySQL (SitoRuntime pattern)
 - [ ] Creare `db_credentials.php` separato (aggiungere al `.gitignore`). *(Cap. 14)*
 - [ ] Aggiornare `db.php` con connessione PDO MySQL (`utf8mb4`, `EMULATE_PREPARES=false`). *(Cap. 14)*
 - [ ] Eseguire `init_mysql.php` per creare lo schema MySQL sul server. *(Cap. 14)*
 - [ ] Eseguire `migrate_to_mysql.php` per trasloco dati (ONE-SHOT, eliminare dopo). *(Cap. 14)*
 
----
-*Questa checklist Ã¨ generata basandosi sui capitoli del Modello Universale miniCMS v2.0. Per i dettagli implementativi fare riferimento ai file `.md` corrispondenti.*
-
-
+\newpage
+*Questa checklist è generata basandosi sui capitoli del Modello Universale miniCMS v2.0. Per i dettagli implementativi fare riferimento ai file `.md` corrispondenti.*
 
 
 # CAPITOLO 19: Social Interactions & Reactions (v1.0)
 
-[Contenuto di Capitolo 19...]
+L'engagement degli utenti è fondamentale per un blog moderno. Il Modello Universale integra un sistema di **Reazioni Social** anonime, sicure e totalmente GDPR-compliant, ispirato alla logica di **SimonePizziWebSite (v2.0)**.
+
+## 1. Filosofia del Modulo
+A differenza dei commenti, che richiedono moderazione e gestione di dati personali (email, nomi), le reazioni permettono un'interazione istantanea senza frizioni.
+
+- **Anonimato:** L'utente non deve registrarsi.
+- **Sicurezza:** Protezione contro il voto multiplo (Spam) tramite hashing dell'identità.
+- **Leggerezza:** Icone SVG native cross-platform (Emoji style).
+
+## 2. Il Sistema delle 5 Reazioni
+Il set standard include 5 tipi di feedback emotivo:
+1.  **Thumb** (Apprezzamento standard)
+2.  **Heart** (Amore/Passione)
+3.  **Fire** (Contenuto "caldo" o di tendenza)
+4.  **Think** (Contenuto riflessivo o complesso)
+5.  **Game** (Contenuto ludico o interattivo)
+
+## 3. Sicurezza e GDPR: Il Voter Hash
+Per impedire a un utente di cliccare 100 volte la stessa reazione senza memorizzare il suo indirizzo IP (dato personale sensibile), usiamo un **Hash SHA256** salato e anonimo.
+
+`php
+// Hash anonimo del visitatore
+ = hash('sha256',
+    (['REMOTE_ADDR'] ?? 'unknown') .
+    (['HTTP_USER_AGENT'] ?? 'unknown')
+);
+`
+Questo hash identifica univocamente la "sessione/dispositivo" ma non permette di risalire all'IP originale, garantendo la conformità GDPR.
+
+## 4. Rate Limiting (Protezione Anti-Frode)
+Oltre alla chiave univoca sul database, il sistema implementa un limite temporale per IP: **max 20 azioni al minuto**. Questo blocca script automatizzati che tenterebbero di falsare le statistiche di engagement.
+
+## 5. Schema Database (MySQL)
+
+`sql
+CREATE TABLE IF NOT EXISTS article_reactions (
+    id          INT AUTO_INCREMENT PRIMARY KEY,
+    article_id  INT NOT NULL,
+    reaction    VARCHAR(20) NOT NULL,
+    voter_hash  VARCHAR(64) NOT NULL,
+    created_at  DATETIME DEFAULT CURRENT_TIMESTAMP,
+    UNIQUE KEY (article_id, voter_hash, reaction) -- Impedisce voti doppi
+);
+`
+
+## 6. Logica API (Toggle Pattern)
+L'endpoint eactions.php non si limita ad aggiungere voti, ma implementa la logica **Toggle**:
+- Se l'utente clicca su una reazione che ha già dato, questa viene **rimossa**.
+- Se clicca su una nuova, viene **aggiunta**.
+
+Questo permette un'esperienza fluida simile ai "Like" dei social media moderni (Instagram/Facebook).
+
+\newpage
+*Prossimo Capitolo: [Capitolo successivo previsto in roadmap]*
