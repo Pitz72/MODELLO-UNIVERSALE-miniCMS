@@ -1,5 +1,5 @@
 #!/bin/bash
-# Build script: React + PHP: The Thin Stack — Prima Edizione
+# Build script: React + PHP: The Thin Stack — Seconda Edizione
 
 PANDOC="/c/Users/Utente/AppData/Local/Microsoft/WinGet/Packages/JohnMacFarlane.Pandoc_Microsoft.Winget.Source_8wekyb3d8bbwe/pandoc-3.9.0.1/pandoc.exe"
 XELATEX="/c/Users/Utente/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe"
@@ -20,7 +20,7 @@ cat > "$MASTER" << 'YAML'
 title: "React + PHP: The Thin Stack"
 subtitle: "Il protocollo miniCMS per Web App moderne"
 author: "Simone Pizzi"
-date: "Marzo 2026 — Prima Edizione"
+date: "Maggio 2026 — Seconda Edizione"
 lang: it
 book: true
 classoption: [oneside]
