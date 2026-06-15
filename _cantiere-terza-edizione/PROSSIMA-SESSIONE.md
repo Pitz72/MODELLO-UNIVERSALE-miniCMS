@@ -8,75 +8,84 @@
 Stiamo lavorando alla TERZA EDIZIONE del manuale miniCMS. Leggi prima
 _cantiere-terza-edizione/ROADMAP.md e _cantiere-terza-edizione/LOG.md per il contesto.
 
-NOVITÀ METODO (ROADMAP §0.1): da ora si accorpano nella stessa sessione SOLO coppie di cluster già
-accoppiati, mantenendo DUE file-card separati + DUE righe LOG separate. Questa sessione è la prima
-coppia: SR-C4 + SR-C5.
+METODO (ROADMAP §0.1): si accorpano nella stessa sessione SOLO coppie di cluster già accoppiati,
+mantenendo DUE file-card separati + DUE righe LOG separate. Questa sessione è la SECONDA coppia di
+SitoRuntime: SR-C7 + SR-C8 (sono i due "emettitori" dello stesso contenuto news → SEO e RSS).
 
 Stato: SimonePizziWebSite (flagship contenuti) è COMPLETO. Su SitoRuntime sono fatte SR-C1 (Backend
-Core), SR-C2 (Security & Auth + CORS) e SR-C3 (Frontend Bridge & State). Da questa sessione si
-prosegue con la COPPIA C4+C5 — Content APIs + Media/Upload (logica SERVER).
+Core), SR-C2 (Security & Auth + CORS), SR-C3 (Frontend Bridge & State) e la coppia SR-C4 (Content
+APIs) + SR-C5 (Media & Upload). Da questa sessione si prosegue con la COPPIA C7+C8 — SEO/Prerendering
+e RSS/Feed.
 
 Per impostare stile e metodo, leggi le card di riferimento:
-- _cantiere-terza-edizione/mappatura/SimonePizziWebSite/SPW-C4-content-apis.md (parallelo C4) e
-  _cantiere-terza-edizione/mappatura/SimonePizziWebSite/SPW-C5-media-upload.md (parallelo C5: upload
-  a doppio strato estensione+magic bytes, naming uniqid anti-doppia-estensione, smistamento
-  sottocartelle su MIME reale, WebP+resize sincrono via GD, media.php libreria, download proxy
-  path-guarded, uploads/.htaccess PHP-off, difesa in profondità a 3 livelli, path traversal "dal DB").
-- _cantiere-terza-edizione/mappatura/SitoRuntime/SR-C3-frontend-bridge.md (la card client appena
-  fatta: ti dà le BUSTE che ora mappi lato server — news.php={success,data,meta},
-  admin.php?action=list={success,articles,total}, speakers/podcasts=array NUDO, e l'upload client
-  uploadImage→upload.php con X-CSRF-Token ma SENZA progress).
-- (facoltativo) SR-C1 per il vocabolario (getDB() lazy, schema init_mysql.php news/speakers[col
-  JSON]/podcasts, incidente fuso/formato-data debug_time.php — confronto stringa published_at<=NOW
-  con separatore 'T', che è LOGICA C4 di visibilità) e SR-C2 (gate isLoggedIn/validateCsrf per-ramo).
+- _cantiere-terza-edizione/mappatura/SimonePizziWebSite/SPW-C7-seo-prerendering.md (parallelo C7: SEO
+  Engine v2.0 = Dynamic Rendering ibrido in public/index.php, isCrawler() UA-sniff, sitemap.php/
+  robots.php dinamici via rewrite senza file fisici, JSON-LD per tipo pagina, SEO.tsx client con
+  canonical NON parametrizzato, SeoScorePanel; GOLD: index.php:404 ri-emette content via strip_tags
+  allowlist ≠ DOMPurify → buco XSS-stored a livello ATTRIBUTI via UA spoofing).
+- _cantiere-terza-edizione/mappatura/SimonePizziWebSite/SPW-C8-rss-feed.md (parallelo C8: rss.php
+  feed RSS 2.0 real-time, RFC822, GUID urn:…isPermaLink=false, enclosure; GOLD: rss.php NON emette
+  articles.content → il PIÙ SICURO dei 3 emettitori, sicurezza-per-sottrazione).
+- _cantiere-terza-edizione/mappatura/SitoRuntime/SR-C4-content-apis.md (la card appena fatta: ti dà
+  la regola di visibilità published_at<=date('Y-m-d H:i:s') AND (status='published' OR status IS
+  NULL) che C7/C8 devono RIUSARE; e la CACHE su file .cache/news_*.json + seo_news_*.json già scritta
+  dentro admin.php su save — è il PONTE diretto a C7, da mappare qui come strategia).
+- (facoltativo) SR-C1 per index.php "SEO Engine v3.0" e SITE_URL canonico ASSENTE (baseUrl da
+  HTTP_HOST), e SR-C5 per il fatto che cover_image è una stringa URL (open graph image).
 
-Unità di QUESTA sessione: COPPIA SR-C4 + SR-C5 del sito SitoRuntime
+Unità di QUESTA sessione: COPPIA SR-C7 + SR-C8 del sito SitoRuntime
 (C:\Users\Utente\Documents\GitHub\SITI-WEB\SitoRuntime). Due card separate.
 
-Ambito SR-C4 (Content APIs — logica server di news/speakers/podcasts):
-- news.php: lista pubblica paginata {success,data,meta} (COUNT + LIMIT/OFFSET?), lookup per slug, e
-  SOPRATTUTTO la regola di VISIBILITÀ status=published AND published_at<=NOW: com'è scritto il
-  confronto data/ora? È il confronto-stringa con separatore 'T' dell'incidente di SR-C1? Post
-  programmato (published_at futuro).
-- admin.php rami contenuto (action=list/get/save/delete): forma {success,articles,total}, generazione
-  slug (normalizzazione accenti?), campo author (SR-C2/C3: $_SESSION['username'] non salvato →
-  author='Admin'), draft vs published, gating isLoggedIn/CSRF.
-- speakers.php: colonna JSON (programs/social?), flag founder, forma ARRAY NUDO in lettura vs
-  {success,...} in errore (perché la guardia Array.isArray lato client), GET/POST/DELETE.
-- podcasts.php: forma array nudo, struttura feed/episodi (solo lettura/scrittura DB; il feed RSS
-  syndication è C8 → puntatore).
-- categorie/tag/ricerca/navigazione: ci sono o SitoRuntime è più piatto (category stringa libera)?
-  Mappa quello che c'è, marca N/A il resto.
+Ambito SR-C7 (SEO & Prerendering + seo-cache):
+- public/index.php: c'è un "SEO Engine" (SR-C1 lo marca v3.0)? È Dynamic Rendering UA-sniff come SPW
+  o un meccanismo diverso? Come deriva baseUrl (HTTP_HOST, visto SITE_URL canonico assente in SR-C1)?
+  Inietta meta/JSON-LD? Routing PHP speculare a React Router?
+- rebuild_seo_cache.php: cosa rigenera, e come si lega ai file seo_news_*.json / seo_speaker_*.json
+  già scritti da admin.php:292-297,309 e speakers.php:158-159,172-173 (questa è la seo-cache; in C4
+  ho mappato solo CHE viene scritta/invalidata, qui la STRATEGIA). È uno script one-shot o un
+  endpoint? Gated?
+- debug_seo.php: diagnostica SEO (cosa ispeziona).
+- sitemap.php + robots.php (se esiste): dinamici via rewrite .htaccess (public/.htaccess:77-78 li
+  serve da PHP) senza file fisici? baseUrl da HTTP_HOST? Stessa regola di visibilità di C4?
+- meta/OG/JSON-LD lato client: c'è un SEO.tsx (SR-C3 cita SEO.tsx in News.tsx/Article.tsx)? Canonical
+  parametrizzato o no (in SPW era sempre la homepage)?
+- la cache di CONTENUTO news_*.json (mappata in C4) vs la seo-cache: distinguere i due livelli.
 
-Ambito SR-C5 (Media & Upload — logica server):
-- upload.php: validazione (estensione? magic bytes/MIME reale come SPW?), naming dei file,
-  destinazione/sottocartelle, conversione/resize immagini (WebP via GD? sincrono?), risposta
-  {success,url,...}, gate isLoggedIn+validateCsrf (SR-C2 ha già visto upload.php:8,13).
-- media.php (libreria: lista {success,files}, eliminazione con unlink? path-guard?).
-- download/proxy se presente; uploads/.htaccess PHP-off (SR-C2 NON l'ha trovato → VERIFICARE qui se
-  esiste protezione equivalente: è un potenziale buco annotato in SR-C2 §8).
-- script one-shot optimize_*/fix_image_paths (se di C5; storia migratoria media → puntatore C13).
+Ambito SR-C8 (RSS & Feed):
+- feed_news_rss.php: feed RSS 2.0 delle news? Real-time o da cache? Content-Type, timezone, limite,
+  channel title/description (hardcoded o da settings?). RIUSA la regola published_at<=now+status di
+  C4? Formato pubDate (RFC822?), GUID/URN, enclosure per cover_image. EMETTE news.content o solo
+  summary/excerpt (è il punto GOLD di SPW-C8: sicurezza-per-sottrazione)?
+- feed_config.php: SR-C3 dice che ritorna {success, feed_url}. Cos'è? Configurazione di un feed
+  esterno (Telegram?) o del feed RSS interno? C'è un legame col bot Telegram (SR-C1 cita
+  TELEGRAM_BOT_TOKEN nei segreti)?
+- podcasts: NON è qui la syndication degli episodi (in C4 ho mappato podcasts come record-link
+  esterni); verificare se esiste un feed RSS dei podcast o se è solo news. Marca N/A il resto.
+- routing del feed (URL pulito via .htaccess o grezzo /api/feed_news_rss.php?).
 
 Fai così:
-1. Ispeziona in modo microscopico i file di C4 e C5 (cita sempre percorso/file:linea).
+1. Ispeziona in modo microscopico i file di C7 e C8 (cita sempre percorso/file:linea).
 2. Compila DUE card seguendo _TEMPLATE.md e salvale in
-   _cantiere-terza-edizione/mappatura/SitoRuntime/SR-C4-content-apis.md e
-   _cantiere-terza-edizione/mappatura/SitoRuntime/SR-C5-media-upload.md
-3. NON sconfinare: core/DB=C1, security/CORS=C2, frontend/client=C3 (fatti), editor/sanitizzazione=C6,
-   SEO+cache=C7, RSS/feed=C8, newsletter=C9, admin UI=C12, EVOLUZIONE DB & INCIDENTI=C13. Puntatori
-   nelle "Note / domande aperte" per il resto. Tieni C4 e C5 distinti: la logica contenuti (query,
-   slug, visibilità, buste) in C4; lo storage/file (validazione, magic bytes, WebP, sottocartelle,
-   PHP-off) in C5.
-4. §6 di ENTRAMBE le card: confronto con SPW-C4 e SPW-C5 (Double Read vs buste eterogenee; categoria
-   gerarchica+tag M:N vs category piatta; published_at<=NOW e incidente 'T'; difesa upload a 3 livelli
-   e uploads/.htaccess PHP-off presente/assente).
+   _cantiere-terza-edizione/mappatura/SitoRuntime/SR-C7-seo-prerendering.md e
+   _cantiere-terza-edizione/mappatura/SitoRuntime/SR-C8-rss-feed.md
+3. NON sconfinare: core/DB=C1, security/CORS=C2, frontend/client=C3, content/buste/slug=C4 (fatti),
+   media/upload=C5 (fatto), editor/sanitizzazione=C6, newsletter/email/Telegram-invio=C9, admin UI=C12,
+   EVOLUZIONE DB & INCIDENTI=C13. Puntatori nelle "Note / domande aperte" per il resto. Tieni C7 e C8
+   distinti: prerendering/meta/sitemap/seo-cache in C7; il feed XML (RSS) in C8.
+4. §6 di ENTRAMBE le card: confronto con SPW-C7 e SPW-C8 (Dynamic Rendering UA-sniff e il buco
+   strip_tags vs DOMPurify; sitemap/robots dinamici; canonical non parametrizzato; RSS che NON emette
+   content = sicurezza-per-sottrazione; SITE_URL assente in SR → baseUrl da HTTP_HOST). ATTENZIONE al
+   ponte XSS-stored: in SR la sanitizzazione è render-time client (DOMPurify in Article.tsx, SR-C3/C6)
+   — verificare se index.php/feed_news_rss.php ri-emettono news.content GREZZO (riaprendo il buco come
+   in SPW) oppure no.
 
 Criterio di STOP: ENTRAMBE le card in stato COMPLETATO (tutte le voci compilate o N/A).
 
 Ciclo di chiusura OBBLIGATORIO a fine sessione:
-- aggiorna _cantiere-terza-edizione/mappatura/_INDICE-MAPPATURA.md (SR-C4 → ✅, SR-C5 → ✅)
-- aggiungi DUE righe a _cantiere-terza-edizione/LOG.md (una per card, più recenti IN BASSO)
-- aggiorna _cantiere-terza-edizione/ROADMAP.md (spunta SR-C4 e SR-C5) e lo stato globale
+- aggiorna _cantiere-terza-edizione/mappatura/_INDICE-MAPPATURA.md (SR-C7 → ✅, SR-C8 → ✅)
+- aggiungi DUE righe a _cantiere-terza-edizione/LOG.md (una per card, più recenti IN BASSO — attento
+  all'ordine cronologico)
+- aggiorna _cantiere-terza-edizione/ROADMAP.md (spunta SR-C7 e SR-C8) e lo stato globale
 - git add/commit/push (un commit per la coppia) e verifica che locale = origin/main
-- riscrivi QUESTO file (PROSSIMA-SESSIONE.md) con la prossima unità: COPPIA SR-C7 + SR-C8
-  (SEO & Prerendering + seo-cache · RSS & Feed) del sito SitoRuntime.
+- riscrivi QUESTO file (PROSSIMA-SESSIONE.md) con la prossima unità: SR-C9 (Newsletter & Email) del
+  sito SitoRuntime, DA SOLA (vedi ROADMAP §0.1: C9, C12, C13 restano singole).
