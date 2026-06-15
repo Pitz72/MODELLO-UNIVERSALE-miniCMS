@@ -1,82 +1,81 @@
 # PROSSIMA SESSIONE — prompt pronto da incollare
 
 > Aggiornato a fine di ogni sessione. Contiene UNA unità (da 2026-06-15: può essere una COPPIA
-> accorpata di cluster accoppiati — vedi ROADMAP §0.1).
+> accorpata di cluster accoppiati — vedi ROADMAP §0.1). Questa volta è una card SINGOLA.
 
 ---
 
 Stiamo lavorando alla TERZA EDIZIONE del manuale miniCMS. Leggi prima
 _cantiere-terza-edizione/ROADMAP.md e _cantiere-terza-edizione/LOG.md per il contesto.
 
-NOVITÀ METODO (ROADMAP §0.1): da ora si accorpano nella stessa sessione SOLO coppie di cluster già
-accoppiati, mantenendo DUE file-card separati + DUE righe LOG separate. Questa sessione è la prima
-coppia: SR-C4 + SR-C5.
+METODO (ROADMAP §0.1): si accorpano nella stessa sessione SOLO coppie di cluster già accoppiati. Per
+SitoRuntime le coppie erano C4+C5 (fatta) e C7+C8 (fatta); C9, C12, C13 restano DA SOLE. Questa
+sessione è SR-C9 (Newsletter & Email) DA SOLA: UNA sola card.
 
 Stato: SimonePizziWebSite (flagship contenuti) è COMPLETO. Su SitoRuntime sono fatte SR-C1 (Backend
-Core), SR-C2 (Security & Auth + CORS) e SR-C3 (Frontend Bridge & State). Da questa sessione si
-prosegue con la COPPIA C4+C5 — Content APIs + Media/Upload (logica SERVER).
+Core), SR-C2 (Security & Auth + CORS), SR-C3 (Frontend Bridge & State), la coppia SR-C4 (Content APIs)
++ SR-C5 (Media & Upload) e la coppia SR-C7 (SEO/seo-cache) + SR-C8 (RSS & Feed). Da questa sessione si
+prosegue con SR-C9 — Newsletter & Email. Restano poi SR-C12 (Admin) e SR-C13 (DB Evolution & Incidenti),
+entrambe da sole → SitoRuntime si chiude in 3 sessioni / 3 card.
 
 Per impostare stile e metodo, leggi le card di riferimento:
-- _cantiere-terza-edizione/mappatura/SimonePizziWebSite/SPW-C4-content-apis.md (parallelo C4) e
-  _cantiere-terza-edizione/mappatura/SimonePizziWebSite/SPW-C5-media-upload.md (parallelo C5: upload
-  a doppio strato estensione+magic bytes, naming uniqid anti-doppia-estensione, smistamento
-  sottocartelle su MIME reale, WebP+resize sincrono via GD, media.php libreria, download proxy
-  path-guarded, uploads/.htaccess PHP-off, difesa in profondità a 3 livelli, path traversal "dal DB").
-- _cantiere-terza-edizione/mappatura/SitoRuntime/SR-C3-frontend-bridge.md (la card client appena
-  fatta: ti dà le BUSTE che ora mappi lato server — news.php={success,data,meta},
-  admin.php?action=list={success,articles,total}, speakers/podcasts=array NUDO, e l'upload client
-  uploadImage→upload.php con X-CSRF-Token ma SENZA progress).
-- (facoltativo) SR-C1 per il vocabolario (getDB() lazy, schema init_mysql.php news/speakers[col
-  JSON]/podcasts, incidente fuso/formato-data debug_time.php — confronto stringa published_at<=NOW
-  con separatore 'T', che è LOGICA C4 di visibilità) e SR-C2 (gate isLoggedIn/validateCsrf per-ramo).
+- _cantiere-terza-edizione/mappatura/SimonePizziWebSite/SPW-C9-newsletter-email.md (parallelo C9:
+  subscribers.php endpoint-router GET/POST/PATCH/DELETE con double opt-in confirm_token monouso +
+  unsubscribe_token stabile random_bytes(32); rate-limit per-IP che RICICLA login_attempts di C2;
+  newsletter_send.php gated; trasporto mail() nativa; form GDPR doppio checkbox. GOLD: CHIUSURA del
+  ponte XSS C6/C7/C8 — la newsletter è il 4°/ultimo emettitore ma NON emette articles.content [solo
+  title/excerpt via buildArticleHtml client + body grezzo via buildNewsletterHtml ZERO sanitizzazione,
+  il meno sanitizzato dei 4], ponte chiuso a rischio basso perché dietro Auth::check e l'unico input
+  pubblico — name — è escapato. Bug: invio sincrono foreach mail() senza coda, unsubscribe GET
+  prefetch-able, confirm_token senza TTL).
+- _cantiere-terza-edizione/mappatura/SitoRuntime/SR-C8-rss-feed.md (la card appena fatta: il PONTE
+  XSS è chiuso per il feed — feed_news_rss.php emette un preview di content ESCAPATO; resta aperto SOLO
+  C9. Il quadro dei QUATTRO emettitori del content [DOMPurify/strip_tags-allowlist/strip_tags+escape/
+  newsletter] va CHIUSO qui verificando come la newsletter di SR emette il contenuto. NB: TELEGRAM_BOT_TOKEN
+  nei segreti SR-C1 + il "token" fossile di feed_config.php → l'eventuale invio Telegram è C9, verificalo qui).
+- (facoltativo) SR-C2 per il rate-limit FILE-BASED .cache/ratelimit/ e il riciclo dei meccanismi auth;
+  SR-C1 per SMTP_* nei segreti (.env via db_credentials.php) e PHPMailer vendored in lib/ con .htaccess deny.
 
-Unità di QUESTA sessione: COPPIA SR-C4 + SR-C5 del sito SitoRuntime
-(C:\Users\Utente\Documents\GitHub\SITI-WEB\SitoRuntime). Due card separate.
+Unità di QUESTA sessione: SR-C9 (Newsletter & Email) del sito SitoRuntime
+(C:\Users\Utente\Documents\GitHub\SITI-WEB\SitoRuntime). UNA card.
 
-Ambito SR-C4 (Content APIs — logica server di news/speakers/podcasts):
-- news.php: lista pubblica paginata {success,data,meta} (COUNT + LIMIT/OFFSET?), lookup per slug, e
-  SOPRATTUTTO la regola di VISIBILITÀ status=published AND published_at<=NOW: com'è scritto il
-  confronto data/ora? È il confronto-stringa con separatore 'T' dell'incidente di SR-C1? Post
-  programmato (published_at futuro).
-- admin.php rami contenuto (action=list/get/save/delete): forma {success,articles,total}, generazione
-  slug (normalizzazione accenti?), campo author (SR-C2/C3: $_SESSION['username'] non salvato →
-  author='Admin'), draft vs published, gating isLoggedIn/CSRF.
-- speakers.php: colonna JSON (programs/social?), flag founder, forma ARRAY NUDO in lettura vs
-  {success,...} in errore (perché la guardia Array.isArray lato client), GET/POST/DELETE.
-- podcasts.php: forma array nudo, struttura feed/episodi (solo lettura/scrittura DB; il feed RSS
-  syndication è C8 → puntatore).
-- categorie/tag/ricerca/navigazione: ci sono o SitoRuntime è più piatto (category stringa libera)?
-  Mappa quello che c'è, marca N/A il resto.
-
-Ambito SR-C5 (Media & Upload — logica server):
-- upload.php: validazione (estensione? magic bytes/MIME reale come SPW?), naming dei file,
-  destinazione/sottocartelle, conversione/resize immagini (WebP via GD? sincrono?), risposta
-  {success,url,...}, gate isLoggedIn+validateCsrf (SR-C2 ha già visto upload.php:8,13).
-- media.php (libreria: lista {success,files}, eliminazione con unlink? path-guard?).
-- download/proxy se presente; uploads/.htaccess PHP-off (SR-C2 NON l'ha trovato → VERIFICARE qui se
-  esiste protezione equivalente: è un potenziale buco annotato in SR-C2 §8).
-- script one-shot optimize_*/fix_image_paths (se di C5; storia migratoria media → puntatore C13).
+Ambito SR-C9 (Newsletter & Email):
+- newsletter.php: endpoint pubblico di iscrizione? Double opt-in (confirm_token) o iscrizione diretta?
+  unsubscribe_token? Schema subscribers (init_mysql.php lo prevede — SR-C1). Rate-limit (riusa il
+  .cache/ratelimit/ FILE-BASED di SR-C2 o altro)? Gate sui rami admin (lista/invio)?
+- fix_newsletter_table.php: micro-migrazione dello schema subscribers (one-shot, gated .htaccess
+  by-prefix ^fix_). Cosa aggiunge/ripara? → traccia anche C13.
+- l'INVIO della newsletter: c'è un newsletter_send equivalente? Dentro admin.php (apply_v293_newsletter
+  citato in SR-C4 §8) o in un file a sé? Trasporto: mail() nativa o PHPMailer (lib/ vendored, SR-C1)?
+  SMTP_* dai segreti? Invio sincrono foreach o coda?
+- test_smtp / contact.php: contact.php è il form contatti (invio mail redazione)? test_smtp (citato in
+  SR-C4 §8) diagnostica SMTP? Marca cosa è C9 e cosa è puntatore.
+- IL PONTE XSS (chiusura definitiva): la newsletter EMETTE news.content? Con quale sanitizzazione?
+  È il 4°/ultimo emettitore — chiudi il quadro dei quattro emettitori iniziato in C6 e ribadito in
+  C7/C8. Confronta con SPW-C9 (body grezzo buildNewsletterHtml ZERO sanitizzazione ma dietro Auth).
+- Telegram: TELEGRAM_BOT_TOKEN nei segreti — c'è un invio Telegram delle news/newsletter qui? (il
+  "token" di feed_config.php in C8 era un fossile). Verifica se C9 è il punto dove il bot vive.
 
 Fai così:
-1. Ispeziona in modo microscopico i file di C4 e C5 (cita sempre percorso/file:linea).
-2. Compila DUE card seguendo _TEMPLATE.md e salvale in
-   _cantiere-terza-edizione/mappatura/SitoRuntime/SR-C4-content-apis.md e
-   _cantiere-terza-edizione/mappatura/SitoRuntime/SR-C5-media-upload.md
-3. NON sconfinare: core/DB=C1, security/CORS=C2, frontend/client=C3 (fatti), editor/sanitizzazione=C6,
-   SEO+cache=C7, RSS/feed=C8, newsletter=C9, admin UI=C12, EVOLUZIONE DB & INCIDENTI=C13. Puntatori
-   nelle "Note / domande aperte" per il resto. Tieni C4 e C5 distinti: la logica contenuti (query,
-   slug, visibilità, buste) in C4; lo storage/file (validazione, magic bytes, WebP, sottocartelle,
-   PHP-off) in C5.
-4. §6 di ENTRAMBE le card: confronto con SPW-C4 e SPW-C5 (Double Read vs buste eterogenee; categoria
-   gerarchica+tag M:N vs category piatta; published_at<=NOW e incidente 'T'; difesa upload a 3 livelli
-   e uploads/.htaccess PHP-off presente/assente).
+1. Ispeziona in modo microscopico i file di C9 (cita sempre percorso/file:linea).
+2. Compila UNA card seguendo _TEMPLATE.md e salvala in
+   _cantiere-terza-edizione/mappatura/SitoRuntime/SR-C9-newsletter-email.md
+3. NON sconfinare: core/DB=C1, security/CORS/rate-limit-meccanica=C2, frontend/client=C3,
+   content/slug=C4, media/upload=C5, editor/sanitizzazione-render=C6, SEO/seo-cache=C7 (fatto),
+   RSS/feed=C8 (fatto), admin UI=C12, EVOLUZIONE DB & INCIDENTI=C13. Puntatori nelle "Note / domande
+   aperte" per il resto.
+4. §6: confronto con SPW-C9 (double opt-in, riciclo login_attempts, mail() nativa, body newsletter
+   non sanitizzato ma dietro Auth, unsubscribe GET prefetch-able). ATTENZIONE al PONTE XSS-stored: in
+   SR la sanitizzazione è render-time client (DOMPurify in Article.tsx, SR-C3/C6) — verifica se la
+   newsletter ri-emette news.content GREZZO (riaprendo il buco) oppure no. CHIUDI il quadro dei 4
+   emettitori.
 
-Criterio di STOP: ENTRAMBE le card in stato COMPLETATO (tutte le voci compilate o N/A).
+Criterio di STOP: card in stato COMPLETATO (tutte le voci compilate o N/A).
 
 Ciclo di chiusura OBBLIGATORIO a fine sessione:
-- aggiorna _cantiere-terza-edizione/mappatura/_INDICE-MAPPATURA.md (SR-C4 → ✅, SR-C5 → ✅)
-- aggiungi DUE righe a _cantiere-terza-edizione/LOG.md (una per card, più recenti IN BASSO)
-- aggiorna _cantiere-terza-edizione/ROADMAP.md (spunta SR-C4 e SR-C5) e lo stato globale
-- git add/commit/push (un commit per la coppia) e verifica che locale = origin/main
-- riscrivi QUESTO file (PROSSIMA-SESSIONE.md) con la prossima unità: COPPIA SR-C7 + SR-C8
-  (SEO & Prerendering + seo-cache · RSS & Feed) del sito SitoRuntime.
+- aggiorna _cantiere-terza-edizione/mappatura/_INDICE-MAPPATURA.md (SR-C9 → ✅)
+- aggiungi UNA riga a _cantiere-terza-edizione/LOG.md (più recente IN BASSO — attento all'ordine cronologico)
+- aggiorna _cantiere-terza-edizione/ROADMAP.md (spunta SR-C9) e lo stato globale
+- git add/commit/push (un commit) e verifica che locale = origin/main
+- riscrivi QUESTO file (PROSSIMA-SESSIONE.md) con la prossima unità: SR-C12 (Admin Dashboard & Panels)
+  del sito SitoRuntime, DA SOLA (vedi ROADMAP §0.1: C12, C13 restano singole).
