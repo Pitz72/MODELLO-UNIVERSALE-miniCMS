@@ -60,7 +60,9 @@
       "Bash(git commit --amend -m 'fix: recupero corruzione Seconda Edizione + integrazione Cap 19' -m 'Il commit 8d359ae aveva introdotto corruzione catastrofica \\(Cap 10 svuotato a $content, variabili PHP mangiate dalla shell, code fence degradati a singolo backtick, mojibake UTF-8, CR spuri\\). *)",
       "Bash(xargs git log -1 --oneline)",
       "Bash(git merge *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(start \"\" \"_cantiere-terza-edizione\\\\PROSSIMA-SESSIONE.md\")",
+      "Bash(git check-ignore *)"
     ]
   }
 }
