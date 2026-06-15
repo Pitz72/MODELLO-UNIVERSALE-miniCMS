@@ -56,7 +56,7 @@ Ordine: prima il flagship contenuti, poi scalabilità, poi festival, infine il d
 - [x] SPW-C1 Backend Core & Bootstrap
 - [x] SPW-C2 Security & Auth
 - [x] SPW-C3 Frontend Bridge & State
-- [ ] SPW-C4 Content APIs (articles/categories/tags/search/navigation)
+- [x] SPW-C4 Content APIs (articles/categories/tags/search/navigation)
 - [ ] SPW-C5 Media & Upload
 - [ ] SPW-C6 Advanced Editing / Editor
 - [ ] SPW-C7 SEO & Prerendering
@@ -119,6 +119,6 @@ Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "rac
 
 ## 7. Stato globale
 
-- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1, SPW-C2, SPW-C3 (3/~30 card).
-- **Prossima unità:** SPW-C4 — Content APIs (vedi `PROSSIMA-SESSIONE.md`).
+- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1, SPW-C2, SPW-C3, SPW-C4 (4/~30 card).
+- **Prossima unità:** SPW-C5 — Media & Upload (vedi `PROSSIMA-SESSIONE.md`).
 - **Log completo:** `LOG.md`.
