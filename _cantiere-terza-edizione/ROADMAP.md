@@ -67,7 +67,7 @@ Ordine: prima il flagship contenuti, poi scalabilità, poi festival, infine il d
 
 ### 3.2 SitoRuntime (flagship scalabilità + incidenti)
 - [x] SR-C1 Backend Core & Bootstrap
-- [ ] SR-C2 Security & Auth (+ CORS)
+- [x] SR-C2 Security & Auth (+ CORS)
 - [ ] SR-C3 Frontend Bridge & State
 - [ ] SR-C4 Content APIs (news + speakers + podcasts)
 - [ ] SR-C5 Media & Upload
@@ -119,6 +119,6 @@ Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "rac
 
 ## 7. Stato globale
 
-- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1** (12/~30 card). Iniziato il 2° sito **SitoRuntime** (flagship scalabilità).
-- **Prossima unità:** SR-C2 — Security & Auth (+ CORS) di SitoRuntime (vedi `PROSSIMA-SESSIONE.md`).
+- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1, SR-C2** (13/~30 card). In corso il 2° sito **SitoRuntime** (flagship scalabilità).
+- **Prossima unità:** SR-C3 — Frontend Bridge & State di SitoRuntime (vedi `PROSSIMA-SESSIONE.md`).
 - **Log completo:** `LOG.md`.
