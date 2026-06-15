@@ -63,7 +63,7 @@ Ordine: prima il flagship contenuti, poi scalabilità, poi festival, infine il d
 - [x] SPW-C8 RSS & Feed
 - [x] SPW-C9 Newsletter & Email
 - [x] SPW-C11 Engagement & Social (reactions/messages)
-- [ ] SPW-C12 Admin Dashboard & Panels
+- [x] SPW-C12 Admin Dashboard & Panels
 
 ### 3.2 SitoRuntime (flagship scalabilità + incidenti)
 - [ ] SR-C1 Backend Core & Bootstrap
@@ -119,6 +119,6 @@ Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "rac
 
 ## 7. Stato globale
 
-- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1, SPW-C2, SPW-C3, SPW-C4, SPW-C5, SPW-C6, SPW-C7, SPW-C8, SPW-C9, SPW-C11 (10/~30 card).
-- **Prossima unità:** SPW-C12 — Admin Dashboard & Panels (ULTIMA card di SimonePizziWebSite; poi SitoRuntime SR-C1) (vedi `PROSSIMA-SESSIONE.md`).
+- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1, SPW-C2, SPW-C3, SPW-C4, SPW-C5, SPW-C6, SPW-C7, SPW-C8, SPW-C9, SPW-C11, SPW-C12 (11/~30 card). **SimonePizziWebSite COMPLETO** (flagship contenuti mappato per intero).
+- **Prossima unità:** SR-C1 — Backend Core & Bootstrap di SitoRuntime (flagship scalabilità) (vedi `PROSSIMA-SESSIONE.md`).
 - **Log completo:** `LOG.md`.
