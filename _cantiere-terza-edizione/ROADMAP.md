@@ -69,8 +69,8 @@ Ordine: prima il flagship contenuti, poi scalabilità, poi festival, infine il d
 - [x] SR-C1 Backend Core & Bootstrap
 - [x] SR-C2 Security & Auth (+ CORS)
 - [x] SR-C3 Frontend Bridge & State
-- [ ] SR-C4 Content APIs (news + speakers + podcasts) ┐ *(coppia: 1 sessione)*
-- [ ] SR-C5 Media & Upload                            ┘
+- [x] SR-C4 Content APIs (news + speakers + podcasts) ┐ *(coppia: 1 sessione)*
+- [x] SR-C5 Media & Upload                            ┘
 - [ ] SR-C7 SEO & Prerendering (+ seo-cache) ┐ *(coppia: 1 sessione)*
 - [ ] SR-C8 RSS & Feed                       ┘
 - [ ] SR-C9 Newsletter & Email *(sola)*
@@ -119,6 +119,6 @@ Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "rac
 
 ## 7. Stato globale
 
-- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1, SR-C2, SR-C3** (14/~30 card). In corso il 2° sito **SitoRuntime** (flagship scalabilità).
-- **Prossima unità:** SR-C4 + SR-C5 (coppia accorpata: Content APIs + Media/Upload) di SitoRuntime (vedi `PROSSIMA-SESSIONE.md`). SitoRuntime si chiude in **5 sessioni / 7 card** con l'accorpamento: [C4+C5] · [C7+C8] · [C9] · [C12] · [C13].
+- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1, SR-C2, SR-C3, SR-C4, SR-C5** (16/~30 card). In corso il 2° sito **SitoRuntime** (flagship scalabilità).
+- **Prossima unità:** SR-C7 + SR-C8 (coppia accorpata: SEO & Prerendering + seo-cache · RSS & Feed) di SitoRuntime (vedi `PROSSIMA-SESSIONE.md`). Restano poi: [C9] · [C12] · [C13] da sole → SitoRuntime si chiude in **3 sessioni / 4 card**.
 - **Log completo:** `LOG.md`.
