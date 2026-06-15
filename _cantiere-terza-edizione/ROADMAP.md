@@ -54,7 +54,7 @@ Ordine: prima il flagship contenuti, poi scalabilità, poi festival, infine il d
 
 ### 3.1 SimonePizziWebSite (flagship contenuti)
 - [x] SPW-C1 Backend Core & Bootstrap
-- [ ] SPW-C2 Security & Auth
+- [x] SPW-C2 Security & Auth
 - [ ] SPW-C3 Frontend Bridge & State
 - [ ] SPW-C4 Content APIs (articles/categories/tags/search/navigation)
 - [ ] SPW-C5 Media & Upload
@@ -119,6 +119,6 @@ Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "rac
 
 ## 7. Stato globale
 
-- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completata: SPW-C1 (1/~30 card).
-- **Prossima unità:** SPW-C2 — Security & Auth (vedi `PROSSIMA-SESSIONE.md`).
+- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1, SPW-C2 (2/~30 card).
+- **Prossima unità:** SPW-C3 — Frontend Bridge & State (vedi `PROSSIMA-SESSIONE.md`).
 - **Log completo:** `LOG.md`.
