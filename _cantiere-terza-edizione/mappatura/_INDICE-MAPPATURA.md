@@ -4,7 +4,7 @@
 
 ## SimonePizziWebSite
 - ✅ SPW-C1 Backend Core · ✅ SPW-C2 Security · ✅ SPW-C3 Frontend Bridge · ✅ SPW-C4 Content APIs
-- ⬜ SPW-C5 Media · ⬜ SPW-C6 Editor · ⬜ SPW-C7 SEO · ⬜ SPW-C8 RSS · ⬜ SPW-C9 Newsletter
+- ✅ SPW-C5 Media · ⬜ SPW-C6 Editor · ⬜ SPW-C7 SEO · ⬜ SPW-C8 RSS · ⬜ SPW-C9 Newsletter
 - ⬜ SPW-C11 Engagement · ⬜ SPW-C12 Admin
 
 ## SitoRuntime
