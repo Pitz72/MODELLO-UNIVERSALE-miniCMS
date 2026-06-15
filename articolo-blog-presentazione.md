@@ -90,7 +90,7 @@ E poi c'è un secondo motivo, più pratico: **documentare obbliga a capire davve
 
 ## Cosa trovi dentro
 
-Il manuale si chiama ufficialmente *React + PHP: The Thin Stack — Il protocollo miniCMS per Web App moderne*. Prima edizione. Marzo 2026.
+Il manuale si chiama ufficialmente *React + PHP: The Thin Stack — Il protocollo miniCMS per Web App moderne*. Seconda edizione. Maggio 2026.
 
 È organizzato in **cinque parti e un allegato**, per un totale di diciotto capitoli.
 

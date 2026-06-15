@@ -55,7 +55,12 @@
       "Bash(tail -10 \"c:/Users/Utente/Documents/GitHub/SITI-WEB/MODELLO-UNIVERSALE-miniCMS/CAPITOLO 13 - Newsletter & Email System.md\")",
       "Bash(tail -10 \"c:/Users/Utente/Documents/GitHub/SITI-WEB/MODELLO-UNIVERSALE-miniCMS/CAPITOLO 15 - Portfolio & Projects Module.md\")",
       "Bash(git checkout *)",
-      "Bash(xxd)"
+      "Bash(xxd)",
+      "Bash(git commit -m '@ *)",
+      "Bash(git commit --amend -m 'fix: recupero corruzione Seconda Edizione + integrazione Cap 19' -m 'Il commit 8d359ae aveva introdotto corruzione catastrofica \\(Cap 10 svuotato a $content, variabili PHP mangiate dalla shell, code fence degradati a singolo backtick, mojibake UTF-8, CR spuri\\). *)",
+      "Bash(xargs git log -1 --oneline)",
+      "Bash(git merge *)",
+      "Bash(git commit *)"
     ]
   }
 }
