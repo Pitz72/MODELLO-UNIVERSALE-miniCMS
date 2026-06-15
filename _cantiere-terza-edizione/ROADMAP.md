@@ -75,7 +75,7 @@ Ordine: prima il flagship contenuti, poi scalabilità, poi festival, infine il d
 - [x] SR-C8 RSS & Feed                       ┘
 - [x] SR-C9 Newsletter & Email *(sola)*
 - [x] SR-C12 Admin Dashboard & Panels *(sola)*
-- [ ] SR-C13 DB Evolution & Incidenti (MySQL, WAL, emergency) — **alto valore** *(sola)*
+- [x] SR-C13 DB Evolution & Incidenti (MySQL, WAL, emergency) — **alto valore** *(sola)* — **(SitoRuntime COMPLETO, 10 card)**
 
 ### 3.3 DISINTELLIGENZA (base festival)
 - [ ] DIS-C1 Backend Core & Bootstrap
@@ -119,6 +119,6 @@ Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "rac
 
 ## 7. Stato globale
 
-- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1, SR-C2, SR-C3, SR-C4, SR-C5, SR-C7, SR-C8, SR-C9, SR-C12** (20/~30 card). In corso il 2° sito **SitoRuntime** (flagship scalabilità).
-- **Prossima unità:** SR-C13 (DB Evolution & Incidenti) di SitoRuntime, DA SOLA (vedi `PROSSIMA-SESSIONE.md`) — **ULTIMA card di SitoRuntime**, alto valore (incidenti MySQL/WAL, emergency revert, migrazioni storiche, i 3 schemi subscribers divergenti, l'assenza di backup emersa in SR-C12). Dopo: il sito si chiude e si passa a DISINTELLIGENZA.
+- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1, SR-C2, SR-C3, SR-C4, SR-C5, SR-C7, SR-C8, SR-C9, SR-C12, SR-C13** (**SitoRuntime COMPLETO, 21/~30 card**). Conclusi i primi 2 siti (i due flagship). Si passa al 3° sito **DISINTELLIGENZA** (base festival, SQLite).
+- **Prossima unità:** DIS-C1 (Backend Core & Bootstrap) di DISINTELLIGENZA, DA SOLA (vedi `PROSSIMA-SESSIONE.md`) — apre il 3° sito. SQLite *vivo* (dove WAL/PRAGMA, fossili in SR-C13, sono ancora il motore reale): primo termine di paragone "dal vivo" del DB a file.
 - **Log completo:** `LOG.md`.
