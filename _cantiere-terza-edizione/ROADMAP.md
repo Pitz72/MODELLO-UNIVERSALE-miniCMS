@@ -73,7 +73,7 @@ Ordine: prima il flagship contenuti, poi scalabilità, poi festival, infine il d
 - [x] SR-C5 Media & Upload                            ┘
 - [x] SR-C7 SEO & Prerendering (+ seo-cache) ┐ *(coppia: 1 sessione)*
 - [x] SR-C8 RSS & Feed                       ┘
-- [ ] SR-C9 Newsletter & Email *(sola)*
+- [x] SR-C9 Newsletter & Email *(sola)*
 - [ ] SR-C12 Admin Dashboard & Panels *(sola)*
 - [ ] SR-C13 DB Evolution & Incidenti (MySQL, WAL, emergency) — **alto valore** *(sola)*
 
@@ -119,6 +119,6 @@ Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "rac
 
 ## 7. Stato globale
 
-- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1, SR-C2, SR-C3, SR-C4, SR-C5, SR-C7, SR-C8** (18/~30 card). In corso il 2° sito **SitoRuntime** (flagship scalabilità).
-- **Prossima unità:** SR-C9 (Newsletter & Email) di SitoRuntime, DA SOLA (vedi `PROSSIMA-SESSIONE.md`). Restano poi: [C12] · [C13] da sole → SitoRuntime si chiude in **3 sessioni / 3 card**.
+- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1, SR-C2, SR-C3, SR-C4, SR-C5, SR-C7, SR-C8, SR-C9** (19/~30 card). In corso il 2° sito **SitoRuntime** (flagship scalabilità).
+- **Prossima unità:** SR-C12 (Admin Dashboard & Panels) di SitoRuntime, DA SOLA (vedi `PROSSIMA-SESSIONE.md`). Resta poi: [C13] da sola → SitoRuntime si chiude in **2 sessioni / 2 card**.
 - **Log completo:** `LOG.md`.

@@ -9,7 +9,7 @@
 
 ## SitoRuntime
 - ✅ SR-C1 Backend Core · ✅ SR-C2 Security+CORS · ✅ SR-C3 Frontend Bridge · ✅ SR-C4 Content (news/speakers/podcasts)
-- ✅ SR-C5 Media · ✅ SR-C7 SEO+cache · ✅ SR-C8 RSS · ⬜ SR-C9 Newsletter
+- ✅ SR-C5 Media · ✅ SR-C7 SEO+cache · ✅ SR-C8 RSS · ✅ SR-C9 Newsletter
 - ⬜ SR-C12 Admin · ⬜ SR-C13 DB Evolution & Incidenti
 
 ## DISINTELLIGENZA
