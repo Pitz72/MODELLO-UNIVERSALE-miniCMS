@@ -7,7 +7,7 @@
 
 ## 0. Regole operative (valide per OGNI sessione)
 
-1. **Una unità per sessione.** Un'unità = una "card" di mappatura (1 sito × 1 cluster) oppure 1 micro-step di scrittura. Se troppo grande, si spezza (es. `parte 1/2`).
+1. **Una unità per sessione — con accorpamento SELETTIVO.** Un'unità = una "card" di mappatura (1 sito × 1 cluster) oppure 1 micro-step di scrittura. Se troppo grande, si spezza (es. `parte 1/2`). **Dal 2026-06-15** (Opus 4.8 a 1M di contesto): si possono accorpare nella stessa sessione **solo coppie di cluster già accoppiati** (max 2, mai 3), mantenendo **file-card separati + righe LOG separate**. Per SitoRuntime le coppie sono **C4+C5** (Content + Media/Upload) e **C7+C8** (SEO + RSS, emettitori dello stesso contenuto); **C9, C12, C13 restano da sole** (C13 incidenti DB = alto valore e corposo). Motivo: il contesto grande rilassa il limite tecnico, non quello di *qualità* (profondità microscopica + §6 + GOLD dipendono dall'attenzione su una lente e dalla lunghezza dell'output ~250-350 righe/card).
 2. **Ciclo di chiusura obbligatorio** ad ogni step: salva → aggiorna `LOG.md` → `git add/commit/push` → verifica sync locale=remoto → scrivi/aggiorna `PROSSIMA-SESSIONE.md` con il prompt pronto.
 3. **Criterio di STOP di una sezione:** la card è in stato `COMPLETATO` (tutte le voci del template compilate o marcate `N/A`), committata e pushata, log aggiornato, prompt della sessione successiva preparato.
 4. **Fonti = stato reale dei siti, oggi.** Si cita sempre `percorso/file.php:linea`. Niente memoria/supposizioni: si legge il codice.
@@ -69,13 +69,13 @@ Ordine: prima il flagship contenuti, poi scalabilità, poi festival, infine il d
 - [x] SR-C1 Backend Core & Bootstrap
 - [x] SR-C2 Security & Auth (+ CORS)
 - [x] SR-C3 Frontend Bridge & State
-- [ ] SR-C4 Content APIs (news + speakers + podcasts)
-- [ ] SR-C5 Media & Upload
-- [ ] SR-C7 SEO & Prerendering (+ seo-cache)
-- [ ] SR-C8 RSS & Feed
-- [ ] SR-C9 Newsletter & Email
-- [ ] SR-C12 Admin Dashboard & Panels
-- [ ] SR-C13 DB Evolution & Incidenti (MySQL, WAL, emergency) — **alto valore**
+- [ ] SR-C4 Content APIs (news + speakers + podcasts) ┐ *(coppia: 1 sessione)*
+- [ ] SR-C5 Media & Upload                            ┘
+- [ ] SR-C7 SEO & Prerendering (+ seo-cache) ┐ *(coppia: 1 sessione)*
+- [ ] SR-C8 RSS & Feed                       ┘
+- [ ] SR-C9 Newsletter & Email *(sola)*
+- [ ] SR-C12 Admin Dashboard & Panels *(sola)*
+- [ ] SR-C13 DB Evolution & Incidenti (MySQL, WAL, emergency) — **alto valore** *(sola)*
 
 ### 3.3 DISINTELLIGENZA (base festival)
 - [ ] DIS-C1 Backend Core & Bootstrap
@@ -120,5 +120,5 @@ Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "rac
 ## 7. Stato globale
 
 - **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1, SR-C2, SR-C3** (14/~30 card). In corso il 2° sito **SitoRuntime** (flagship scalabilità).
-- **Prossima unità:** SR-C4 — Content APIs (news + speakers + podcasts) di SitoRuntime (vedi `PROSSIMA-SESSIONE.md`).
+- **Prossima unità:** SR-C4 + SR-C5 (coppia accorpata: Content APIs + Media/Upload) di SitoRuntime (vedi `PROSSIMA-SESSIONE.md`). SitoRuntime si chiude in **5 sessioni / 7 card** con l'accorpamento: [C4+C5] · [C7+C8] · [C9] · [C12] · [C13].
 - **Log completo:** `LOG.md`.
