@@ -20,13 +20,13 @@ Il set standard include 5 tipi di feedback emotivo:
 ## 3. Sicurezza e GDPR: Il Voter Hash
 Per impedire a un utente di cliccare 100 volte la stessa reazione senza memorizzare il suo indirizzo IP (dato personale sensibile), usiamo un **Hash SHA256** salato e anonimo.
 
-`php
+```php
 // Hash anonimo del visitatore
- = hash('sha256',
-    (['REMOTE_ADDR'] ?? 'unknown') .
-    (['HTTP_USER_AGENT'] ?? 'unknown')
+$voterHash = hash('sha256',
+    ($_SERVER['REMOTE_ADDR'] ?? 'unknown') .
+    ($_SERVER['HTTP_USER_AGENT'] ?? 'unknown')
 );
-`
+```
 Questo hash identifica univocamente la "sessione/dispositivo" ma non permette di risalire all'IP originale, garantendo la conformità GDPR.
 
 ## 4. Rate Limiting (Protezione Anti-Frode)
@@ -34,7 +34,7 @@ Oltre alla chiave univoca sul database, il sistema implementa un limite temporal
 
 ## 5. Schema Database (MySQL)
 
-`sql
+```sql
 CREATE TABLE IF NOT EXISTS article_reactions (
     id          INT AUTO_INCREMENT PRIMARY KEY,
     article_id  INT NOT NULL,
@@ -43,10 +43,10 @@ CREATE TABLE IF NOT EXISTS article_reactions (
     created_at  DATETIME DEFAULT CURRENT_TIMESTAMP,
     UNIQUE KEY (article_id, voter_hash, reaction) -- Impedisce voti doppi
 );
-`
+```
 
 ## 6. Logica API (Toggle Pattern)
-L'endpoint eactions.php non si limita ad aggiungere voti, ma implementa la logica **Toggle**:
+L'endpoint `reactions.php` non si limita ad aggiungere voti, ma implementa la logica **Toggle**:
 - Se l'utente clicca su una reazione che ha già dato, questa viene **rimossa**.
 - Se clicca su una nuova, viene **aggiunta**.
 

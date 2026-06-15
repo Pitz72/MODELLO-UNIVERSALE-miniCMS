@@ -53,7 +53,9 @@
       "Bash(\"$MIKTEX_BIN/miktex.exe\" packages install fontspec)",
       "Bash(tail -10 \"c:/Users/Utente/Documents/GitHub/SITI-WEB/MODELLO-UNIVERSALE-miniCMS/CAPITOLO 8 - Advanced Content Editing & Media Integration.md\")",
       "Bash(tail -10 \"c:/Users/Utente/Documents/GitHub/SITI-WEB/MODELLO-UNIVERSALE-miniCMS/CAPITOLO 13 - Newsletter & Email System.md\")",
-      "Bash(tail -10 \"c:/Users/Utente/Documents/GitHub/SITI-WEB/MODELLO-UNIVERSALE-miniCMS/CAPITOLO 15 - Portfolio & Projects Module.md\")"
+      "Bash(tail -10 \"c:/Users/Utente/Documents/GitHub/SITI-WEB/MODELLO-UNIVERSALE-miniCMS/CAPITOLO 15 - Portfolio & Projects Module.md\")",
+      "Bash(git checkout *)",
+      "Bash(xxd)"
     ]
   }
 }
