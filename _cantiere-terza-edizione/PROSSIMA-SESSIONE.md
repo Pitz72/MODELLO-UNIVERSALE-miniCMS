@@ -1,91 +1,72 @@
 # PROSSIMA SESSIONE — prompt pronto da incollare
 
 > Aggiornato a fine di ogni sessione. Contiene UNA unità (da 2026-06-15: può essere una COPPIA
-> accorpata di cluster accoppiati — vedi ROADMAP §0.1).
+> accorpata di cluster accoppiati — vedi ROADMAP §0.1). Questa volta è una card SINGOLA — l'ULTIMA di SitoRuntime.
 
 ---
 
 Stiamo lavorando alla TERZA EDIZIONE del manuale miniCMS. Leggi prima
 _cantiere-terza-edizione/ROADMAP.md e _cantiere-terza-edizione/LOG.md per il contesto.
 
-METODO (ROADMAP §0.1): si accorpano nella stessa sessione SOLO coppie di cluster già accoppiati,
-mantenendo DUE file-card separati + DUE righe LOG separate. Questa sessione è la SECONDA coppia di
-SitoRuntime: SR-C7 + SR-C8 (sono i due "emettitori" dello stesso contenuto news → SEO e RSS).
+METODO (ROADMAP §0.1): si accorpano nella stessa sessione SOLO coppie di cluster già accoppiati. Per
+SitoRuntime le coppie erano C4+C5 (fatta) e C7+C8 (fatta); C9 (fatta), C12 (fatta) e C13 sono DA SOLE.
+Questa sessione è SR-C13 (DB Evolution & Incidenti) DA SOLA: UNA sola card. È l'ULTIMA card di SitoRuntime
+e ha ALTO VALORE — è il cuore del ruolo del sito nel manuale ("flagship scalabilità + problemi/soluzioni").
 
 Stato: SimonePizziWebSite (flagship contenuti) è COMPLETO. Su SitoRuntime sono fatte SR-C1 (Backend
-Core), SR-C2 (Security & Auth + CORS), SR-C3 (Frontend Bridge & State) e la coppia SR-C4 (Content
-APIs) + SR-C5 (Media & Upload). Da questa sessione si prosegue con la COPPIA C7+C8 — SEO/Prerendering
-e RSS/Feed.
+Core), SR-C2 (Security & Auth + CORS), SR-C3 (Frontend Bridge & State), la coppia SR-C4 (Content APIs)
++ SR-C5 (Media & Upload), la coppia SR-C7 (SEO/seo-cache) + SR-C8 (RSS & Feed), SR-C9 (Newsletter &
+Email) e SR-C12 (Admin Dashboard & Panels). Con SR-C13 SitoRuntime SI CHIUDE (10 card) e si passa al 3°
+sito DISINTELLIGENZA (base festival).
 
-Per impostare stile e metodo, leggi le card di riferimento:
-- _cantiere-terza-edizione/mappatura/SimonePizziWebSite/SPW-C7-seo-prerendering.md (parallelo C7: SEO
-  Engine v2.0 = Dynamic Rendering ibrido in public/index.php, isCrawler() UA-sniff, sitemap.php/
-  robots.php dinamici via rewrite senza file fisici, JSON-LD per tipo pagina, SEO.tsx client con
-  canonical NON parametrizzato, SeoScorePanel; GOLD: index.php:404 ri-emette content via strip_tags
-  allowlist ≠ DOMPurify → buco XSS-stored a livello ATTRIBUTI via UA spoofing).
-- _cantiere-terza-edizione/mappatura/SimonePizziWebSite/SPW-C8-rss-feed.md (parallelo C8: rss.php
-  feed RSS 2.0 real-time, RFC822, GUID urn:…isPermaLink=false, enclosure; GOLD: rss.php NON emette
-  articles.content → il PIÙ SICURO dei 3 emettitori, sicurezza-per-sottrazione).
-- _cantiere-terza-edizione/mappatura/SitoRuntime/SR-C4-content-apis.md (la card appena fatta: ti dà
-  la regola di visibilità published_at<=date('Y-m-d H:i:s') AND (status='published' OR status IS
-  NULL) che C7/C8 devono RIUSARE; e la CACHE su file .cache/news_*.json + seo_news_*.json già scritta
-  dentro admin.php su save — è il PONTE diretto a C7, da mappare qui come strategia).
-- (facoltativo) SR-C1 per index.php "SEO Engine v3.0" e SITE_URL canonico ASSENTE (baseUrl da
-  HTTP_HOST), e SR-C5 per il fatto che cover_image è una stringa URL (open graph image).
+Per impostare stile e metodo, ricorda l'altissima densità delle card già fatte e il ricco materiale
+"incidenti" già emerso lungo tutta la mappatura di SitoRuntime. Leggi in particolare:
+- _cantiere-terza-edizione/mappatura/SitoRuntime/SR-C1-backend-core.md (db.php singleton MySQL, init_mysql.php
+  schema dedicato, migrate_*/fix_* micro-migrazioni, init_db.php fossile SQLite, incidente fuso/formato-data in
+  debug_time.php — molti puntatori "→C13" partono da qui).
+- _cantiere-terza-edizione/mappatura/SitoRuntime/SR-C9-newsletter-email.md (i TRE schemi subscribers
+  divergenti: init_mysql base 4 col / fix_newsletter_table.php fossile SQLite rotto su MySQL / apply_v293
+  self-healing in admin.php — ponte C13 esplicito) e SR-C5 (storia migratoria raster→WebP: optimize_webp/
+  fix_image_paths, ponte C13) e SR-C12 (l'ASSENZA di backup/cron: il flagship degli incidenti ha la cura
+  emergency_revert_wal ma non la prevenzione — da raccontare in C13).
+- (facoltativo) SPW non ha una card C13 equivalente (in SPW gli incidenti erano sparsi); qui SR-C13 è
+  un capitolo a sé. Per il §6 il confronto è più "SR vs sé stesso nel tempo" che SR vs SPW.
 
-Unità di QUESTA sessione: COPPIA SR-C7 + SR-C8 del sito SitoRuntime
-(C:\Users\Utente\Documents\GitHub\SITI-WEB\SitoRuntime). Due card separate.
+Unità di QUESTA sessione: SR-C13 (DB Evolution & Incidenti) del sito SitoRuntime
+(C:\Users\Utente\Documents\GitHub\SITI-WEB\SitoRuntime). UNA card. ULTIMA di SitoRuntime.
 
-Ambito SR-C7 (SEO & Prerendering + seo-cache):
-- public/index.php: c'è un "SEO Engine" (SR-C1 lo marca v3.0)? È Dynamic Rendering UA-sniff come SPW
-  o un meccanismo diverso? Come deriva baseUrl (HTTP_HOST, visto SITE_URL canonico assente in SR-C1)?
-  Inietta meta/JSON-LD? Routing PHP speculare a React Router?
-- rebuild_seo_cache.php: cosa rigenera, e come si lega ai file seo_news_*.json / seo_speaker_*.json
-  già scritti da admin.php:292-297,309 e speakers.php:158-159,172-173 (questa è la seo-cache; in C4
-  ho mappato solo CHE viene scritta/invalidata, qui la STRATEGIA). È uno script one-shot o un
-  endpoint? Gated?
-- debug_seo.php: diagnostica SEO (cosa ispeziona).
-- sitemap.php + robots.php (se esiste): dinamici via rewrite .htaccess (public/.htaccess:77-78 li
-  serve da PHP) senza file fisici? baseUrl da HTTP_HOST? Stessa regola di visibilità di C4?
-- meta/OG/JSON-LD lato client: c'è un SEO.tsx (SR-C3 cita SEO.tsx in News.tsx/Article.tsx)? Canonical
-  parametrizzato o no (in SPW era sempre la homepage)?
-- la cache di CONTENUTO news_*.json (mappata in C4) vs la seo-cache: distinguere i due livelli.
-
-Ambito SR-C8 (RSS & Feed):
-- feed_news_rss.php: feed RSS 2.0 delle news? Real-time o da cache? Content-Type, timezone, limite,
-  channel title/description (hardcoded o da settings?). RIUSA la regola published_at<=now+status di
-  C4? Formato pubDate (RFC822?), GUID/URN, enclosure per cover_image. EMETTE news.content o solo
-  summary/excerpt (è il punto GOLD di SPW-C8: sicurezza-per-sottrazione)?
-- feed_config.php: SR-C3 dice che ritorna {success, feed_url}. Cos'è? Configurazione di un feed
-  esterno (Telegram?) o del feed RSS interno? C'è un legame col bot Telegram (SR-C1 cita
-  TELEGRAM_BOT_TOKEN nei segreti)?
-- podcasts: NON è qui la syndication degli episodi (in C4 ho mappato podcasts come record-link
-  esterni); verificare se esiste un feed RSS dei podcast o se è solo news. Marca N/A il resto.
-- routing del feed (URL pulito via .htaccess o grezzo /api/feed_news_rss.php?).
+Ambito SR-C13 (DB Evolution & Incidenti):
+- migrazione SQLite→MySQL: migrate_to_mysql.php (come copia i dati, COUNT di verifica, gestione errori),
+  init_mysql.php (schema di destinazione), init_db.php (il fossile SQLite con seed 24 speaker), fix_users_table.php
+  (fossile). Racconta l'evoluzione DB storica.
+- INCIDENTI veri: emergency_revert_wal.php (cos'è il WAL, perché un emergency revert, cosa ripristina),
+  migrate_status.php, debug_time.php (l'incidente fuso/formato-data separatore 'T' vs spazio già emerso in
+  C1/C4), eventuali altri debug_*/test_*.php. Ispeziona ogni file e cita file:linea.
+- le micro-migrazioni idempotenti come pattern: apply_v291_status (news.status), apply_v293_newsletter
+  (double opt-in), setup_podcasts.php — la filosofia "ALTER TABLE ADD COLUMN con skip su Duplicate column"
+  e "self-healing dentro admin.php" vs "script one-shot da cancellare".
+- i TRE schemi subscribers divergenti (da SR-C9): consolidali qui come caso-studio "la tabella che nessuno
+  crea due volte uguale".
+- l'ASSENZA di backup/cron emersa in SR-C12: incidente latente (cura senza prevenzione).
+- archeologia: file fossili SQLite rimasti nel repo MySQL (init_db.php, fix_users_table.php,
+  fix_newsletter_table.php), gated .htaccess by-prefix (debug_/migrate_/fix_/init_).
 
 Fai così:
-1. Ispeziona in modo microscopico i file di C7 e C8 (cita sempre percorso/file:linea).
-2. Compila DUE card seguendo _TEMPLATE.md e salvale in
-   _cantiere-terza-edizione/mappatura/SitoRuntime/SR-C7-seo-prerendering.md e
-   _cantiere-terza-edizione/mappatura/SitoRuntime/SR-C8-rss-feed.md
-3. NON sconfinare: core/DB=C1, security/CORS=C2, frontend/client=C3, content/buste/slug=C4 (fatti),
-   media/upload=C5 (fatto), editor/sanitizzazione=C6, newsletter/email/Telegram-invio=C9, admin UI=C12,
-   EVOLUZIONE DB & INCIDENTI=C13. Puntatori nelle "Note / domande aperte" per il resto. Tieni C7 e C8
-   distinti: prerendering/meta/sitemap/seo-cache in C7; il feed XML (RSS) in C8.
-4. §6 di ENTRAMBE le card: confronto con SPW-C7 e SPW-C8 (Dynamic Rendering UA-sniff e il buco
-   strip_tags vs DOMPurify; sitemap/robots dinamici; canonical non parametrizzato; RSS che NON emette
-   content = sicurezza-per-sottrazione; SITE_URL assente in SR → baseUrl da HTTP_HOST). ATTENZIONE al
-   ponte XSS-stored: in SR la sanitizzazione è render-time client (DOMPurify in Article.tsx, SR-C3/C6)
-   — verificare se index.php/feed_news_rss.php ri-emettono news.content GREZZO (riaprendo il buco come
-   in SPW) oppure no.
+1. Ispeziona in modo microscopico i file di C13 (cita sempre percorso/file:linea).
+2. Compila UNA card seguendo _TEMPLATE.md e salvala in
+   _cantiere-terza-edizione/mappatura/SitoRuntime/SR-C13-db-evolution-incidenti.md
+3. NON sconfinare: core/DB-bootstrap=C1 (qui solo l'EVOLUZIONE e gli incidenti, non il singleton in sé),
+   security/CORS/auth=C2, frontend=C3, content/slug=C4, media/upload=C5, SEO=C7, RSS=C8, newsletter=C9,
+   admin UI=C12. Puntatori nelle "Note / domande aperte". Consolida QUI i ponti "→C13" lasciati dalle altre card.
+4. §6: qui il confronto è soprattutto storico/interno (SR oggi vs SR nelle migrazioni passate) + nota su
+   come SPW gestiva gli incidenti in modo sparso (niente card C13 dedicata) vs SR che li concentra.
 
-Criterio di STOP: ENTRAMBE le card in stato COMPLETATO (tutte le voci compilate o N/A).
+Criterio di STOP: card in stato COMPLETATO (tutte le voci compilate o N/A).
 
 Ciclo di chiusura OBBLIGATORIO a fine sessione:
-- aggiorna _cantiere-terza-edizione/mappatura/_INDICE-MAPPATURA.md (SR-C7 → ✅, SR-C8 → ✅)
-- aggiungi DUE righe a _cantiere-terza-edizione/LOG.md (una per card, più recenti IN BASSO — attento
-  all'ordine cronologico)
-- aggiorna _cantiere-terza-edizione/ROADMAP.md (spunta SR-C7 e SR-C8) e lo stato globale
-- git add/commit/push (un commit per la coppia) e verifica che locale = origin/main
-- riscrivi QUESTO file (PROSSIMA-SESSIONE.md) con la prossima unità: SR-C9 (Newsletter & Email) del
-  sito SitoRuntime, DA SOLA (vedi ROADMAP §0.1: C9, C12, C13 restano singole).
+- aggiorna _cantiere-terza-edizione/mappatura/_INDICE-MAPPATURA.md (SR-C13 → ✅, segna SitoRuntime COMPLETO)
+- aggiungi UNA riga a _cantiere-terza-edizione/LOG.md (più recente IN BASSO — attento all'ordine cronologico)
+- aggiorna _cantiere-terza-edizione/ROADMAP.md (spunta SR-C13, segna SitoRuntime COMPLETO, aggiorna stato globale)
+- git add/commit/push (un commit) e verifica che locale = origin/main
+- riscrivi QUESTO file (PROSSIMA-SESSIONE.md) con la prossima unità: la PRIMA card di DISINTELLIGENZA
+  (festival, SQLite) — verosimilmente DIS-C1 (Backend Core & Bootstrap), DA SOLA. Apri così il 3° sito.
