@@ -71,6 +71,7 @@ Ordine: prima il flagship contenuti, poi scalabilità, poi festival, infine il d
 - [x] SR-C3 Frontend Bridge & State
 - [x] SR-C4 Content APIs (news + speakers + podcasts) ┐ *(coppia: 1 sessione)*
 - [x] SR-C5 Media & Upload                            ┘
+- [x] SR-C6 Advanced Editing / Editor *(gap colmato 18/06)* — Tiptap v3 + **shim migrazione Quill→Tiptap**; DOMPurify al render; guardia link più debole di SPW
 - [x] SR-C7 SEO & Prerendering (+ seo-cache) ┐ *(coppia: 1 sessione)*
 - [x] SR-C8 RSS & Feed                       ┘
 - [x] SR-C9 Newsletter & Email *(sola)*
@@ -80,8 +81,12 @@ Ordine: prima il flagship contenuti, poi scalabilità, poi festival, infine il d
 ### 3.3 DISINTELLIGENZA (base festival)
 - [x] DIS-C1 Backend Core & Bootstrap — **SQLite VIVO** (db-a-file corrente, non fossile): PDO singleton minimale, zero config/segreti, `.data/` auto-creata, init fossile *parziale* (v0.3.6), versionamento per nomi-file `update_db_*`
 - [x] DIS-C2 Security & Auth (+ anti-frode voto) — **GOLD: auth grado-zero (no CSRF/rate-limit/fixation/recovery); admin solo nel .sqlite; anti-frode voto IP/24h REMOTE_ADDR; backup pre-distruttivo (≠ SR-C13)**
+- [x] DIS-C3 Frontend Bridge & State *(gap colmato 18/06)* — **GOLD: error-handling INIETTATO da codemod `fix_api` (ripetizioni, metodi sfuggiti, riga duplicata)**; oggetto-namespace, no CSRF, "busta zero"
 - [x] DIS-C4 Content APIs (news/podcasts) ┐ *(coppia: 1 sessione, come SR-C4+C5)*
 - [x] DIS-C5 Media & Upload                ┘ — **GOLD: upload pubblico partecipanti + MIME client spoofabile + no PHP-off = catena RCE**
+- [x] DIS-C6 Advanced Editing / Editor *(gap colmato 18/06)* — **GOLD: editor custom `contentEditable`+`execCommand` (no Tiptap), link via `prompt` senza guardia, NESSUN DOMPurify = stored-XSS scoperto**
+- [x] DIS-C7 SEO & Prerendering *(gap colmato 18/06)* ┐ *(coppia, come SR-C7+C8)* — OG-proxy leggero (solo meta escaped, no body prerender, no UA-sniff): più sicuro di SR-C7 per sottrazione
+- [x] DIS-C8 RSS & Feed *(gap colmato 18/06)*          ┘ — feed **podcast iTunes** (no RSS news); GOLD: commenti "ragionamento ad alta voce" in produzione; settings podcast_* mai popolati
 - [x] DIS-C9 Newsletter & Email (+ contact) — **GOLD: mail() nativa, NO double opt-in, NO token disiscrizione (forgeable), invio sincrono nudo, email header injection via name; ma FILTER_VALIDATE_EMAIL + strip_tags write-time**
 - [x] DIS-C10 Festival Logic (participants/votes/settings/stats) — **cuore del sito; GOLD: macchina a stati + round manuali via flag + vote_count denormalizzato (classifica) + master switch pubblici + report finale disabilitato + finalist vestigiale**
 - [x] DIS-C12 Admin Dashboard & Panels — **via di mezzo SR/SPW: AdminLayout (come SPW) + guard-componente (come SR), dashboard che MISURA (stats.php, no Chart.js); GOLD: contacts write-only (mai letti), guard role-blind, reset senza CSRF** — **(DISINTELLIGENZA COMPLETO, 7 card)**
@@ -119,6 +124,6 @@ Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "rac
 
 ## 7. Stato globale
 
-- **Fase corrente:** ✅ **FASE 1 — MAPPATURA CONCLUSA (4 siti, 29 card).** SimonePizziWebSite COMPLETO (11: C1–C9, C11, C12) + SitoRuntime COMPLETO (10: C1–C5, C7–C9, C12, C13) + DISINTELLIGENZA COMPLETO (7: C1, C2, C4, C5, C9, C10, C12) + FDCA-DIFF (1). Si passa alla **FASE 2 — SINTESI**.
+- **Fase corrente:** ✅ **FASE 1 — MAPPATURA CONCLUSA + gap colmati (4 siti, 34 card).** SimonePizziWebSite COMPLETO (11) + SitoRuntime COMPLETO (11: +C6) + DISINTELLIGENZA COMPLETO (11: +C3, C6, C7, C8) + FDCA-DIFF (1). Copertura ora **completa** (matrice in `_INDICE-MAPPATURA.md`: tutti i cluster reali mappati, N/A giustificati). Gap colmati il 18/06 (FASE 1-bis): SR-C6, DIS-C3, DIS-C6, DIS-C7, DIS-C8 — riequilibrio verso la metà React/SEO. Si passa alla **FASE 2 — SINTESI**.
 - **Prossima unità:** FASE 2 / S1 — Consolidamento: da card per-sito a **schede tematiche cross-sito** (dedup, pattern comuni, varianti). NB: FDCA non aggiunge pattern (backend=DIS), va trattato come caso "fork/evoluzione". In alternativa partire da S3 (scaletta/indice globale). Vedi `PROSSIMA-SESSIONE.md`.
 - **Log completo:** `LOG.md`.

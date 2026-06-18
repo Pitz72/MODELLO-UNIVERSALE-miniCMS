@@ -7,12 +7,15 @@
 Stiamo lavorando alla TERZA EDIZIONE del manuale miniCMS. Leggi prima
 _cantiere-terza-edizione/ROADMAP.md e _cantiere-terza-edizione/LOG.md per il contesto.
 
-STATO: la FASE 1 (mappatura) è CONCLUSA — 4 siti, 29 card:
+STATO: la FASE 1 (mappatura) è CONCLUSA + GAP COLMATI — 4 siti, 34 card:
 - SimonePizziWebSite (flagship contenuti, MySQL): 11 card (C1–C9, C11, C12)
-- SitoRuntime (flagship scalabilità+incidenti, MySQL): 10 card (C1–C5, C7–C9, C12, C13)
-- DISINTELLIGENZA (festival, SQLite vivo): 7 card (C1, C2, C4, C5, C9, C10, C12)
+- SitoRuntime (flagship scalabilità+incidenti, MySQL): 11 card (C1–C9, C12, C13) — +C6 (editor)
+- DISINTELLIGENZA (festival, SQLite vivo): 11 card (C1–C10, C12) — +C3, C6, C7, C8
 - FDCA (fork di DIS): 1 card di DIFF (backend identico, solo re-skin frontend)
-Tutte le card sono in _cantiere-terza-edizione/mappatura/<sito>/ con §6 di confronto già scritti.
+Copertura ora COMPLETA: vedi la matrice in _cantiere-terza-edizione/mappatura/_INDICE-MAPPATURA.md
+(tutti i cluster reali mappati, N/A giustificati). I 5 gap colmati il 18/06 (SR-C6, DIS-C3/C6/C7/C8)
+riequilibrano verso la metà React/SEO: ora le schede cross-sito "Frontend Bridge" (C3) ed "Editor"
+(C6) sono 3-su-3, non più 2-su-3 / 1-su-3. Tutte le card hanno §6 di confronto già scritti.
 
 ORA: FASE 2 — SINTESI (ROADMAP §4). Obiettivo: da 29 card per-sito a un MANUALE. Sotto-fasi:
 - S1 — Consolidamento: schede TEMATICHE cross-sito (un cluster alla volta, dedup pattern comuni + varianti)
