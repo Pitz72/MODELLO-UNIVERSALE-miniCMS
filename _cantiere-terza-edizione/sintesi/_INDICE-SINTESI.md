@@ -16,7 +16,12 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
   Scala a 3 gradini RIBALTATA (SPW maturo / SR parziale / DIS grado-zero) — più ingegnerizzato ≠ più sicuro;
   CSRF a 3 gradini, flag cookie, IP grezzo-come-pregio (DIS), anti-frode voto + voter_hash, reset-a-un-clic.
   Corregge/amplia 4 punti in CAP 10 (§1.1 cookie Strict≠Lax, §1.2 username, §3 brute-force, §6 DDoS→CAP 11).
-- ⬜ S1-C3 Frontend Bridge & State — fonti SPW-C3, SR-C3, DIS-C3
+- ✅ **S1-C3 Frontend Bridge & State** — fonti SPW-C3, SR-C3, DIS-C3 (FDCA: nessun api.ts → fuori scala). → CAP 6 (princ.) + ponti CAP 10/9/4.
+  Stesso oggetto `api` su fetch, ma tre investimenti diversi attorno a un'API non-uniforme:
+  state-layer/loader+Double Read (SPW) / token CSRF in-memory (SR) / codemod fix_api (DIS).
+  GOLD: 3 modi di leggere il payload, codemod, messaggio-backend-perso (3 punti stesso esito),
+  token CSRF & reload, guard loader-vs-componente, niente interceptor 401. Corregge CAP 6 (§1.1
+  "Double Read" è il nome SBAGLIATO; §1.1/3.1/3.2/4 sono prescrizioni DIS-flavored).
 - ⬜ S1-C4 Content APIs — fonti SPW-C4, SR-C4, DIS-C4
 - ⬜ S1-C5 Media & Upload — fonti SPW-C5, SR-C5, DIS-C5
 - ⬜ S1-C6 Advanced Editing / Editor — fonti SPW-C6, SR-C6, DIS-C6
@@ -41,4 +46,4 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
 ---
 
 ### Stato globale FASE 2
-- **2 / 14 schede S1 completate** (S1-C1 ✅, S1-C2 ✅). Prossima: **S1-C3 Frontend Bridge & State**.
+- **3 / 14 schede S1 completate** (S1-C1 ✅, S1-C2 ✅, S1-C3 ✅). Prossima: **S1-C4 Content APIs**.
