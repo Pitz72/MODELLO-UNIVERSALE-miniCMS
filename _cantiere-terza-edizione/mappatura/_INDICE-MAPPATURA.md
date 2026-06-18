@@ -14,7 +14,7 @@
 
 ## DISINTELLIGENZA
 - ✅ DIS-C1 Backend Core (SQLite vivo) · ✅ DIS-C2 Security+anti-frode voto · ✅ DIS-C4 Content · ✅ DIS-C5 Media (upload pubblico/RCE)
-- ⬜ DIS-C9 Newsletter · ✅ DIS-C10 Festival Logic (cuore: stati/round/voto/settings) · ⬜ DIS-C12 Admin
+- ✅ DIS-C9 Newsletter & Email (no double opt-in/no token) · ✅ DIS-C10 Festival Logic (cuore: stati/round/voto/settings) · ⬜ DIS-C12 Admin
 
 ## FDCA
 - ⬜ FDCA-DIFF (vs DISINTELLIGENZA)

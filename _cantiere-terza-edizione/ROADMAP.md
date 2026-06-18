@@ -82,7 +82,7 @@ Ordine: prima il flagship contenuti, poi scalabilità, poi festival, infine il d
 - [x] DIS-C2 Security & Auth (+ anti-frode voto) — **GOLD: auth grado-zero (no CSRF/rate-limit/fixation/recovery); admin solo nel .sqlite; anti-frode voto IP/24h REMOTE_ADDR; backup pre-distruttivo (≠ SR-C13)**
 - [x] DIS-C4 Content APIs (news/podcasts) ┐ *(coppia: 1 sessione, come SR-C4+C5)*
 - [x] DIS-C5 Media & Upload                ┘ — **GOLD: upload pubblico partecipanti + MIME client spoofabile + no PHP-off = catena RCE**
-- [ ] DIS-C9 Newsletter & Email
+- [x] DIS-C9 Newsletter & Email (+ contact) — **GOLD: mail() nativa, NO double opt-in, NO token disiscrizione (forgeable), invio sincrono nudo, email header injection via name; ma FILTER_VALIDATE_EMAIL + strip_tags write-time**
 - [x] DIS-C10 Festival Logic (participants/votes/settings/stats) — **cuore del sito; GOLD: macchina a stati + round manuali via flag + vote_count denormalizzato (classifica) + master switch pubblici + report finale disabilitato + finalist vestigiale**
 - [ ] DIS-C12 Admin Dashboard & Panels
 
@@ -119,6 +119,6 @@ Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "rac
 
 ## 7. Stato globale
 
-- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1…C5, C7, C8, C9, C12, C13** (SitoRuntime COMPLETO) + **DIS-C1, DIS-C2, DIS-C4, DIS-C5, DIS-C10** (3° sito quasi completo). **26/~30 card.** Restano DIS-C9, DIS-C12 + FDCA-DIFF.
-- **Prossima unità:** DIS-C9 (Newsletter & Email + contact) di DISINTELLIGENZA, DA SOLA (leggera). Vedi `PROSSIMA-SESSIONE.md`. Poi DIS-C12 (Admin) e FDCA-DIFF (chiude la mappatura). Fili verso C9: email `mail()` nativa (template comici in participants.php → C10), iscrizione newsletter all'approvazione (consenso GDPR?), tabelle newsletter_subscribers/contacts/newsletter_campaigns (create da update_db_0_1_3).
+- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1…C5, C7, C8, C9, C12, C13** (SitoRuntime COMPLETO) + **DIS-C1, C2, C4, C5, C9, C10** (3° sito quasi completo). **27/~30 card.** Restano **DIS-C12** + **FDCA-DIFF**.
+- **Prossima unità:** DIS-C12 (Admin Dashboard & Panels) di DISINTELLIGENZA, DA SOLA — penultima card del sito. Vedi `PROSSIMA-SESSIONE.md`. Poi FDCA-DIFF (ultima unità, chiude FASE 1 mappatura). Fili verso C12: UI admin del festival (pannelli partecipanti/round, dashboard stats+storage breakdown da stats.php), compositore newsletter (newsletter.php?send) + inbox contatti, gestione utenti (users.php), master switch (settings.php). NB: DIS non ha un AdminLayout/loader (SPA con guard-componente? da verificare lato src/).
 - **Log completo:** `LOG.md`.
