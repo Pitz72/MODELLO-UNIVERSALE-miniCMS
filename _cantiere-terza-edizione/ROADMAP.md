@@ -83,7 +83,7 @@ Ordine: prima il flagship contenuti, poi scalabilità, poi festival, infine il d
 - [x] DIS-C4 Content APIs (news/podcasts) ┐ *(coppia: 1 sessione, come SR-C4+C5)*
 - [x] DIS-C5 Media & Upload                ┘ — **GOLD: upload pubblico partecipanti + MIME client spoofabile + no PHP-off = catena RCE**
 - [ ] DIS-C9 Newsletter & Email
-- [ ] DIS-C10 Festival Logic (participants/votes/settings)
+- [x] DIS-C10 Festival Logic (participants/votes/settings/stats) — **cuore del sito; GOLD: macchina a stati + round manuali via flag + vote_count denormalizzato (classifica) + master switch pubblici + report finale disabilitato + finalist vestigiale**
 - [ ] DIS-C12 Admin Dashboard & Panels
 
 ### 3.4 FDCA (diff)
@@ -119,6 +119,6 @@ Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "rac
 
 ## 7. Stato globale
 
-- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1…C5, C7, C8, C9, C12, C13** (SitoRuntime COMPLETO) + **DIS-C1, DIS-C2, DIS-C4, DIS-C5** (3° sito in corso). **25/~30 card.** Restano DIS-C9, DIS-C10, DIS-C12 + FDCA-DIFF.
-- **Prossima unità:** DIS-C10 (Festival Logic: participants/votes/settings/stats, round, classifiche) di DISINTELLIGENZA, DA SOLA (è il CUORE del sito, alto valore) — oppure, se si preferisce alleggerire, DIS-C9 (Newsletter & Email) prima. Vedi `PROSSIMA-SESSIONE.md`. Fili aperti da chiudere in C10: schema `votes`/`vote_count` denormalizzato, gestione round (`in_current_round`), `stats.php`, master switch; ruoli (update_status/round gated solo isset user_id, non isAdmin).
+- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1…C5, C7, C8, C9, C12, C13** (SitoRuntime COMPLETO) + **DIS-C1, DIS-C2, DIS-C4, DIS-C5, DIS-C10** (3° sito quasi completo). **26/~30 card.** Restano DIS-C9, DIS-C12 + FDCA-DIFF.
+- **Prossima unità:** DIS-C9 (Newsletter & Email + contact) di DISINTELLIGENZA, DA SOLA (leggera). Vedi `PROSSIMA-SESSIONE.md`. Poi DIS-C12 (Admin) e FDCA-DIFF (chiude la mappatura). Fili verso C9: email `mail()` nativa (template comici in participants.php → C10), iscrizione newsletter all'approvazione (consenso GDPR?), tabelle newsletter_subscribers/contacts/newsletter_campaigns (create da update_db_0_1_3).
 - **Log completo:** `LOG.md`.
