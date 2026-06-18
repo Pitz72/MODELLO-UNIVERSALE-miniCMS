@@ -79,7 +79,7 @@ Ordine: prima il flagship contenuti, poi scalabilità, poi festival, infine il d
 
 ### 3.3 DISINTELLIGENZA (base festival)
 - [x] DIS-C1 Backend Core & Bootstrap — **SQLite VIVO** (db-a-file corrente, non fossile): PDO singleton minimale, zero config/segreti, `.data/` auto-creata, init fossile *parziale* (v0.3.6), versionamento per nomi-file `update_db_*`
-- [ ] DIS-C2 Security & Auth (+ anti-frode voto)
+- [x] DIS-C2 Security & Auth (+ anti-frode voto) — **GOLD: auth grado-zero (no CSRF/rate-limit/fixation/recovery); admin solo nel .sqlite; anti-frode voto IP/24h REMOTE_ADDR; backup pre-distruttivo (≠ SR-C13)**
 - [x] DIS-C4 Content APIs (news/podcasts) ┐ *(coppia: 1 sessione, come SR-C4+C5)*
 - [x] DIS-C5 Media & Upload                ┘ — **GOLD: upload pubblico partecipanti + MIME client spoofabile + no PHP-off = catena RCE**
 - [ ] DIS-C9 Newsletter & Email
@@ -119,6 +119,6 @@ Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "rac
 
 ## 7. Stato globale
 
-- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1…C5, C7, C8, C9, C12, C13** (SitoRuntime COMPLETO) + **DIS-C1, DIS-C4, DIS-C5** (3° sito in corso). **24/~30 card.** Si prosegue su **DISINTELLIGENZA** (base festival, SQLite vivo).
-- **Prossima unità:** DIS-C2 (Security & Auth + anti-frode voto) di DISINTELLIGENZA, DA SOLA (vedi `PROSSIMA-SESSIONE.md`) — alto valore. Da chiarire in C2: dove/come viene creato l'utente admin (omesso nell'init fossile parziale) ed eventuale password di default; assenza di CSRF; gate per-tipo incoerente di `upload.php` (upload pubblico partecipanti); protezione (assente) di `update_db_*`/`migrate_media.php`; anti-frode voto (schema `votes`).
+- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1…C5, C7, C8, C9, C12, C13** (SitoRuntime COMPLETO) + **DIS-C1, DIS-C2, DIS-C4, DIS-C5** (3° sito in corso). **25/~30 card.** Restano DIS-C9, DIS-C10, DIS-C12 + FDCA-DIFF.
+- **Prossima unità:** DIS-C10 (Festival Logic: participants/votes/settings/stats, round, classifiche) di DISINTELLIGENZA, DA SOLA (è il CUORE del sito, alto valore) — oppure, se si preferisce alleggerire, DIS-C9 (Newsletter & Email) prima. Vedi `PROSSIMA-SESSIONE.md`. Fili aperti da chiudere in C10: schema `votes`/`vote_count` denormalizzato, gestione round (`in_current_round`), `stats.php`, master switch; ruoli (update_status/round gated solo isset user_id, non isAdmin).
 - **Log completo:** `LOG.md`.

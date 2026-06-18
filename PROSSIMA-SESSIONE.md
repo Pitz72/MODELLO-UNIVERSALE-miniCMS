@@ -1,80 +1,63 @@
 # PROSSIMA SESSIONE — prompt pronto da incollare
 
-> Aggiornato a fine di ogni sessione. Contiene UNA unità (da 2026-06-15: può essere una COPPIA
-> accorpata di cluster accoppiati — vedi ROADMAP §0.1). Questa volta è una card SINGOLA — DIS-C2,
-> alto valore (auth + anti-frode voto), il 2° passo del 3° sito DISINTELLIGENZA.
+> Aggiornato a fine di ogni sessione. Contiene UNA unità. Questa volta è una card SINGOLA ad alto
+> valore: DIS-C10, il CUORE del sito-festival DISINTELLIGENZA.
 
 ---
 
 Stiamo lavorando alla TERZA EDIZIONE del manuale miniCMS. Leggi prima
 _cantiere-terza-edizione/ROADMAP.md e _cantiere-terza-edizione/LOG.md per il contesto.
 
-METODO (ROADMAP §0.1): si accorpano nella stessa sessione SOLO coppie di cluster già accoppiati. La
-coppia DIS-C4+C5 è stata fatta (come SR-C4+C5). Restano: **C2 DA SOLA** (alto valore — auth +
-anti-frode voto, QUESTA sessione), poi **C9** (newsletter/contact, leggera) e **C10** (festival logic,
-il cuore) da sola, infine **C12** (admin) e FDCA-DIFF. Questa sessione è una card SINGOLA: DIS-C2.
+METODO (ROADMAP §0.1): si accorpano SOLO coppie di cluster già accoppiati. C10 (Festival Logic) è
+il cuore del sito e va fatta DA SOLA (alto valore e corposa). Restano poi DIS-C9 (Newsletter/contact,
+leggera) e DIS-C12 (Admin), più FDCA-DIFF. Questa sessione = card SINGOLA: DIS-C10.
 
-Stato: i PRIMI DUE siti (i due flagship) sono COMPLETI; il 3° è in corso.
-- SimonePizziWebSite (flagship contenuti): COMPLETO (11 card).
-- SitoRuntime (flagship scalabilità + incidenti): COMPLETO (10 card).
-- DISINTELLIGENZA (base festival, SQLite VIVO): DIS-C1, DIS-C4, DIS-C5 fatte. 24/~30 card totali.
+Stato: i PRIMI DUE siti (flagship) COMPLETI; il 3° in corso.
+- SimonePizziWebSite: COMPLETO (11 card). SitoRuntime: COMPLETO (10 card).
+- DISINTELLIGENZA (festival, SQLite VIVO): DIS-C1, DIS-C2, DIS-C4, DIS-C5 fatte. 25/~30 card totali.
 
-CONTESTO da DIS-C1 (leggi la card _cantiere-terza-edizione/mappatura/DISINTELLIGENZA/DIS-C1-backend-core.md):
-DISINTELLIGENZA gira su SQLite vivo, PHP puro, bootstrap inline minimale (no cors.php, no auth_helper
-centralizzato), `session_start()` a mano in ogni endpoint. DIS-C1 ha lasciato APERTI per C2 tre fili
-precisi che vanno chiusi qui:
-1. DOVE viene creato l'utente admin? init_db.php lo OMETTE (commento "[Admin creation ignored for
-   brevity in repl]", :85). Cercare se c'è un hardcoded di default (come SR `runtime2026`) o se è
-   creato a mano nel .sqlite.
-2. Gli script update_db_* sono per lo più NON protetti (solo security_move=admin, v0.5.4=login) ed
-   eseguibili in HTTP; il .htaccess di public/ NON li nega (vs deny by-prefix di SR-C2). Valutare il
-   rischio in chiave sicurezza.
-3. Schema tab. `votes` (init_db.php:62-70): session_id + ip_address + user_agent → è l'impianto
-   anti-doppio-voto. Confrontare con il voter_hash SHA256 di SPW-C11 e con l'anti-frode di SR-C2.
-4. (da DIS-C5) Il gate di `upload.php` è PER-TIPO e incoerente: `type=audio_participant` e `audio`
-   sono PUBBLICI (no auth), con validazione solo sul MIME client + naming che tiene l'estensione +
-   nessun PHP-off su uploads/ = catena RCE documentata in DIS-C5. In C2 inquadrare la sicurezza di
-   questo (è un upload pubblico per le iscrizioni). Anche `migrate_media.php` è non gated.
-   NB: NON è una card di fix — è mappatura/sicurezza (sola lettura sui siti sorgente).
+CONTESTO da card già fatte (leggi DIS-C2 e DIS-C4 prima di iniziare): il festival ha già lasciato
+molti fili aperti verso C10. DIS-C2 ha mappato SOLO l'aspetto sicurezza/anti-frode del voto e della
+registrazione; C10 deve mappare la LOGICA festival completa. Cosa NON ripetere (già in DIS-C2): la
+catena anti-doppio-voto (cookie+IP/24h), il backup pre-reset, i gate. C10 li richiama come puntatori.
 
-Unità di QUESTA sessione: DIS-C2 (Security & Auth + anti-frode voto) del sito DISINTELLIGENZA
+Unità di QUESTA sessione: DIS-C10 (Festival Logic) del sito DISINTELLIGENZA
 (C:\Users\Utente\Documents\GitHub\SITI-WEB\DISINTELLIGENZA). UNA card.
 
-Ambito DIS-C2 (Security & Auth + anti-frode voto):
-- public/api/auth.php (login/logout/check: già visto il login a password_verify + $_SESSION
-  user_id/username/role; mappare logout, eventuale recovery/reset, gestione sessione).
-- public/api/users.php (gestione utenti admin/editor: CRUD, ruoli, eventuale creazione admin =
-  risposta al filo #1 di sopra).
-- Meccanica di sessione: session_start() per-endpoint, gate $_SESSION['role'] admin/editor (come
-  appare in news.php:17, update_db_security_move.php:8, v0.5.4:8). C'è un cookie config? SameSite/
-  Secure/HttpOnly? session_regenerate_id anti-fixation? CSRF (token? Origin/Referer? — in DIS-C1 NON
-  ho visto né cors.php né header CSRF)?
-- Anti-frode VOTO: la parte di auth/identità del voto (session_id/ip/user_agent in `votes`), rate
-  limiting, dedup. NB: la LOGICA festival completa (conteggi, round, master switch) è C10 — qui solo
-  l'aspetto sicurezza/identità/anti-abuso del voto.
-- .htaccess (public/): già mappato il deny di *.sqlite/*.bak e il routing SEO; qui interessa la
-  parte sicurezza (manca HSTS/CSP/redirect HTTPS? manca il deny degli script update_db_*?).
-- NON sconfinare: bootstrap/db=C1 (fatto), content/news=C4, media=C5, newsletter/contact=C9, festival
-  logic conteggi/round/settings=C10, admin dashboard=C12, feed/podcast=C8.
+Ambito DIS-C10 (Festival Logic):
+- public/api/participants.php — il CICLO DI VITA del partecipante: submit pubblica (pending) →
+  update_status (approved/rejected, con email C9) → update_round (in_current_round). Mappare gli stati
+  (pending/approved/rejected/finalist da init_db.php:55) e le transizioni. (La sicurezza della submit
+  è DIS-C2; qui la LOGICA di concorso.)
+- public/api/votes.php — la MECCANICA del voto come logica festival: 1-3 preferenze, in_current_round,
+  vote_count denormalizzato, session_id di raggruppamento. (anti-frode = DIS-C2; qui conteggio/round.)
+- public/api/settings.php — i MASTER SWITCH del festival: voting_active, registration_active,
+  voting_period/registration_period, maintenance_mode. Come si leggono/scrivono, chi li tocca.
+- public/api/stats.php — classifiche/aggregazioni del festival (conteggi voti, partecipanti per stato,
+  vincitori?). Verificare se è pubblico o gated, e cosa calcola.
+- public/api/reset_votes.php + reset_system.php — dal punto di vista del FLUSSO festival (reset turno
+  vs reset totale, cosa preserva/cancella). La sicurezza/backup è DIS-C2; qui il significato nel ciclo.
+- Schema: participants (vote_count, in_current_round, status), votes, settings — come si tengono
+  coerenti (es. vote_count denormalizzato vs COUNT su votes).
+- NON sconfinare: auth/anti-frode/CSRF=C2 (fatto), upload audio=C5 (fatto), news=C4 (fatto),
+  email/newsletter=C9, admin dashboard/UI=C12, bootstrap/DB=C1.
 
 Fai così:
-1. Ispeziona in modo microscopico i file di C2 (cita sempre percorso/file:linea).
+1. Ispeziona in modo microscopico i file (cita sempre percorso/file:linea).
 2. Compila UNA card seguendo _TEMPLATE.md e salvala in
-   _cantiere-terza-edizione/mappatura/DISINTELLIGENZA/DIS-C2-security-auth.md
-3. §6: confronto a TRE — DIS-C2 vs SPW-C2 e SR-C2 (auth + sessioni + CSRF + rate-limit). Asse chiave:
-   quanto si può togliere alla sicurezza quando il sito è piccolo e same-origin (DIS sembra il più
-   spoglio: nessun CSRF token visto, cookie di default). Riusa anche SPW-C11 per il confronto
-   anti-doppio-voto (voter_hash) e SR-C2 per il rate-limit file-based.
-4. Chiudi i 3 fili lasciati aperti da DIS-C1 (admin creation, script non protetti, schema votes).
-5. Lascia puntatori nelle "Note / domande aperte" per C4/C5/C9/C10/C12.
+   _cantiere-terza-edizione/mappatura/DISINTELLIGENZA/DIS-C10-festival-logic.md
+3. §6: confronto — DIS è l'UNICO sito con festival logic completa (SPW/SR non ce l'hanno; FDCA è un
+   fork). Quindi il §6 è soprattutto INTERNO (come il festival modella stati/round/voto) + un cenno a
+   come questo "dominio votazioni" non esista negli altri due siti. Anticipa il diff FDCA.
+4. Chiudi i fili lasciati aperti da DIS-C2/C4/C5 verso C10 (round, vote_count, stats, ruoli editor).
+5. Lascia puntatori per C9 (email approvazione) e C12 (UI admin del festival).
 
-Criterio di STOP: card in stato COMPLETATO (tutte le voci compilate o N/A).
+Criterio di STOP: card in stato COMPLETATO.
 
 Ciclo di chiusura OBBLIGATORIO a fine sessione:
-- aggiorna _cantiere-terza-edizione/mappatura/_INDICE-MAPPATURA.md (DIS-C2 → ✅)
-- aggiungi UNA riga a _cantiere-terza-edizione/LOG.md (più recente IN BASSO — attento all'ordine cronologico)
-- aggiorna _cantiere-terza-edizione/ROADMAP.md (spunta DIS-C2, aggiorna stato globale)
+- aggiorna _cantiere-terza-edizione/mappatura/_INDICE-MAPPATURA.md (DIS-C10 → ✅)
+- aggiungi UNA riga a _cantiere-terza-edizione/LOG.md (più recente IN BASSO)
+- aggiorna _cantiere-terza-edizione/ROADMAP.md (spunta DIS-C10, aggiorna stato globale)
 - git add/commit/push (un commit) e verifica che locale = origin/main
-- riscrivi QUESTO file (PROSSIMA-SESSIONE.md) con la prossima unità: verosimilmente la coppia
-  DIS-C4+DIS-C9 (Content/news + Newsletter/contact), oppure DIS-C10 (Festival Logic) da sola se in
-  C2 emerge che il voto merita una card dedicata tutta sua.
+- riscrivi QUESTO file (PROSSIMA-SESSIONE.md) con la prossima unità: verosimilmente DIS-C9
+  (Newsletter & Email + contact) da sola, poi DIS-C12 (Admin), infine FDCA-DIFF.
