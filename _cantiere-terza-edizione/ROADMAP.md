@@ -100,7 +100,8 @@ Ordine: prima il flagship contenuti, poi scalabilità, poi festival, infine il d
 
 ## 4. FASE 2 — SINTESI
 
-- [ ] S1 — Consolidamento: da card per-sito a **schede tematiche cross-sito** (dedup, pattern comuni, varianti).
+- [ ] S1 — Consolidamento: da card per-sito a **schede tematiche cross-sito** (dedup, pattern comuni, varianti). *(1/14 schede — stato in `sintesi/_INDICE-SINTESI.md`)*
+  - [x] S1-C1 Backend Core & Bootstrap → `sintesi/S1-C1-backend-core.md` (scala a 3 gradini SQLite/MySQL-essenziale/MySQL-ingegnerizzato; GOLD init-fossile/credenziali-default/errore-connessione; corregge 2 sviste in CAP 3)
 - [ ] S2 — Inventario contenuti: cosa entra nel libro, cosa si aggiorna, cosa è nuovo, cosa si scarta.
 - [ ] S3 — **Scaletta/Indice globale** della Terza Edizione (struttura a Parti + capitoli, con mappa card→capitolo).
 - [ ] S4 — Validazione indice con Simone (gate prima della scrittura).
@@ -124,6 +125,6 @@ Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "rac
 
 ## 7. Stato globale
 
-- **Fase corrente:** ✅ **FASE 1 — MAPPATURA CONCLUSA + gap colmati (4 siti, 34 card).** SimonePizziWebSite COMPLETO (11) + SitoRuntime COMPLETO (11: +C6) + DISINTELLIGENZA COMPLETO (11: +C3, C6, C7, C8) + FDCA-DIFF (1). Copertura ora **completa** (matrice in `_INDICE-MAPPATURA.md`: tutti i cluster reali mappati, N/A giustificati). Gap colmati il 18/06 (FASE 1-bis): SR-C6, DIS-C3, DIS-C6, DIS-C7, DIS-C8 — riequilibrio verso la metà React/SEO. Si passa alla **FASE 2 — SINTESI**.
-- **Prossima unità:** FASE 2 / S1 — Consolidamento: da card per-sito a **schede tematiche cross-sito** (dedup, pattern comuni, varianti). NB: FDCA non aggiunge pattern (backend=DIS), va trattato come caso "fork/evoluzione". In alternativa partire da S3 (scaletta/indice globale). Vedi `PROSSIMA-SESSIONE.md`.
+- **Fase corrente:** 🟨 **FASE 2 — SINTESI, sotto-fase S1 (Consolidamento) avviata.** FASE 1 conclusa (4 siti, 34 card, copertura completa). FASE 2 in corso: **1/14 schede tematiche S1 completate** (S1-C1 Backend Core). Cartella `_cantiere-terza-edizione/sintesi/` creata con `_TEMPLATE-SCHEDA.md` + `_INDICE-SINTESI.md`.
+- **Prossima unità:** FASE 2 / **S1-C2 Security & Auth** (cross-sito) — fonti SPW-C2, SR-C2, DIS-C2 (+ SPW-C11 voter_hash, DIS-C2/C10 anti-frode). Vedi `PROSSIMA-SESSIONE.md`.
 - **Log completo:** `LOG.md`.
