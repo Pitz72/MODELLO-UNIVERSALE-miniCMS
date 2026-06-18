@@ -12,7 +12,10 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
 - ✅ **S1-C1 Backend Core & Bootstrap** — fonti SPW-C1, SR-C1, DIS-C1 (+ FDCA §3). → CAP 3/5/14.
   Scala a 3 gradini (SQLite grado-zero DIS / MySQL essenziale SPW / MySQL ingegnerizzato SR);
   GOLD init-fossile, credenziali-default, errore-connessione. Corregge 2 sviste in CAP 3.
-- ⬜ S1-C2 Security & Auth — fonti SPW-C2, SR-C2, DIS-C2 (+ SPW-C11 voter_hash, DIS-C2/C10 anti-frode)
+- ✅ **S1-C2 Security & Auth** — fonti SPW-C2, SR-C2, DIS-C2 (+ SPW-C11 voter_hash, DIS-C10 contesto voto). → CAP 10 (princ.) + ponti CAP 13/11/17.
+  Scala a 3 gradini RIBALTATA (SPW maturo / SR parziale / DIS grado-zero) — più ingegnerizzato ≠ più sicuro;
+  CSRF a 3 gradini, flag cookie, IP grezzo-come-pregio (DIS), anti-frode voto + voter_hash, reset-a-un-clic.
+  Corregge/amplia 4 punti in CAP 10 (§1.1 cookie Strict≠Lax, §1.2 username, §3 brute-force, §6 DDoS→CAP 11).
 - ⬜ S1-C3 Frontend Bridge & State — fonti SPW-C3, SR-C3, DIS-C3
 - ⬜ S1-C4 Content APIs — fonti SPW-C4, SR-C4, DIS-C4
 - ⬜ S1-C5 Media & Upload — fonti SPW-C5, SR-C5, DIS-C5
@@ -38,4 +41,4 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
 ---
 
 ### Stato globale FASE 2
-- **1 / 14 schede S1 completate** (S1-C1 ✅). Prossima: **S1-C2 Security & Auth**.
+- **2 / 14 schede S1 completate** (S1-C1 ✅, S1-C2 ✅). Prossima: **S1-C3 Frontend Bridge & State**.
