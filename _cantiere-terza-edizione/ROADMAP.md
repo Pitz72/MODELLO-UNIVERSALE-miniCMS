@@ -84,7 +84,7 @@ Ordine: prima il flagship contenuti, poi scalabilità, poi festival, infine il d
 - [x] DIS-C5 Media & Upload                ┘ — **GOLD: upload pubblico partecipanti + MIME client spoofabile + no PHP-off = catena RCE**
 - [x] DIS-C9 Newsletter & Email (+ contact) — **GOLD: mail() nativa, NO double opt-in, NO token disiscrizione (forgeable), invio sincrono nudo, email header injection via name; ma FILTER_VALIDATE_EMAIL + strip_tags write-time**
 - [x] DIS-C10 Festival Logic (participants/votes/settings/stats) — **cuore del sito; GOLD: macchina a stati + round manuali via flag + vote_count denormalizzato (classifica) + master switch pubblici + report finale disabilitato + finalist vestigiale**
-- [ ] DIS-C12 Admin Dashboard & Panels
+- [x] DIS-C12 Admin Dashboard & Panels — **via di mezzo SR/SPW: AdminLayout (come SPW) + guard-componente (come SR), dashboard che MISURA (stats.php, no Chart.js); GOLD: contacts write-only (mai letti), guard role-blind, reset senza CSRF** — **(DISINTELLIGENZA COMPLETO, 7 card)**
 
 ### 3.4 FDCA (diff)
 - [ ] FDCA-DIFF — differenze rilevanti vs DISINTELLIGENZA (cosa è cambiato nel fork)
@@ -119,6 +119,6 @@ Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "rac
 
 ## 7. Stato globale
 
-- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1…C5, C7, C8, C9, C12, C13** (SitoRuntime COMPLETO) + **DIS-C1, C2, C4, C5, C9, C10** (3° sito quasi completo). **27/~30 card.** Restano **DIS-C12** + **FDCA-DIFF**.
-- **Prossima unità:** DIS-C12 (Admin Dashboard & Panels) di DISINTELLIGENZA, DA SOLA — penultima card del sito. Vedi `PROSSIMA-SESSIONE.md`. Poi FDCA-DIFF (ultima unità, chiude FASE 1 mappatura). Fili verso C12: UI admin del festival (pannelli partecipanti/round, dashboard stats+storage breakdown da stats.php), compositore newsletter (newsletter.php?send) + inbox contatti, gestione utenti (users.php), master switch (settings.php). NB: DIS non ha un AdminLayout/loader (SPA con guard-componente? da verificare lato src/).
+- **Fase corrente:** FASE 1 — MAPPATURA quasi completa. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1…C5, C7, C8, C9, C12, C13** (SitoRuntime COMPLETO) + **DIS-C1, C2, C4, C5, C9, C10, C12** (**DISINTELLIGENZA COMPLETO, 7 card**). **28/~30 card.** Resta SOLO **FDCA-DIFF** (ultima unità).
+- **Prossima unità:** FDCA-DIFF — differenze del fork FDCA vs DISINTELLIGENZA (cosa è cambiato nel fork). È l'ULTIMA card e chiude la FASE 1 di mappatura. Vedi `PROSSIMA-SESSIONE.md`. Dopo: FASE 2 (Sintesi: schede cross-sito, inventario, scaletta globale).
 - **Log completo:** `LOG.md`.

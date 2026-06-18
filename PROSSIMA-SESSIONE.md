@@ -1,66 +1,58 @@
 # PROSSIMA SESSIONE — prompt pronto da incollare
 
-> Aggiornato a fine di ogni sessione. Contiene UNA unità. Questa volta è la PENULTIMA card del 3°
-> sito: DIS-C12 (Admin Dashboard & Panels) di DISINTELLIGENZA.
+> Aggiornato a fine di ogni sessione. Contiene UNA unità. Questa è l'ULTIMA card della FASE 1:
+> FDCA-DIFF, che chiude la mappatura.
 
 ---
 
 Stiamo lavorando alla TERZA EDIZIONE del manuale miniCMS. Leggi prima
 _cantiere-terza-edizione/ROADMAP.md e _cantiere-terza-edizione/LOG.md per il contesto.
 
-METODO (ROADMAP §0.1): C12 è il pannello admin, va DA SOLA. Questa sessione = card SINGOLA: DIS-C12.
-Dopo resta solo FDCA-DIFF (l'ultima unità, che chiude la FASE 1 di mappatura).
+METODO (ROADMAP §3.4): FDCA è un FORK di DISINTELLIGENZA. NON si rifà la mappatura da zero: si fa UN
+SOLO documento di DIFF che cattura SOLO ciò che è cambiato nel fork rispetto a DISINTELLIGENZA (già
+mappata in 7 card: C1, C2, C4, C5, C9, C10, C12). Questa è l'ULTIMA unità: chiude la FASE 1.
 
-Stato: i PRIMI DUE siti (flagship) COMPLETI; il 3° quasi completo.
-- SimonePizziWebSite: COMPLETO (11). SitoRuntime: COMPLETO (10).
-- DISINTELLIGENZA (festival, SQLite VIVO): DIS-C1, C2, C4, C5, C9, C10 fatte. 27/~30 card totali.
-- Resta: DIS-C12 (questa), poi FDCA-DIFF.
+Stato: TRE siti mappati a fondo, manca solo il diff del fork.
+- SimonePizziWebSite: COMPLETO (11 card). SitoRuntime: COMPLETO (10). DISINTELLIGENZA: COMPLETO (7).
+- 28/~30 card. Resta SOLO FDCA-DIFF. Dopo → FASE 2 (Sintesi).
 
-CONTESTO IMPORTANTE: a differenza degli altri cluster di DIS, il LATO SERVER dell'admin è GIÀ stato
-mappato sparso nelle altre card (stats.php=DIS-C10, settings.php=DIS-C10, users.php=DIS-C2,
-participants.php update_status/update_round=DIS-C10, newsletter.php?send=DIS-C9). Quindi DIS-C12 è
-soprattutto il LATO FRONTEND: come la SPA React mette insieme questi endpoint in una dashboard admin.
-Bisogna quindi guardare src/ (NON solo public/api/). Confronto chiave: SR-C12 ("la dashboard che non
-misura niente", guard-componente, niente AdminLayout/loader) e SPW-C12 (AdminLayout + adminAuthLoader,
-dashboard a 3 livelli con Chart.js, backup/analytics).
+Unità di QUESTA sessione: FDCA-DIFF (differenze del fork) del sito FDCA
+(C:\Users\Utente\Documents\GitHub\SITI-WEB\FDCA). UNA card di DIFF.
 
-Unità di QUESTA sessione: DIS-C12 (Admin Dashboard & Panels) del sito DISINTELLIGENZA
-(C:\Users\Utente\Documents\GitHub\SITI-WEB\DISINTELLIGENZA). UNA card.
+Metodo consigliato per il DIFF (efficiente):
+1. Prima capire COSA è FDCA: leggere README.md, package.json (nome/versione), e la struttura cartelle.
+   Capire se è "Festival della Canzone d'Autore" o simile (acronimo FDCA) — un altro festival.
+2. DIFF STRUTTURALE veloce: confrontare l'elenco di public/api/*.php e src/pages|components di FDCA
+   con quelli di DISINTELLIGENZA (usare find/ls e un grep mirato). Identificare: file aggiunti, file
+   rimossi, file rinominati. Questo dà la mappa del "cosa è cambiato".
+3. DIFF MIRATO sui file chiave già analizzati in DIS (db.php, init_db.php, auth.php, votes.php,
+   participants.php, settings.php, upload.php, newsletter.php, AdminLayout.tsx, Dashboard.tsx): per
+   ognuno, è IDENTICO o MODIFICATO? Citare le differenze concrete (file:linea). NON ri-descrivere ciò
+   che è identico — solo i delta. Se un GOLD di DIS (es. RCE upload pubblico, auth grado-zero, contacts
+   write-only, vote_count denormalizzato, anti-frode IP/24h) è CAMBIATO o RISOLTO nel fork, è il valore
+   principale della card.
+4. Branding/contenuti: FDCA avrà testi/tema diversi (altro festival). Annotare il livello di
+   personalizzazione (solo branding? o anche logica?).
 
-Ambito DIS-C12 (Admin Dashboard & Panels):
-- src/ — trovare il componente Admin/Dashboard e i pannelli: come si fa il guard (componente che
-  controlla check_auth on mount, come SR? o loader/route guard, come SPW? o niente?). Cercare in
-  src/pages, src/components, App routing (vite + react-router?).
-- La DASHBOARD: cosa mostra? stats.php fornisce participants_count/votes_count/top_voted/
-  latest_participants/storage_breakdown → c'è un cruscotto con grafici? contatori? o solo navigazione
-  (come SR)? È "una dashboard che misura" (≠ SR) grazie a stats.php?
-- I PANNELLI admin del festival: gestione partecipanti (lista, approva/rifiuta, toggle round),
-  master switch (settings: voting/registration active+period), compositore newsletter (send + selezione
-  articoli), inbox contatti (lettura tabella contacts — c'è un endpoint GET per leggerli? verificare:
-  in DIS-C9 contact.php fa solo POST, manca un read!), gestione utenti.
-- COERENZA col backend già mappato: collegare ogni pannello UI al suo endpoint (participants.php,
-  settings.php, newsletter.php, users.php, stats.php).
-- NON sconfinare: logica festival=C10 (fatto), auth=C2 (fatto), email=C9 (fatto), upload=C5, content=C4.
-  Qui si mappa la PRESENTAZIONE/orchestrazione admin, non la logica di dominio.
+Ambito FDCA-DIFF: TUTTI i cluster, ma SOLO in termini di differenza vs DIS. Organizzare la card per
+cluster (C1/C2/C4/C5/C9/C10/C12) con una riga "IDENTICO" o l'elenco dei delta per ciascuno.
 
 Fai così:
-1. Ispeziona src/ in modo microscopico (cita sempre percorso/file:linea). Parti da App/routing e dal
-   componente admin.
+1. Ispeziona FDCA in modo mirato (diff vs DIS, cita file:linea).
 2. Compila UNA card in
-   _cantiere-terza-edizione/mappatura/DISINTELLIGENZA/DIS-C12-admin-dashboard.md
-3. §6: confronto a TRE — DIS-C12 vs SR-C12 (console CRUD senza metriche, guard-componente) e SPW-C12
-   (cruscotto analitico, AdminLayout+loader, backup). Dove sta DIS? Ha stats.php → forse una via di
-   mezzo (qualche metrica ma niente Chart.js/analytics/backup-cron?).
-4. Verifica il buco emerso in DIS-C9: i `contacts` si possono LEGGERE da admin? (contact.php è
-   solo-POST). Se non c'è un read, è un dato raccolto e mai mostrato → GOLD.
-5. Puntatori per FDCA-DIFF.
+   _cantiere-terza-edizione/mappatura/FDCA/FDCA-DIFF.md (crea la cartella FDCA/)
+   Struttura suggerita: §1 cos'è FDCA · §2 diff strutturale (file aggiunti/rimossi) · §3 diff per
+   cluster · §4 GOLD: cosa il fork ha cambiato/risolto/peggiorato · §5 cosa resta identico (sintetico).
+3. Verifica in particolare se il fork ha RISOLTO qualcuno dei GOLD di sicurezza di DIS (RCE upload,
+   CSRF, double opt-in, ecc.) — sarebbe il dato più prezioso.
 
-Criterio di STOP: card in stato COMPLETATO.
+Criterio di STOP: card di DIFF in stato COMPLETATO; con essa la FASE 1 (MAPPATURA) è CONCLUSA.
 
 Ciclo di chiusura OBBLIGATORIO a fine sessione:
-- aggiorna _cantiere-terza-edizione/mappatura/_INDICE-MAPPATURA.md (DIS-C12 → ✅, DISINTELLIGENZA COMPLETO)
+- aggiorna _cantiere-terza-edizione/mappatura/_INDICE-MAPPATURA.md (FDCA-DIFF → ✅, FASE 1 COMPLETA)
 - aggiungi UNA riga a _cantiere-terza-edizione/LOG.md (più recente IN BASSO)
-- aggiorna _cantiere-terza-edizione/ROADMAP.md (spunta DIS-C12, aggiorna stato globale)
+- aggiorna _cantiere-terza-edizione/ROADMAP.md (spunta FDCA-DIFF; segnare FASE 1 CONCLUSA, passare a FASE 2)
 - git add/commit/push (un commit) e verifica che locale = origin/main
-- riscrivi QUESTO file (PROSSIMA-SESSIONE.md) con l'ULTIMA unità: FDCA-DIFF (differenze del fork FDCA
-  vs DISINTELLIGENZA: cosa è cambiato), che chiude la FASE 1 di mappatura.
+- riscrivi QUESTO file (PROSSIMA-SESSIONE.md) con la PRIMA unità della FASE 2 — SINTESI: verosimilmente
+  S1 (consolidamento card per-sito → schede tematiche cross-sito) oppure S3 (scaletta/indice globale
+  della Terza Edizione). Proporre il punto di partenza della sintesi.
