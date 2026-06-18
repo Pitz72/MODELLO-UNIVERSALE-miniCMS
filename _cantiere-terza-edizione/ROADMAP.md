@@ -80,8 +80,8 @@ Ordine: prima il flagship contenuti, poi scalabilità, poi festival, infine il d
 ### 3.3 DISINTELLIGENZA (base festival)
 - [x] DIS-C1 Backend Core & Bootstrap — **SQLite VIVO** (db-a-file corrente, non fossile): PDO singleton minimale, zero config/segreti, `.data/` auto-creata, init fossile *parziale* (v0.3.6), versionamento per nomi-file `update_db_*`
 - [ ] DIS-C2 Security & Auth (+ anti-frode voto)
-- [ ] DIS-C4 Content APIs (news/feed)
-- [ ] DIS-C5 Media & Upload
+- [x] DIS-C4 Content APIs (news/podcasts) ┐ *(coppia: 1 sessione, come SR-C4+C5)*
+- [x] DIS-C5 Media & Upload                ┘ — **GOLD: upload pubblico partecipanti + MIME client spoofabile + no PHP-off = catena RCE**
 - [ ] DIS-C9 Newsletter & Email
 - [ ] DIS-C10 Festival Logic (participants/votes/settings)
 - [ ] DIS-C12 Admin Dashboard & Panels
@@ -119,6 +119,6 @@ Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "rac
 
 ## 7. Stato globale
 
-- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1…C5, C7, C8, C9, C12, C13** (SitoRuntime COMPLETO) + **DIS-C1** (aperto il 3° sito). **22/~30 card.** Si prosegue su **DISINTELLIGENZA** (base festival, SQLite vivo).
-- **Prossima unità:** DIS-C2 (Security & Auth + anti-frode voto) di DISINTELLIGENZA, DA SOLA (vedi `PROSSIMA-SESSIONE.md`) — alto valore. Da chiarire in C2: dove/come viene creato l'utente admin (omesso nell'init fossile parziale) ed eventuale password di default; protezione (assente) degli script `update_db_*`.
+- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1…C5, C7, C8, C9, C12, C13** (SitoRuntime COMPLETO) + **DIS-C1, DIS-C4, DIS-C5** (3° sito in corso). **24/~30 card.** Si prosegue su **DISINTELLIGENZA** (base festival, SQLite vivo).
+- **Prossima unità:** DIS-C2 (Security & Auth + anti-frode voto) di DISINTELLIGENZA, DA SOLA (vedi `PROSSIMA-SESSIONE.md`) — alto valore. Da chiarire in C2: dove/come viene creato l'utente admin (omesso nell'init fossile parziale) ed eventuale password di default; assenza di CSRF; gate per-tipo incoerente di `upload.php` (upload pubblico partecipanti); protezione (assente) di `update_db_*`/`migrate_media.php`; anti-frode voto (schema `votes`).
 - **Log completo:** `LOG.md`.

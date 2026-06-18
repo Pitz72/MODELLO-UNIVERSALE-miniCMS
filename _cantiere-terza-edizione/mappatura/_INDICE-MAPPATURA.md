@@ -13,7 +13,7 @@
 - ✅ SR-C12 Admin · ✅ SR-C13 DB Evolution & Incidenti · **(SitoRuntime COMPLETO)**
 
 ## DISINTELLIGENZA
-- ✅ DIS-C1 Backend Core (SQLite vivo) · ⬜ DIS-C2 Security+anti-frode · ⬜ DIS-C4 Content · ⬜ DIS-C5 Media
+- ✅ DIS-C1 Backend Core (SQLite vivo) · ⬜ DIS-C2 Security+anti-frode · ✅ DIS-C4 Content · ✅ DIS-C5 Media (upload pubblico/RCE)
 - ⬜ DIS-C9 Newsletter · ⬜ DIS-C10 Festival Logic · ⬜ DIS-C12 Admin
 
 ## FDCA

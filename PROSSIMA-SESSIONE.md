@@ -9,15 +9,15 @@
 Stiamo lavorando alla TERZA EDIZIONE del manuale miniCMS. Leggi prima
 _cantiere-terza-edizione/ROADMAP.md e _cantiere-terza-edizione/LOG.md per il contesto.
 
-METODO (ROADMAP §0.1): si accorpano nella stessa sessione SOLO coppie di cluster già accoppiati. Per
-DISINTELLIGENZA, dopo aver visto la geografia in DIS-C1, la proposta è: **C2 DA SOLA** (è alto valore
-— auth + anti-frode voto), poi valutare la coppia C4+C9 e tenere C10 (festival logic) da sola. Quindi
-questa sessione è una card SINGOLA: DIS-C2.
+METODO (ROADMAP §0.1): si accorpano nella stessa sessione SOLO coppie di cluster già accoppiati. La
+coppia DIS-C4+C5 è stata fatta (come SR-C4+C5). Restano: **C2 DA SOLA** (alto valore — auth +
+anti-frode voto, QUESTA sessione), poi **C9** (newsletter/contact, leggera) e **C10** (festival logic,
+il cuore) da sola, infine **C12** (admin) e FDCA-DIFF. Questa sessione è una card SINGOLA: DIS-C2.
 
-Stato: i PRIMI DUE siti (i due flagship) sono COMPLETI; il 3° è APERTO.
+Stato: i PRIMI DUE siti (i due flagship) sono COMPLETI; il 3° è in corso.
 - SimonePizziWebSite (flagship contenuti): COMPLETO (11 card).
 - SitoRuntime (flagship scalabilità + incidenti): COMPLETO (10 card).
-- DISINTELLIGENZA (base festival, SQLite VIVO): DIS-C1 fatta. 22/~30 card totali.
+- DISINTELLIGENZA (base festival, SQLite VIVO): DIS-C1, DIS-C4, DIS-C5 fatte. 24/~30 card totali.
 
 CONTESTO da DIS-C1 (leggi la card _cantiere-terza-edizione/mappatura/DISINTELLIGENZA/DIS-C1-backend-core.md):
 DISINTELLIGENZA gira su SQLite vivo, PHP puro, bootstrap inline minimale (no cors.php, no auth_helper
@@ -31,6 +31,11 @@ precisi che vanno chiusi qui:
    rischio in chiave sicurezza.
 3. Schema tab. `votes` (init_db.php:62-70): session_id + ip_address + user_agent → è l'impianto
    anti-doppio-voto. Confrontare con il voter_hash SHA256 di SPW-C11 e con l'anti-frode di SR-C2.
+4. (da DIS-C5) Il gate di `upload.php` è PER-TIPO e incoerente: `type=audio_participant` e `audio`
+   sono PUBBLICI (no auth), con validazione solo sul MIME client + naming che tiene l'estensione +
+   nessun PHP-off su uploads/ = catena RCE documentata in DIS-C5. In C2 inquadrare la sicurezza di
+   questo (è un upload pubblico per le iscrizioni). Anche `migrate_media.php` è non gated.
+   NB: NON è una card di fix — è mappatura/sicurezza (sola lettura sui siti sorgente).
 
 Unità di QUESTA sessione: DIS-C2 (Security & Auth + anti-frode voto) del sito DISINTELLIGENZA
 (C:\Users\Utente\Documents\GitHub\SITI-WEB\DISINTELLIGENZA). UNA card.
