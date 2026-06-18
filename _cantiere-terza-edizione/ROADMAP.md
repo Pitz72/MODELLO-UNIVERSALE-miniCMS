@@ -87,7 +87,7 @@ Ordine: prima il flagship contenuti, poi scalabilità, poi festival, infine il d
 - [x] DIS-C12 Admin Dashboard & Panels — **via di mezzo SR/SPW: AdminLayout (come SPW) + guard-componente (come SR), dashboard che MISURA (stats.php, no Chart.js); GOLD: contacts write-only (mai letti), guard role-blind, reset senza CSRF** — **(DISINTELLIGENZA COMPLETO, 7 card)**
 
 ### 3.4 FDCA (diff)
-- [ ] FDCA-DIFF — differenze rilevanti vs DISINTELLIGENZA (cosa è cambiato nel fork)
+- [x] FDCA-DIFF — **"Festival della Canzone Artificiale", fork di DIS: backend PHP byte-IDENTICO (tutti i GOLD ereditati, RCE inclusa, nessuno risolto); frontend riscritto/ridotto/SCOLLEGATO (no admin, no api.ts, no fetch); re-brand via Google AI Studio; v0.0.1 + ROADMAP-EVOLUZIONE-miniCMS (9 cap)** — **FASE 1 CONCLUSA**
 
 > Stima ~30 sessioni di mappatura. L'elenco è vivo: si aggiungono/splittano card quando il codice lo richiede.
 
@@ -119,6 +119,6 @@ Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "rac
 
 ## 7. Stato globale
 
-- **Fase corrente:** FASE 1 — MAPPATURA quasi completa. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1…C5, C7, C8, C9, C12, C13** (SitoRuntime COMPLETO) + **DIS-C1, C2, C4, C5, C9, C10, C12** (**DISINTELLIGENZA COMPLETO, 7 card**). **28/~30 card.** Resta SOLO **FDCA-DIFF** (ultima unità).
-- **Prossima unità:** FDCA-DIFF — differenze del fork FDCA vs DISINTELLIGENZA (cosa è cambiato nel fork). È l'ULTIMA card e chiude la FASE 1 di mappatura. Vedi `PROSSIMA-SESSIONE.md`. Dopo: FASE 2 (Sintesi: schede cross-sito, inventario, scaletta globale).
+- **Fase corrente:** ✅ **FASE 1 — MAPPATURA CONCLUSA (4 siti, 29 card).** SimonePizziWebSite COMPLETO (11: C1–C9, C11, C12) + SitoRuntime COMPLETO (10: C1–C5, C7–C9, C12, C13) + DISINTELLIGENZA COMPLETO (7: C1, C2, C4, C5, C9, C10, C12) + FDCA-DIFF (1). Si passa alla **FASE 2 — SINTESI**.
+- **Prossima unità:** FASE 2 / S1 — Consolidamento: da card per-sito a **schede tematiche cross-sito** (dedup, pattern comuni, varianti). NB: FDCA non aggiunge pattern (backend=DIS), va trattato come caso "fork/evoluzione". In alternativa partire da S3 (scaletta/indice globale). Vedi `PROSSIMA-SESSIONE.md`.
 - **Log completo:** `LOG.md`.

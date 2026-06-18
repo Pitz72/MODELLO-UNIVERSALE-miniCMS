@@ -17,4 +17,9 @@
 - ✅ DIS-C9 Newsletter & Email (no double opt-in/no token) · ✅ DIS-C10 Festival Logic (cuore: stati/round/voto/settings) · ✅ DIS-C12 Admin (dashboard che misura; contacts write-only; guard role-blind) · **(DISINTELLIGENZA COMPLETO, 7 card)**
 
 ## FDCA
-- ⬜ FDCA-DIFF (vs DISINTELLIGENZA)
+- ✅ FDCA-DIFF (vs DISINTELLIGENZA) — backend PHP byte-identico (tutti i GOLD ereditati, RCE inclusa); frontend riscritto/ridotto/scollegato (no admin, no api.ts, no fetch); re-brand "Canzone Artificiale" via Google AI Studio; v0.0.1 + ROADMAP-EVOLUZIONE-miniCMS · **(FDCA COMPLETO)**
+
+---
+
+## ✅ FASE 1 — MAPPATURA CONCLUSA (4 siti, 29 card)
+SimonePizziWebSite 11 · SitoRuntime 10 · DISINTELLIGENZA 7 · FDCA 1 (diff). → Prossima: FASE 2 (Sintesi).
