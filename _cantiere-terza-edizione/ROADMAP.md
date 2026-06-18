@@ -78,7 +78,7 @@ Ordine: prima il flagship contenuti, poi scalabilità, poi festival, infine il d
 - [x] SR-C13 DB Evolution & Incidenti (MySQL, WAL, emergency) — **alto valore** *(sola)* — **(SitoRuntime COMPLETO, 10 card)**
 
 ### 3.3 DISINTELLIGENZA (base festival)
-- [ ] DIS-C1 Backend Core & Bootstrap
+- [x] DIS-C1 Backend Core & Bootstrap — **SQLite VIVO** (db-a-file corrente, non fossile): PDO singleton minimale, zero config/segreti, `.data/` auto-creata, init fossile *parziale* (v0.3.6), versionamento per nomi-file `update_db_*`
 - [ ] DIS-C2 Security & Auth (+ anti-frode voto)
 - [ ] DIS-C4 Content APIs (news/feed)
 - [ ] DIS-C5 Media & Upload
@@ -119,6 +119,6 @@ Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "rac
 
 ## 7. Stato globale
 
-- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1, SR-C2, SR-C3, SR-C4, SR-C5, SR-C7, SR-C8, SR-C9, SR-C12, SR-C13** (**SitoRuntime COMPLETO, 21/~30 card**). Conclusi i primi 2 siti (i due flagship). Si passa al 3° sito **DISINTELLIGENZA** (base festival, SQLite).
-- **Prossima unità:** DIS-C1 (Backend Core & Bootstrap) di DISINTELLIGENZA, DA SOLA (vedi `PROSSIMA-SESSIONE.md`) — apre il 3° sito. SQLite *vivo* (dove WAL/PRAGMA, fossili in SR-C13, sono ancora il motore reale): primo termine di paragone "dal vivo" del DB a file.
+- **Fase corrente:** FASE 1 — MAPPATURA in corso. Completate: SPW-C1…C9, C11, C12 (SimonePizziWebSite COMPLETO) + **SR-C1…C5, C7, C8, C9, C12, C13** (SitoRuntime COMPLETO) + **DIS-C1** (aperto il 3° sito). **22/~30 card.** Si prosegue su **DISINTELLIGENZA** (base festival, SQLite vivo).
+- **Prossima unità:** DIS-C2 (Security & Auth + anti-frode voto) di DISINTELLIGENZA, DA SOLA (vedi `PROSSIMA-SESSIONE.md`) — alto valore. Da chiarire in C2: dove/come viene creato l'utente admin (omesso nell'init fossile parziale) ed eventuale password di default; protezione (assente) degli script `update_db_*`.
 - **Log completo:** `LOG.md`.

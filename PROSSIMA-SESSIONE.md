@@ -1,7 +1,8 @@
 # PROSSIMA SESSIONE — prompt pronto da incollare
 
 > Aggiornato a fine di ogni sessione. Contiene UNA unità (da 2026-06-15: può essere una COPPIA
-> accorpata di cluster accoppiati — vedi ROADMAP §0.1). Questa volta è una card SINGOLA — l'ULTIMA di SitoRuntime.
+> accorpata di cluster accoppiati — vedi ROADMAP §0.1). Questa volta è una card SINGOLA — DIS-C2,
+> alto valore (auth + anti-frode voto), il 2° passo del 3° sito DISINTELLIGENZA.
 
 ---
 
@@ -9,64 +10,66 @@ Stiamo lavorando alla TERZA EDIZIONE del manuale miniCMS. Leggi prima
 _cantiere-terza-edizione/ROADMAP.md e _cantiere-terza-edizione/LOG.md per il contesto.
 
 METODO (ROADMAP §0.1): si accorpano nella stessa sessione SOLO coppie di cluster già accoppiati. Per
-SitoRuntime le coppie erano C4+C5 (fatta) e C7+C8 (fatta); C9 (fatta), C12 (fatta) e C13 sono DA SOLE.
-Questa sessione è SR-C13 (DB Evolution & Incidenti) DA SOLA: UNA sola card. È l'ULTIMA card di SitoRuntime
-e ha ALTO VALORE — è il cuore del ruolo del sito nel manuale ("flagship scalabilità + problemi/soluzioni").
+DISINTELLIGENZA, dopo aver visto la geografia in DIS-C1, la proposta è: **C2 DA SOLA** (è alto valore
+— auth + anti-frode voto), poi valutare la coppia C4+C9 e tenere C10 (festival logic) da sola. Quindi
+questa sessione è una card SINGOLA: DIS-C2.
 
-Stato: SimonePizziWebSite (flagship contenuti) è COMPLETO. Su SitoRuntime sono fatte SR-C1 (Backend
-Core), SR-C2 (Security & Auth + CORS), SR-C3 (Frontend Bridge & State), la coppia SR-C4 (Content APIs)
-+ SR-C5 (Media & Upload), la coppia SR-C7 (SEO/seo-cache) + SR-C8 (RSS & Feed), SR-C9 (Newsletter &
-Email) e SR-C12 (Admin Dashboard & Panels). Con SR-C13 SitoRuntime SI CHIUDE (10 card) e si passa al 3°
-sito DISINTELLIGENZA (base festival).
+Stato: i PRIMI DUE siti (i due flagship) sono COMPLETI; il 3° è APERTO.
+- SimonePizziWebSite (flagship contenuti): COMPLETO (11 card).
+- SitoRuntime (flagship scalabilità + incidenti): COMPLETO (10 card).
+- DISINTELLIGENZA (base festival, SQLite VIVO): DIS-C1 fatta. 22/~30 card totali.
 
-Per impostare stile e metodo, ricorda l'altissima densità delle card già fatte e il ricco materiale
-"incidenti" già emerso lungo tutta la mappatura di SitoRuntime. Leggi in particolare:
-- _cantiere-terza-edizione/mappatura/SitoRuntime/SR-C1-backend-core.md (db.php singleton MySQL, init_mysql.php
-  schema dedicato, migrate_*/fix_* micro-migrazioni, init_db.php fossile SQLite, incidente fuso/formato-data in
-  debug_time.php — molti puntatori "→C13" partono da qui).
-- _cantiere-terza-edizione/mappatura/SitoRuntime/SR-C9-newsletter-email.md (i TRE schemi subscribers
-  divergenti: init_mysql base 4 col / fix_newsletter_table.php fossile SQLite rotto su MySQL / apply_v293
-  self-healing in admin.php — ponte C13 esplicito) e SR-C5 (storia migratoria raster→WebP: optimize_webp/
-  fix_image_paths, ponte C13) e SR-C12 (l'ASSENZA di backup/cron: il flagship degli incidenti ha la cura
-  emergency_revert_wal ma non la prevenzione — da raccontare in C13).
-- (facoltativo) SPW non ha una card C13 equivalente (in SPW gli incidenti erano sparsi); qui SR-C13 è
-  un capitolo a sé. Per il §6 il confronto è più "SR vs sé stesso nel tempo" che SR vs SPW.
+CONTESTO da DIS-C1 (leggi la card _cantiere-terza-edizione/mappatura/DISINTELLIGENZA/DIS-C1-backend-core.md):
+DISINTELLIGENZA gira su SQLite vivo, PHP puro, bootstrap inline minimale (no cors.php, no auth_helper
+centralizzato), `session_start()` a mano in ogni endpoint. DIS-C1 ha lasciato APERTI per C2 tre fili
+precisi che vanno chiusi qui:
+1. DOVE viene creato l'utente admin? init_db.php lo OMETTE (commento "[Admin creation ignored for
+   brevity in repl]", :85). Cercare se c'è un hardcoded di default (come SR `runtime2026`) o se è
+   creato a mano nel .sqlite.
+2. Gli script update_db_* sono per lo più NON protetti (solo security_move=admin, v0.5.4=login) ed
+   eseguibili in HTTP; il .htaccess di public/ NON li nega (vs deny by-prefix di SR-C2). Valutare il
+   rischio in chiave sicurezza.
+3. Schema tab. `votes` (init_db.php:62-70): session_id + ip_address + user_agent → è l'impianto
+   anti-doppio-voto. Confrontare con il voter_hash SHA256 di SPW-C11 e con l'anti-frode di SR-C2.
 
-Unità di QUESTA sessione: SR-C13 (DB Evolution & Incidenti) del sito SitoRuntime
-(C:\Users\Utente\Documents\GitHub\SITI-WEB\SitoRuntime). UNA card. ULTIMA di SitoRuntime.
+Unità di QUESTA sessione: DIS-C2 (Security & Auth + anti-frode voto) del sito DISINTELLIGENZA
+(C:\Users\Utente\Documents\GitHub\SITI-WEB\DISINTELLIGENZA). UNA card.
 
-Ambito SR-C13 (DB Evolution & Incidenti):
-- migrazione SQLite→MySQL: migrate_to_mysql.php (come copia i dati, COUNT di verifica, gestione errori),
-  init_mysql.php (schema di destinazione), init_db.php (il fossile SQLite con seed 24 speaker), fix_users_table.php
-  (fossile). Racconta l'evoluzione DB storica.
-- INCIDENTI veri: emergency_revert_wal.php (cos'è il WAL, perché un emergency revert, cosa ripristina),
-  migrate_status.php, debug_time.php (l'incidente fuso/formato-data separatore 'T' vs spazio già emerso in
-  C1/C4), eventuali altri debug_*/test_*.php. Ispeziona ogni file e cita file:linea.
-- le micro-migrazioni idempotenti come pattern: apply_v291_status (news.status), apply_v293_newsletter
-  (double opt-in), setup_podcasts.php — la filosofia "ALTER TABLE ADD COLUMN con skip su Duplicate column"
-  e "self-healing dentro admin.php" vs "script one-shot da cancellare".
-- i TRE schemi subscribers divergenti (da SR-C9): consolidali qui come caso-studio "la tabella che nessuno
-  crea due volte uguale".
-- l'ASSENZA di backup/cron emersa in SR-C12: incidente latente (cura senza prevenzione).
-- archeologia: file fossili SQLite rimasti nel repo MySQL (init_db.php, fix_users_table.php,
-  fix_newsletter_table.php), gated .htaccess by-prefix (debug_/migrate_/fix_/init_).
+Ambito DIS-C2 (Security & Auth + anti-frode voto):
+- public/api/auth.php (login/logout/check: già visto il login a password_verify + $_SESSION
+  user_id/username/role; mappare logout, eventuale recovery/reset, gestione sessione).
+- public/api/users.php (gestione utenti admin/editor: CRUD, ruoli, eventuale creazione admin =
+  risposta al filo #1 di sopra).
+- Meccanica di sessione: session_start() per-endpoint, gate $_SESSION['role'] admin/editor (come
+  appare in news.php:17, update_db_security_move.php:8, v0.5.4:8). C'è un cookie config? SameSite/
+  Secure/HttpOnly? session_regenerate_id anti-fixation? CSRF (token? Origin/Referer? — in DIS-C1 NON
+  ho visto né cors.php né header CSRF)?
+- Anti-frode VOTO: la parte di auth/identità del voto (session_id/ip/user_agent in `votes`), rate
+  limiting, dedup. NB: la LOGICA festival completa (conteggi, round, master switch) è C10 — qui solo
+  l'aspetto sicurezza/identità/anti-abuso del voto.
+- .htaccess (public/): già mappato il deny di *.sqlite/*.bak e il routing SEO; qui interessa la
+  parte sicurezza (manca HSTS/CSP/redirect HTTPS? manca il deny degli script update_db_*?).
+- NON sconfinare: bootstrap/db=C1 (fatto), content/news=C4, media=C5, newsletter/contact=C9, festival
+  logic conteggi/round/settings=C10, admin dashboard=C12, feed/podcast=C8.
 
 Fai così:
-1. Ispeziona in modo microscopico i file di C13 (cita sempre percorso/file:linea).
+1. Ispeziona in modo microscopico i file di C2 (cita sempre percorso/file:linea).
 2. Compila UNA card seguendo _TEMPLATE.md e salvala in
-   _cantiere-terza-edizione/mappatura/SitoRuntime/SR-C13-db-evolution-incidenti.md
-3. NON sconfinare: core/DB-bootstrap=C1 (qui solo l'EVOLUZIONE e gli incidenti, non il singleton in sé),
-   security/CORS/auth=C2, frontend=C3, content/slug=C4, media/upload=C5, SEO=C7, RSS=C8, newsletter=C9,
-   admin UI=C12. Puntatori nelle "Note / domande aperte". Consolida QUI i ponti "→C13" lasciati dalle altre card.
-4. §6: qui il confronto è soprattutto storico/interno (SR oggi vs SR nelle migrazioni passate) + nota su
-   come SPW gestiva gli incidenti in modo sparso (niente card C13 dedicata) vs SR che li concentra.
+   _cantiere-terza-edizione/mappatura/DISINTELLIGENZA/DIS-C2-security-auth.md
+3. §6: confronto a TRE — DIS-C2 vs SPW-C2 e SR-C2 (auth + sessioni + CSRF + rate-limit). Asse chiave:
+   quanto si può togliere alla sicurezza quando il sito è piccolo e same-origin (DIS sembra il più
+   spoglio: nessun CSRF token visto, cookie di default). Riusa anche SPW-C11 per il confronto
+   anti-doppio-voto (voter_hash) e SR-C2 per il rate-limit file-based.
+4. Chiudi i 3 fili lasciati aperti da DIS-C1 (admin creation, script non protetti, schema votes).
+5. Lascia puntatori nelle "Note / domande aperte" per C4/C5/C9/C10/C12.
 
 Criterio di STOP: card in stato COMPLETATO (tutte le voci compilate o N/A).
 
 Ciclo di chiusura OBBLIGATORIO a fine sessione:
-- aggiorna _cantiere-terza-edizione/mappatura/_INDICE-MAPPATURA.md (SR-C13 → ✅, segna SitoRuntime COMPLETO)
+- aggiorna _cantiere-terza-edizione/mappatura/_INDICE-MAPPATURA.md (DIS-C2 → ✅)
 - aggiungi UNA riga a _cantiere-terza-edizione/LOG.md (più recente IN BASSO — attento all'ordine cronologico)
-- aggiorna _cantiere-terza-edizione/ROADMAP.md (spunta SR-C13, segna SitoRuntime COMPLETO, aggiorna stato globale)
+- aggiorna _cantiere-terza-edizione/ROADMAP.md (spunta DIS-C2, aggiorna stato globale)
 - git add/commit/push (un commit) e verifica che locale = origin/main
-- riscrivi QUESTO file (PROSSIMA-SESSIONE.md) con la prossima unità: la PRIMA card di DISINTELLIGENZA
-  (festival, SQLite) — verosimilmente DIS-C1 (Backend Core & Bootstrap), DA SOLA. Apri così il 3° sito.
+- riscrivi QUESTO file (PROSSIMA-SESSIONE.md) con la prossima unità: verosimilmente la coppia
+  DIS-C4+DIS-C9 (Content/news + Newsletter/contact), oppure DIS-C10 (Festival Logic) da sola se in
+  C2 emerge che il voto merita una card dedicata tutta sua.

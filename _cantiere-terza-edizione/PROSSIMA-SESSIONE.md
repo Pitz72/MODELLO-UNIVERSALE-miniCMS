@@ -1,8 +1,8 @@
 # PROSSIMA SESSIONE — prompt pronto da incollare
 
 > Aggiornato a fine di ogni sessione. Contiene UNA unità (da 2026-06-15: può essere una COPPIA
-> accorpata di cluster accoppiati — vedi ROADMAP §0.1). Questa volta è una card SINGOLA — la PRIMA
-> del 3° sito DISINTELLIGENZA, che APRE il sito.
+> accorpata di cluster accoppiati — vedi ROADMAP §0.1). Questa volta è una card SINGOLA — DIS-C2,
+> alto valore (auth + anti-frode voto), il 2° passo del 3° sito DISINTELLIGENZA.
 
 ---
 
@@ -10,58 +10,66 @@ Stiamo lavorando alla TERZA EDIZIONE del manuale miniCMS. Leggi prima
 _cantiere-terza-edizione/ROADMAP.md e _cantiere-terza-edizione/LOG.md per il contesto.
 
 METODO (ROADMAP §0.1): si accorpano nella stessa sessione SOLO coppie di cluster già accoppiati. Per
-DISINTELLIGENZA NON sono ancora state definite coppie: la PRIMA card (DIS-C1, backend core) va fatta
-DA SOLA, perché è quella che fissa lo stile/metodo dell'intero sito e perché è ad alta densità (db.php,
-init_db, e — sorpresa — una lunga catena di `update_db_*`). Le eventuali coppie le decideremo DOPO aver
-visto la geografia del sito in C1.
+DISINTELLIGENZA, dopo aver visto la geografia in DIS-C1, la proposta è: **C2 DA SOLA** (è alto valore
+— auth + anti-frode voto), poi valutare la coppia C4+C9 e tenere C10 (festival logic) da sola. Quindi
+questa sessione è una card SINGOLA: DIS-C2.
 
-Stato: i PRIMI DUE siti (i due flagship) sono COMPLETI.
+Stato: i PRIMI DUE siti (i due flagship) sono COMPLETI; il 3° è APERTO.
 - SimonePizziWebSite (flagship contenuti): COMPLETO (11 card).
-- SitoRuntime (flagship scalabilità + incidenti): COMPLETO (10 card: C1, C2, C3, C4, C5, C7, C8, C9, C12, C13).
-Si apre ora il 3° sito: DISINTELLIGENZA (base festival, votazioni/iscrizioni). 21/~30 card totali fatte.
+- SitoRuntime (flagship scalabilità + incidenti): COMPLETO (10 card).
+- DISINTELLIGENZA (base festival, SQLite VIVO): DIS-C1 fatta. 22/~30 card totali.
 
-DIFFERENZA CHIAVE rispetto ai primi due siti: DISINTELLIGENZA gira ancora su SQLITE *VIVO*
-(public/api/database.sqlite presente nel repo, più una cartella DATABASESOLOPERCONSULTAZIONE). Tutto ciò
-che in SitoRuntime SR-C13 era "fossile" (PRAGMA, WAL, sqlite_master, AUTOINCREMENT, datetime()) qui è il
-MOTORE REALE. Questo rende DIS il termine di paragone "dal vivo" del DB-a-file: leggi SR-C13 prima di
-iniziare, ti servirà per il §6 (DIS-C1 vs i due flagship migrati a MySQL).
+CONTESTO da DIS-C1 (leggi la card _cantiere-terza-edizione/mappatura/DISINTELLIGENZA/DIS-C1-backend-core.md):
+DISINTELLIGENZA gira su SQLite vivo, PHP puro, bootstrap inline minimale (no cors.php, no auth_helper
+centralizzato), `session_start()` a mano in ogni endpoint. DIS-C1 ha lasciato APERTI per C2 tre fili
+precisi che vanno chiusi qui:
+1. DOVE viene creato l'utente admin? init_db.php lo OMETTE (commento "[Admin creation ignored for
+   brevity in repl]", :85). Cercare se c'è un hardcoded di default (come SR `runtime2026`) o se è
+   creato a mano nel .sqlite.
+2. Gli script update_db_* sono per lo più NON protetti (solo security_move=admin, v0.5.4=login) ed
+   eseguibili in HTTP; il .htaccess di public/ NON li nega (vs deny by-prefix di SR-C2). Valutare il
+   rischio in chiave sicurezza.
+3. Schema tab. `votes` (init_db.php:62-70): session_id + ip_address + user_agent → è l'impianto
+   anti-doppio-voto. Confrontare con il voter_hash SHA256 di SPW-C11 e con l'anti-frode di SR-C2.
 
-Unità di QUESTA sessione: DIS-C1 (Backend Core & Bootstrap) del sito DISINTELLIGENZA
-(C:\Users\Utente\Documents\GitHub\SITI-WEB\DISINTELLIGENZA). UNA card. PRIMA del sito.
+Unità di QUESTA sessione: DIS-C2 (Security & Auth + anti-frode voto) del sito DISINTELLIGENZA
+(C:\Users\Utente\Documents\GitHub\SITI-WEB\DISINTELLIGENZA). UNA card.
 
-Ambito DIS-C1 (Backend Core & Bootstrap):
-- public/api/db.php (connessione PDO a SQLite: come apre il file, opzioni, singleton? confronto con i
-  due db.php MySQL già mappati). Verifica dove vive il file .sqlite e come viene referenziato.
-- public/api/init_db.php (schema SQLite VIVO + eventuale seed): qui NON è un fossile, è la fonte di
-  verità. Mappa le tabelle del festival (participants/votes/settings/users/news/...) ma SOLO per il
-  bootstrap — la logica festival è C10, news è C4, auth è C2.
-- la catena update_db_*.php (update_db_0_1_3 / 0_1_4 / maintenance / registration / security_move /
-  v0.4.2 / v0.5.4 / voting): è la storia migratoria del sito. In C1 mappa il MECCANISMO di bootstrap e
-  versionamento schema (c'è un registro versioni? un pattern ALTER+skip come SR? nomi con numero di
-  versione?); la cronologia incidenti dettagliata sarà la C13 di DIS (se la apriremo).
-- config/timezone/struttura public/api: prelude di bootstrap (c'è un cors.php condiviso come SR o
-  bootstrap inline come SPW?), gestione errori connessione, eventuale config/segreti. Nota: in root ci
-  sono anche fix_api.cjs/fix_api.js — verifica se toccano il bootstrap o sono build-tooling.
-- NON sconfinare: security/auth=C2, frontend=C3, content/news=C4, media/upload=C5, newsletter=C9,
-  festival logic (participants/votes/settings/reset_votes/stats)=C10, admin=C12, evoluzione DB &
-  incidenti dettagliati=C13. In C1 solo db.php + init_db + il meccanismo di migrazione + bootstrap.
+Ambito DIS-C2 (Security & Auth + anti-frode voto):
+- public/api/auth.php (login/logout/check: già visto il login a password_verify + $_SESSION
+  user_id/username/role; mappare logout, eventuale recovery/reset, gestione sessione).
+- public/api/users.php (gestione utenti admin/editor: CRUD, ruoli, eventuale creazione admin =
+  risposta al filo #1 di sopra).
+- Meccanica di sessione: session_start() per-endpoint, gate $_SESSION['role'] admin/editor (come
+  appare in news.php:17, update_db_security_move.php:8, v0.5.4:8). C'è un cookie config? SameSite/
+  Secure/HttpOnly? session_regenerate_id anti-fixation? CSRF (token? Origin/Referer? — in DIS-C1 NON
+  ho visto né cors.php né header CSRF)?
+- Anti-frode VOTO: la parte di auth/identità del voto (session_id/ip/user_agent in `votes`), rate
+  limiting, dedup. NB: la LOGICA festival completa (conteggi, round, master switch) è C10 — qui solo
+  l'aspetto sicurezza/identità/anti-abuso del voto.
+- .htaccess (public/): già mappato il deny di *.sqlite/*.bak e il routing SEO; qui interessa la
+  parte sicurezza (manca HSTS/CSP/redirect HTTPS? manca il deny degli script update_db_*?).
+- NON sconfinare: bootstrap/db=C1 (fatto), content/news=C4, media=C5, newsletter/contact=C9, festival
+  logic conteggi/round/settings=C10, admin dashboard=C12, feed/podcast=C8.
 
 Fai così:
-1. Ispeziona in modo microscopico i file di C1 (cita sempre percorso/file:linea).
+1. Ispeziona in modo microscopico i file di C2 (cita sempre percorso/file:linea).
 2. Compila UNA card seguendo _TEMPLATE.md e salvala in
-   _cantiere-terza-edizione/mappatura/DISINTELLIGENZA/DIS-C1-backend-core.md
-   (crea la cartella DISINTELLIGENZA/ dentro mappatura/ — è la prima card del sito).
-3. §6: confronto a TRE — DIS-C1 (SQLite vivo) vs SPW-C1 e SR-C1 (entrambi MySQL migrati). Il valore è
-   "il sito che NON ha migrato": come appare il DB-a-file quando è ancora la scelta corrente, non un
-   fossile. Riusa la cronologia SR-C13 (WAL/PRAGMA) come specchio.
-4. Lascia puntatori nelle "Note / domande aperte" per C2/C4/C5/C9/C10/C12/C13.
+   _cantiere-terza-edizione/mappatura/DISINTELLIGENZA/DIS-C2-security-auth.md
+3. §6: confronto a TRE — DIS-C2 vs SPW-C2 e SR-C2 (auth + sessioni + CSRF + rate-limit). Asse chiave:
+   quanto si può togliere alla sicurezza quando il sito è piccolo e same-origin (DIS sembra il più
+   spoglio: nessun CSRF token visto, cookie di default). Riusa anche SPW-C11 per il confronto
+   anti-doppio-voto (voter_hash) e SR-C2 per il rate-limit file-based.
+4. Chiudi i 3 fili lasciati aperti da DIS-C1 (admin creation, script non protetti, schema votes).
+5. Lascia puntatori nelle "Note / domande aperte" per C4/C5/C9/C10/C12.
 
 Criterio di STOP: card in stato COMPLETATO (tutte le voci compilate o N/A).
 
 Ciclo di chiusura OBBLIGATORIO a fine sessione:
-- aggiorna _cantiere-terza-edizione/mappatura/_INDICE-MAPPATURA.md (DIS-C1 → ✅)
+- aggiorna _cantiere-terza-edizione/mappatura/_INDICE-MAPPATURA.md (DIS-C2 → ✅)
 - aggiungi UNA riga a _cantiere-terza-edizione/LOG.md (più recente IN BASSO — attento all'ordine cronologico)
-- aggiorna _cantiere-terza-edizione/ROADMAP.md (spunta DIS-C1, aggiorna stato globale)
+- aggiorna _cantiere-terza-edizione/ROADMAP.md (spunta DIS-C2, aggiorna stato globale)
 - git add/commit/push (un commit) e verifica che locale = origin/main
-- riscrivi QUESTO file (PROSSIMA-SESSIONE.md) con la prossima unità: verosimilmente DIS-C2 (Security &
-  Auth + anti-frode voto), DA SOLA — oppure, se in DIS-C1 emergono coppie naturali, proponile.
+- riscrivi QUESTO file (PROSSIMA-SESSIONE.md) con la prossima unità: verosimilmente la coppia
+  DIS-C4+DIS-C9 (Content/news + Newsletter/contact), oppure DIS-C10 (Festival Logic) da sola se in
+  C2 emerge che il voto merita una card dedicata tutta sua.
