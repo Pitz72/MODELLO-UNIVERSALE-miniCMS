@@ -1,96 +1,111 @@
-# CAPITOLO 3: Database Strategy (v1.2 - ADVANCED)
+# CAPITOLO 3: Database Strategy (Terza Edizione)
 
-Il database è il cuore pulsante del miniCMS. Questa sezione definisce le strategie di ottimizzazione, integrità e migrazione per garantire performance "zero-latency" anche su hosting condivisi.
+Il database è il cuore del miniCMS. Questo capitolo definisce le strategie di connessione, integrità e migrazione, distinguendo con cura due cose che è facile confondere: ciò che il Modello **raccomanda** e ciò che i siti reali **fanno davvero**. Non sempre coincidono, e dirlo apertamente è più utile che spacciare una prescrizione per una fotografia.
 
-## 1. Architettura di Connessione (Agnostic PDO)
-Il sistema utilizza un wrapper PDO che astrae il motore sottostante.
+## 1. Architettura di Connessione (PDO, un motore alla volta)
 
-### 1.1 Configurazione Ottimale SQLite
-Per evitare il problema dei "file lock" comuni su Apache/PHP, il Modello Universale impone:
-- **Journal Mode: DELETE**: Più lento di WAL ma infinitamente più stabile su hosting condivisi dove il locking del file system è imprevedibile.
-- **Busy Timeout**: Impostato a 5000ms per gestire tentativi di scrittura simultanei (es. Newsletter + Admin).
+Il sistema usa PDO con un singleton memoizzato (la connessione si apre una sola volta per richiesta, Capitolo 5). Il motore sotto, però, non è astratto: SQLite e MySQL aprono la connessione con opzioni diverse, e i tre siti le scelgono su tre livelli.
+
+### 1.1 Le opzioni di connessione: la fotografia
+
+Prima della prescrizione, cosa accade nel codice reale. I tre siti impostano set di opzioni PDO di crescente paranoia, e questo è un buon esempio della scala a tre gradini del Capitolo 1.
+
+| Sito | Motore | Opzioni PDO reali |
+|---|---|---|
+| **DISINTELLIGENZA** | SQLite (vivo) | **solo** `ERRMODE=EXCEPTION` + `DEFAULT_FETCH_MODE=ASSOC`, via `setAttribute()`. Nessun `PRAGMA` nel `connect()`. |
+| **SimonePizziWebSite** | MySQL | `ERRMODE` + `FETCH` + `EMULATE_PREPARES=false` (prepared statement veri) |
+| **SitoRuntime** | MySQL | `ERRMODE` + `FETCH` + `ATTR_TIMEOUT=5` + `MYSQL_ATTR_INIT_COMMAND` (`SET NAMES`) |
+
+Il dato che sorprende è la prima riga: l'unico sito che oggi gira **davvero** su SQLite (DISINTELLIGENZA) non imposta nessuno dei `PRAGMA` «ottimali» che la maggior parte dei manuali dà per scontati. Apre il file e basta, con due sole opzioni. È una scelta minimale che funziona per il suo carico, ma non è la configurazione più robusta possibile, ed è il motivo per cui la prescrizione che segue va presa per quello che è: un consiglio, non una descrizione del codice esistente.
+
+### 1.2 Le opzioni di connessione: la prescrizione
+
+Per un deploy SQLite su hosting condiviso, il Modello raccomanda tre `PRAGMA` in aggiunta alle opzioni base:
 
 ```php
-// In db.php
+// RACCOMANDATO per SQLite su hosting condiviso (non è ciò che DIS imposta oggi)
 self::$pdo = new PDO("sqlite:" . $dbPath);
-self::$pdo->exec("PRAGMA journal_mode=DELETE;");
-self::$pdo->exec("PRAGMA busy_timeout=5000;");
-self::$pdo->exec("PRAGMA foreign_keys = ON;");
+self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+self::$pdo->exec("PRAGMA journal_mode = DELETE;");   // più stabile di WAL su hosting condiviso
+self::$pdo->exec("PRAGMA busy_timeout = 5000;");     // attende invece di fallire sotto scrittura concorrente
+self::$pdo->exec("PRAGMA foreign_keys = ON;");       // integrità referenziale (off di default in SQLite)
 ```
 
-**⚠️ Perché DELETE e non WAL**: SitoRuntime ha tentato di usare `journal_mode=WAL` in produzione per migliorare le performance sotto carico. Il WAL ha causato problemi gravi su hosting condiviso Apache: il file di lock `.sqlite-wal` rimaneva "appeso" corrompendo le letture. È stato necessario uno script di emergenza (`emergency_revert_wal.php`) per tornare a DELETE. **Questa è la lezione: usare sempre DELETE mode su hosting condiviso.**
+Il `busy_timeout` a 5000ms fa aspettare una scrittura concorrente invece di farla fallire subito (utile quando newsletter e admin scrivono insieme). Il `foreign_keys = ON` serve perché SQLite, a differenza di MySQL, lascia le chiavi esterne disattivate per default. Ma la riga che porta una cicatrice è la prima.
 
-### 1.2 Auto-Scaffolding della Cartella .data
-La classe `Database` in **SimonePizziWebSite** integra la creazione automatica della cartella `.data/` e del relativo `.htaccess` di protezione direttamente nella connessione lazy:
+> [!WARNING]
+> **Perché `DELETE` e non `WAL`: la lezione arriva da un incidente**
+> SitoRuntime, quando ancora girava su SQLite, ha provato a usare `journal_mode = WAL` in produzione per migliorare le prestazioni sotto carico. Su hosting condiviso Apache il WAL ha fatto danni: il file di lock `.sqlite-wal` restava appeso e corrompeva le letture. È servito uno script d'emergenza (`emergency_revert_wal.php`) per tornare a `DELETE`, e poco dopo quel disastro ha spinto la migrazione a MySQL (la storia completa è al Capitolo 15). La lezione, valida per chi resta su SQLite: su hosting condiviso scegli `DELETE`, non `WAL`. È una raccomandazione nata da un guasto vero, non una preferenza di stile.
+
+### 1.3 Nascondere il database-a-file (solo SQLite)
+
+Chi usa SQLite ha un problema che chi usa MySQL non ha: il database è un file dentro le cartelle del sito, e un file raggiungibile via web è il database intero scaricabile da chiunque. La difesa, in **DISINTELLIGENZA**, è generata a runtime dal codice di connessione: alla prima `connect()`, se la cartella `.data/` non esiste, viene creata e ci si scrive dentro un `.htaccess` di `Deny from all`.
 
 ```php
-public static function connect() {
-    if (self::$pdo === null) {
-        $dbPath = __DIR__ . '/.data/database.sqlite';
-        $dir    = dirname($dbPath);
-
-        // Crea la cartella se non esiste
-        if (!is_dir($dir)) {
-            mkdir($dir, 0777, true);
-        }
-
-        // Protezione immediata con .htaccess
-        $htaccessPath = $dir . '/.htaccess';
-        if (!file_exists($htaccessPath)) {
-            file_put_contents($htaccessPath, "Require all denied\n");
-        }
-
-        try {
-            self::$pdo = new PDO('sqlite:' . $dbPath);
-            self::$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            self::$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
-            self::$pdo->exec('PRAGMA journal_mode = DELETE;');
-            self::$pdo->exec('PRAGMA foreign_keys = ON;');
-        } catch (PDOException $e) {
-            http_response_code(500);
-            echo json_encode(['status' => 'error', 'message' => 'Database connection failed']);
-            exit;
-        }
-    }
-    return self::$pdo;
+// DISINTELLIGENZA db.php — la protezione del DB-a-file è creata dall'app, non pre-deployata
+$dir = dirname($dbPath);                                  // .../.data
+if (!is_dir($dir)) mkdir($dir, 0755, true);
+$htaccessPath = $dir . '/.htaccess';
+if (!file_exists($htaccessPath)) {
+    file_put_contents($htaccessPath, "Require all denied\n");   // seconda rete: <Files> nel .htaccess globale
 }
 ```
 
-## 2. Indicizzazione Strategica (Performance Engineering)
-Le query di lettura devono essere istantanee. Il Modello Universale impone la creazione dei seguenti indici:
+Questo pattern appartiene ai siti SQLite, non a quelli su MySQL. SimonePizziWebSite e SitoRuntime sono migrati a MySQL: non hanno alcuna cartella `.data/` con il database dentro, perché i loro dati vivono sul server MySQL, fuori dalla docroot per natura. Generare la protezione a runtime, anziché affidarla a un file committato, ha una ragione concreta che ritorna al Capitolo 14: lo script di build può rimuovere la cartella `.data/` dalla distribuzione, e con essa l'`.htaccess` di deny, che quindi non arriverebbe mai sul server.
+
+---
+
+## 2. Indicizzazione Strategica
+
+Le query di lettura devono essere istantanee. Il Modello prevede questi indici:
 
 | Tabella | Colonna | Tipo | Scopo |
 | :--- | :--- | :--- | :--- |
 | `news` / `articles` | `slug` | UNIQUE | Ricerca articolo via URL (SEO) |
 | `news` / `articles` | `published_at` | DESC | Ordinamento cronologico veloce |
-| `news` / `articles` | `status` | INDEX | Filtraggio Bozza/Pubblicato |
+| `news` / `articles` | `status` | INDEX | Filtraggio bozza/pubblicato |
 | `speakers` | `sort_order` | ASC | Ordinamento manuale trascinabile |
 | `podcasts` | `slug` | UNIQUE | Accesso rapido alle serie |
 | `projects` | `category` | INDEX | Filtraggio per categoria portfolio |
 | `projects` | `sort_order` | ASC | Ordinamento manuale portfolio |
 
-**Comando di Manutenzione**: Periodicamente (o dopo caricamenti massivi) deve essere eseguito `ANALYZE;` per ricalcolare le statistiche di accesso e ottimizzare il piano di esecuzione delle query.
-
-## 3. Ciclo di Vita delle Migrazioni (Safe-Schema Update)
-Le modifiche allo schema devono essere atomiche e reversibili.
-- **Atomicità**: Ogni script di migrazione deve utilizzare le transazioni (`beginTransaction`).
-- **Idempotenza**: Lo script deve verificare l'esistenza di colonne o tabelle prima di tentare la creazione (`IF NOT EXISTS`, `PRAGMA table_info`).
-- **Protezione**: Gli script di migrazione (`update_db_vX.X.X.php`) devono essere protetti da controllo sessione admin per evitare esecuzioni non autorizzate.
-- **Nomenclatura**: Il pattern di naming dei siti reali: `update_db_v0.4.2.php`, `update_db_v0.5.4.php`. Numerazione semantica (Major.Minor.Patch) allineata alla versione del progetto in `package.json`.
-
-## 4. Normalizzazione Dati (The "Round" Rule)
-Per evitare errori di precisione nei calcoli (es. durata podcast o bitrate), il sistema impone la normalizzazione lato backend prima del salvataggio:
-- **Date**: Formato ISO 8601 (`Y-m-d H:i:s`) per compatibilità SQL e JS.
-- **Numerici**: Interi puri o arrotondati a zero decimali per evitare bug di virgola mobile tra PHP e SQLite.
-- **Booleani**: Sempre `INTEGER` in SQLite (`0` o `1`). In MySQL `TINYINT(1)`.
-
-## 5. Manutenzione e Integrità
-- **VACUUM**: Da eseguire mensilmente o post-cancellazione massiva per ricostruire il file database e ridurne il peso fisico.
-- **Backup**: Ogni operazione di migrazione deve essere preceduta da una copia fisica del file `.sqlite` in una cartella di backup protetta.
-- **optimize_db.php**: SitoRuntime include uno script dedicato alla manutenzione (`VACUUM`, `ANALYZE`, verifica integrità) eseguibile manualmente dall'admin.
-
-## 6. Quando Passare a MySQL
-Vedi Capitolo 15 per la storia completa e il processo di migrazione. In sintesi: rimani su SQLite finché il traffico è gestibile (< 50 scritture/ora) e non ci sono vincoli di hosting. La migrazione è documentata con script reali, testati in produzione.
+Dopo caricamenti massivi è utile eseguire `ANALYZE;` per ricalcolare le statistiche di accesso e ottimizzare il piano delle query.
 
 ---
-*Prossimo Capitolo: Frontend Dependencies - La matrice delle dipendenze, le regole di scelta e il costo di ogni libreria.*
+
+## 3. Ciclo di Vita delle Migrazioni
+
+Le modifiche allo schema devono essere atomiche, idempotenti e protette. Sono i requisiti; i siti reali li rispettano in modo diseguale, e la differenza conta.
+
+- **Atomicità**: ogni migrazione usa una transazione (`beginTransaction`).
+- **Idempotenza**: lo script verifica l'esistenza di colonne o tabelle prima di crearle (`IF NOT EXISTS`, `PRAGMA table_info`), così rieseguirlo non rompe niente.
+- **Protezione**: gli script di migrazione **dovrebbero** essere irraggiungibili da web non autenticato. Qui la realtà diverge: SitoRuntime li nega per prefisso nel `.htaccess` o li tiene dentro `admin.php` (gated), mentre DISINTELLIGENZA lascia i suoi `update_db_*.php` e `migrate_media.php` raggiungibili in HTTP senza gate. È un debito di sicurezza reale (Capitolo 15), non un dettaglio.
+- **Nomenclatura**: nessun sito ha una tabella `schema_version`. La versione vive nei **nomi dei file** (`update_db_v0.4.2.php`, `update_db_v0.5.4.php`), allineati alla versione in `package.json`. La storia delle migrazioni si legge dalla cartella, non da un registro nel database.
+
+---
+
+## 4. Normalizzazione dei Dati
+
+Per evitare incoerenze tra PHP, JS e il database, il Modello normalizza prima del salvataggio:
+- **Date**: formato `Y-m-d H:i:s` per compatibilità SQL e JS. Attenzione al fuso: il confronto di visibilità `published_at <= NOW` è fatto su stringhe, e una data scritta con il separatore sbagliato sposta la soglia (Capitolo 5 e Capitolo 9).
+- **Numerici**: interi o arrotondati a zero decimali, per evitare i bug di virgola mobile.
+- **Booleani**: `INTEGER` (0 o 1) in SQLite, `TINYINT(1)` in MySQL.
+
+---
+
+## 5. Manutenzione e Integrità
+
+- **VACUUM**: da eseguire dopo cancellazioni massive per ricompattare il file e ridurne il peso (rilevante su SQLite).
+- **Backup**: ogni migrazione **dovrebbe** essere preceduta da una copia del database in una cartella protetta. Anche qui la realtà non è uniforme: SimonePizziWebSite ha un backup automatico fuori docroot, DISINTELLIGENZA fa una copia `.bak` prima delle azioni distruttive, SitoRuntime (il sito che ha sofferto il crash) non ha alcun backup automatico. Il paradosso «cura senza prevenzione» è al Capitolo 14.
+- **`optimize_db.php`**: SitoRuntime include uno script di manutenzione (`VACUUM`, `ANALYZE`, verifica integrità); nonostante l'intestazione «usa e getta» è in realtà non distruttivo (aggiunge solo indici idempotenti).
+
+---
+
+## 6. Quando Passare a MySQL
+
+La storia completa, con gli script reali, è al Capitolo 15. Un punto va chiarito subito, perché è una mezza verità diffusa: la migrazione di SitoRuntime **non** è stata decisa da una soglia di traffico raggiunta con calma. È stata la reazione a un incidente (il crash del WAL della notte) che ha reso SQLite improvvisamente inaffidabile su quell'hosting. La soglia non era un numero su un grafico, era un database corrotto alle tre di notte.
+
+Il contrappunto è altrettanto istruttivo: DISINTELLIGENZA, un festival con votazioni pubbliche, gira **ancora oggi su SQLite** in produzione, senza problemi. SQLite non è un gradino da abbandonare appena possibile: è la scelta giusta finché regge, e «finché regge» dipende dal carico e dall'hosting, non da una regola universale. Si passa a MySQL quando un vincolo concreto lo impone, non per scaramanzia.
+
+---
+*Prossimo Capitolo: Frontend Dependencies. La matrice delle dipendenze, le regole di scelta e il costo di ogni libreria.*
