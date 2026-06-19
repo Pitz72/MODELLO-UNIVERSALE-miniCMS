@@ -1,5 +1,11 @@
 # CAPITOLO 1: Manifesto (Terza Edizione)
 
+> *A Valerio Galano, perché lui è come Neo, vede mondi nel codice e mi ha insegnato a ragionare in un modo diverso. Chissà se un po' anche io gli ho insegnato qualcosa.*
+>
+> *A Giuseppe Pugliese che, anche se vede il mondo in un modo tutto suo, ritiene sia un orgoglio essere uno sviluppatore web e persevera nella sua arte con passione.*
+
+---
+
 ## Perché Esiste Questo Protocollo
 
 Esiste una tensione irrisolta al centro dello sviluppo web moderno.
@@ -10,7 +16,7 @@ Dall'altro lato, questa rivoluzione ha portato con sé una complessità infrastr
 
 Questo protocollo nasce da una domanda precisa: **è possibile avere la potenza estetica e tecnica di React senza abbandonare la semplicità, il controllo e l'economicità di un backend PHP con SQLite?**
 
-La risposta, costruita su anni di lavoro reale su progetti reali, è sì.
+La risposta, costruita su mesi di lavoro reale su progetti reali, è sì.
 
 ---
 
@@ -48,6 +54,24 @@ Non è per chi vuole un sito in dieci minuti. È per chi vuole capire cosa sta c
 
 ---
 
+## Quando NON Usare Questo Protocollo
+
+Un manifesto onesto deve dire anche dove finisce. Il Thin Stack scambia la complessità dell'infrastruttura con la disciplina di chi lo scrive: toglie il framework e mette al suo posto la tua attenzione. Quando quel baratto non conviene, conviene un altro stack. Ecco i casi in cui sceglierei altro senza esitare.
+
+**Quando il team è grande.** Le convenzioni qui non sono imposte da un framework, sono tenute insieme dalle persone. Con uno o due sviluppatori funziona; oltre i quattro o cinque, l'assenza di una struttura rigida diventa un costo, non una libertà, e un framework opinionato (Laravel, Next.js con le sue regole) ripaga la curva di apprendimento.
+
+**Quando serve il tempo reale.** Chat dal vivo, notifiche push istantanee, presenza, collaborazione simultanea su uno stesso documento: sono carichi che vogliono WebSocket e processi persistenti, non il modello richiesta-risposta di PHP su hosting condiviso. Si possono forzare, ma è la strada in salita.
+
+**Quando la scala è davvero alta.** Decine di migliaia di richieste al secondo, picchi imprevedibili, necessità di scalare orizzontalmente su più nodi: qui servono code, cache distribuite e database gestiti. Il Capitolo 3 mette dei numeri concreti sotto questa frase, così la soglia non resta un'opinione.
+
+**Quando i dati sono complessi e molto relazionali.** Transazioni distribuite, reportistica analitica pesante, modelli con decine di entità interconnesse: a un certo punto un ORM e un RDBMS ingegnerizzato non sono overhead, sono lo strumento giusto.
+
+**Quando la conformità è un requisito esplicito.** Audit formali, certificazioni, ambienti regolati che pretendono framework e librerie con supporto commerciale e una catena di responsabilità documentata: il fai-da-te disciplinato, qui, è un rischio che non vale la pena correre.
+
+La regola che tiene insieme questi casi è semplice: il Thin Stack è eccellente finché la complessità del problema sta sotto la complessità che un framework imporrebbe. Quando la supera, il framework smette di essere un peso e diventa una rete. Riconoscere quel punto di sorpasso è parte della stessa onestà tecnica che attraversa il resto del libro.
+
+---
+
 ## I Valori che Guidano Ogni Decisione
 
 **Controllo totale.** Chi costruisce un sito con questo protocollo possiede ogni riga del suo stack. Nessun vendor lock-in, nessun aggiornamento forzato che rompe la produzione, nessuna dipendenza da un servizio esterno per la sopravvivenza del sito.
@@ -78,6 +102,20 @@ A chiunque creda che il web possa essere ancora un posto fatto da persone, per p
 
 ---
 
+## Due Voci: «Dal vivo» e «Il Canone»
+
+Questo manuale fa una cosa che la maggior parte dei testi tecnici evita: mostra il codice reale com'è, non come dovrebbe essere. È la sua forza, ma può confondere, perché in una stessa pagina convivono due cose diverse, e vanno tenute distinte.
+
+La prima voce è **«dal vivo»**: la fotografia di cosa fanno davvero i quattro siti. Qui ci sono le scelte buone e anche le cicatrici, gli anti-pattern, le falle lasciate aperte. Quando il testo racconta che un sito salva l'HTML grezzo senza sanitizzarlo, o espone uno script di migrazione, non lo sta raccomandando: lo sta documentando. È il corpo di ogni capitolo, ed è scritto senza sconti proprio perché la cicatrice insegna più della teoria.
+
+La seconda voce è **«il Canone»**: la regola da seguire, distillata. Ogni capitolo si chiude con un riquadro intitolato **Il Canone**, che separa nettamente la prescrizione dalla fotografia. Lì trovi cosa fare in un progetto nuovo, ripulito dalle imperfezioni dei casi reali. Se hai dieci secondi e vuoi solo la norma, leggi quel riquadro; se vuoi capire *perché* la norma è quella, leggi il capitolo che lo precede.
+
+> [!NOTE]
+> **La regola di lettura, in una riga**
+> Il corpo del capitolo dice cosa il codice *fa* («dal vivo»); il riquadro finale dice cosa tu *dovresti* fare («il Canone»). Quando i due divergono, ha sempre ragione il Canone: la divergenza è il punto, non un errore di stampa.
+
+---
+
 ## Come Usare Questo Manuale
 
 Il manuale è organizzato in capitoli tematici indipendenti. Non è necessario leggerlo dall'inizio alla fine: ogni capitolo è una reference autonoma.
@@ -89,6 +127,16 @@ Per migliorare un progetto esistente, i capitoli specifici (Database Strategy, S
 Per imparare dalla storia, i capitoli con la voce esperienziale (il crash del WAL, l'attacco dei bot su Runtime Radio, la migrazione a MySQL) sono la lettura più onesta che questo manuale può offrire.
 
 Il codice non mente. Le cicatrici nemmeno.
+
+---
+
+> [!IMPORTANT]
+> **Il Canone**
+> - Separa i due piani: React compilato per la presentazione, PHP nativo con PDO per i dati, un contratto REST tra loro.
+> - Scegli il gradino giusto della scala (SQLite grado-zero → MySQL essenziale → MySQL ingegnerizzato), mai più di quanto serve.
+> - Tratta la sicurezza come architettura, non come patch, e diffida dell'equazione «più strati uguale più sicuro».
+> - Documenta com'è il codice, non com'è bello: la cicatrice insegna più della teoria.
+> - Usa il Thin Stack finché la complessità del problema resta sotto quella che un framework imporrebbe; superato quel punto, scegli il framework.
 
 ---
 
