@@ -153,7 +153,7 @@ In DIS le mutazioni sono protette dal solo cookie di sessione. Un grep su tutta 
 ## 4. Il cookie di sessione e l'anti session-fixation
 
 > [!NOTE]
-> **Correzione rispetto alla Seconda Edizione.** La vecchia §1.1 presentava come prescrizione un cookie con `cookie_secure = 1` e `cookie_samesite = 'Lax'`. Due cose vanno corrette guardando il codice reale: il `SameSite` effettivo di chi lo imposta è `Strict`, non `Lax` (sia SPW sia SR); e solo SPW imposta davvero tutti e tre i flag.
+> **Un errore comune sui cookie di sessione.** Verrebbe da prescrivere un cookie con `cookie_secure = 1` e `cookie_samesite = 'Lax'`. Guardando il codice reale, due cose vanno corrette: il `SameSite` giusto, e quello che i siti usano davvero, è `Strict`, non `Lax` (sia SPW sia SR); e solo SPW imposta davvero tutti e tre i flag.
 
 I flag vanno impostati prima di `session_start()`, altrimenti non hanno effetto sul cookie corrente. È qui che la scala si vede meglio.
 
@@ -212,7 +212,7 @@ if (isset($_SESSION['user_id'])) {
 ```
 
 > [!NOTE]
-> **Correzione rispetto alla Seconda Edizione.** L'esempio precedente leggeva `$_SESSION['username']` come se fosse sempre presente. In SR non lo è: il login salva `user_id` e `role` ma non `username` (`admin.php:123-124`). La conseguenza è concreta: `check_auth` restituisce `username: null`, e il salvataggio articolo ripiega su `author = $_SESSION['username'] ?? 'Admin'`. In SPW e DIS lo `username` è in sessione e l'esempio regge. Non è un buco di sicurezza, ma un'incoerenza di stato reale: lo stesso campo non è garantito su tutti e tre i siti.
+> **Lo `username` non è garantito in sessione.** Verrebbe da leggere `$_SESSION['username']` come se fosse sempre presente. In SR non lo è: il login salva `user_id` e `role` ma non `username` (`admin.php:123-124`). La conseguenza è concreta: `check_auth` restituisce `username: null`, e il salvataggio articolo ripiega su `author = $_SESSION['username'] ?? 'Admin'`. In SPW e DIS lo `username` è in sessione e l'esempio regge. Non è un buco di sicurezza, ma un'incoerenza di stato reale: lo stesso campo non è garantito su tutti e tre i siti.
 
 ---
 
@@ -221,7 +221,7 @@ if (isset($_SESSION['user_id'])) {
 L'hashing è l'unico punto in cui i tre siti sono identici e tutti corretti: `password_hash($pass, PASSWORD_DEFAULT)` alla creazione, `password_verify` alla verifica. Il sistema non conosce mai la password in chiaro, e l'algoritmo può evolvere (da bcrypt ad argon2) senza che si tocchi una riga di codice.
 
 > [!NOTE]
-> **Correzione rispetto alla Seconda Edizione.** La vecchia §3 riduceva la difesa brute-force a un `sleep(1)`. È incompleta e tarata su SR. Il `sleep(1)` è solo un accorgimento di SR; la difesa vera è il lockout, e soprattutto conta da quale IP lo si misura.
+> **La difesa brute-force non è un `sleep(1)`.** Verrebbe da ridurre la difesa brute-force a un `sleep(1)`, ma è una soluzione incompleta e tarata sul solo SR. Il `sleep(1)` è appena un accorgimento; la difesa vera è il lockout, e soprattutto conta da quale IP lo si misura.
 
 La domanda non è «come rallento i tentativi» ma dove vive il contatore. Tre risposte. SPW lo tiene in una tabella DB `login_attempts`: dopo 5 tentativi falliti da un IP in 15 minuti scatta il `429`, e al login riuscito il contatore si azzera.
 

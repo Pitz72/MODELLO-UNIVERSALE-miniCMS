@@ -7,7 +7,7 @@ Ma questo capitolo ha una lente precisa, ed è la chiusura di un filo. Al CAP 8 
 E proprio perché sulla sicurezza i tre siti convergono, è interessante quanto divergano su tutto il resto. La geografia va da un file unico a un trittico di file con ruoli opposti, fino a un feed che non è nemmeno di notizie ma di podcast. E sulla disciplina del GUID si vede una piccola storia di regressione: una buona idea risolta da un sito e dimenticata dagli altri due.
 
 > [!NOTE]
-> **Correzioni rispetto alla Seconda Edizione.** Tre punti del capitolo precedente erano sbagliati o fuorvianti. Il **feed podcast non è di SitoRuntime ma di DISINTELLIGENZA**: SR non genera un feed podcast, *consuma* quelli esterni con un proxy (§4). Il **catch vuoto** era insegnato come «fallback silenzioso» virtuoso: è invece un anti-pattern, perché serve un feed troncato con HTTP 200 (§7). E **`feed.php` non è un «alias»** di `rss.php`: è il feed podcast di DIS, un endpoint con tutt'altro scopo (§3).
+> **Tre malintesi diffusi su questi feed.** Tre punti, spesso dati per scontati, sono in realtà sbagliati o fuorvianti. Il **feed podcast non è di SitoRuntime ma di DISINTELLIGENZA**: SR non genera un feed podcast, *consuma* quelli esterni con un proxy (§4). Il **catch vuoto** viene a volte insegnato come «fallback silenzioso» virtuoso: è invece un anti-pattern, perché serve un feed troncato con HTTP 200 (§7). E **`feed.php` non è un «alias»** di `rss.php`: è il feed podcast di DIS, un endpoint con tutt'altro scopo (§3).
 
 ---
 
@@ -78,7 +78,7 @@ SPW è un file solo, `rss.php`: feed di notizie, minimale e rigoroso. SR è un t
 
 > [!NOTE]
 > **Produrre un feed podcast, o consumarne uno: non è la stessa cosa**
-> Qui la Seconda Edizione si confondeva. Il sito che *genera* un feed podcast è DIS, con `feed.php`: legge la tabella `podcasts` ed emette gli episodi con `<enclosure>` audio e i tag `<itunes:*>`. SR fa l'opposto: non genera nessun feed podcast, ma con `rss.php` *scarica* i feed podcast altrui (Spreaker, il suo AzuraCast) per mostrarli sul sito. Produrre e consumare un feed sono due operazioni speculari, ed è proprio il contrasto tra questi due siti a renderlo evidente. Lo vediamo al paragrafo seguente.
+> È un punto facile da confondere. Il sito che *genera* un feed podcast è DIS, con `feed.php`: legge la tabella `podcasts` ed emette gli episodi con `<enclosure>` audio e i tag `<itunes:*>`. SR fa l'opposto: non genera nessun feed podcast, ma con `rss.php` *scarica* i feed podcast altrui (Spreaker, il suo AzuraCast) per mostrarli sul sito. Produrre e consumare un feed sono due operazioni speculari, ed è proprio il contrasto tra questi due siti a renderlo evidente. Lo vediamo al paragrafo seguente.
 
 ---
 
@@ -145,13 +145,13 @@ Gli altri due siti questa idea l'hanno persa. SR usa il permalink come GUID, con
 
 > [!TIP]
 > **L'identità stabile di un articolo: un URN, non il permalink**
-> Il vecchio capitolo raccomandava già il GUID a URN, ed è corretto. Quello che andava aggiunto è che è una best practice che due siti su tre **non** seguono: SPW la applica, SR è regredito al permalink, DIS all'URL audio (il meno stabile di tutti). La regola, in una riga: l'identità di un item nel feed deve dipendere da qualcosa che non cambia mai (l'ID di database), mai dall'indirizzo, che cambia eccome.
+> Il GUID a URN è la raccomandazione corretta. Quello che va aggiunto è che è una best practice che due siti su tre **non** seguono: SPW la applica, SR è regredito al permalink, DIS all'URL audio (il meno stabile di tutti). La regola, in una riga: l'identità di un item nel feed deve dipendere da qualcosa che non cambia mai (l'ID di database), mai dall'indirizzo, che cambia eccome.
 
 ---
 
 ## 7. Il catch vuoto che nasconde un database giù
 
-Resta da correggere un punto che la Seconda Edizione insegnava come virtù. Sia SPW sia DIS avvolgono la query in un `try/catch` con il `catch` **vuoto**:
+Resta un punto spesso scambiato per virtù, e a torto. Sia SPW sia DIS avvolgono la query in un `try/catch` con il `catch` **vuoto**:
 
 ```php
 // public/api/rss.php (SPW) — il catch vuoto: l'header e <channel> sono già usciti con HTTP 200

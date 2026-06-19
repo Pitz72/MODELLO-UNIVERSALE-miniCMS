@@ -7,7 +7,7 @@ Questo capitolo chiude un filo iniziato cinque capitoli fa. La newsletter è il 
 E proprio perché sul rischio XSS i tre convergono, la lente vera del capitolo diventa un'altra: **quanto si può semplificare un sistema di posta** prima che la semplificazione diventi pericolosa. Si va da un sistema completo, con double opt-in e protezione anti-abuso, fino a una `mail()` nuda che chiunque può usare per iscrivere o disiscrivere chiunque. E, come già al CAP 10, il sito col backend più ricco non è il più sicuro.
 
 > [!NOTE]
-> **Correzioni rispetto alla Seconda Edizione.** Il capitolo precedente aveva tre buchi seri. **Ometteva del tutto il double opt-in**, che è la feature-cardine di due siti su tre, e mostrava al suo posto un'iscrizione attiva da subito e una disiscrizione per sola email: cioè il modello di DIS, il più debole, attribuito a SitoRuntime. Chiamava quella disiscrizione **«GDPR-Compliant»**, quando è la versione insicura (chiunque disiscrive chiunque). E chiamava **«Rate Limiting»** un `usleep`, che è un'altra cosa (§4). Questo capitolo riallinea tutto.
+> **Tre punti su cui è facile sbagliare.** Tre aspetti di questo sistema vengono spesso fraintesi. Il primo è il **double opt-in**, la feature-cardine di due siti su tre: ometterlo, e mostrare al suo posto un'iscrizione attiva da subito con disiscrizione per sola email, significa adottare il modello di DIS, il più debole. Quella disiscrizione per sola email **non è «GDPR-Compliant»**: è la versione insicura (chiunque disiscrive chiunque). E un `usleep` **non è «Rate Limiting»**: è un'altra cosa (§4).
 
 ---
 
@@ -38,7 +38,7 @@ La disiscrizione è «morbida»: nessuno cancella il record, l'iscritto viene ma
 
 ## 2. Il double opt-in e il segreto del link di disiscrizione
 
-Il double opt-in è la garanzia che chi iscrive un'email **possiede** quella casella: invece di attivare subito l'indirizzo, si crea un record in attesa e si manda un'email con un link di conferma; solo dopo il click l'iscrizione diventa attiva. È la feature che il vecchio capitolo non menzionava, e i tre siti la implementano su tre gradini.
+Il double opt-in è la garanzia che chi iscrive un'email **possiede** quella casella: invece di attivare subito l'indirizzo, si crea un record in attesa e si manda un'email con un link di conferma; solo dopo il click l'iscrizione diventa attiva. È la feature più importante dell'intero sistema, e i tre siti la implementano su tre gradini.
 
 SPW la fa nel modo da manuale, con **due token distinti**: uno di conferma, monouso, azzerato dopo l'uso; uno di disiscrizione, casuale e stabile, separato dal primo.
 
@@ -73,7 +73,7 @@ if ($action === 'unsubscribe') {
 
 > [!WARNING]
 > **Il link di disiscrizione ha bisogno di un segreto**
-> La Seconda Edizione chiamava «GDPR-Compliant» proprio questa disiscrizione per sola email. È l'opposto: senza un token segreto, chiunque conosca o indovini l'indirizzo di un iscritto può disiscriverlo. E poiché è una `GET`, è anche *prefetch-able*: un client di posta che precarica i link può disiscrivere l'utente solo passandoci sopra. La versione corretta è quella di SPW, con un `unsubscribe_token` casuale e stabile (e, idealmente, una conferma con `POST` dalla pagina di atterraggio). Il double opt-in protegge l'ingresso; un token di disiscrizione protegge l'uscita. Servono entrambi.
+> Questa disiscrizione per sola email viene spesso spacciata per «GDPR-compliant». È l'opposto: senza un token segreto, chiunque conosca o indovini l'indirizzo di un iscritto può disiscriverlo. E poiché è una `GET`, è anche *prefetch-able*: un client di posta che precarica i link può disiscrivere l'utente solo passandoci sopra. La versione corretta è quella di SPW, con un `unsubscribe_token` casuale e stabile (e, idealmente, una conferma con `POST` dalla pagina di atterraggio). Il double opt-in protegge l'ingresso; un token di disiscrizione protegge l'uscita. Servono entrambi.
 
 ---
 
@@ -91,7 +91,7 @@ $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; $mail->Port = $cfg['SMTP_POR
 $mail->setFrom($cfg['SMTP_USER'], $cfg['SMTP_FROM_NAME']);
 ```
 
-C'è però una contraddizione interna: SR usa l'SMTP autenticato solo per la newsletter. Il form contatti, `contact.php`, è rimasto sulla `mail()` nativa. Lo stesso sito ha così due meccaniche di posta diverse, e il vecchio capitolo presentava l'SMTP come una scelta «per il futuro, a volumi maggiori» quando in realtà è già in produzione, accanto alla `mail()` che non ha mai dismesso.
+C'è però una contraddizione interna: SR usa l'SMTP autenticato solo per la newsletter. Il form contatti, `contact.php`, è rimasto sulla `mail()` nativa. Lo stesso sito ha così due meccaniche di posta diverse: è facile pensare all'SMTP come a una scelta «per il futuro, a volumi maggiori», quando in realtà in SR è già in produzione, accanto alla `mail()` che non ha mai dismesso.
 
 ---
 
@@ -99,7 +99,7 @@ C'è però una contraddizione interna: SR usa l'SMTP autenticato solo per la new
 
 Arriva qui il difetto più istruttivo del capitolo, e nasce da una confusione comune tra due difese che sembrano simili e non lo sono.
 
-Un **throttle** rallenta l'invio in uscita, per non sovraccaricare il mail server e non farsi mettere in greylisting: è una pausa ogni tot email. Un **rate-limit** limita le richieste in ingresso, per impedire a un estraneo di abusare di un endpoint: è un tetto di tentativi per IP. Sono difese ortogonali, su lati opposti del sistema. La Seconda Edizione chiamava «Rate Limiting» questo, che è un throttle:
+Un **throttle** rallenta l'invio in uscita, per non sovraccaricare il mail server e non farsi mettere in greylisting: è una pausa ogni tot email. Un **rate-limit** limita le richieste in ingresso, per impedire a un estraneo di abusare di un endpoint: è un tetto di tentativi per IP. Sono difese ortogonali, su lati opposti del sistema. Quello che spesso viene chiamato «Rate Limiting» è in realtà un throttle:
 
 ```php
 // public/api/newsletter.php (SR) — questo è un THROTTLE in uscita, non un rate-limit in ingresso
@@ -157,7 +157,7 @@ Torniamo un'ultima volta alla tabella del CAP 8. La newsletter è la quarta case
 | 3 | **Feed RSS** (CAP 12) | niente / preview escapata | `htmlspecialchars` / `strip_tags`+escape | sicuro |
 | 4 | **Newsletter** (questo capitolo) | **niente** (solo titolo, riassunto, intro) | `htmlspecialchars` (SR, DIS) / grezzo dietro Auth (SPW) | **sicuro** |
 
-Il vecchio capitolo presentava la query senza `content` come una semplice «ottimizzazione di payload», per tenere le email leggere. È vero, ma è soprattutto la chiusura del filo: non emettere il campo grezzo è ciò che impedisce all'email di diventare un quinto vettore XSS.
+Si potrebbe leggere la query senza `content` come una semplice «ottimizzazione di payload», per tenere le email leggere. È vero, ma è soprattutto la chiusura del filo: non emettere il campo grezzo è ciò che impedisce all'email di diventare un quinto vettore XSS.
 
 C'è una simmetria curiosa tra i due flagship. In SR la newsletter è l'emettitore *più* sicuro dei quattro: non tocca il `content` e per giunta escapa ogni altro campo. In SPW è invece il *meno* sanitizzato, perché il testo introduttivo scritto dall'admin viene emesso grezzo, senza alcun `htmlspecialchars`: è sicuro solo perché chi lo scrive è autenticato, non perché ci sia una difesa. Due posizioni opposte sulla stessa scala.
 

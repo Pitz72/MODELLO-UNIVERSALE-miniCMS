@@ -4,10 +4,10 @@ Una Single Page Application ha un problema di nascita con i motori di ricerca. I
 
 Il Modello risolve senza un framework SSR, senza Next.js, senza Node. Mette un file PHP davanti alla SPA, gli fa interrogare il database e gli fa iniettare nei posti giusti i meta tag corretti, prima che l'HTML arrivi al bot. È la versione thin-stack del server-side rendering: qualche centinaio di righe di PHP e zero infrastruttura nuova.
 
-Ma questo capitolo ha tre fili da tenere insieme. Il primo è una storia di tentativi: il pattern vincente non è il primo che è stato provato, e i due flagship hanno scartato per strada una soluzione che la Seconda Edizione ancora raccomandava. Il secondo è una scala a tre gradini: i due flagship fanno un Dynamic Rendering completo, DIS si ferma a un proxy di anteprime social, e il gradino più capace porta con sé tre debiti. Il terzo è il filo della sicurezza aperto al CAP 8: il prerender è l'emettitore del `content` dove il buco XSS dei «quattro emettitori» è **ancora vivo**.
+Ma questo capitolo ha tre fili da tenere insieme. Il primo è una storia di tentativi: il pattern vincente non è il primo che è stato provato, e i due flagship hanno scartato per strada una soluzione che a prima vista sembra la più naturale. Il secondo è una scala a tre gradini: i due flagship fanno un Dynamic Rendering completo, DIS si ferma a un proxy di anteprime social, e il gradino più capace porta con sé tre debiti. Il terzo è il filo della sicurezza aperto al CAP 8: il prerender è l'emettitore del `content` dove il buco XSS dei «quattro emettitori» è **ancora vivo**.
 
 > [!NOTE]
-> **Correzione rispetto alla Seconda Edizione.** Il capitolo precedente descriveva la sola iniezione dei meta e, in un riquadro, consigliava di aggiungere uno **Static Prerendering** in build (tipo `vite-plugin-prerender`) per l'indicizzazione profonda. Ma quella è **esattamente la SSG con Puppeteer che SimonePizziWebSite ha provato e poi abbandonato** (§1): oggi nel suo repo è solo codice morto, con tanto di post-mortem. La soluzione realmente adottata dai flagship è il **Dynamic Rendering**, che il vecchio capitolo non descriveva. Inoltre lo snippet «implementato in SimonePizziWebSite» si connetteva a un file `.sqlite`: ma SPW gira su MySQL. Quella forma con SQLite e connessione diretta è il proxy di DIS, non il motore di SPW.
+> **Una tentazione da evitare: lo Static Prerendering (SSG).** Per l'indicizzazione profonda verrebbe da aggiungere, oltre alla sola iniezione dei meta, uno **Static Prerendering** in build (tipo `vite-plugin-prerender`). Ma quella è **esattamente la SSG con Puppeteer che SimonePizziWebSite ha provato e poi abbandonato** (§1): oggi nel suo repo è solo codice morto, con tanto di post-mortem. La soluzione realmente adottata dai flagship è il **Dynamic Rendering**. Attenzione anche a un dettaglio che inganna: una forma con un file `.sqlite` e connessione diretta non è il motore di SPW, che gira su MySQL, ma il proxy di DIS.
 
 ---
 
@@ -23,7 +23,7 @@ La terza tappa, quella attuale, è il **Dynamic Rendering**: niente build, nient
 
 > [!TIP]
 > **Il codice che resta dopo che la strategia è cambiata**
-> Della SSG abbandonata, in SPW, è rimasta l'impronta fossile: `prerender.php` è deprecato (risponde solo un avviso), `prerender.js` e `prerender-routes.js` sono codice morto (il `postbuild` esegue `clean-dist.js`, non loro), e una costante `IS_PRERENDERING` protegge dei rami che nessuno definisce più. SR, arrivato dopo, è andato dritto al Dynamic Rendering e non ha fossili. È un piccolo promemoria archeologico: quando si cambia strategia, il codice della strategia vecchia raramente sparisce: resta lì, inerte, finché qualcuno non si fida abbastanza da cancellarlo. La Seconda Edizione di questo manuale raccomandava proprio quella strategia fossile.
+> Della SSG abbandonata, in SPW, è rimasta l'impronta fossile: `prerender.php` è deprecato (risponde solo un avviso), `prerender.js` e `prerender-routes.js` sono codice morto (il `postbuild` esegue `clean-dist.js`, non loro), e una costante `IS_PRERENDERING` protegge dei rami che nessuno definisce più. SR, arrivato dopo, è andato dritto al Dynamic Rendering e non ha fossili. È un piccolo promemoria archeologico: quando si cambia strategia, il codice della strategia vecchia raramente sparisce: resta lì, inerte, finché qualcuno non si fida abbastanza da cancellarlo.
 
 ---
 
@@ -197,7 +197,7 @@ Quei file JSON precompilati hanno un nome familiare: `.cache/seo_*.json`. Sono l
 
 ## 8. sitemap, robots e dati strutturati
 
-Resta l'infrastruttura SEO di contorno, che il vecchio capitolo liquidava come «già gestita dall'`.htaccess`». In realtà c'è un pattern preciso: `sitemap.xml` e `robots.txt` non sono file fisici, ma rewrite verso `sitemap.php` e `robots.php`, generati in tempo reale.
+Resta l'infrastruttura SEO di contorno, che è facile liquidare come «già gestita dall'`.htaccess`». In realtà c'è un pattern preciso: `sitemap.xml` e `robots.txt` non sono file fisici, ma rewrite verso `sitemap.php` e `robots.php`, generati in tempo reale.
 
 ```apache
 # public/.htaccess (SPW) — niente file fisici: sitemap e robots sono PHP
