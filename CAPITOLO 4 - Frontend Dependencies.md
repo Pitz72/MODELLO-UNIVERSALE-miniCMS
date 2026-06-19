@@ -1,27 +1,33 @@
-# CAPITOLO 4: Frontend Dependencies (v1.0)
+# CAPITOLO 4: Frontend Dependencies (Terza Edizione)
 
-Le dipendenze frontend sono scelte architetturali, non solo dichiarazioni in `package.json`. Ogni libreria aggiunta ha un costo — dimensione del bundle, superficie di aggiornamento, complessità di integrazione — e deve guadagnarsi il suo posto. Questo capitolo documenta le scelte fatte nei 4 siti di riferimento, con le motivazioni che le guidano.
+Le dipendenze frontend sono scelte architetturali, non solo righe in `package.json`. Ogni libreria aggiunta ha un costo (dimensione del bundle, superficie di aggiornamento, complessità di integrazione) e deve guadagnarsi il posto. Questo capitolo documenta le scelte fatte nei quattro siti di riferimento, con le motivazioni che le guidano, e dedica spazio anche a un'assenza: le librerie che il Modello sceglie di **non** usare.
 
 ## 1. Il Core Stack (Ogni Progetto)
 
-Queste dipendenze sono presenti in tutti e 4 i siti senza eccezioni:
+Queste dipendenze sono presenti in tutti e quattro i siti senza eccezioni:
 
 | Libreria | Versione | Ruolo |
 | :--- | :--- | :--- |
-| `react` + `react-dom` | ^19.2.x | Framework UI — componenti, stato, rendering |
-| `react-router-dom` | ^7.x | Client-side routing, React Router v7 (API stabile) |
+| `react` + `react-dom` | ^19.2.x | Framework UI: componenti, stato, rendering |
+| `react-router-dom` | ^7.x | Routing client-side, React Router v7 (API stabile) |
 | `typescript` | ~5.x | Type safety a compile time |
-| `vite` | ^7.x | Build tool — dev server HMR, bundle ottimizzato |
-| `@vitejs/plugin-react` | ^5.x | Plugin Vite per JSX/TSX transform |
-| `lucide-react` | ^0.5xx | Libreria icone SVG — tree-shakeable, React-native |
+| `vite` | ^7.x | Build tool: dev server HMR, bundle ottimizzato |
+| `@vitejs/plugin-react` | ^5.x | Plugin Vite per la trasformazione JSX/TSX |
+| `lucide-react` | ^0.5xx | Icone SVG tree-shakeable, native in React |
 
-React 19 introduce significativi miglioramenti al rendering concorrente e alle Server Components. Per il Modello Universale (solo SPA client-side), la differenza pratica con v18 è minima, ma mantenere l'ultima versione stabile è la scelta corretta per nuovi progetti.
+React 19 introduce miglioramenti al rendering concorrente e alle Server Components. Per il Modello Universale (sola SPA client-side) la differenza pratica con la v18 è minima, ma tenere l'ultima versione stabile è la scelta corretta per i nuovi progetti.
 
-## 2. Tailwind CSS: v3 vs v4
+### 1.1 L'Assenza che Conta: Niente Librerie di Data-Fetching
 
-I 4 siti usano versioni diverse di Tailwind, con configurazione significativamente diversa.
+Prima di elencare cosa c'è, vale un elenco di cosa manca, perché è una scelta tanto quanto le altre. Nessuno dei quattro siti usa una libreria di data-fetching o di gestione dello stato: niente Axios, niente React Query, niente SWR, niente Redux, niente Zustand. Il ponte verso il backend PHP è l'oggetto `api`, un wrapper sottile su `fetch` nativo (Capitolo 6); lo stato condiviso vive nel router (SimonePizziWebSite, con i loader di React Router) oppure è `useState` locale ai componenti (SitoRuntime e DISINTELLIGENZA).
 
-### SitoRuntime — Tailwind v3 (Setup Classico)
+Non è pigrizia, è coerenza con la filosofia del Capitolo 1: ogni dipendenza che non aggiungi è una superficie di aggiornamento che non devi mantenere, un bundle che non cresce, un comportamento che non devi imparare. `fetch` fa quasi tutto ciò che serve a un CMS; il poco che manca (un punto unico per gli errori, un interceptor per la sessione scaduta) si scrive in poche righe, e il Capitolo 6 racconta dove i siti hanno scelto di non scriverle.
+
+## 2. Tailwind CSS: v3 contro v4
+
+I quattro siti usano versioni diverse di Tailwind, con configurazione sensibilmente diversa.
+
+### SitoRuntime: Tailwind v3 (setup classico)
 
 ```json
 // devDependencies
@@ -30,274 +36,204 @@ I 4 siti usano versioni diverse di Tailwind, con configurazione significativamen
 "postcss": "^8.5.6"
 ```
 
-Richiede `tailwind.config.js` e `postcss.config.js` espliciti. Il file CSS di ingresso:
+Richiede `tailwind.config.js` e `postcss.config.js` espliciti. Il CSS di ingresso:
 ```css
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 ```
 
-### SimonePizziWebSite, DISINTELLIGENZA, FDCA — Tailwind v4
+### SimonePizziWebSite, DISINTELLIGENZA, FDCA: Tailwind v4
 
 ```json
 // devDependencies
 "tailwindcss": "^4.x",
-"@tailwindcss/vite": "^4.x"  // o "@tailwindcss/postcss"
+"@tailwindcss/vite": "^4.x"  // oppure "@tailwindcss/postcss"
 ```
 
-Tailwind v4 usa il plugin Vite nativo — nessun `postcss.config.js` separato, nessun `tailwind.config.js` obbligatorio. Il file CSS:
+Tailwind v4 usa il plugin Vite nativo: nessun `postcss.config.js` separato, nessun `tailwind.config.js` obbligatorio. Il CSS:
 ```css
 @import "tailwindcss";
 ```
 
-**Quando usare v4**: Per tutti i nuovi progetti. La migrazione da v3 a v4 richiede attenzione alle classi rinominate (es. `shadow-sm` → `shadow-xs`).
+Per i nuovi progetti la scelta è la v4. La migrazione da v3 richiede attenzione alle classi rinominate (per esempio `shadow-sm` è diventato `shadow-xs`).
 
 ### @tailwindcss/typography
 
-Presente in tutti i siti come devDependency. Aggiunge la classe `prose` che applica stili tipografici curati a blocchi di HTML generato dinamicamente (come output Markdown o contenuto da rich text editor).
+Presente in tutti i siti come devDependency. Aggiunge la classe `prose`, che applica stili tipografici curati a blocchi di HTML generato dinamicamente (l'output di un editor di testo ricco, o di un convertitore Markdown).
 
 ```html
 <div class="prose prose-invert max-w-none">
-  {/* HTML generato da showdown o Quill */}
+  <!-- HTML generato da Tiptap o da showdown -->
 </div>
 ```
 
-## 3. Rendering del Contenuto
+## 3. Editing e Rendering del Contenuto
 
-### showdown — Markdown → HTML
+### Tiptap v3: il Rich Text Editor dei flagship
 
-**Usato in:** SimonePizziWebSite, SitoRuntime, DISINTELLIGENZA (3/4 siti)
+**Usato in:** SimonePizziWebSite e SitoRuntime (i due siti con redazione editoriale).
+
+L'editor di testo ricco dei due flagship è **Tiptap v3**, non un editor monolitico ma un insieme di pacchetti `@tiptap/*` che si compongono come mattoncini: una decina di moduli per il nucleo e le estensioni effettivamente usate.
+
+```json
+"@tiptap/react": "^3.x",
+"@tiptap/pm": "^3.x",
+"@tiptap/starter-kit": "^3.x",
+"@tiptap/extension-image": "^3.x",
+"@tiptap/extension-text-style": "^3.x",
+"@tiptap/extension-color": "^3.x",
+"@tiptap/extension-text-align": "^3.x",
+"@tiptap/extension-table": "^3.x",
+"@tiptap/extension-youtube": "^3.x"
+```
+
+Tiptap produce **HTML** (non Markdown), che viene salvato grezzo nel database e sanificato al momento del rendering con DOMPurify (la trattazione completa, comprese le guardie all'inserimento dei link e il choke-point di sanitizzazione, è al Capitolo 8). SitoRuntime ci è arrivato con una migrazione: prima usava Quill, e nel codice restano i segni di quel passaggio (uno shim di conversione, qualche type-def `react-quill` residua). Quei residui non sono l'editor attivo, sono cicatrici della migrazione a Tiptap.
+
+DISINTELLIGENZA non usa nessuna libreria di editing: il suo editor è costruito a mano con `contentEditable` ed `execCommand`. È il gradino grado-zero della scala, con la conseguenza di sicurezza che il Capitolo 8 mette in chiaro (è l'unico sito senza DOMPurify).
+
+### showdown: Markdown → HTML
+
+**Usato in:** SimonePizziWebSite, SitoRuntime, DISINTELLIGENZA, per i contenuti scritti in Markdown.
 
 ```json
 "showdown": "^2.1.0",
 "@types/showdown": "^2.0.6"
 ```
 
-Converte Markdown in HTML. Pattern di utilizzo:
 ```typescript
 import showdown from 'showdown';
 const converter = new showdown.Converter({ tables: true, strikethrough: true });
 const html = converter.makeHtml(markdownContent);
 ```
 
-**Non usare mai showdown senza dompurify** — l'HTML generato da contenuto non trusted deve essere sanificato.
+L'HTML generato da contenuto non fidato va sempre sanificato (vedi sotto): showdown e DOMPurify vanno in coppia.
 
-### dompurify — Sanitizzazione XSS
+### dompurify: sanitizzazione XSS
 
-**Usato in:** SimonePizziWebSite, SitoRuntime (2/4 siti, sempre accoppiato con showdown o Quill)
+**Usato in:** SimonePizziWebSite, SitoRuntime (sempre accoppiato all'editor o al convertitore Markdown). **Assente in DISINTELLIGENZA**, ed è il buco di sicurezza che il Capitolo 8 documenta.
 
 ```json
 "dompurify": "^3.3.x",
 "@types/dompurify": "^3.0.5"
 ```
 
-DOMPurify rimuove script iniettati e attributi pericolosi dall'HTML:
-
 ```typescript
 import DOMPurify from 'dompurify';
-import showdown from 'showdown';
-
-const converter = new showdown.Converter();
-const rawHtml = converter.makeHtml(markdownContent);
 const safeHtml = DOMPurify.sanitize(rawHtml);
-
 // Solo ora è sicuro usare dangerouslySetInnerHTML
 <div dangerouslySetInnerHTML={{ __html: safeHtml }} />
 ```
 
-**Regola assoluta**: `showdown` + `dangerouslySetInnerHTML` senza `DOMPurify` in mezzo è una vulnerabilità XSS. I due vanno sempre in coppia.
+> [!WARNING]
+> **HTML grezzo più `dangerouslySetInnerHTML` senza DOMPurify è una vulnerabilità XSS**
+> Vale per l'output di showdown, di Tiptap, di qualunque sorgente. Salvare HTML grezzo è una scelta legittima (preserva la formattazione), ma il momento del rendering è dove la sanitizzazione diventa obbligatoria. DISINTELLIGENZA salta questo passaggio, e il Capitolo 8 mostra cosa significa.
 
-### react-quill-new — Rich Text Editor WYSIWYG
-
-**Usato in:** SitoRuntime (1/4 siti — solo dove serve editing visivo avanzato)
-
-```json
-"react-quill-new": "^3.7.0",
-"quill-image-drop-module": "^1.0.3",
-"quill-magic-url": "^4.2.0"
-```
-
-`react-quill-new` è il fork mantenuto di `react-quill`, necessario perché la versione originale non supporta React 19. Output in HTML (non Markdown), quindi richiede comunque `DOMPurify` lato rendering.
-
-Il modulo `quill-image-drop-module` aggiunge drag & drop di immagini nell'editor. `quill-magic-url` converte automaticamente URL incollati in link cliccabili.
-
-**Quando usarlo**: Solo quando il progetto richiede un editor visivo tipo Word per i redattori — es. radio web, sito editoriale. Per un portfolio o blog tecnico, un'area textarea con Markdown è più semplice e altrettanto efficace.
-
-## 4. Animazioni & Effetti Visivi
+## 4. Animazioni ed Effetti Visivi
 
 ### framer-motion
 
-**Usato in:** tutti e 4 i siti
+**Usato in:** tutti e quattro i siti.
 
 ```json
 "framer-motion": "^12.x"
 ```
 
-La libreria di animazioni declarative per React. Pattern fondamentali nel Modello Universale:
-
 ```typescript
 import { motion } from 'framer-motion';
-
-// Fade-in all'ingresso del componente
-<motion.div
-  initial={{ opacity: 0, y: 20 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.4 }}
->
+<motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
   {/* contenuto */}
 </motion.div>
-
-// Animazioni su lista di elementi (staggered)
-<motion.ul variants={containerVariants} initial="hidden" animate="show">
-  {items.map(item => (
-    <motion.li key={item.id} variants={itemVariants}>...</motion.li>
-  ))}
-</motion.ul>
 ```
 
-framer-motion è pesante (~100KB gzip). Giustificato quando le animazioni sono parte integrante dell'identità visiva del sito. Per siti dove le animazioni sono marginali, CSS transitions native sono la scelta corretta.
+framer-motion è pesante (circa 100KB gzip). Si giustifica quando le animazioni sono parte dell'identità visiva del sito; dove sono marginali, le transizioni CSS native sono la scelta giusta.
 
 ### typewriter-effect
 
-**Usato in:** SimonePizziWebSite (1/4 siti)
-
-```json
-"typewriter-effect": "^2.22.0"
-```
-
-Effetto macchina da scrivere per headline animati — specifico per portfolio/presentazioni personali.
+**Usato in:** SimonePizziWebSite. Effetto macchina da scrivere per le headline animate, specifico per un portfolio personale.
 
 ### tailwindcss-animate
 
-**Usato in:** DISINTELLIGENZA (1/4 siti)
+**Usato in:** DISINTELLIGENZA. Plugin Tailwind con classi come `animate-in`, `fade-in`, `slide-in-from-bottom`: alternativa leggera a framer-motion per animazioni semplici basate su CSS.
 
-```json
-"tailwindcss-animate": "^1.0.7"
-```
-
-Plugin Tailwind che aggiunge classi di animazione come `animate-in`, `fade-in`, `slide-in-from-bottom`. Alternativa leggera a framer-motion per animazioni semplici basate su CSS.
-
-## 5. SEO & Meta Tag
+## 5. SEO e Meta Tag
 
 ### react-helmet-async
 
-**Usato in:** SimonePizziWebSite, DISINTELLIGENZA (2/4 siti)
+**Usato in:** SimonePizziWebSite, DISINTELLIGENZA. Gestisce `<title>`, `<meta>`, `<link>` dal lato React, per gli utenti con JavaScript attivo.
 
 ```json
 "react-helmet-async": "^2.0.5"
 ```
 
-Gestisce dinamicamente `<title>`, `<meta>`, `<link>` nel `<head>` del documento da qualsiasi componente React:
+La versione originale (`react-helmet`) non è più mantenuta e ha problemi di memory leak con React 18+; `react-helmet-async` è il fork attivo, compatibile con React 19.
 
-```typescript
-import { Helmet } from 'react-helmet-async';
-
-<Helmet>
-  <title>{article.title} — Runtime Radio</title>
-  <meta name="description" content={article.excerpt} />
-  <meta property="og:image" content={article.cover_image} />
-</Helmet>
-```
-
-**Perché `react-helmet-async` e non `react-helmet`**: La versione originale (`react-helmet`) non è più mantenuta e ha problemi di memory leak con React 18+. `react-helmet-async` è il fork attivo e compatibile con React 19.
-
-**Limitazione importante**: `react-helmet-async` gestisce i meta tag per gli utenti con JavaScript attivo (browser reali). I crawler dei social media e dei motori di ricerca richiedono il **PHP SEO Engine** (Capitolo 11) per ricevere meta tag corretti, perché non eseguono JavaScript.
-
-SitoRuntime non usa `react-helmet-async` perché delega tutto il SEO all'engine PHP lato server.
+I crawler dei social e dei motori di ricerca non eseguono JavaScript, quindi i meta tag che contano per loro li produce il **SEO Engine PHP** (Capitolo 11). I due si completano, non sono alternativi: SitoRuntime, infatti, rinuncia del tutto a `react-helmet-async` e delega l'intero SEO all'engine lato server.
 
 ## 6. Utilities
 
 ### clsx + tailwind-merge
 
-**Usati in:** SimonePizziWebSite, DISINTELLIGENZA
+**Usati in:** SimonePizziWebSite, DISINTELLIGENZA.
 
 ```json
 "clsx": "^2.1.1",
 "tailwind-merge": "^3.x"
 ```
 
-`clsx` permette la composizione condizionale di className:
-```typescript
-import { clsx } from 'clsx';
-const classes = clsx('base-class', isActive && 'active', error && 'text-red-500');
-```
-
-`tailwind-merge` risolve i conflitti tra classi Tailwind (es. `text-sm text-lg` → `text-lg`):
-```typescript
-import { twMerge } from 'tailwind-merge';
-const cn = (...inputs) => twMerge(clsx(inputs)); // Pattern helper classico
-```
+`clsx` compone className in modo condizionale; `tailwind-merge` risolve i conflitti tra classi Tailwind (`text-sm text-lg` diventa `text-lg`). Insieme danno il classico helper `cn()`.
 
 ### date-fns
 
-**Usato in:** DISINTELLIGENZA (1/4 siti)
+**Usato in:** DISINTELLIGENZA, per formattare le date del festival nel frontend. Gli altri siti gestiscono le date lato PHP (`date()`, `strtotime()`), riducendo la complessità nel client.
 
-```json
-"date-fns": "^4.1.0"
-```
-
-Utilità per la formattazione e manipolazione delle date. Alternativa a `dayjs` e `moment.js` (quest'ultimo deprecato). Usato in DISINTELLIGENZA per formattare le date del festival e delle iscrizioni nel frontend.
-
-Gli altri siti gestiscono la formattazione date lato PHP (con `date()` e `strtotime()`), riducendo la complessità frontend.
-
-## 7. Build-Time Optimization
+## 7. Ottimizzazione in Build
 
 ### sharp
 
-**Usato in:** SimonePizziWebSite (come dependency, usato solo in script post-build)
+**Usato in:** SimonePizziWebSite, come `dependency` ma solo negli script post-build.
 
 ```json
 "sharp": "^0.34.5"
 ```
 
-`sharp` è una libreria Node.js per la manipolazione di immagini ad alte prestazioni. Nel contesto del Modello Universale, viene usato nel `clean-dist.js` post-build per ottimizzare automaticamente le immagini nella cartella `dist/` prima del deploy.
-
-```javascript
-// Esempio di utilizzo in clean-dist.js
-import sharp from 'sharp';
-await sharp('input.jpg')
-  .resize(1200)
-  .webp({ quality: 80 })
-  .toFile('output.webp');
-```
-
-È tecnicamente una `dependency` invece che `devDependency` perché il build script (`postbuild`) la richiede al momento della build — ma non viene mai inclusa nel bundle React (non è importata da nessun file `.tsx`).
+`sharp` è una libreria Node.js per la manipolazione di immagini ad alte prestazioni; viene usata negli script di build per ottimizzare gli asset statici. È una `dependency` (non `devDependency`) perché il `postbuild` la richiede al momento della build, ma non entra mai nel bundle React: nessun file `.tsx` la importa. La conversione WebP degli upload a runtime, invece, è tutta lato PHP con GD (Capitolo 7): `sharp` e GD coprono due momenti diversi.
 
 ## 8. Matrice delle Dipendenze per Sito
 
 | Libreria | SitoRuntime | DISINTELLIGENZA | FDCA | SimonePizziWebSite |
 | :--- | :---: | :---: | :---: | :---: |
-| React 19 | ✓ | ✓ | ✓ | ✓ |
-| react-router-dom v7 | ✓ | ✓ | ✓ | ✓ |
-| framer-motion | ✓ | ✓ | ✓ | ✓ |
-| showdown | ✓ | ✓ | — | ✓ |
-| dompurify | ✓ | — | — | ✓ |
-| lucide-react | ✓ | ✓ | ✓ | ✓ |
-| Tailwind v3 | ✓ | — | — | — |
-| Tailwind v4 | — | ✓ | ✓ | ✓ |
-| @tailwindcss/typography | ✓ | ✓ | ✓ | ✓ |
-| react-helmet-async | — | ✓ | ✓ | ✓ |
-| react-quill-new | ✓ | — | — | — |
-| clsx + tailwind-merge | — | ✓ | ✓ | ✓ |
-| sharp | — | — | — | ✓ |
-| date-fns | — | ✓ | ✓ | — |
-| typewriter-effect | — | — | — | ✓ |
-| tailwindcss-animate | — | ✓ | ✓ | — |
+| React 19 | sì | sì | sì | sì |
+| react-router-dom v7 | sì | sì | sì | sì |
+| framer-motion | sì | sì | sì | sì |
+| showdown | sì | sì | no | sì |
+| dompurify | sì | no | no | sì |
+| lucide-react | sì | sì | sì | sì |
+| Tailwind v3 | sì | no | no | no |
+| Tailwind v4 | no | sì | sì | sì |
+| @tailwindcss/typography | sì | sì | sì | sì |
+| react-helmet-async | no | sì | sì | sì |
+| `@tiptap/*` (editor) | sì | no | no | sì |
+| clsx + tailwind-merge | no | sì | sì | sì |
+| sharp | no | no | no | sì |
+| date-fns | no | sì | sì | no |
+| typewriter-effect | no | no | no | sì |
+| tailwindcss-animate | no | sì | sì | no |
+| *librerie di data-fetching* | no | no | no | no |
+
+L'ultima riga è la più importante del Modello: nessun sito ne ha.
 
 ## 9. Regole per i Nuovi Progetti
 
-1. **Parti dal minimo**: Core stack + framer-motion + lucide-react. Aggiungi solo quando la funzionalità è richiesta concretamente.
-
-2. **showdown richiede sempre dompurify**: Mai usare l'uno senza l'altro quando il contenuto è user-generated o proviene dal DB.
-
-3. **react-quill-new solo per editor WYSIWYG**: Per semplici aree di testo Markdown, un `<textarea>` è sufficiente e mantiene il bundle piccolo.
-
-4. **react-helmet-async per SEO client-side, PHP engine per SEO crawler**: I due si complementano — non sono alternativi.
-
-5. **Tailwind v4 per nuovi progetti**: La configurazione è più semplice. Verificare la compatibilità delle classi se si migra da v3.
+1. **Parti dal minimo**: core stack, framer-motion, lucide-react. Aggiungi solo quando la funzionalità serve davvero.
+2. **Niente data-fetching library**: `fetch` e un oggetto `api` bastano (Capitolo 6). Aggiungere React Query o Axios è quasi sempre peso che non ripaga in un CMS thin-stack.
+3. **showdown richiede sempre dompurify** quando il contenuto è user-generated o viene dal database.
+4. **Tiptap per l'editing ricco, `<textarea>` per il resto**: monta i pacchetti `@tiptap/*` solo dove serve un editor visivo per i redattori; per un input semplice, una textarea mantiene il bundle piccolo.
+5. **react-helmet-async per il SEO client, PHP engine per i crawler**: si completano, non sono alternativi.
+6. **Tailwind v4 per i nuovi progetti**: configurazione più semplice; se migri da v3, verifica le classi rinominate.
 
 ---
-*Capitoli correlati: Cap 2 (Struttura Progetto) per la configurazione Vite, Cap 7 (Media & Optimization) per sharp nel dettaglio, Cap 11 (SEO Pre-rendering) per il rapporto tra react-helmet-async e PHP engine.*
+*Capitoli correlati: Capitolo 2 (struttura del progetto) per la configurazione Vite; Capitolo 6 (Frontend Bridge) per l'oggetto `api` su `fetch`; Capitolo 8 (Advanced Content Editing) per Tiptap e la sanitizzazione; Capitolo 11 (SEO) per il rapporto tra react-helmet-async e l'engine PHP.*
 
 ---
-*Prossimo Capitolo: Backend Logic (PHP) - CRUD unificato, gestione dei buffer e sanitizzazione degli input.*
+*Prossimo Capitolo: Backend Logic (PHP). CRUD unificato, gestione dei buffer e sanitizzazione degli input.*
