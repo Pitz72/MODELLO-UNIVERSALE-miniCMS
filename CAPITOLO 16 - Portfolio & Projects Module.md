@@ -1,6 +1,6 @@
-# CAPITOLO 16: Portfolio & Projects Module (v1.0)
+# CAPITOLO 16: Portfolio & Projects Module (Terza Edizione)
 
-Il modulo Portfolio è un'entità distinta dalla News/Article, progettata per siti di tipo personale, agenzia o showcase. Documentato da **SimonePizziWebSite**, introduce pattern specifici: visibilità granulare, ordinamento manuale, pulsanti azione multipli e gestione per categorie. È il modello di riferimento per qualsiasi sito che debba esporre un catalogo di lavori, prodotti o progetti.
+Il modulo Portfolio è un'entità distinta da News/Article, pensata per un sito personale, un'agenzia, uno showcase. Mappato su **SimonePizziWebSite**, porta pattern propri: visibilità granulare, ordinamento manuale, pulsanti d'azione multipli, gestione per categorie. È il riferimento per qualunque sito che debba esporre un catalogo di lavori, prodotti o progetti.
 
 ## 1. La Differenza con il Modulo News/Articles
 
@@ -8,11 +8,13 @@ Il modulo Portfolio è un'entità distinta dalla News/Article, progettata per si
 | :--- | :--- | :--- |
 | Identificatore URL | `slug` (testo parlante) | `id` (numerico) |
 | Visibilità | `status` (draft/published) | `is_visible` (boolean) |
-| Programmazione temporale | `published_at` | Non prevista |
-| Rich Text body | Sì (HTML) | Opzionale (description breve) |
-| Ordinamento | Per data (automatico) | `sort_order` (manuale) |
-| CTA | — | `button_a` + `button_b` (URL esterni) |
-| Categorizzazione | category + tags | Solo category |
+| Programmazione temporale | `published_at` | non prevista |
+| Rich text body | sì (HTML) | opzionale (description breve) |
+| Ordinamento | per data (automatico) | `sort_order` (manuale) |
+| CTA | nessuna | `button_a` + `button_b` (URL esterni) |
+| Categorizzazione | category + tag | solo category |
+
+La riga sull'identificatore conta più di quanto sembri: gli articoli vivono su URL parlanti (`slug`), i progetti su un `id` numerico. I progetti, quindi, non generano slug, e la logica di slug avanzata (con la mappa degli accenti italiani) vive una volta sola al Capitolo 5, dove serve agli articoli.
 
 ## 2. Schema Database
 
@@ -28,7 +30,7 @@ CREATE TABLE IF NOT EXISTS projects (
     button_b_label TEXT DEFAULT '',
     button_b_url   TEXT DEFAULT '',
     is_visible   INTEGER NOT NULL DEFAULT 1,    -- 1=visibile al pubblico, 0=nascosto
-    sort_order   INTEGER NOT NULL DEFAULT 0,    -- Ordinamento manuale per categoria
+    sort_order   INTEGER NOT NULL DEFAULT 0,    -- ordinamento manuale per categoria
     created_at   DATETIME DEFAULT (datetime('now'))
 );
 
@@ -36,196 +38,94 @@ CREATE INDEX IF NOT EXISTS idx_projects_category   ON projects(category);
 CREATE INDEX IF NOT EXISTS idx_projects_sort_order ON projects(sort_order ASC);
 ```
 
-## 3. L'API projects.php (5 Metodi HTTP)
+## 3. L'API `projects.php`: tutti e cinque i verbi
 
-Il modulo Projects usa **tutti e 5 i metodi HTTP**, incluso `PATCH` per aggiornamenti parziali — il pattern più pulito per operazioni di visibilità e riordinamento:
+Il modulo usa l'intera gamma dei metodi HTTP, e `PATCH` è quello che lo distingue: è il verbo giusto per le operazioni di visibilità e riordino, che cambiano un solo campo.
 
-### GET — Lista con Bypass Admin
+**GET: lista con bypass admin.** Il pubblico vede solo i visibili; l'admin vede tutto. Stesso pattern del Capitolo 9, qui su `is_visible` invece che su `status`.
+
 ```php
 $is_admin = isset($_SESSION['user_id']);
-$conditions = [];
-$params = [];
-
-if (!$is_admin) {
-    $conditions[] = "is_visible = 1"; // Il pubblico vede solo i visibili
-}
-
-if ($category) {
-    $conditions[] = "category = ?";
-    $params[] = $category;
-}
-
-// Ordinamento: per categoria poi per sort_order manuale
+if (!$is_admin) $conditions[] = "is_visible = 1";          // il pubblico vede solo i visibili
+if ($category)  { $conditions[] = "category = ?"; $params[] = $category; }
 $query .= " ORDER BY category ASC, sort_order ASC, created_at ASC";
 ```
 
-### POST — Creazione con Auto-Sort
-Alla creazione, `sort_order` viene calcolato automaticamente come `MAX(sort_order) + 1` all'interno della stessa categoria. Questo garantisce che i nuovi progetti appaiano in fondo alla lista della loro categoria:
+**POST: creazione con auto-sort.** Alla creazione, `sort_order` diventa `MAX(sort_order) + 1` nella stessa categoria, così il nuovo progetto compare in fondo alla sua lista.
+
 ```php
 $stmtMax = $pdo->prepare("SELECT COALESCE(MAX(sort_order), 0) FROM projects WHERE category = ?");
 $stmtMax->execute([$category]);
 $sort_order = (int)$stmtMax->fetchColumn() + 1;
 ```
 
-### PATCH — Aggiornamenti Parziali
-`PATCH` è il metodo corretto per aggiornamenti atomici di un singolo campo. Non invia l'intero oggetto: solo il campo che cambia.
+**PATCH: aggiornamenti parziali.** Non invia l'intero oggetto, solo il campo che cambia: il toggle di visibilità, o il nuovo `sort_order` arrivato dal drag-to-sort del frontend.
 
 ```php
-// Toggle visibilità singolo progetto
 if (isset($data['is_visible'])) {
-    $stmt = $pdo->prepare("UPDATE projects SET is_visible=? WHERE id=?");
-    $stmt->execute([(int)$data['is_visible'], $id]);
+    $pdo->prepare("UPDATE projects SET is_visible=? WHERE id=?")->execute([(int)$data['is_visible'], $id]);
 }
-
-// Aggiornamento ordinamento (da drag-to-sort frontend)
 if (isset($data['sort_order'])) {
-    $stmt = $pdo->prepare("UPDATE projects SET sort_order=? WHERE id=?");
-    $stmt->execute([(int)$data['sort_order'], $id]);
+    $pdo->prepare("UPDATE projects SET sort_order=? WHERE id=?")->execute([(int)$data['sort_order'], $id]);
 }
 ```
 
-**Perché PATCH e non POST?** Semantica HTTP: `POST` crea, `PUT` sostituisce l'intero oggetto, `PATCH` modifica parzialmente. Usare PATCH per toggle di visibilità e riordinamento è la scelta corretta e comunica chiaramente l'intento dell'operazione.
+La semantica HTTP è chiara: `POST` crea, `PUT` sostituisce l'intero oggetto, `PATCH` modifica un pezzo. Usare `PATCH` per il toggle e il riordino comunica l'intento meglio di un `POST` generico.
 
-## 4. Il Pattern dei Pulsanti CTA (button_a / button_b)
+## 4. I Pulsanti CTA (`button_a` / `button_b`)
 
-Ogni progetto può avere fino a due pulsanti di azione che puntano a risorse esterne:
-- `button_a`: Pulsante principale (es. "Scopri", "Visita il sito", "Gioca ora")
-- `button_b`: Pulsante secondario opzionale (es. "GitHub", "Case Study", "App Store")
+Ogni progetto può avere fino a due pulsanti verso risorse esterne: uno principale («Scopri», «Visita il sito», «Gioca ora») e uno secondario opzionale («GitHub», «Case Study», «App Store»).
 
 ```typescript
-// Frontend TypeScript: rendering condizionale dei bottoni
 {project.button_a_url && (
-  <a href={project.button_a_url} target="_blank" rel="noopener noreferrer"
-     className="btn-primary">
+  <a href={project.button_a_url} target="_blank" rel="noopener noreferrer" className="btn-primary">
     {project.button_a_label || 'Scopri'}
   </a>
 )}
 {project.button_b_url && (
-  <a href={project.button_b_url} target="_blank" rel="noopener noreferrer"
-     className="btn-secondary">
+  <a href={project.button_b_url} target="_blank" rel="noopener noreferrer" className="btn-secondary">
     {project.button_b_label}
   </a>
 )}
 ```
 
-Il `rel="noopener noreferrer"` è obbligatorio per i link `target="_blank"`: previene l'accesso alla `window.opener` della pagina madre da parte della pagina di destinazione (vulnerabilità tabnapping).
+Il `rel="noopener noreferrer"` sui link `target="_blank"` è obbligatorio: impedisce alla pagina di destinazione di accedere alla `window.opener` di quella di partenza (il tabnapping).
 
-### 4.1 Switch Dinamico Web / Email
-Una feature avanzata introdotta nella gestione dei CTA (SimonePizziWebSite v1.7.x) è il toggle "Tipo di Link" lato Editor. Spesso un CTA in un progetto personale non punta a un sito web, ma deve aprire il client email.
-L'editor include uno switch (Web URL / Email) che, se impostato su Email, aggiunge automaticamente il prefisso protocollare `mailto:` alla stringa salvata nel DB ignorando l'`https://`, garantendo che l'autore non compia errori di distrazione fornendo una UX sicura.
+### 4.1 Lo switch Web / Email
 
-## 5. Il Pattern di Slug Avanzato (Normalizzazione Accenti Italiani)
+Una rifinitura introdotta nella gestione dei CTA (SimonePizziWebSite v1.7.x) è un toggle «tipo di link» nell'editor: spesso un pulsante non punta a un sito ma deve aprire il client di posta. Se l'autore sceglie «Email», l'editor antepone da solo `mailto:` alla stringa salvata, ignorando l'`https://`. È una piccola UX a prova di distrazione: il redattore non deve ricordarsi il protocollo giusto.
 
-Scoperto in `articles.php` di SimonePizziWebSite, questo pattern risolve un problema reale: le parole italiane con accenti generano slug malformati.
+## 5. Ricerca Unificata: un Solo Endpoint per Articoli e Progetti
 
-**Problema**:
-```php
-// Input: "Il caffè di Genova è buono"
-// Risultato naive: "il-caff-di-genova--buono"  ← accenti rimossi male
-```
-
-**Soluzione con mappa esplicita**:
-```php
-function generateSlug($title, $pdo) {
-    // Mappa esplicita accenti italiani e francesi comuni
-    $accents      = ['à','è','é','ì','ò','ù','À','È','É','Ì','Ò','Ù',
-                     'â','ê','î','ô','û','ä','ë','ï','ö','ü'];
-    $replacements = ['a','e','e','i','o','u','a','e','e','i','o','u',
-                     'a','e','i','o','u','a','e','i','o','u'];
-
-    $title = str_replace($accents, $replacements, $title);
-    $slug  = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $title)));
-
-    // Anti-collisione: verifica unicità prima del salvataggio
-    $stmt = $pdo->prepare("SELECT COUNT(*) FROM projects WHERE slug = ?");
-    $stmt->execute([$slug]);
-    if ($stmt->fetchColumn() > 0) {
-        $slug .= '-' . time();
-    }
-
-    return $slug;
-}
-```
-
-**Risultato**:
-```
-"Il caffè di Genova è buono" → "il-caffe-di-genova-e-buono"  ✓
-```
-
-Questo pattern va applicato a **tutti i moduli che generano slug** in siti con contenuto italiano.
-
-## 6. React Frontend — Componenti Chiave
-
-### PortfolioGrid.tsx
-La griglia del portfolio filtra i progetti per categoria e li mostra in cards. Con dati provenienti dall'API, supporta:
-- Filtraggio lato client per `category`
-- Visualizzazione dell'immagine di copertina con lazy loading
-- Rendering condizionale dei due pulsanti CTA
-- Badge di categoria
-
-### ProjectEditor.tsx (Admin)
-Il form di editing del progetto nell'area admin include:
-- Upload immagine via `MediaPicker` (vedi Capitolo 8)
-- Due coppie `label + URL` per i pulsanti
-- Toggle `is_visible` con switch UI
-- Selezione categoria da dropdown
-
-### ProjectsList.tsx (Admin)
-La lista admin dei progetti espone:
-- **Drag-to-sort**: invio di PATCH request ad ogni riposizionamento
-- **Toggle visibilità**: PATCH istantaneo con cambio di icona (occhio aperto/chiuso)
-- **Filtro per categoria**: segmentazione visiva della lista
-
-## 7. Strategie di Categoria
-Inizialmente (sino alla v1.6.0), le categorie erano progettate in modo statico: stringhe fisse definite all'interno del codice React (`PROJECT_CATEGORIES`).
-
-Tuttavia, l'esperienza in produzione su SimonePizziWebSite ha dimostrato che un portfolio in crescita richiede flessibilità editoriale totale. Con la **v1.7.10**, l'architettura è stata migrata verso un modello nativamente **DB-driven e Dinamico**.
-
-### Sistema Relazionale Categorie e Tag
-Il database si è arricchito delle tabelle `categories` e `tags`, assieme a tabelle pivot per relazioni molti-a-molti (`article_tags`).
-Il frontend non possiede più array hardcoded, ma effettua il fetching all'avvio chiamando endpoints specifici (es. `GET /api/categories.php`).
-
-**Perché questa migrazione è stata vitale:**
-1. L'amministratore può modificare, rinominare o depotenziare categorie dal volo tramite pannello admin senza richiedere una nuova "build" di Vite.
-2. Introduce il supporto al **Multi-Tagging** per l'incrocio dimensionale dei contenuti.
-3. Il frontend mappa in UI istantaneamente questi nuovi filtri, rendendo la navigazione della libreria estremamente flessibile.
-
-## 8. `auth_helper.php` — Il Pattern Minimale
-
-SimonePizziWebSite ha introdotto un pattern di autenticazione più snello rispetto agli altri siti: `auth_helper.php` è una classe `Auth` con un unico metodo statico `check()`.
+Articoli e progetti sono entità diverse, ma per chi cerca sul sito sono la stessa cosa: contenuti. SimonePizziWebSite lo riconosce con un endpoint di ricerca unico, `search.php`, che interroga entrambe le tabelle con un `LIKE` e marca ogni risultato con un campo `type` perché il frontend sappia come renderlo.
 
 ```php
-<?php
-// auth_helper.php
-require_once 'db.php';
-
-session_start();
-header('Content-Type: application/json');
-
-class Auth {
-    public static function check() {
-        if (!isset($_SESSION['user_id'])) {
-            http_response_code(401);
-            echo json_encode(['status' => 'error', 'message' => 'Non autorizzato']);
-            exit;
-        }
-    }
-}
+// SPW search.php — una query per famiglia, risultati uniti e marcati con `type`
+$like = '%' . $q . '%';
+$articles = $pdo->prepare("SELECT id, title AS name, slug, 'article' AS type FROM articles
+                           WHERE status='published' AND (title LIKE ? OR content LIKE ?)");
+$projects = $pdo->prepare("SELECT id, name, NULL AS slug, 'project' AS type FROM projects
+                           WHERE is_visible=1 AND (name LIKE ? OR description LIKE ?)");
+// ...si eseguono entrambe, si concatenano i risultati, il client smista per `type`
 ```
 
-**Utilizzo in ogni endpoint protetto**:
-```php
-// In projects.php, articles.php, ecc.
-require_once 'auth_helper.php'; // Include anche session_start() e gli header
+È una ricerca onesta nei suoi limiti: `LIKE '%q%'`, non un motore full-text. Per un portfolio o un blog personale è più che sufficiente, e il campo `type` evita di costruire due ricerche separate nel frontend. Questo endpoint vive a metà strada tra il ciclo di vita dei contenuti (Capitolo 9) e questo modulo: è il punto in cui le due entità tornano a parlare la stessa lingua.
 
-// Nelle route protette:
-Auth::check();
-```
+## 6. Frontend React: i Componenti Chiave
 
-Il vantaggio rispetto al pattern `auth.php` standard: `session_start()` e gli header JSON vengono gestiti **una volta sola** nel file helper, non ripetuti in ogni endpoint. Riduce errori di "headers already sent".
+- **`PortfolioGrid.tsx`**: la griglia pubblica, che filtra per categoria lato client, mostra le copertine con lazy loading, rende i due CTA in modo condizionale e i badge di categoria.
+- **`ProjectEditor.tsx`** (admin): upload immagine via `MediaPicker` (Capitolo 8), le due coppie label+URL dei pulsanti, il toggle `is_visible`, la categoria da dropdown.
+- **`ProjectsList.tsx`** (admin): drag-to-sort che invia un `PATCH` a ogni riposizionamento, toggle di visibilità con `PATCH` istantaneo (l'icona occhio aperto/chiuso), filtro per categoria.
+
+## 7. Strategie di Categoria: da Statiche a DB-driven
+
+Fino alla v1.6, le categorie erano stringhe fisse nel codice React (`PROJECT_CATEGORIES`). Un portfolio che cresce ha bisogno di più libertà, e dalla v1.7.10 le categorie diventano DB-driven: una tabella `categories` interrogata dal frontend all'avvio (`GET /api/categories.php`), così l'admin può rinominarle o aggiungerne dal pannello senza una nuova build di Vite.
+
+Il multi-tagging molti-a-molti, invece, resta una feature degli **articoli**, non dei progetti (che hanno una sola `category`): la sua trattazione, con il doppio binario verso il campo CSV legacy, è al Capitolo 9. Qui basta la lezione di disponibilità: spostare le categorie dal codice al database le rende modificabili a caldo, e questo per un catalogo editoriale è ciò che conta.
+
+> [!NOTE]
+> **Il pattern `auth_helper.php`**
+> Anche `projects.php`, come ogni endpoint protetto, si appoggia all'`auth_helper.php` che incapsula `session_start()`, gli header JSON e la classe `Auth` (il dettaglio è al Capitolo 5). Concentrare quelle chiamate in un solo include, invece di ripeterle in ogni file, riduce gli errori da «headers already sent».
 
 ---
-*Conclusione: Con i capitoli 14-15 il Modello Universale copre i pattern di migrazione e showcase reali emersi dai progetti di produzione.*
-
----
-*Prossimo Capitolo: Festival Logic - Iscrizioni e Workflow Approvazione - Il ciclo completo di gestione concorrenti per DISINTELLIGENZA e FDCA.*
+*Prossimo Capitolo: Festival Logic, Iscrizioni e Workflow di Approvazione. Il ciclo di gestione dei concorrenti per DISINTELLIGENZA e FDCA.*
