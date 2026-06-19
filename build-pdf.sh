@@ -42,44 +42,44 @@ YAML
 
 # ---- PARTE I ----
 printf '\n\\part{La Visione}\n\n' >> "$MASTER"
-append_chapter "$DIR/CAPITOLO 1 - Manifesto.md"
+append_chapter "$DIR/manuale/CAPITOLO 1 - Manifesto.md"
 
 # ---- PARTE II ----
 printf '\n\\part{L'"'"'Architettura}\n\n' >> "$MASTER"
-append_chapter "$DIR/CAPITOLO 2 - Architettura e Struttura Progetto.md"
-append_chapter "$DIR/CAPITOLO 3 - Database Strategy.md"
-append_chapter "$DIR/CAPITOLO 4 - Frontend Dependencies.md"
+append_chapter "$DIR/manuale/CAPITOLO 2 - Architettura e Struttura Progetto.md"
+append_chapter "$DIR/manuale/CAPITOLO 3 - Database Strategy.md"
+append_chapter "$DIR/manuale/CAPITOLO 4 - Frontend Dependencies.md"
 
 # ---- PARTE III ----
 printf '\n\\part{I Componenti}\n\n' >> "$MASTER"
-append_chapter "$DIR/CAPITOLO 5 - Backend Logic (PHP).md"
-append_chapter "$DIR/CAPITOLO 6 - Frontend Bridge (API.ts).md"
-append_chapter "$DIR/CAPITOLO 7 - Media & Optimization.md"
-append_chapter "$DIR/CAPITOLO 8 - Advanced Content Editing & Media Integration.md"
+append_chapter "$DIR/manuale/CAPITOLO 5 - Backend Logic (PHP).md"
+append_chapter "$DIR/manuale/CAPITOLO 6 - Frontend Bridge (API.ts).md"
+append_chapter "$DIR/manuale/CAPITOLO 7 - Media & Optimization.md"
+append_chapter "$DIR/manuale/CAPITOLO 8 - Advanced Content Editing & Media Integration.md"
 
 # ---- PARTE IV ----
 printf '\n\\part{Il Flusso Operativo}\n\n' >> "$MASTER"
-append_chapter "$DIR/CAPITOLO 9 - Content Lifecycle.md"
-append_chapter "$DIR/CAPITOLO 10 - Security & Auth.md"
-append_chapter "$DIR/CAPITOLO 11 - SEO Pre-rendering con PHP Entry-Point.md"
-append_chapter "$DIR/CAPITOLO 12 - RSS Feed & Syndication.md"
-append_chapter "$DIR/CAPITOLO 13 - Newsletter & Email System.md"
-append_chapter "$DIR/CAPITOLO 14 - Admin Dashboard & Panels.md"
+append_chapter "$DIR/manuale/CAPITOLO 9 - Content Lifecycle.md"
+append_chapter "$DIR/manuale/CAPITOLO 10 - Security & Auth.md"
+append_chapter "$DIR/manuale/CAPITOLO 11 - SEO Pre-rendering con PHP Entry-Point.md"
+append_chapter "$DIR/manuale/CAPITOLO 12 - RSS Feed & Syndication.md"
+append_chapter "$DIR/manuale/CAPITOLO 13 - Newsletter & Email System.md"
+append_chapter "$DIR/manuale/CAPITOLO 14 - Admin Dashboard & Panels.md"
 
 # ---- PARTE V ----
 printf '\n\\part{I Casi Reali}\n\n' >> "$MASTER"
-append_chapter "$DIR/CAPITOLO 15 - Database Evolution - Da SQLite a MySQL.md"
-append_chapter "$DIR/CAPITOLO 16 - Portfolio & Projects Module.md"
-append_chapter "$DIR/CAPITOLO 17 - Festival Logic - Iscrizioni e Workflow Approvazione.md"
-append_chapter "$DIR/CAPITOLO 18 - Festival Logic - Votazioni e Protezione Anti-Frode.md"
-append_chapter "$DIR/CAPITOLO 19 - Festival Logic - Dashboard Admin, Settings e Reporting.md"
-append_chapter "$DIR/CAPITOLO 20 - Social Interactions & Reactions.md"
+append_chapter "$DIR/manuale/CAPITOLO 15 - Database Evolution - Da SQLite a MySQL.md"
+append_chapter "$DIR/manuale/CAPITOLO 16 - Portfolio & Projects Module.md"
+append_chapter "$DIR/manuale/CAPITOLO 17 - Festival Logic - Iscrizioni e Workflow Approvazione.md"
+append_chapter "$DIR/manuale/CAPITOLO 18 - Festival Logic - Votazioni e Protezione Anti-Frode.md"
+append_chapter "$DIR/manuale/CAPITOLO 19 - Festival Logic - Dashboard Admin, Settings e Reporting.md"
+append_chapter "$DIR/manuale/CAPITOLO 20 - Social Interactions & Reactions.md"
 
 # ---- APPENDICI ----
 printf '\n\\part{Appendici}\n\n' >> "$MASTER"
-append_chapter "$DIR/BOILERPLATE-CHECKLIST.md"
-append_chapter "$DIR/APPENDICE B - Ciclo di vita di un fork.md"
-append_chapter "$DIR/APPENDICE C - Testing e Deploy.md"
+append_chapter "$DIR/manuale/BOILERPLATE-CHECKLIST.md"
+append_chapter "$DIR/manuale/APPENDICE B - Ciclo di vita di un fork.md"
+append_chapter "$DIR/manuale/APPENDICE C - Testing e Deploy.md"
 
 echo "File master creato: $MASTER"
 
