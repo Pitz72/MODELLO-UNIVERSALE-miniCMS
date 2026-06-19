@@ -65,10 +65,11 @@ L'obiettivo è uno standard di sviluppo per Web App moderne leggere che sia:
 - [Capitolo 19: Festival Logic - Dashboard Admin, Settings e Reporting](./CAPITOLO%2019%20-%20Festival%20Logic%20-%20Dashboard%20Admin%2C%20Settings%20e%20Reporting.md)
 - [Capitolo 20: Social Interactions & Reactions](./CAPITOLO%2020%20-%20Social%20Interactions%20%26%20Reactions.md)
 
-### Allegati
-*Strumenti pratici per iniziare.*
+### Appendici
+*Strumenti pratici e casi di confine.*
 
-- [Boilerplate Checklist](./BOILERPLATE-CHECKLIST.md)
+- [Appendice A: Boilerplate Checklist](./BOILERPLATE-CHECKLIST.md)
+- [Appendice B: Ciclo di vita di un fork](./APPENDICE%20B%20-%20Ciclo%20di%20vita%20di%20un%20fork.md)
 
 ---
 *Prima Edizione — Marzo 2026*
