@@ -35,8 +35,17 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
   difesa-3/1/0-livelli, tre-modi-di-nominare, $_FILES['type']-non-è-validazione, path-guard
   realpath/basename/strpos + delete-senza-CSRF, disco-come-DB-media, WebP-non-universale, one-shot-non-gated.
   Corregge CAP 7 (manca del tutto la sicurezza upload; §3.3 .htaccess è PHP-off non solo cache; §3.1 WebP non universale).
-- ⬜ S1-C6 Advanced Editing / Editor — fonti SPW-C6, SR-C6, DIS-C6
-- ⬜ S1-C7 SEO & Prerendering — fonti SPW-C7, SR-C7, DIS-C7
+- ✅ **S1-C6 Advanced Editing / Editor** — fonti SPW-C6, SR-C6, DIS-C6 (FDCA = editor assente). → CAP 8 (princ.) + ponti CAP 10/11/7.
+  Scala a 3 gradini: Tiptap-blindato SPW / Tiptap + shim migrazione Quill→Tiptap SR / contentEditable+execCommand DIS.
+  Difesa XSS-stored = solo render-time DOMPurify (DIS l'UNICO senza = scoperto). GOLD: scala-editor, choke-point-render,
+  sito-senza-DOMPurify, shim-Quill→Tiptap, guardie-inserimento, "sembra sanitize ma non lo è". Corregge CAP 8 (§3
+  l'editor NON è "native-React senza deps" = è Tiptap; "Paste Protection" sovradichiarata; manca del tutto DOMPurify/sicurezza).
+- ✅ **S1-C7 SEO & Prerendering** — fonti SPW-C7, SR-C7, DIS-C7 (FDCA fuori scala). → CAP 11 (princ.) + ponti CAP 8/10/9.
+  Scala a 3 gradini: Dynamic Rendering completo SPW≡SR (UA-sniff + body) / OG-proxy leggero solo-meta DIS. SALDA S1-C6→C7:
+  il prerender riemette content con strip_tags-allowlist (≠ DOMPurify) = buco XSS-attributi via UA-spoof (SR copia il motore
+  di SPW + la falla); DIS immune per sottrazione. GOLD: 3-gradini, buco-XSS-copiato, seo-cache-morta SR, SEO-indicizza-bozze
+  SR+DIS, due-sistemi-SEO-divergono, archeologia-SSG. Corregge CAP 11 (raccomanda l'SSG che SPW ha SCARTATO; esempio SQLite
+  attribuito a SPW-MySQL; manca Dynamic Rendering, buco XSS, visibilità, seo-cache, sitemap/JSON-LD).
 - ⬜ S1-C8 RSS & Feed — fonti SPW-C8, SR-C8, DIS-C8
 - ⬜ S1-C9 Newsletter & Email — fonti SPW-C9, SR-C9, DIS-C9
 - ⬜ S1-C10 Festival Logic — fonte DIS-C10 (solo DIS; FDCA eredita)
@@ -57,4 +66,4 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
 ---
 
 ### Stato globale FASE 2
-- **5 / 14 schede S1 completate** (S1-C1 ✅, S1-C2 ✅, S1-C3 ✅, S1-C4 ✅, S1-C5 ✅). Prossima: **S1-C6 Advanced Editing / Editor**.
+- **7 / 14 schede S1 completate** (S1-C1 ✅, S1-C2 ✅, S1-C3 ✅, S1-C4 ✅, S1-C5 ✅, S1-C6 ✅, S1-C7 ✅). Prossima: **S1-C8 RSS & Feed**.
