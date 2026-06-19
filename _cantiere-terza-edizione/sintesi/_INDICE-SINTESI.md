@@ -76,7 +76,16 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
   (ponte S1-C2). Anti-frode voto già in S1-C2 (qui solo richiamato). Corregge CAP 18 §4 (report dato come attivo
   = è disabilitato), §3 (finalist mai usato + drift non avvertito), CAP 16 §4 (Newsletter Sync = problema GDPR),
   CAP 17 §2 (cookie cosmetico, la barriera reale è IP/24h); inquadra il festival come modulo opzionale + eredità FDCA.
-- ⬜ S1-C11 Engagement & Reactions — fonte SPW-C11 (solo SPW)
+- ✅ **S1-C11 Engagement & Reactions** — fonte SPW-C11 (reazioni solo SPW; ramo contatti cross-sito). → CAP 19 (princ.) + ponti CAP 10/8/13/18.
+  L'engagement anonimo = il FRONTE di scrittura pubblica del CMS (uniche superfici dove un visitatore non
+  autenticato scrive: reazioni + messaggi). GOLD: le DUE FILOSOFIE di sanitizzazione (write-time messaggi vs
+  render-time articoli S1-C6, polarità inversa — input pubblico ripulito all'ingresso, content admin al render);
+  rate-limit a DUE strati (voter_hash 20/min bypassabile via UA-rotation → secondo argine solo-IP 30/min);
+  hash≠anonimato (SHA256(IP+UA) NON salato, reversibile per forza bruta); integrità-nello-schema (UNIQUE+INSERT
+  IGNORE vs drift del vote_count festival S1-C10); IP-grezzo (rimando S1-C2); email-fire-and-forget (S1-C9);
+  engagement-leggero vs voto-competitivo (S1-C10). Anti-frode/identità già in S1-C2. Corregge CAP 19 §4 (un solo
+  strato mislabeled "per IP" = sono due, il vero per-IP è il secondo), §3 (hash NON salato né irreversibile),
+  omette messages.php (metà del cluster) e le due filosofie di sanitizzazione; versione "v2.0" errata (SPW v1.21).
 - ⬜ S1-C12 Admin Dashboard & Panels — fonti SPW-C12, SR-C12, DIS-C12
 - ⬜ S1-C13 DB Evolution & Incidenti — fonti SR-C13, DIS-C1 (meccanismo update_db_*), SPW-C1 (init fossile)
 - ⬜ S1-FORK FDCA come caso "fork/evoluzione" — fonte FDCA-DIFF (non aggiunge pattern: backend = DIS)
@@ -93,4 +102,4 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
 ---
 
 ### Stato globale FASE 2
-- **10 / 14 schede S1 completate** (S1-C1 ✅, S1-C2 ✅, S1-C3 ✅, S1-C4 ✅, S1-C5 ✅, S1-C6 ✅, S1-C7 ✅, S1-C8 ✅, S1-C9 ✅, S1-C10 ✅). Prossima: **S1-C11 Engagement & Reactions**.
+- **11 / 14 schede S1 completate** (S1-C1 ✅, S1-C2 ✅, S1-C3 ✅, S1-C4 ✅, S1-C5 ✅, S1-C6 ✅, S1-C7 ✅, S1-C8 ✅, S1-C9 ✅, S1-C10 ✅, S1-C11 ✅). Prossima: **S1-C12 Admin Dashboard & Panels**.

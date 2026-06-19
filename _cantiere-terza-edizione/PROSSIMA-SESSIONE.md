@@ -1,8 +1,8 @@
 # PROSSIMA SESSIONE — prompt pronto da incollare
 
-> 🟨 FASE 2 (SINTESI) in corso. S1-C1 → S1-C8 ✅ COMPLETATE (8/14). S1-C6 ed S1-C7 erano state
-> accorpate in una sessione; S1-C8 è stata fatta SOLA. Questa è la NONA scheda di sintesi:
-> **S1-C9 Newsletter & Email**. Ordine confermato: S1 → S2 → S3 → S4 (nessuna deviazione).
+> 🟨 FASE 2 (SINTESI) in corso. S1-C1 → S1-C11 ✅ COMPLETATE (11/14). L'ultima è stata una SESSIONE
+> TRIPLA (C9+C10+C11 di fila, per non ricaricare il contesto). Restano: **S1-C12, S1-C13, S1-FORK**.
+> Questa è la DODICESIMA scheda: **S1-C12 Admin Dashboard & Panels**. Ordine: S1 → S2 → S3 → S4.
 
 ---
 
@@ -10,78 +10,63 @@ Stiamo lavorando alla TERZA EDIZIONE del manuale miniCMS. Leggi prima
 _cantiere-terza-edizione/ROADMAP.md, _cantiere-terza-edizione/LOG.md e
 _cantiere-terza-edizione/sintesi/_INDICE-SINTESI.md per il contesto.
 
-STATO: FASE 1 (mappatura) CONCLUSA — 4 siti, 34 card, copertura COMPLETA. FASE 2 (SINTESI) in corso:
-**8/14 schede S1 completate** (S1-C1 Backend Core ✅, S1-C2 Security & Auth ✅, S1-C3 Frontend Bridge
-✅, S1-C4 Content APIs ✅, S1-C5 Media & Upload ✅, S1-C6 Editor ✅, S1-C7 SEO & Prerendering ✅,
-S1-C8 RSS & Feed ✅). Metodo: UNA scheda tematica cross-sito per sessione (eccezionalmente DUE se unite
-da un filo, come C6+C7). Fonde i 2-3 trattamenti per-sito di un cluster in UNA visione comparata (pattern
-comune + varianti per sito in tabella unica + GOLD + mappa→capitoli). Fonti = card di mappatura
-(specialmente i §6). NON si rilegge il codice sorgente. Template:
-`_cantiere-terza-edizione/sintesi/_TEMPLATE-SCHEDA.md`; modelli già fatti: `S1-C1` … `S1-C8` (seguine
-struttura e livello di dettaglio).
+STATO: FASE 1 (mappatura) CONCLUSA — 4 siti, 34 card. FASE 2 (SINTESI) in corso: **11/14 schede S1
+completate** (S1-C1…C11 ✅). Metodo: UNA scheda tematica cross-sito per sessione (ma si possono fare
+PIÙ schede di fila nella stessa sessione, come la tripla C9/C10/C11 — scriverle/committarle comunque
+una alla volta). Fonde i 2-3 trattamenti per-sito in UNA visione comparata (pattern comune + tabella
+varianti unica + GOLD + mappa→capitoli). Fonti = card di mappatura (specialmente i §6). NON si rilegge
+il codice sorgente. Template: `_cantiere-terza-edizione/sintesi/_TEMPLATE-SCHEDA.md`; modelli già fatti:
+`S1-C1` … `S1-C11` (seguine struttura e livello di dettaglio).
 
-UNITÀ DI QUESTA SESSIONE: **S1-C9 — Scheda tematica cross-sito "Newsletter & Email"**.
-Fonti primarie: SPW-C9, SR-C9, DIS-C9. Da consolidare (spunti dai §6 e dal LOG già scritti):
-- **CHIUDE DEFINITIVAMENTE il "quadro dei 4 emettitori del content"** (DOMPurify render / strip_tags-
-  allowlist prerender / feed sottrazione|escape / **newsletter = QUESTA scheda**). La newsletter è
-  l'ULTIMO/4° emettitore. Tesi per-sito: **SPW** = la newsletter è il MENO sanitizzato dei 4 (body grezzo
-  via buildNewsletterHtml ZERO sanitizzazione) MA NON emette articles.content (solo title/excerpt/cover) e
-  i due punti d'iniezione stanno dietro Auth::check, unico input pubblico (name in conferma) escapato →
-  ponte chiuso a rischio basso; **SR** = newsletter PIÙ sicura dei 4 (SELECT senza content :306 +
-  htmlspecialchars su tutto, sottrazione+escape, speculare-opposto a SPW); **DIS** = newsletter sicura per
-  escape (news htmlspecialchars, non emette content) ma il sistema email il PIÙ GREZZO.
-- **Scala a 3 gradini "quanto puoi semplificare un sistema di posta":** SPW (double opt-in con
-  confirm_token monouso + unsubscribe_token stabile random_bytes(32) + rate-limit per-IP che RICICLA
-  login_attempts di C2 anti-mail-bombing) → SR (PHPMailer/SMTP STARTTLS, primo uso reale di lib/ vendored;
-  UN SOLO confirmation_token che fa conferma E disiscrizione, mai azzerato, senza TTL; rate-limit ASSENTE
-  sulla subscribe = mail-bombing pur avendo .cache/ratelimit) → DIS (mail() NATIVA, NESSUN double opt-in
-  = iscrizione di terzi, NESSUN token disiscrizione = forgeable+GET-prefetchabile, invio sincrono nudo,
-  email HEADER INJECTION via name nel Subject contact).
-- **Trasporto:** SPW mail() nativa · SR PHPMailer/SMTP (ma contact.php usa mail() → DUE trasporti
-  coesistono) · DIS mail() nativa duplicata per file. Deliverability (no SPF/DKIM con mail(), From "Fake
-  domain?" DIS).
-- **GOLD trasversali:** (1) invio SINCRONO foreach mail()/SMTP senza coda/throttle in tutti e tre
-  (gemello del WebP sincrono S1-C5) — SPW nessun throttle, SR usleep ogni 10+try/catch per-destinatario
-  (il migliore), DIS nudo (recipients_count = tentativi non successi); (2) rate-limit anti-mail-bombing
-  (SPW ricicla login_attempts / SR assente / DIS assente); (3) double opt-in a 3 gradini (SPW pieno / SR
-  un-token-per-tutto / DIS assente); (4) unsubscribe (token stabile SPW / stesso token SR / sola-email
-  forgeable DIS) + GET prefetch-able senza conferma in tutti; (5) confirm_token senza TTL nonostante
-  claim "il link scade" (SPW E SR = stesso fossile di promessa); (6) header injection via name (DIS);
-  (7) storicizzazione campagne (newsletter_campaigns solo DIS); (8) consenso/GDPR (doppio checkbox SPW /
-  singolo SR / implicito all'approvazione festival DIS, ponte C10).
-- **Ponte Telegram (da S1-C1/C8):** in SR il TELEGRAM_BOT_TOKEN è fossile e il feed_config.php di S1-C8
-  ne era il relitto; in C9 verificare se Telegram entra davvero nell'invio (probabilmente no — bot manuale
-  via copia-URL). Chiude il filo Telegram-fossile.
+UNITÀ DI QUESTA SESSIONE: **S1-C12 — Scheda tematica cross-sito "Admin Dashboard & Panels"**.
+Fonti primarie: SPW-C12, SR-C12, DIS-C12. Da consolidare (spunti dai §6 e dal LOG):
+- **Scala a 3 modelli di dashboard:** SPW = dashboard che **MISURA** (stats.php + analytics a doppia
+  personalità + 6 grafici Chart.js + selettore periodo 7/30/90 + AdminLayout con route-guard unico
+  adminAuthLoader); SR = dashboard che **NON misura niente** = console CRUD pura (Admin.tsx mega-componente
+  596 righe, "Dashboard" = section-switcher a 8 card senza dati/contatori/grafici, guard-componente
+  checkAuth on mount); DIS = **via di mezzo** (AdminLayout come SPW + guard-componente come SR, dashboard
+  che misura ma TESTUALE — stats.php senza Chart.js).
+- **GOLD per sito:** SPW = (1) backup automatico FUORI dalla docroot (../db_backups_simonepizzi) perché
+  clean-dist.js strippa .data/ → il .htaccess deny non arriva mai sul server, ricreato a runtime + nome
+  random_bytes + chmod 0600 + rotazione 15; (2) pseudo-cron gated admin-OR-secret timing-safe hash_equals;
+  (3) settings POST accetta chiavi arbitrarie no-whitelist; (4) optimize_db NON distruttivo nonostante
+  intestazione "usa-e-getta". SR = (1) "la dashboard che non misura niente" (gemello del framing upload
+  SR-C5); (2) NESSUN backup/export/cron — il flagship degli incidenti ha la cura (emergency_revert_wal
+  S1-C13) ma non la prevenzione (vs backup fuori-docroot SPW); (3) change_password senza session_version →
+  invalidazione client-side setTimeout. DIS = (1) la dashboard MISURA (≠ SR) ma testuale; (2) contacts
+  WRITE-ONLY (mai letti da nessun pannello, l'admin li vede solo via email di notifica — chiude buco
+  DIS-C9); (3) guard ROLE-BLIND (AdminLayout controlla solo login non role==admin → editor vede tutto);
+  (4) reset distruttivi via fetch POST nudo senza CSRF (protezione = doppio window.confirm UX + gate admin).
+- **Tre modi di fare un admin (architettura frontend):** mega-componente unico SR (1 rotta /admin, tutto
+  dentro) / AdminLayout + loader react-router SPW (guard dichiarativo, N pagine figlie via Outlet) /
+  AdminLayout + guard-componente DIS (struttura SPW ma guard imperativo SR). Ponte forte a S1-C3 (guard
+  loader-vs-componente già consolidato lì) — qui l'architettura completa del pannello.
+- **Ponti:** backup/cron/optimize_db → S1-C13 (DB evolution); analytics consumer delle reazioni → S1-C11;
+  gate role-blind → S1-C2; consumer dei contenuti (NewsletterComposer, ArticleEditor, MediaManager) →
+  S1-C4/C5/C6/C9 (qui solo come aggregati nel pannello, non ri-mappati).
 
 Fai così:
-1. Scrivi la scheda in `_cantiere-terza-edizione/sintesi/S1-C9-newsletter-email.md` seguendo
-   `_TEMPLATE-SCHEDA.md` (0 una-frase · 1 pattern comune · 2 tabella varianti UNICA e deduplicata · 3
-   GOLD/box · 4 mappa→capitoli · 5 scarti/dedup). COMPLETA esplicitamente la "mappa dei 4 emettitori del
-   content" come tabella/box riassuntivo, marcando che con la newsletter il quadro è CHIUSO (riprendi la
-   tabella del §3 di S1-C8 e riempi la riga 4 per ciascun sito) — è il valore trasversale di questa scheda.
-2. Mappa esplicitamente → capitoli esistenti: soprattutto **CAP 13 (Newsletter & Email System)**, con
-   ponti a CAP 8/11/12 (gli altri 3 emettitori del content), CAP 10 (rate-limit/header-injection/CSRF,
-   il riciclo di login_attempts), CAP 9 (consenso/GDPR), CAP 16-18 (consenso implicito festival DIS).
-   Segnala eventuali CORREZIONI al testo attuale (come fatto per CAP 3/10/6/9/7/8/11/12 nelle schede
-   precedenti).
-3. Aggiorna `_cantiere-terza-edizione/sintesi/_INDICE-SINTESI.md` (S1-C9 → ✅, contatore 9/14).
+1. Scrivi la scheda in `_cantiere-terza-edizione/sintesi/S1-C12-admin-dashboard.md` seguendo
+   `_TEMPLATE-SCHEDA.md` (0 una-frase · 1 pattern comune · 2 tabella varianti UNICA · 3 GOLD/box · 4
+   mappa→capitoli · 5 scarti/dedup).
+2. Mappa esplicitamente → capitoli esistenti. ATTENZIONE: **non esiste un capitolo "Admin Dashboard"
+   dedicato** nei 19 capitoli attuali (verifica: i capitoli admin sono spalmati — CAP 10 auth, CAP 18
+   dashboard FESTIVAL, ecc.). Quindi questa scheda probabilmente segnala un GAP = un capitolo nuovo da
+   proporre in S3 (Admin Dashboard generale, distinto dal CAP 18 festival-specifico). Verifica leggendo
+   _master.md / l'indice dei capitoli e proponi dove collocare il materiale (nuovo CAP o sezione).
+3. Aggiorna `_cantiere-terza-edizione/sintesi/_INDICE-SINTESI.md` (S1-C12 → ✅, contatore 12/14).
 
-Criterio di STOP: scheda S1-C9 in stato COMPLETATO (pattern + varianti + GOLD + mappa capitolo + quadro
-4 emettitori CHIUSO).
+Criterio di STOP: scheda S1-C12 in stato COMPLETATO (pattern + varianti + GOLD + mappa/proposta capitolo).
 
 Ciclo di chiusura OBBLIGATORIO a fine sessione:
-- aggiorna `_cantiere-terza-edizione/sintesi/_INDICE-SINTESI.md` (S1-C9 → ✅)
-- aggiorna `_cantiere-terza-edizione/ROADMAP.md` (spunta S1-C9 in §4, aggiorna §7 stato globale)
-- aggiungi UNA riga a `_cantiere-terza-edizione/LOG.md` (più recente IN BASSO)
-- git add/commit/push (un commit) e verifica che locale = origin/main
-- riscrivi QUESTO file (PROSSIMA-SESSIONE.md, sia root sia in _cantiere-terza-edizione/) con la
-  prossima scheda: **S1-C10 (Festival Logic)** — fonte DIS-C10 (solo DIS; FDCA eredita). Scheda
-  particolare (un solo sito): macchina a stati iscrizione→selezione→voto→reset, round manuali via flag
-  in_current_round, vote_count denormalizzato, master switch pubblici, anti-frode voto (già in S1-C2,
-  qui il contesto festival), report finale disabilitato, stato finalist vestigiale. Valuta il taglio:
-  cluster mono-sito → scheda più corta, focalizzata sul pattern "concorso a voto pubblico" come modulo
-  opzionale del miniCMS, con FDCA come eredità.
+- aggiorna `_INDICE-SINTESI.md` (S1-C12 → ✅) + `ROADMAP.md` (§4 spunta S1-C12, §7 stato globale)
+- aggiungi UNA riga a `LOG.md` (più recente IN BASSO)
+- git add/commit/push (un commit) e verifica locale = origin/main
+- riscrivi QUESTO file (root + _cantiere-terza-edizione/) con la prossima scheda: **S1-C13 (DB Evolution
+  & Incidenti)** — fonti SR-C13 (princ.), DIS-C1 (meccanismo update_db_*), SPW-C1 (init fossile). Alto
+  valore e corposo (l'incidente WAL notturno, la migrazione MySQL come reazione, i fossili SQLite, i 3
+  schemi subscribers, cura-senza-prevenzione). → CAP 14. Dopo C13 resta solo **S1-FORK** (FDCA come caso
+  fork/evoluzione, fonte FDCA-DIFF — non aggiunge pattern, backend = DIS) e poi S2/S3/S4.
 
-Nota: scheda S1-C9 = valuta se accorparla con C13 (DB Evolution) — probabilmente NO (C13 è alto valore e
-corposo, merita sola; C9 è autonoma e chiude il quadro emettitori). Default: S1-C9 SOLA. L'accorpamento
-resta eccezionale e solo quando due cluster sono genuinamente uniti da un filo tematico.
+Nota: si possono di nuovo fare PIÙ schede di fila se la sessione lo consente (C12 + C13, o C13 + FORK).
+Valuta in base allo spazio di contesto. Le schede vanno comunque scritte e committate una alla volta.
