@@ -1,8 +1,8 @@
 # PROSSIMA SESSIONE — prompt pronto da incollare
 
-> 🟨 FASE 2 (SINTESI) in corso. S1-C1 → S1-C7 ✅ COMPLETATE (7/14). S1-C6 ed S1-C7 sono state
-> accorpate in una sessione. Questa è l'OTTAVA scheda di sintesi: **S1-C8 RSS & Feed**.
-> Ordine confermato: S1 → S2 → S3 → S4 (nessuna deviazione).
+> 🟨 FASE 2 (SINTESI) in corso. S1-C1 → S1-C8 ✅ COMPLETATE (8/14). S1-C6 ed S1-C7 erano state
+> accorpate in una sessione; S1-C8 è stata fatta SOLA. Questa è la NONA scheda di sintesi:
+> **S1-C9 Newsletter & Email**. Ordine confermato: S1 → S2 → S3 → S4 (nessuna deviazione).
 
 ---
 
@@ -11,67 +11,77 @@ _cantiere-terza-edizione/ROADMAP.md, _cantiere-terza-edizione/LOG.md e
 _cantiere-terza-edizione/sintesi/_INDICE-SINTESI.md per il contesto.
 
 STATO: FASE 1 (mappatura) CONCLUSA — 4 siti, 34 card, copertura COMPLETA. FASE 2 (SINTESI) in corso:
-**7/14 schede S1 completate** (S1-C1 Backend Core ✅, S1-C2 Security & Auth ✅, S1-C3 Frontend Bridge
-✅, S1-C4 Content APIs ✅, S1-C5 Media & Upload ✅, S1-C6 Editor ✅, S1-C7 SEO & Prerendering ✅).
-Metodo: UNA scheda tematica cross-sito per sessione (eccezionalmente DUE se unite da un filo, come
-C6+C7). Fonde i 2-3 trattamenti per-sito di un cluster in UNA visione comparata (pattern comune +
-varianti per sito in tabella unica + GOLD + mappa→capitoli). Fonti = card di mappatura (specialmente i
-§6). NON si rilegge il codice sorgente. Template: `_cantiere-terza-edizione/sintesi/_TEMPLATE-SCHEDA.md`;
-modelli già fatti: `S1-C1` … `S1-C7` (seguine struttura e livello di dettaglio).
+**8/14 schede S1 completate** (S1-C1 Backend Core ✅, S1-C2 Security & Auth ✅, S1-C3 Frontend Bridge
+✅, S1-C4 Content APIs ✅, S1-C5 Media & Upload ✅, S1-C6 Editor ✅, S1-C7 SEO & Prerendering ✅,
+S1-C8 RSS & Feed ✅). Metodo: UNA scheda tematica cross-sito per sessione (eccezionalmente DUE se unite
+da un filo, come C6+C7). Fonde i 2-3 trattamenti per-sito di un cluster in UNA visione comparata (pattern
+comune + varianti per sito in tabella unica + GOLD + mappa→capitoli). Fonti = card di mappatura
+(specialmente i §6). NON si rilegge il codice sorgente. Template:
+`_cantiere-terza-edizione/sintesi/_TEMPLATE-SCHEDA.md`; modelli già fatti: `S1-C1` … `S1-C8` (seguine
+struttura e livello di dettaglio).
 
-UNITÀ DI QUESTA SESSIONE: **S1-C8 — Scheda tematica cross-sito "RSS & Feed Syndication"**.
-Fonti primarie: SPW-C8, SR-C8, DIS-C8. Da consolidare (spunti dai §6 già scritti):
-- **CHIUDE il "quadro dei 4 emettitori del content"** (aperto in S1-C6, sviluppato in S1-C7): editor/
-  render (DOMPurify) → prerender (strip_tags-allowlist, buco attributi) → **RSS (questa scheda)** →
-  newsletter (S1-C9). Tesi chiave del feed: è l'emettitore PIÙ sicuro perché o NON emette il content o
-  lo ESCAPA totalmente. SPW: rss.php NON emette articles.content (description=excerpt+htmlspecialchars)
-  = "sicuro per sottrazione"; SR: feed_news_rss.php EMETTE content (preview 500c SUBSTRING) ma con
-  strip_tags+htmlspecialchars (escape totale) = "sicuro per escape"; DIS: feed.php è PODCAST (non
-  emette news.content), escape parziale (description grezza in CDATA).
-- **Struttura del feed:** SPW = file UNICO rss.php (RSS 2.0 news real-time, GUID urn:...:article:ID
-  isPermaLink=false anti-ripubblicazione); SR = TRITTICO (feed_news_rss.php EMETTE news + rss.php è
-  PROXY INBOUND dei feed podcast esterni Spreaker/AzuraCast con allowlist host + cache stale + no
-  open-proxy + feed_config.php dispenser admin-gated dell'URL); DIS = feed.php = feed PODCAST RSS 2.0 +
-  iTunes (NON news: DIS non sindaca le news), canale da settings podcast_* MAI POPOLATI → default
-  hardcoded.
-- **GOLD per sito:** SPW = GUID urn anti-doppione (vs ripubblicazione bot Telegram), enclosure
-  type=image/jpeg hardcoded vs cover WebP, pubDate instabile su published_at NULL, catch vuoto = feed
-  troncato con HTTP 200; SR = (1) feed_config.php SECURITY THEATER (promette "feed privato con token"
-  ma ritorna URL di endpoint PUBBLICO senza token = fossile integrazione bot Telegram mai costruita),
-  (2) GUID=permalink isPermaLink=true (ripubblica al cambio slug, regressione vs urn:false di SPW),
-  (3) catch PDOException→500+<error> (meglio del catch-vuoto-200 di SPW); DIS = commenti "ragionamento
-  ad alta voce" più estremi del repo (feed.php:26-34 l'autore si chiede se la tabella esista, "bad
-  practice on GET", "I'll assume it exists") = ritratto di codebase AI-assistito non ripulito, GUID=
-  audio_url instabile, enclosure length=0 hardcoded.
-- **Regola visibilità (filo da S1-C4/C7):** la regola status dimenticata anche nei feed (bozze nel
-  feed) in SR; SPW pubDate su published_at NULL; verificare per-sito.
-- **Telegram fossile (ponte S1-C1):** GUID urn di SPW è parallelo ai 301 .htaccess per il bot Telegram;
-  in SR il TELEGRAM_BOT_TOKEN è fossile (bot manuale via copia-URL), feed_config.php ne è il relitto.
+UNITÀ DI QUESTA SESSIONE: **S1-C9 — Scheda tematica cross-sito "Newsletter & Email"**.
+Fonti primarie: SPW-C9, SR-C9, DIS-C9. Da consolidare (spunti dai §6 e dal LOG già scritti):
+- **CHIUDE DEFINITIVAMENTE il "quadro dei 4 emettitori del content"** (DOMPurify render / strip_tags-
+  allowlist prerender / feed sottrazione|escape / **newsletter = QUESTA scheda**). La newsletter è
+  l'ULTIMO/4° emettitore. Tesi per-sito: **SPW** = la newsletter è il MENO sanitizzato dei 4 (body grezzo
+  via buildNewsletterHtml ZERO sanitizzazione) MA NON emette articles.content (solo title/excerpt/cover) e
+  i due punti d'iniezione stanno dietro Auth::check, unico input pubblico (name in conferma) escapato →
+  ponte chiuso a rischio basso; **SR** = newsletter PIÙ sicura dei 4 (SELECT senza content :306 +
+  htmlspecialchars su tutto, sottrazione+escape, speculare-opposto a SPW); **DIS** = newsletter sicura per
+  escape (news htmlspecialchars, non emette content) ma il sistema email il PIÙ GREZZO.
+- **Scala a 3 gradini "quanto puoi semplificare un sistema di posta":** SPW (double opt-in con
+  confirm_token monouso + unsubscribe_token stabile random_bytes(32) + rate-limit per-IP che RICICLA
+  login_attempts di C2 anti-mail-bombing) → SR (PHPMailer/SMTP STARTTLS, primo uso reale di lib/ vendored;
+  UN SOLO confirmation_token che fa conferma E disiscrizione, mai azzerato, senza TTL; rate-limit ASSENTE
+  sulla subscribe = mail-bombing pur avendo .cache/ratelimit) → DIS (mail() NATIVA, NESSUN double opt-in
+  = iscrizione di terzi, NESSUN token disiscrizione = forgeable+GET-prefetchabile, invio sincrono nudo,
+  email HEADER INJECTION via name nel Subject contact).
+- **Trasporto:** SPW mail() nativa · SR PHPMailer/SMTP (ma contact.php usa mail() → DUE trasporti
+  coesistono) · DIS mail() nativa duplicata per file. Deliverability (no SPF/DKIM con mail(), From "Fake
+  domain?" DIS).
+- **GOLD trasversali:** (1) invio SINCRONO foreach mail()/SMTP senza coda/throttle in tutti e tre
+  (gemello del WebP sincrono S1-C5) — SPW nessun throttle, SR usleep ogni 10+try/catch per-destinatario
+  (il migliore), DIS nudo (recipients_count = tentativi non successi); (2) rate-limit anti-mail-bombing
+  (SPW ricicla login_attempts / SR assente / DIS assente); (3) double opt-in a 3 gradini (SPW pieno / SR
+  un-token-per-tutto / DIS assente); (4) unsubscribe (token stabile SPW / stesso token SR / sola-email
+  forgeable DIS) + GET prefetch-able senza conferma in tutti; (5) confirm_token senza TTL nonostante
+  claim "il link scade" (SPW E SR = stesso fossile di promessa); (6) header injection via name (DIS);
+  (7) storicizzazione campagne (newsletter_campaigns solo DIS); (8) consenso/GDPR (doppio checkbox SPW /
+  singolo SR / implicito all'approvazione festival DIS, ponte C10).
+- **Ponte Telegram (da S1-C1/C8):** in SR il TELEGRAM_BOT_TOKEN è fossile e il feed_config.php di S1-C8
+  ne era il relitto; in C9 verificare se Telegram entra davvero nell'invio (probabilmente no — bot manuale
+  via copia-URL). Chiude il filo Telegram-fossile.
 
 Fai così:
-1. Scrivi la scheda in `_cantiere-terza-edizione/sintesi/S1-C8-rss-feed.md` seguendo
+1. Scrivi la scheda in `_cantiere-terza-edizione/sintesi/S1-C9-newsletter-email.md` seguendo
    `_TEMPLATE-SCHEDA.md` (0 una-frase · 1 pattern comune · 2 tabella varianti UNICA e deduplicata · 3
-   GOLD/box · 4 mappa→capitoli · 5 scarti/dedup). La tabella comparativa va scritta UNA volta, pulita.
-   COMPLETA esplicitamente la "mappa dei 4 emettitori del content" (DOMPurify/strip_tags-allowlist/
-   strip_tags+escape/newsletter) come tabella o box riassuntivo — è il valore trasversale di questa scheda.
-2. Mappa esplicitamente → capitoli esistenti: soprattutto **CAP 12 (RSS Feed & Syndication)**, con
-   ponti a CAP 8/11 (gli altri emettitori del content), CAP 10 (il proxy inbound di SR e l'anti-open-
-   proxy), CAP 13 (Newsletter, l'ultimo emettitore). Segnala eventuali CORREZIONI al testo attuale
-   (come fatto per CAP 3/10/6/9/7/8/11 nelle schede precedenti).
-3. Aggiorna `_cantiere-terza-edizione/sintesi/_INDICE-SINTESI.md` (S1-C8 → ✅, contatore 8/14).
+   GOLD/box · 4 mappa→capitoli · 5 scarti/dedup). COMPLETA esplicitamente la "mappa dei 4 emettitori del
+   content" come tabella/box riassuntivo, marcando che con la newsletter il quadro è CHIUSO (riprendi la
+   tabella del §3 di S1-C8 e riempi la riga 4 per ciascun sito) — è il valore trasversale di questa scheda.
+2. Mappa esplicitamente → capitoli esistenti: soprattutto **CAP 13 (Newsletter & Email System)**, con
+   ponti a CAP 8/11/12 (gli altri 3 emettitori del content), CAP 10 (rate-limit/header-injection/CSRF,
+   il riciclo di login_attempts), CAP 9 (consenso/GDPR), CAP 16-18 (consenso implicito festival DIS).
+   Segnala eventuali CORREZIONI al testo attuale (come fatto per CAP 3/10/6/9/7/8/11/12 nelle schede
+   precedenti).
+3. Aggiorna `_cantiere-terza-edizione/sintesi/_INDICE-SINTESI.md` (S1-C9 → ✅, contatore 9/14).
 
-Criterio di STOP: scheda S1-C8 in stato COMPLETATO (pattern + varianti + GOLD + mappa capitolo).
+Criterio di STOP: scheda S1-C9 in stato COMPLETATO (pattern + varianti + GOLD + mappa capitolo + quadro
+4 emettitori CHIUSO).
 
 Ciclo di chiusura OBBLIGATORIO a fine sessione:
-- aggiorna `_cantiere-terza-edizione/sintesi/_INDICE-SINTESI.md` (S1-C8 → ✅)
-- aggiorna `_cantiere-terza-edizione/ROADMAP.md` (spunta S1-C8 in §4, aggiorna §7 stato globale)
+- aggiorna `_cantiere-terza-edizione/sintesi/_INDICE-SINTESI.md` (S1-C9 → ✅)
+- aggiorna `_cantiere-terza-edizione/ROADMAP.md` (spunta S1-C9 in §4, aggiorna §7 stato globale)
 - aggiungi UNA riga a `_cantiere-terza-edizione/LOG.md` (più recente IN BASSO)
 - git add/commit/push (un commit) e verifica che locale = origin/main
 - riscrivi QUESTO file (PROSSIMA-SESSIONE.md, sia root sia in _cantiere-terza-edizione/) con la
-  prossima scheda: **S1-C9 (Newsletter & Email)** — fonti SPW-C9, SR-C9, DIS-C9 (double opt-in +
-  unsubscribe_token SPW / PHPMailer SMTP + un solo token SR / mail() nativa senza double opt-in né
-  token DIS; CHIUDE definitivamente il quadro dei 4 emettitori; rate-limit anti-mail-bombing, header
-  injection, invio sincrono). Valuta se accorpare C9 con C13 o lasciarla sola.
+  prossima scheda: **S1-C10 (Festival Logic)** — fonte DIS-C10 (solo DIS; FDCA eredita). Scheda
+  particolare (un solo sito): macchina a stati iscrizione→selezione→voto→reset, round manuali via flag
+  in_current_round, vote_count denormalizzato, master switch pubblici, anti-frode voto (già in S1-C2,
+  qui il contesto festival), report finale disabilitato, stato finalist vestigiale. Valuta il taglio:
+  cluster mono-sito → scheda più corta, focalizzata sul pattern "concorso a voto pubblico" come modulo
+  opzionale del miniCMS, con FDCA come eredità.
 
-Nota: scheda S1-C8 = SOLA (non accorpata). L'accorpamento C6+C7 è stato eccezionale (filo "content
-grezzo"); valuta caso per caso solo quando due cluster sono genuinamente uniti da un filo tematico.
+Nota: scheda S1-C9 = valuta se accorparla con C13 (DB Evolution) — probabilmente NO (C13 è alto valore e
+corposo, merita sola; C9 è autonoma e chiude il quadro emettitori). Default: S1-C9 SOLA. L'accorpamento
+resta eccezionale e solo quando due cluster sono genuinamente uniti da un filo tematico.

@@ -46,7 +46,15 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
   di SPW + la falla); DIS immune per sottrazione. GOLD: 3-gradini, buco-XSS-copiato, seo-cache-morta SR, SEO-indicizza-bozze
   SR+DIS, due-sistemi-SEO-divergono, archeologia-SSG. Corregge CAP 11 (raccomanda l'SSG che SPW ha SCARTATO; esempio SQLite
   attribuito a SPW-MySQL; manca Dynamic Rendering, buco XSS, visibilità, seo-cache, sitemap/JSON-LD).
-- ⬜ S1-C8 RSS & Feed — fonti SPW-C8, SR-C8, DIS-C8
+- ✅ **S1-C8 RSS & Feed** — fonti SPW-C8, SR-C8, DIS-C8 (FDCA = DIS, feed podcast ereditato → fuori scala). → CAP 12 (princ.) + ponti CAP 8/11/13/10/9.
+  Il feed è l'emettitore PIÙ sicuro del `content` (o non lo emette o lo escapa totalmente): CHIUDE il "quadro
+  dei 4 emettitori" (DOMPurify/strip_tags-allowlist/strip_tags+escape/newsletter) — qui il buco XSS NON si
+  riapre. Geografia divergente: un file SPW / trittico SR (feed news + proxy inbound + feed_config) / feed
+  podcast iTunes DIS. GOLD: quadro-4-emettitori, sottrazione-vs-escape, feed_config security-theater, proxy
+  CORS inbound (allowlist+stale), GUID-che-ripubblica (regressione urn→permalink→audio_url), status-dimenticata
+  (bozze nel feed SR), catch-vuoto-vs-500, monologhi-AI in feed.php (DIS), config-aspirazionale. Corregge CAP 12
+  (§3 feed podcast è DIS non SR; §1 catch-vuoto insegnato come pattern = anti-pattern; §4 feed.php non è alias;
+  omette quadro-4-emettitori/proxy-CORS/security-theater/status; §2.5 GUID URN da ampliare = SR/DIS non lo seguono).
 - ⬜ S1-C9 Newsletter & Email — fonti SPW-C9, SR-C9, DIS-C9
 - ⬜ S1-C10 Festival Logic — fonte DIS-C10 (solo DIS; FDCA eredita)
 - ⬜ S1-C11 Engagement & Reactions — fonte SPW-C11 (solo SPW)
@@ -66,4 +74,4 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
 ---
 
 ### Stato globale FASE 2
-- **7 / 14 schede S1 completate** (S1-C1 ✅, S1-C2 ✅, S1-C3 ✅, S1-C4 ✅, S1-C5 ✅, S1-C6 ✅, S1-C7 ✅). Prossima: **S1-C8 RSS & Feed**.
+- **8 / 14 schede S1 completate** (S1-C1 ✅, S1-C2 ✅, S1-C3 ✅, S1-C4 ✅, S1-C5 ✅, S1-C6 ✅, S1-C7 ✅, S1-C8 ✅). Prossima: **S1-C9 Newsletter & Email**.
