@@ -185,5 +185,12 @@ Tutto quello che abbiamo visto (il telaio con la guardia, il cruscotto, le impos
 
 L'area admin si misura su due assi indipendenti, e i tre siti li occupano in modo rivelatore. SPW è alto su entrambi: cruscotto analitico e architettura dichiarativa, con il backup fuori docroot a fare da rete. SR è basso su entrambi: un mega-componente che non misura nulla e non salva nulla, il paradosso del sito che ha sofferto di più senza essersi attrezzato per vederlo arrivare. DIS sta nel mezzo in modo istruttivo: la struttura del primo, la guardia (e i buchi) del secondo, e un cruscotto testuale che dimostra quanto si può misurare con poco. La lezione del capitolo non è «aggiungi più grafici»: è che un buon admin ti fa *vedere* lo stato del sistema e ti dà la *rete* per quando qualcosa va storto. L'apparato conta meno della domanda a cui risponde.
 
+> [!IMPORTANT]
+> **Il Canone**
+> - Una sola guardia per l'intera area riservata (route-guard o controllo al montaggio), con verifica di **ruolo**, non solo di login.
+> - Backup automatico fuori docroot, con cron protetto da un segreto timing-safe e fail-closed; ricrea a runtime le difese che il build strippa.
+> - Le azioni potenti passano per POST + token CSRF, non per GET nascoste; nessuna tabella di sola scrittura (un dato salvato ha un consumatore e un modo per cancellarlo).
+> - Misura ciò che serve a decidere: anche un cruscotto testuale è abbastanza.
+
 ---
 *Prossimo Capitolo: Database Evolution, da SQLite a MySQL. La notte di febbraio in cui un database è caduto, e la migrazione d'emergenza raccontata ora per ora.*

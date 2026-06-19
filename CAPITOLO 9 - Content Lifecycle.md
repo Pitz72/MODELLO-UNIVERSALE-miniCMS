@@ -136,5 +136,12 @@ Tre accortezze tengono insieme l'esperienza di redazione:
 
 Sul lato dashboard, la tabella di gestione cura le proporzioni (il titolo non oltre il 45% della griglia, una colonna categoria con badge colorati per la scansione rapida, date e stato dinamico ben visibili, le azioni condensate in icone a fine riga): dettagli di SimonePizziWebSite, utili come riferimento di UX più che come prescrizione.
 
+> [!IMPORTANT]
+> **Il Canone**
+> - Stati bozza/programmato/pubblicato; il confronto `published_at <= NOW` va fatto nello stesso formato e fuso (o delegato a `NOW()`).
+> - Per i contenuti non pubblici rispondi 404, non 403: non confermare l'esistenza di una bozza.
+> - Estendi un contratto (es. `{data, total}`) invece di versionarlo, ma mantienilo coerente tra gli endpoint.
+> - Cache JSON con TTL per i listing pesanti, invalidata su `save`/`delete`.
+
 ---
 *Prossimo Capitolo: Security & Auth. Gestione delle sessioni, CSRF, ruoli e protezione anti-abuso.*

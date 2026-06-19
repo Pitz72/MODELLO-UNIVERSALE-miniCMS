@@ -219,5 +219,12 @@ Sui dati strutturati, entrambi i flagship costruiscono il JSON-LD come array PHP
 
 Indicizzare una SPA senza un framework SSR si può, con un PHP che fa da front controller, annusa il bot e gli serve un HTML completo. Ma il Dynamic Rendering non è gratis: duplica la mappa delle rotte, e soprattutto riapre il buco XSS dei contenuti, perché riemette il `content` con uno strumento (`strip_tags`) più debole del DOMPurify del render. SPW lo fa bene, SR ne ha copiato anche i difetti e ne ha aggiunti di propri (le bozze indicizzate, la cache orfana), DIS evita i problemi facendo di meno. E la storia del DDoS di febbraio chiude il cerchio: l'entry-point che rende il sito visibile è lo stesso che, sotto sforzo, lo fa cadere, e la cache che lo salvò è oggi un attrezzo dimenticato in un angolo.
 
+> [!IMPORTANT]
+> **Il Canone**
+> - Indicizza la SPA con Dynamic Rendering da un entry-point PHP (UA-sniff), non con una SSG fragile.
+> - Il prerender riemette il `content`: sanitizzalo con la **stessa** difesa del render, perché `strip_tags` con allowlist lascia passare gli attributi (`onerror`, `href="javascript:"`).
+> - Rispetta lo `status` anche nel ramo crawler: non indicizzare le bozze.
+> - `sitemap`/`robots` dinamici; lo User-Agent non è un gatekeeper di sicurezza.
+
 ---
 *Prossimo Capitolo: RSS Feed & Syndication. Il feed è l'emettitore più sicuro del contenuto, quello che chiude il filo dei quattro emettitori, e insieme il luogo dove si annidano un proxy CORS e un po' di teatro della sicurezza.*

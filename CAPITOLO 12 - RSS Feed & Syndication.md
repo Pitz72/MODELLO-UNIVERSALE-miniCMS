@@ -214,5 +214,12 @@ E va consegnato ai distributori. SPW ha un bottone «Copia RSS» nell'area admin
 
 Il feed è la parte più tranquilla del giro del contenuto: l'emettitore che chiude il buco XSS, per sottrazione o per escape. Ma intorno a questa quiete i tre siti raccontano tre storie diverse: SPW è minimale e disciplinato (GUID stabile, regola di visibilità rispettata, errori a parte); SR è più ricco e più frammentato, con un proxy inbound ben difeso, un dispenser che finge una privatezza che non c'è, e qualche regressione (le bozze nel feed, il GUID che ripubblica); DIS fa solo podcast, sui default, con i dubbi dell'autore ancora scritti nel codice. Il filo dei quattro emettitori, intanto, ha un'ultima casella da riempire: la newsletter.
 
+> [!IMPORTANT]
+> **Il Canone**
+> - Feed RSS 2.0 valido: header corretto, date RFC-822, URL assoluti, `content` escapato (o non emesso affatto).
+> - Il feed è un emettitore del `content`: o lo escapi del tutto o non lo metti dentro.
+> - GUID stabile con `isPermaLink="false"` (un URN), non il permalink mutevole.
+> - Niente `catch` vuoto che maschera un guasto: meglio un 5xx esplicito. Un proxy inbound va protetto con allowlist host + https-only (anti-SSRF).
+
 ---
 *Prossimo Capitolo: Newsletter & Email System. L'ultimo emettitore del contenuto, che chiude del tutto il filo, e una scala di quanto si può semplificare un sistema di posta prima che diventi pericoloso.*

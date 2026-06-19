@@ -183,5 +183,12 @@ Ma il caso più interessante è in DIS, e non passa nemmeno dal form. Un'email p
 
 La newsletter mostra una scala di semplificazione che è anche una scala di rischio. SPW è il gradino completo: double opt-in con due token distinti, rate-limit contro il mail-bombing, link di disiscrizione con segreto, consenso doppio. SR aggiunge il trasporto più serio, l'SMTP autenticato, ma toglie il rate-limit (e apre il vettore mail-bombing) e fonde i due token in uno solo. DIS toglie anche il double opt-in e ogni token, e lascia un'iniezione di header nel nome del form contatti, pur conservando due buone abitudini d'igiene (la validazione dell'email ovunque e la pulizia in scrittura). Sul `content`, però, tutti e tre fanno la cosa giusta: non lo emettono, e il filo dei quattro emettitori si chiude. La difesa che manca più spesso non è quella contro l'XSS, che qui è risolta per disciplina: è quella contro l'abuso del proprio stesso form.
 
+> [!IMPORTANT]
+> **Il Canone**
+> - Double opt-in con due token distinti (conferma monouso + disiscrizione stabile): il link di disiscrizione ha bisogno di un segreto, non basta l'email in chiaro.
+> - Rate-limit (tetto per IP) sull'iscrizione contro il mail-bombing; non confonderlo col throttle, che regola solo la cadenza d'invio.
+> - Sanitizza per gli header email (i `\r\n`), non solo per il DB: il nome è un vettore di header injection.
+> - Consenso GDPR esplicito; l'invio di massa, meglio se asincrono o in coda.
+
 ---
 *Prossimo Capitolo: Admin Dashboard & Panels. Il pannello di controllo che lega insieme i sistemi visti finora, e i tre modi molto diversi in cui i siti decidono cosa un amministratore può vedere e fare.*

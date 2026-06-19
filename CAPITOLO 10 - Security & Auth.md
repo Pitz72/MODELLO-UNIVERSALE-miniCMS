@@ -476,5 +476,13 @@ C'è infine una lezione che viene da un incidente reale e resta pertinente qui, 
 
 La sicurezza è la lente che smentisce l'intuizione «più grande uguale più robusto». SPW, che non è il sito più ingegnerizzato, ha il perimetro più maturo. SR, il più ricco, lascia tre buchi reali: cookie senza `Secure`, niente anti-fixation, rate-limit che si aggira. DIS, il grado zero, porta comunque due idee che agli altri mancano, l'anti-frode pubblica robusta e il backup pre-distruttivo. Letta come una scala di sottrazione, ogni difesa insegna due cose insieme: cosa fa, e cosa si rompe quando la togli.
 
+> [!IMPORTANT]
+> **Il Canone**
+> - Sessioni con cookie `HttpOnly` + `SameSite=Strict` + `Secure` su HTTPS; password con `password_hash()`.
+> - Token CSRF su tutte le mutazioni: un `confirm()` non è una difesa CSRF.
+> - Autorizzazione per **ruolo** (`isAdmin`), non solo per login (`isLoggedIn`).
+> - Lockout brute-force misurato su un IP affidabile, non su header controllati dal client (`X-Forwarded-For`).
+> - `session_version` per invalidare le sessioni al cambio password; nessuna credenziale di default nel codice.
+
 ---
 *Prossimo Capitolo: SEO Pre-rendering con PHP Entry-Point. Il motore SEO invisibile che trasforma una SPA in un sito indicizzabile, e il vettore dell'attacco DDoS-da-bot del febbraio 2026.*
