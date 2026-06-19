@@ -22,7 +22,12 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
   GOLD: 3 modi di leggere il payload, codemod, messaggio-backend-perso (3 punti stesso esito),
   token CSRF & reload, guard loader-vs-componente, niente interceptor 401. Corregge CAP 6 (§1.1
   "Double Read" è il nome SBAGLIATO; §1.1/3.1/3.2/4 sono prescrizioni DIS-flavored).
-- ⬜ S1-C4 Content APIs — fonti SPW-C4, SR-C4, DIS-C4
+- ✅ **S1-C4 Content APIs** — fonti SPW-C4, SR-C4, DIS-C4 (FDCA = DIS). → CAP 9 (princ.) + ponti CAP 6/3/15/10.
+  Stesso endpoint-router su REQUEST_METHOD; CHIUDE il Double Read di S1-C3 (contratto non-uniforme lato
+  server: solo articles={data,total} SPW / mosaico 3 buste SR / busta-zero DIS). GOLD: paginazione
+  (chi conta), "tre modi di sbagliare il fuso" sui post programmati, schema-solo-nel-.sqlite (DIS),
+  residui-di-migrazione, tag-doppia-scrittura (SPW), tre-slug (SR), 404-non-403. Corregge CAP 9 (§2.2
+  T↔spazio non è "lo standard"; §4 M:N non è esclusivo né universale; §1.1 matrice è SPW; §5 bypass 3 forme).
 - ⬜ S1-C5 Media & Upload — fonti SPW-C5, SR-C5, DIS-C5
 - ⬜ S1-C6 Advanced Editing / Editor — fonti SPW-C6, SR-C6, DIS-C6
 - ⬜ S1-C7 SEO & Prerendering — fonti SPW-C7, SR-C7, DIS-C7
@@ -46,4 +51,4 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
 ---
 
 ### Stato globale FASE 2
-- **3 / 14 schede S1 completate** (S1-C1 ✅, S1-C2 ✅, S1-C3 ✅). Prossima: **S1-C4 Content APIs**.
+- **4 / 14 schede S1 completate** (S1-C1 ✅, S1-C2 ✅, S1-C3 ✅, S1-C4 ✅). Prossima: **S1-C5 Media & Upload**.

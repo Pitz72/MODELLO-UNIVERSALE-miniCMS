@@ -100,10 +100,11 @@ Ordine: prima il flagship contenuti, poi scalabilità, poi festival, infine il d
 
 ## 4. FASE 2 — SINTESI
 
-- [ ] S1 — Consolidamento: da card per-sito a **schede tematiche cross-sito** (dedup, pattern comuni, varianti). *(3/14 schede — stato in `sintesi/_INDICE-SINTESI.md`)*
+- [ ] S1 — Consolidamento: da card per-sito a **schede tematiche cross-sito** (dedup, pattern comuni, varianti). *(4/14 schede — stato in `sintesi/_INDICE-SINTESI.md`)*
   - [x] S1-C1 Backend Core & Bootstrap → `sintesi/S1-C1-backend-core.md` (scala a 3 gradini SQLite/MySQL-essenziale/MySQL-ingegnerizzato; GOLD init-fossile/credenziali-default/errore-connessione; corregge 2 sviste in CAP 3)
   - [x] S1-C2 Security & Auth → `sintesi/S1-C2-security-auth.md` (scala a 3 gradini RIBALTATA: SPW maturo / SR parziale / DIS grado-zero, "più ingegnerizzato ≠ più sicuro"; GOLD CSRF-a-3-gradini, flag-cookie, IP-grezzo-come-pregio, anti-frode-voto + voter_hash, reset-a-un-clic + backup; corregge/amplia 4 punti in CAP 10)
   - [x] S1-C3 Frontend Bridge & State → `sintesi/S1-C3-frontend-bridge.md` (stesso oggetto `api` su fetch, tre investimenti attorno a un'API non-uniforme: state-layer+Double Read SPW / token CSRF in-memory SR / codemod fix_api DIS; GOLD 3-modi-di-leggere-il-payload, codemod, messaggio-backend-perso, token-CSRF-&-reload, guard loader-vs-componente, niente-interceptor-401; FDCA fuori scala = nessun api.ts; corregge CAP 6 §1.1 nome "Double Read" sbagliato + §1.1/3.1/3.2/4 prescrizioni DIS-flavored)
+  - [x] S1-C4 Content APIs → `sintesi/S1-C4-content-apis.md` (stesso endpoint-router su REQUEST_METHOD; CHIUDE il Double Read di S1-C3 lato server: solo articles={data,total} SPW / mosaico 3 buste SR / busta-zero DIS; scala ricco→grado-zero; GOLD paginazione-chi-conta, "tre modi di sbagliare il fuso" sui post programmati, schema-solo-nel-.sqlite DIS, residui-di-migrazione, tag-doppia-scrittura SPW, tre-slug SR, 404-non-403; corregge CAP 9 §2.2/§4/§1.1/§5)
 - [ ] S2 — Inventario contenuti: cosa entra nel libro, cosa si aggiorna, cosa è nuovo, cosa si scarta.
 - [ ] S3 — **Scaletta/Indice globale** della Terza Edizione (struttura a Parti + capitoli, con mappa card→capitolo).
 - [ ] S4 — Validazione indice con Simone (gate prima della scrittura).
@@ -127,6 +128,6 @@ Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "rac
 
 ## 7. Stato globale
 
-- **Fase corrente:** 🟨 **FASE 2 — SINTESI, sotto-fase S1 (Consolidamento) avviata.** FASE 1 conclusa (4 siti, 34 card, copertura completa). FASE 2 in corso: **3/14 schede tematiche S1 completate** (S1-C1 Backend Core, S1-C2 Security & Auth, S1-C3 Frontend Bridge).
-- **Prossima unità:** FASE 2 / **S1-C4 Content APIs** (cross-sito) — fonti SPW-C4, SR-C4, DIS-C4 (Double Read CHIUSO lato server SPW / geografia frammentata 3 buste SR / busta-zero DIS; slug, visibilità `published_at`, tag M:N vs category-stringa-libera). Vedi `PROSSIMA-SESSIONE.md`.
+- **Fase corrente:** 🟨 **FASE 2 — SINTESI, sotto-fase S1 (Consolidamento) avviata.** FASE 1 conclusa (4 siti, 34 card, copertura completa). FASE 2 in corso: **4/14 schede tematiche S1 completate** (S1-C1 Backend Core, S1-C2 Security & Auth, S1-C3 Frontend Bridge, S1-C4 Content APIs).
+- **Prossima unità:** FASE 2 / **S1-C5 Media & Upload** (cross-sito) — fonti SPW-C5, SR-C5, DIS-C5 (difesa upload a 3 livelli SPW / minimale 1 livello SR / catena RCE da upload pubblico DIS; WebP+resize, sottocartelle vs flat, naming anti-doppia-estensione). Vedi `PROSSIMA-SESSIONE.md`.
 - **Log completo:** `LOG.md`.
