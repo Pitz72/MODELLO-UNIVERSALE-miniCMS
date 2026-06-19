@@ -28,7 +28,13 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
   (chi conta), "tre modi di sbagliare il fuso" sui post programmati, schema-solo-nel-.sqlite (DIS),
   residui-di-migrazione, tag-doppia-scrittura (SPW), tre-slug (SR), 404-non-403. Corregge CAP 9 (§2.2
   T↔spazio non è "lo standard"; §4 M:N non è esclusivo né universale; §1.1 matrice è SPW; §5 bypass 3 forme).
-- ⬜ S1-C5 Media & Upload — fonti SPW-C5, SR-C5, DIS-C5
+- ✅ **S1-C5 Media & Upload** — fonti SPW-C5, SR-C5, DIS-C5 (FDCA = DIS, RCE ereditata). → CAP 7 (princ.) + ponti CAP 10/16-17/14.
+  Stesso scheletro upload.php+GD, ma la SICUREZZA scala all'inverso: 3 barriere SPW / 1 SR / ≈0 + upload
+  PUBBLICO DIS = catena RCE verificata. Ribaltamento: il naming più minimale (SR, nome scartato) è il
+  più sicuro; quello più gentile (DIS, nome+ext conservati) abilita la RCE. GOLD: catena-RCE-pubblica,
+  difesa-3/1/0-livelli, tre-modi-di-nominare, $_FILES['type']-non-è-validazione, path-guard
+  realpath/basename/strpos + delete-senza-CSRF, disco-come-DB-media, WebP-non-universale, one-shot-non-gated.
+  Corregge CAP 7 (manca del tutto la sicurezza upload; §3.3 .htaccess è PHP-off non solo cache; §3.1 WebP non universale).
 - ⬜ S1-C6 Advanced Editing / Editor — fonti SPW-C6, SR-C6, DIS-C6
 - ⬜ S1-C7 SEO & Prerendering — fonti SPW-C7, SR-C7, DIS-C7
 - ⬜ S1-C8 RSS & Feed — fonti SPW-C8, SR-C8, DIS-C8
@@ -51,4 +57,4 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
 ---
 
 ### Stato globale FASE 2
-- **4 / 14 schede S1 completate** (S1-C1 ✅, S1-C2 ✅, S1-C3 ✅, S1-C4 ✅). Prossima: **S1-C5 Media & Upload**.
+- **5 / 14 schede S1 completate** (S1-C1 ✅, S1-C2 ✅, S1-C3 ✅, S1-C4 ✅, S1-C5 ✅). Prossima: **S1-C6 Advanced Editing / Editor**.
