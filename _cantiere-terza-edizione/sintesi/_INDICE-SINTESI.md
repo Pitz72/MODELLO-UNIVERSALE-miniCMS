@@ -120,12 +120,17 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
   falsi-pattern da rimuovere. (D) 8 fili trasversali con "una casa + rimandi". → prepara S3.
 
 ## S3 — Scaletta / indice globale
-- ⬜ Struttura a Parti + capitoli, con mappa card→capitolo.
+- ✅ **S3 — Scaletta globale** → `sintesi/S3-scaletta-globale.md`. Struttura a 5 Parti CONFERMATA; **20 capitoli +
+  2 appendici** (era 19+Boilerplate): +1 CAP "Admin Dashboard generale" (Parte IV) + App. B "Ciclo di vita di un
+  fork". Indice rinumerato (Parte V +1), mappa card/scheda→capitolo (copertura totale), collocazione 8 fili
+  trasversali (una-casa+rimandi), spostamenti di scope (cache→9, SEO→11, DDoS→11), etichetta "Terza Edizione".
+  Contiene **7 DECISIONI APERTE per il GATE S4** (con raccomandazioni). È il documento da validare con Simone.
 
 ## S4 — Validazione indice con Simone
-- ⬜ GATE prima della scrittura (FASE 3).
+- 🟨 **GATE in attesa di Simone** — 7 decisioni in `S3-scaletta-globale.md` §7 (nuovo CAP Admin + rinumerazione;
+  appendice fork; analytics; ribilanciamento CAP 7; etichetta edizione; profondità riscritture; ordine FASE 3).
 
 ---
 
 ### Stato globale FASE 2
-- **14 / 14 schede S1 COMPLETATE** ✅ (S1-C1…C13 + S1-FORK). **Sotto-fase S1 (Consolidamento) CONCLUSA.** Prossima sotto-fase: **S2 — Inventario contenuti**.
+- **FASE 2 — SINTESI: S1 ✅ (14/14) · S2 ✅ (Inventario) · S3 ✅ (Scaletta) · S4 🟨 (GATE in attesa di Simone).** Dopo il gate → FASE 3 (Scrittura).

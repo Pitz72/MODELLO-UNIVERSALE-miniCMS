@@ -1,56 +1,44 @@
 # PROSSIMA SESSIONE — prompt pronto da incollare
 
-> 🟩 **FASE 2 / sotto-fase S1 (Consolidamento) CONCLUSA — 14/14 schede** (S1-C1…C13 + S1-FORK).
-> Si passa alla sotto-fase **S2 — Inventario contenuti**. Ordine confermato: S1 ✅ → **S2** → S3 → S4.
+> 🟩 **FASE 2 quasi conclusa: S1 ✅ (14/14) · S2 ✅ (Inventario) · S3 ✅ (Scaletta).**
+> 🔴 **GATE S4 IN ATTESA DI SIMONE** — vanno prima decise le 7 domande in
+> `_cantiere-terza-edizione/sintesi/S3-scaletta-globale.md` §7. Senza quelle risposte NON si scrive.
 
 ---
 
-Stiamo lavorando alla TERZA EDIZIONE del manuale miniCMS. Leggi prima
-_cantiere-terza-edizione/ROADMAP.md, _cantiere-terza-edizione/LOG.md e
-_cantiere-terza-edizione/sintesi/_INDICE-SINTESI.md per il contesto.
+## Se Simone NON ha ancora risposto al gate (caso tipico)
 
-STATO: FASE 1 (mappatura) CONCLUSA — 4 siti, 34 card. FASE 2 (SINTESI): **sotto-fase S1 CONCLUSA —
-14/14 schede tematiche cross-sito** in `_cantiere-terza-edizione/sintesi/` (S1-C1 … S1-C13 + S1-FORK).
-Ogni scheda ha: 0 una-frase · 1 pattern comune · 2 tabella varianti · 3 GOLD/box · 4 mappa→capitoli (+
-correzioni al testo attuale) · 5 scarti/dedup. Le schede hanno già prodotto, capitolo per capitolo, un
-elenco di **azioni e correzioni** verso i 19 capitoli esistenti.
+NON iniziare la FASE 3. Apri `sintesi/S3-scaletta-globale.md`, leggi §7 (7 decisioni con raccomandazioni)
+e §0-§2 (cosa cambia, indice proposto a 20 capitoli + 2 appendici), e **riproponi a Simone le 7
+decisioni** in modo conciso, con le tue raccomandazioni, chiedendo conferma o modifiche. Aggiorna S3 con
+le risposte. Solo allora la FASE 2 è chiusa.
 
-UNITÀ DI QUESTA SESSIONE: **S2 — Inventario contenuti.** Obiettivo: trasformare le 14 schede S1 in un
-**inventario operativo** che dica, per ciascun capitolo del libro e per ogni nuovo capitolo proposto,
-cosa ENTRA / si AGGIORNA / è NUOVO / si SCARTA. È il ponte tra "abbiamo capito cosa dicono i siti" (S1) e
-"ecco la scaletta della Terza Edizione" (S3).
+Le 7 decisioni (sintesi):
+1. Nuovo **CAP 14 "Admin Dashboard generale"** in Parte IV + rinumerazione Parte V (+1)? *(racc. sì)*
+2. **Appendice B "Fork"** a sé *(racc.)* o sezione in coda al CAP DB Evolution?
+3. **Analytics first-party**: sezione dentro CAP Admin *(racc.)* o capitolo a sé?
+4. **CAP 7**: spostare cache→CAP 9 e SEO→CAP 11 e rinominarlo "Upload & Sicurezza"? *(racc. sì)*
+5. **Etichetta edizione**: "Terza Edizione" ovunque (chiude E2)? *(racc. sì)*
+6. **Profondità riscritture** (CAP 6/7/8/10/11/12/13/20): chirurgica *(racc.)* o integrale?
+7. **Ordine FASE 3**: Security(10) → poi 8+11+12+13 insieme (filo 4-emettitori) → poi CAP 14 Admin →
+   correzioni minori. Confermare o riordinare.
 
-Materiale di partenza (già pronto nelle schede S1, §4 di ciascuna):
-- **Mappa scheda→capitolo** già abbozzata in ogni S1-Cx (sezione "Mappa → capitolo/i del libro").
-- **Correzioni al testo attuale** già elencate scheda per scheda (CAP 3/6/7/8/9/10/11/12/13/14/16/17/18/19).
-- **GAP / capitoli nuovi proposti:** almeno due emersi in S1 — (a) un **CAP "Admin Dashboard & Panels"
-  generale** (S1-C12: oggi manca, CAP 18 è solo festival); (b) una **sezione/appendice "ciclo di vita di
-  un fork"** (S1-FORK). Valutare anche: un capitolo "Misurare senza terze parti / analytics first-party"
-  (S1-C12), e dove collocare il "quadro dei 4 emettitori del content" (filo S1-C6→C7→C8→C9, trasversale a
-  CAP 8/11/12/13).
+## Quando Simone HA risposto → si apre la FASE 3 (Scrittura)
 
-Fai così:
-1. Leggi le 14 schede S1 (almeno i §4 "Mappa → capitolo" e le "Correzioni") e l'elenco dei 19 capitoli
-   esistenti (sono file `CAPITOLO N - *.md` nella root del repo; c'è anche `_master.md`).
-2. Produci `_cantiere-terza-edizione/sintesi/S2-inventario-contenuti.md` con:
-   - **A) Tabella capitolo-per-capitolo** (CAP 1→19): per ciascuno → schede S1 che lo toccano · azione
-     sintetica (CONFERMA / AGGIORNA / RISCRIVI / CORREGGI) · le correzioni puntuali già raccolte.
-   - **B) Capitoli/sezioni NUOVI proposti** (Admin Dashboard generale, sezione Fork, eventuale Analytics
-     first-party, box trasversale "4 emettitori") con motivazione e materiale-sorgente (quali schede).
-   - **C) Cosa si SCARTA** (materiale per-sito troppo di dettaglio, falsi pattern, doppioni) già segnalato
-     nei §5 delle schede.
-   - **D) Fili trasversali** che attraversano più capitoli (i 4 emettitori del content; "più
-     ingegnerizzato ≠ più sicuro" S1-C2/C5/C9/C12/C13; le due filosofie di sanitizzazione write-time vs
-     render-time; il forking che eredita il debito) — dove e come trattarli senza ripetizioni.
-3. Aggiorna `_INDICE-SINTESI.md` (S2 → ✅ o 🟨), `ROADMAP.md` (§4 spunta S2, §7 stato), una riga in `LOG.md`.
+Aggiorna `S3-scaletta-globale.md` (segna le decisioni prese), spunta **S4** in `_INDICE-SINTESI.md` e in
+`ROADMAP.md` §4, aggiorna §7 ("FASE 2 CONCLUSA → FASE 3 avviata"), riga in `LOG.md`. Poi genera la prima
+card di scrittura secondo l'ordine concordato (default: **CAP 10 Security & Auth**, la riscrittura a più
+alto valore — oggi non parla affatto di CSRF/recovery/session_version).
 
-Criterio di STOP: `S2-inventario-contenuti.md` completo (A+B+C+D), tracking aggiornato, commit+push,
-locale = origin/main.
+Metodo FASE 3 (da ROADMAP §5): un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e
+"raccontata" + blocchi di codice reali (`path:linea` come origine, dalle card di mappatura) + box
+problemi/soluzioni. Fonti per ogni capitolo: la **mappa card/scheda→capitolo** in `S3-scaletta-globale.md`
+§3 + i §3/§4 delle schede S1 corrispondenti + le card di mappatura per gli stralci di codice.
 
-Ciclo di chiusura OBBLIGATORIO a fine sessione: _INDICE-SINTESI + ROADMAP (§4/§7) + LOG (riga in basso) +
-git add/commit/push (verifica sync) + riscrivi QUESTO file (root + _cantiere-terza-edizione/) con la
-prossima sotto-fase: **S3 — Scaletta/Indice globale** della Terza Edizione (struttura a Parti + capitoli
-con mappa card→capitolo), che sarà il GATE prima di S4 (validazione con Simone).
+## Contesto sempre da rileggere a inizio sessione
+`_cantiere-terza-edizione/ROADMAP.md`, `LOG.md`, `sintesi/_INDICE-SINTESI.md`, e — per la scrittura —
+`sintesi/S2-inventario-contenuti.md` (azioni/correzioni per capitolo) + `sintesi/S3-scaletta-globale.md`
+(indice + decisioni del gate).
 
-Nota metodo: S2/S3 NON sono "una scheda per cluster" ma documenti unitari di pianificazione — si possono
-fare in una o due sessioni. Mantenere la qualità/omogeneità (no ripetizioni, rimandi alle schede S1).
+## Stato sintesi (14 schede S1 + S2 + S3) — tutte in `_cantiere-terza-edizione/sintesi/`
+S1-C1…S1-C13 + S1-FORK (consolidamento) · S2-inventario-contenuti · S3-scaletta-globale.
