@@ -107,5 +107,23 @@ La storia completa, con gli script reali, è al Capitolo 15. Un punto va chiarit
 
 Il contrappunto è altrettanto istruttivo: DISINTELLIGENZA, un festival con votazioni pubbliche, gira **ancora oggi su SQLite** in produzione, senza problemi. SQLite non è un gradino da abbandonare appena possibile: è la scelta giusta finché regge, e «finché regge» dipende dal carico e dall'hosting, non da una regola universale. Si passa a MySQL quando un vincolo concreto lo impone, non per scaramanzia.
 
+### 6.1 I numeri, con onestà
+
+«Finché regge» non è una risposta che si può lasciare al sentimento. Servono ordini di grandezza, con l'avvertenza che restano tali: dipendono dall'hardware, dal disco dell'hosting condiviso e dalla forma delle query, e vanno misurati sul proprio caso, non presi come garanzie.
+
+Il punto chiave è che in SQLite **lettura e scrittura non scalano allo stesso modo**. Le letture sono concorrenti e velocissime: un sito a prevalenza di lettura (un blog, un portfolio, una radio con news e podcast) regge senza fatica migliaia di letture al secondo dalla cache di pagina e centinaia di query di lettura al secondo dirette al file, perché più richieste possono leggere lo stesso database insieme. Le scritture, invece, sono **serializzate**: SQLite ammette un solo scrittore alla volta e blocca l'intero file durante la scrittura. È lì che si trova il soffitto.
+
+In pratica, su un tipico hosting condiviso:
+
+| Segnale | SQLite è a suo agio | Conviene valutare MySQL |
+| :--- | :--- | :--- |
+| **Scritture concorrenti** | fino a qualche decina al minuto, sporadiche | decine al secondo sostenute, o picchi concorrenti regolari |
+| **Profilo di carico** | lettura dominante (90%+), scritture isolate | scrittura frequente e simultanea (form, voti, code) |
+| **Concorrenza in scrittura** | un processo per volta basta | più processi scrivono insieme (newsletter + admin + pubblico) |
+| **Topologia** | un solo server applicativo | serve scalare su più nodi che condividono i dati |
+| **Sintomo nei log** | nessun `database is locked` | `busy timeout` o `database is locked` ricorrenti |
+
+La soglia vera non è un numero ma un **sintomo**: quando nei log compaiono errori di lock o di `busy timeout` nonostante il `busy_timeout` configurato, il database ti sta dicendo che la contesa in scrittura ha superato quello che un file-database regge su quell'hosting. È il momento di MySQL, e non un istante prima. Runtime Radio ci è arrivato per un incidente (Capitolo 15); la maggior parte dei siti non ci arriva mai, ed è giusto così.
+
 ---
 *Prossimo Capitolo: Frontend Dependencies. La matrice delle dipendenze, le regole di scelta e il costo di ogni libreria.*
