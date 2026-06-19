@@ -1,8 +1,7 @@
 # PROSSIMA SESSIONE — prompt pronto da incollare
 
-> 🟨 FASE 2 (SINTESI) in corso. S1-C1 → S1-C11 ✅ COMPLETATE (11/14). L'ultima è stata una SESSIONE
-> TRIPLA (C9+C10+C11 di fila, per non ricaricare il contesto). Restano: **S1-C12, S1-C13, S1-FORK**.
-> Questa è la DODICESIMA scheda: **S1-C12 Admin Dashboard & Panels**. Ordine: S1 → S2 → S3 → S4.
+> 🟩 **FASE 2 / sotto-fase S1 (Consolidamento) CONCLUSA — 14/14 schede** (S1-C1…C13 + S1-FORK).
+> Si passa alla sotto-fase **S2 — Inventario contenuti**. Ordine confermato: S1 ✅ → **S2** → S3 → S4.
 
 ---
 
@@ -10,63 +9,48 @@ Stiamo lavorando alla TERZA EDIZIONE del manuale miniCMS. Leggi prima
 _cantiere-terza-edizione/ROADMAP.md, _cantiere-terza-edizione/LOG.md e
 _cantiere-terza-edizione/sintesi/_INDICE-SINTESI.md per il contesto.
 
-STATO: FASE 1 (mappatura) CONCLUSA — 4 siti, 34 card. FASE 2 (SINTESI) in corso: **11/14 schede S1
-completate** (S1-C1…C11 ✅). Metodo: UNA scheda tematica cross-sito per sessione (ma si possono fare
-PIÙ schede di fila nella stessa sessione, come la tripla C9/C10/C11 — scriverle/committarle comunque
-una alla volta). Fonde i 2-3 trattamenti per-sito in UNA visione comparata (pattern comune + tabella
-varianti unica + GOLD + mappa→capitoli). Fonti = card di mappatura (specialmente i §6). NON si rilegge
-il codice sorgente. Template: `_cantiere-terza-edizione/sintesi/_TEMPLATE-SCHEDA.md`; modelli già fatti:
-`S1-C1` … `S1-C11` (seguine struttura e livello di dettaglio).
+STATO: FASE 1 (mappatura) CONCLUSA — 4 siti, 34 card. FASE 2 (SINTESI): **sotto-fase S1 CONCLUSA —
+14/14 schede tematiche cross-sito** in `_cantiere-terza-edizione/sintesi/` (S1-C1 … S1-C13 + S1-FORK).
+Ogni scheda ha: 0 una-frase · 1 pattern comune · 2 tabella varianti · 3 GOLD/box · 4 mappa→capitoli (+
+correzioni al testo attuale) · 5 scarti/dedup. Le schede hanno già prodotto, capitolo per capitolo, un
+elenco di **azioni e correzioni** verso i 19 capitoli esistenti.
 
-UNITÀ DI QUESTA SESSIONE: **S1-C12 — Scheda tematica cross-sito "Admin Dashboard & Panels"**.
-Fonti primarie: SPW-C12, SR-C12, DIS-C12. Da consolidare (spunti dai §6 e dal LOG):
-- **Scala a 3 modelli di dashboard:** SPW = dashboard che **MISURA** (stats.php + analytics a doppia
-  personalità + 6 grafici Chart.js + selettore periodo 7/30/90 + AdminLayout con route-guard unico
-  adminAuthLoader); SR = dashboard che **NON misura niente** = console CRUD pura (Admin.tsx mega-componente
-  596 righe, "Dashboard" = section-switcher a 8 card senza dati/contatori/grafici, guard-componente
-  checkAuth on mount); DIS = **via di mezzo** (AdminLayout come SPW + guard-componente come SR, dashboard
-  che misura ma TESTUALE — stats.php senza Chart.js).
-- **GOLD per sito:** SPW = (1) backup automatico FUORI dalla docroot (../db_backups_simonepizzi) perché
-  clean-dist.js strippa .data/ → il .htaccess deny non arriva mai sul server, ricreato a runtime + nome
-  random_bytes + chmod 0600 + rotazione 15; (2) pseudo-cron gated admin-OR-secret timing-safe hash_equals;
-  (3) settings POST accetta chiavi arbitrarie no-whitelist; (4) optimize_db NON distruttivo nonostante
-  intestazione "usa-e-getta". SR = (1) "la dashboard che non misura niente" (gemello del framing upload
-  SR-C5); (2) NESSUN backup/export/cron — il flagship degli incidenti ha la cura (emergency_revert_wal
-  S1-C13) ma non la prevenzione (vs backup fuori-docroot SPW); (3) change_password senza session_version →
-  invalidazione client-side setTimeout. DIS = (1) la dashboard MISURA (≠ SR) ma testuale; (2) contacts
-  WRITE-ONLY (mai letti da nessun pannello, l'admin li vede solo via email di notifica — chiude buco
-  DIS-C9); (3) guard ROLE-BLIND (AdminLayout controlla solo login non role==admin → editor vede tutto);
-  (4) reset distruttivi via fetch POST nudo senza CSRF (protezione = doppio window.confirm UX + gate admin).
-- **Tre modi di fare un admin (architettura frontend):** mega-componente unico SR (1 rotta /admin, tutto
-  dentro) / AdminLayout + loader react-router SPW (guard dichiarativo, N pagine figlie via Outlet) /
-  AdminLayout + guard-componente DIS (struttura SPW ma guard imperativo SR). Ponte forte a S1-C3 (guard
-  loader-vs-componente già consolidato lì) — qui l'architettura completa del pannello.
-- **Ponti:** backup/cron/optimize_db → S1-C13 (DB evolution); analytics consumer delle reazioni → S1-C11;
-  gate role-blind → S1-C2; consumer dei contenuti (NewsletterComposer, ArticleEditor, MediaManager) →
-  S1-C4/C5/C6/C9 (qui solo come aggregati nel pannello, non ri-mappati).
+UNITÀ DI QUESTA SESSIONE: **S2 — Inventario contenuti.** Obiettivo: trasformare le 14 schede S1 in un
+**inventario operativo** che dica, per ciascun capitolo del libro e per ogni nuovo capitolo proposto,
+cosa ENTRA / si AGGIORNA / è NUOVO / si SCARTA. È il ponte tra "abbiamo capito cosa dicono i siti" (S1) e
+"ecco la scaletta della Terza Edizione" (S3).
+
+Materiale di partenza (già pronto nelle schede S1, §4 di ciascuna):
+- **Mappa scheda→capitolo** già abbozzata in ogni S1-Cx (sezione "Mappa → capitolo/i del libro").
+- **Correzioni al testo attuale** già elencate scheda per scheda (CAP 3/6/7/8/9/10/11/12/13/14/16/17/18/19).
+- **GAP / capitoli nuovi proposti:** almeno due emersi in S1 — (a) un **CAP "Admin Dashboard & Panels"
+  generale** (S1-C12: oggi manca, CAP 18 è solo festival); (b) una **sezione/appendice "ciclo di vita di
+  un fork"** (S1-FORK). Valutare anche: un capitolo "Misurare senza terze parti / analytics first-party"
+  (S1-C12), e dove collocare il "quadro dei 4 emettitori del content" (filo S1-C6→C7→C8→C9, trasversale a
+  CAP 8/11/12/13).
 
 Fai così:
-1. Scrivi la scheda in `_cantiere-terza-edizione/sintesi/S1-C12-admin-dashboard.md` seguendo
-   `_TEMPLATE-SCHEDA.md` (0 una-frase · 1 pattern comune · 2 tabella varianti UNICA · 3 GOLD/box · 4
-   mappa→capitoli · 5 scarti/dedup).
-2. Mappa esplicitamente → capitoli esistenti. ATTENZIONE: **non esiste un capitolo "Admin Dashboard"
-   dedicato** nei 19 capitoli attuali (verifica: i capitoli admin sono spalmati — CAP 10 auth, CAP 18
-   dashboard FESTIVAL, ecc.). Quindi questa scheda probabilmente segnala un GAP = un capitolo nuovo da
-   proporre in S3 (Admin Dashboard generale, distinto dal CAP 18 festival-specifico). Verifica leggendo
-   _master.md / l'indice dei capitoli e proponi dove collocare il materiale (nuovo CAP o sezione).
-3. Aggiorna `_cantiere-terza-edizione/sintesi/_INDICE-SINTESI.md` (S1-C12 → ✅, contatore 12/14).
+1. Leggi le 14 schede S1 (almeno i §4 "Mappa → capitolo" e le "Correzioni") e l'elenco dei 19 capitoli
+   esistenti (sono file `CAPITOLO N - *.md` nella root del repo; c'è anche `_master.md`).
+2. Produci `_cantiere-terza-edizione/sintesi/S2-inventario-contenuti.md` con:
+   - **A) Tabella capitolo-per-capitolo** (CAP 1→19): per ciascuno → schede S1 che lo toccano · azione
+     sintetica (CONFERMA / AGGIORNA / RISCRIVI / CORREGGI) · le correzioni puntuali già raccolte.
+   - **B) Capitoli/sezioni NUOVI proposti** (Admin Dashboard generale, sezione Fork, eventuale Analytics
+     first-party, box trasversale "4 emettitori") con motivazione e materiale-sorgente (quali schede).
+   - **C) Cosa si SCARTA** (materiale per-sito troppo di dettaglio, falsi pattern, doppioni) già segnalato
+     nei §5 delle schede.
+   - **D) Fili trasversali** che attraversano più capitoli (i 4 emettitori del content; "più
+     ingegnerizzato ≠ più sicuro" S1-C2/C5/C9/C12/C13; le due filosofie di sanitizzazione write-time vs
+     render-time; il forking che eredita il debito) — dove e come trattarli senza ripetizioni.
+3. Aggiorna `_INDICE-SINTESI.md` (S2 → ✅ o 🟨), `ROADMAP.md` (§4 spunta S2, §7 stato), una riga in `LOG.md`.
 
-Criterio di STOP: scheda S1-C12 in stato COMPLETATO (pattern + varianti + GOLD + mappa/proposta capitolo).
+Criterio di STOP: `S2-inventario-contenuti.md` completo (A+B+C+D), tracking aggiornato, commit+push,
+locale = origin/main.
 
-Ciclo di chiusura OBBLIGATORIO a fine sessione:
-- aggiorna `_INDICE-SINTESI.md` (S1-C12 → ✅) + `ROADMAP.md` (§4 spunta S1-C12, §7 stato globale)
-- aggiungi UNA riga a `LOG.md` (più recente IN BASSO)
-- git add/commit/push (un commit) e verifica locale = origin/main
-- riscrivi QUESTO file (root + _cantiere-terza-edizione/) con la prossima scheda: **S1-C13 (DB Evolution
-  & Incidenti)** — fonti SR-C13 (princ.), DIS-C1 (meccanismo update_db_*), SPW-C1 (init fossile). Alto
-  valore e corposo (l'incidente WAL notturno, la migrazione MySQL come reazione, i fossili SQLite, i 3
-  schemi subscribers, cura-senza-prevenzione). → CAP 14. Dopo C13 resta solo **S1-FORK** (FDCA come caso
-  fork/evoluzione, fonte FDCA-DIFF — non aggiunge pattern, backend = DIS) e poi S2/S3/S4.
+Ciclo di chiusura OBBLIGATORIO a fine sessione: _INDICE-SINTESI + ROADMAP (§4/§7) + LOG (riga in basso) +
+git add/commit/push (verifica sync) + riscrivi QUESTO file (root + _cantiere-terza-edizione/) con la
+prossima sotto-fase: **S3 — Scaletta/Indice globale** della Terza Edizione (struttura a Parti + capitoli
+con mappa card→capitolo), che sarà il GATE prima di S4 (validazione con Simone).
 
-Nota: si possono di nuovo fare PIÙ schede di fila se la sessione lo consente (C12 + C13, o C13 + FORK).
-Valuta in base allo spazio di contesto. Le schede vanno comunque scritte e committate una alla volta.
+Nota metodo: S2/S3 NON sono "una scheda per cluster" ma documenti unitari di pianificazione — si possono
+fare in una o due sessioni. Mantenere la qualità/omogeneità (no ripetizioni, rimandi alle schede S1).

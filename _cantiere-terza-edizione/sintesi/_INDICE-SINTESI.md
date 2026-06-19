@@ -104,7 +104,13 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
   prevenzione (SR no-backup vs SPW/DIS sì), bug-data-stringa debug_time-T, ETL-2-PDO+COUNT. Init-fossile/versionamento
   già in S1-C1. Corregge CAP 14 (§1 migrazione motivata da soglie-traffico ma il caso reale è l'incidente; §6 checklist
   prescrive backup che SR non ha; SR-centrico = manca DIS-SQLite-vivo-in-prod; omette fossili/3-schemi/doppio-binario).
-- ⬜ S1-FORK FDCA come caso "fork/evoluzione" — fonte FDCA-DIFF (non aggiunge pattern: backend = DIS)
+- ✅ **S1-FORK FDCA come caso "fork/evoluzione"** — fonte FDCA-DIFF. → materiale trasversale/editoriale (no capitolo dedicato → sezione "ciclo di vita di un fork" in S3).
+  Non aggiunge pattern (backend byte-identico a DIS): è il CASO-STUDIO del forking. CHIUDE i fili di sicurezza —
+  il fork eredita TUTTI i GOLD-bug immutati (RCE upload S1-C5, auth grado-zero S1-C2, no-opt-in S1-C9, reset-senza-
+  CSRF, vote_count S1-C10, no-DOMPurify S1-C6). GOLD: il-fork-eredita-i-bug (copiare-backend-verbatim-li-moltiplica,
+  fix-RCE-DIS-non-copre-FDCA), guscio-scollegato (frontend nuovo senza api.ts/fetch), versione-0.0.1-su-backend-v0.5.x
+  (nasconde il debito), roadmap-AI-che-ricalca-i-cluster (il-progetto-che-si-pianifica-da-solo), un-motore-due-festival
+  (modulo concorso riusabile, ponte S1-C10). Il Modello non tratta il forking → proporre sezione/appendice in S3.
 
 ## S2 — Inventario contenuti
 - ⬜ Cosa entra / aggiorna / è nuovo / si scarta vs i 19 capitoli esistenti.
@@ -118,4 +124,4 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
 ---
 
 ### Stato globale FASE 2
-- **13 / 14 schede S1 completate** (S1-C1…C13 ✅). Prossima: **S1-FORK (FDCA come caso fork/evoluzione)** — ULTIMA scheda S1.
+- **14 / 14 schede S1 COMPLETATE** ✅ (S1-C1…C13 + S1-FORK). **Sotto-fase S1 (Consolidamento) CONCLUSA.** Prossima sotto-fase: **S2 — Inventario contenuti**.
