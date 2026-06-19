@@ -86,7 +86,14 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
   engagement-leggero vs voto-competitivo (S1-C10). Anti-frode/identità già in S1-C2. Corregge CAP 19 §4 (un solo
   strato mislabeled "per IP" = sono due, il vero per-IP è il secondo), §3 (hash NON salato né irreversibile),
   omette messages.php (metà del cluster) e le due filosofie di sanitizzazione; versione "v2.0" errata (SPW v1.21).
-- ⬜ S1-C12 Admin Dashboard & Panels — fonti SPW-C12, SR-C12, DIS-C12
+- ✅ **S1-C12 Admin Dashboard & Panels** — fonti SPW-C12, SR-C12, DIS-C12 (FDCA = no admin). → **GAP: nuovo capitolo da proporre in S3** + ponti CAP 10/14/18/19.
+  La dashboard = il tessuto che lega tutti i cluster, su DUE assi ortogonali: *quanto misura* (Chart.js SPW /
+  NON misura=console-CRUD SR / testuale DIS) e *come è costruita* (route-guard-loader SPW / mega-componente SR /
+  AdminLayout+guard-componente DIS). Ribaltamento (gemello S1-C2/C5/C9): il flagship-incidenti SR ha l'admin meno
+  attrezzato (né metriche né backup). GOLD: tre-modelli-dashboard, flagship-senza-rete-di-salvataggio (backup
+  fuori-docroot+htaccess-runtime SPW vs NIENTE SR → S1-C13), tabella-write-only contacts DIS, guard-role-blind DIS,
+  session_version-server-vs-logout-client, console-nascosta (manutenzione GET senza UI SR), confirm≠CSRF, app_settings
+  mass-write. GAP STRUTTURALE: manca un capitolo Admin generale (CAP 18 è solo festival) → proporre nuovo CAP in S3.
 - ⬜ S1-C13 DB Evolution & Incidenti — fonti SR-C13, DIS-C1 (meccanismo update_db_*), SPW-C1 (init fossile)
 - ⬜ S1-FORK FDCA come caso "fork/evoluzione" — fonte FDCA-DIFF (non aggiunge pattern: backend = DIS)
 
@@ -102,4 +109,4 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
 ---
 
 ### Stato globale FASE 2
-- **11 / 14 schede S1 completate** (S1-C1 ✅, S1-C2 ✅, S1-C3 ✅, S1-C4 ✅, S1-C5 ✅, S1-C6 ✅, S1-C7 ✅, S1-C8 ✅, S1-C9 ✅, S1-C10 ✅, S1-C11 ✅). Prossima: **S1-C12 Admin Dashboard & Panels**.
+- **12 / 14 schede S1 completate** (S1-C1…C12 ✅). Prossima: **S1-C13 DB Evolution & Incidenti**.
