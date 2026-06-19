@@ -1,0 +1,11 @@
+# scratch (quirk FUSE Cowork: eliminabili da Windows)
+build/
+proto/
+_*.typ
+libro_proto.typ
+# artefatti generati (rigenerabili con produzione/build_book.py)
+produzione/libro.typ
+produzione/capitoli-typ/
+produzione/prototipi/*.png
+produzione/_interno_rgb.pdf
+produzione/_check/
