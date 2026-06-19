@@ -125,7 +125,8 @@ Ordine: prima il flagship contenuti, poi scalabilità, poi festival, infine il d
 
 Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "raccontata" + blocchi di codice reali (`path:linea` come origine) + box problemi/soluzioni dove pertinente. **Riscritture CHIRURGICHE** (decisione gate S4): preservare il corretto, sostituire le parti smentite dalle fonti, aggiungere le sezioni mancanti. Fonti per ogni capitolo = mappa card/scheda→capitolo in `sintesi/S3-scaletta-globale.md` §3 + §3/§4 delle schede S1 + card di mappatura per gli stralci di codice.
 Ordine deciso (S3 §8): (1) CAP 10 Security → (2) CAP 8 Editing [box-ancora 4 emettitori] → (3) CAP 11 SEO → (4) CAP 12 RSS → (5) CAP 13 Newsletter → (6) CAP 14 Admin [nuovo] → (7) CAP 6 Bridge → (8) CAP 7 Media/Upload → (9) CAP 20 Reactions → (10) correzioni CAP 1/2/3/4/5/9/15/16/17/18/19 → (11) App. B Fork → (12) FASE 4.
-- [ ] **FASE 3 / CAP 10 Security & Auth** (PRIMA card di scrittura) — riscrittura chirurgica, fonti S1-C2 (+ C3/C5/C11/C12). Vedi `PROSSIMA-SESSIONE.md`.
+- [x] **FASE 3 / CAP 10 Security & Auth** (PRIMA card di scrittura) — **CONCLUSO 2026-06-19** — riscrittura chirurgica completa: aggiunti CSRF a 3 gradini (§3), `session_version` (§7), recovery/reset (§8), credenziali default (§9), reset-senza-CSRF + backup just-in-time (§12); box-ancora D7 "Fidarsi dell'IP" (§6); correzioni applicate (SameSite=Strict non Lax, `username` assente in SR, brute-force=lockout-a-3-sedi non solo `sleep(1)`); DDoS-da-bot spostato a CAP 11 (resta solo la lezione "UA non è un gatekeeper", §13). Fonti S1-C2 (+ C3/C5/C11/C12). **NB:** CAP resta numerato 10 in questa fase (rinumerazione fisica → FASE 4).
+- [ ] **FASE 3 / CAP 8 Advanced Content Editing** (PROSSIMA card) — riscrittura chirurgica + **box-ancora "I quattro emettitori del `content`"** (D1). Fonti S1-C6 (+ S1-C7/C8/C9 per il box). Vedi `PROSSIMA-SESSIONE.md`.
 
 ---
 
@@ -139,6 +140,6 @@ Ordine deciso (S3 §8): (1) CAP 10 Security → (2) CAP 8 Editing [box-ancora 4 
 
 ## 7. Stato globale
 
-- **Fase corrente:** 🟩 **FASE 2 — SINTESI CONCLUSA** (S1 14/14 · S2 · S3 · S4 gate superato 2026-06-19). 🟨 **FASE 3 — SCRITTURA avviata.** FASE 1 conclusa (4 siti, 34 card). Target: 20 capitoli + 2 appendici, riscritture chirurgiche.
-- **Prossima unità:** **FASE 3 / CAP 10 Security & Auth** — prima riscrittura (oggi il capitolo non parla affatto di CSRF/recovery/session_version). Fonti: S1-C2 (princ.) + S1-C3/C5/C11/C12. Ordine completo in `sintesi/S3-scaletta-globale.md` §8. Vedi `PROSSIMA-SESSIONE.md`.
+- **Fase corrente:** 🟨 **FASE 3 — SCRITTURA in corso** (1/9 riscritture: **CAP 10 ✅**). FASE 2 conclusa (S1 14/14 · S2 · S3 · S4 gate superato 2026-06-19). FASE 1 conclusa (4 siti, 34 card). Target: 20 capitoli + 2 appendici, riscritture chirurgiche.
+- **Prossima unità:** **FASE 3 / CAP 8 Advanced Content Editing** — riscrittura chirurgica (Tiptap scala a 3 gradini, DOMPurify render-time choke-point) + **box-ancora "I quattro emettitori del `content`"** (D1, apre il filo CAP 8→11→12→13). Fonti: S1-C6 (princ.) + S1-C7/C8/C9 per il box. Ordine completo in `sintesi/S3-scaletta-globale.md` §8. Vedi `PROSSIMA-SESSIONE.md`.
 - **Log completo:** `LOG.md`.
