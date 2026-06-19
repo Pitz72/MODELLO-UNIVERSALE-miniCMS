@@ -1,4 +1,4 @@
-# CAPITOLO 18: Festival Logic - Dashboard Admin, Settings e Reporting (v1.0)
+# CAPITOLO 19: Festival Logic - Dashboard Admin, Settings e Reporting (v1.0)
 
 Il controllo del Festival avviene tramite una dashboard centralizzata che permette all'admin di attivare/disattivare intere fasi dell'evento e monitorare i risultati.
 

@@ -11,7 +11,7 @@ Questa checklist riassume i passi pratici per inizializzare un nuovo progetto We
 - [ ] Creare la cartella media (`public/api/uploads/`) e la cache (`public/api/.cache/`).
 - [ ] Configurare `vite.config.ts` con il proxy corretto per evitare CORS in locale.
 - [ ] Creare `.env.local` con le variabili di sviluppo (`VITE_API_URL=http://localhost/...`).
-- [ ] Aggiungere `db_credentials.php` e `.env.local` al `.gitignore` (mai committare credenziali). *(Cap. 14)*
+- [ ] Aggiungere `db_credentials.php` e `.env.local` al `.gitignore` (mai committare credenziali). *(Cap. 15)*
 
 ## Fase 2: Configurazione Backend Core (PHP)
 - [ ] Implementare `db.php` con connessione Lazy a SQLite (`PRAGMA journal_mode=DELETE`, `busy_timeout=5000`, `PRAGMA foreign_keys=ON`). *(Cap. 3)*
@@ -55,20 +55,20 @@ Questa checklist riassume i passi pratici per inizializzare un nuovo progetto We
 - [ ] Abilitare rate limiting con `usleep(500000)` ogni 10 email nel ciclo di invio. *(Cap. 13)*
 
 ### Per Portfolio/Sito Personale (SimonePizziWebSite pattern)
-- [ ] Aggiungere tabella `projects` con `sort_order`, `is_visible`, `button_a`, `button_b`. *(Cap. 15)*
-- [ ] Implementare `projects.php` con i 5 metodi HTTP incluso PATCH per toggle visibilità e riordinamento. *(Cap. 15)*
-- [ ] Creare componenti `PortfolioGrid.tsx`, `ProjectEditor.tsx`, `ProjectsList.tsx`. *(Cap. 15)*
+- [ ] Aggiungere tabella `projects` con `sort_order`, `is_visible`, `button_a`, `button_b`. *(Cap. 16)*
+- [ ] Implementare `projects.php` con i 5 metodi HTTP incluso PATCH per toggle visibilità e riordinamento. *(Cap. 16)*
+- [ ] Creare componenti `PortfolioGrid.tsx`, `ProjectEditor.tsx`, `ProjectsList.tsx`. *(Cap. 16)*
 
 ### Per Festival/Concorso (FDCA / DISINTELLIGENZA pattern)
-- [ ] Aggiungere tabelle `participants`, `votes`, `settings` con master switch `registration_active` e `voting_active`. *(Cap. 16, 17)*
-- [ ] Implementare `participants.php` con workflow pending → approved/rejected. *(Cap. 16)*
-- [ ] Implementare `votes.php` con protezione IP + cookie anti-frode. *(Cap. 17)*
+- [ ] Aggiungere tabelle `participants`, `votes`, `settings` con master switch `registration_active` e `voting_active`. *(Cap. 17, 18)*
+- [ ] Implementare `participants.php` con workflow pending → approved/rejected. *(Cap. 17)*
+- [ ] Implementare `votes.php` con protezione IP + cookie anti-frode. *(Cap. 18)*
 
 ### Per Migrazione SQLite → MySQL (SitoRuntime pattern)
-- [ ] Creare `db_credentials.php` separato (aggiungere al `.gitignore`). *(Cap. 14)*
-- [ ] Aggiornare `db.php` con connessione PDO MySQL (`utf8mb4`, `EMULATE_PREPARES=false`). *(Cap. 14)*
-- [ ] Eseguire `init_mysql.php` per creare lo schema MySQL sul server. *(Cap. 14)*
-- [ ] Eseguire `migrate_to_mysql.php` per trasloco dati (ONE-SHOT, eliminare dopo). *(Cap. 14)*
+- [ ] Creare `db_credentials.php` separato (aggiungere al `.gitignore`). *(Cap. 15)*
+- [ ] Aggiornare `db.php` con connessione PDO MySQL (`utf8mb4`, `EMULATE_PREPARES=false`). *(Cap. 15)*
+- [ ] Eseguire `init_mysql.php` per creare lo schema MySQL sul server. *(Cap. 15)*
+- [ ] Eseguire `migrate_to_mysql.php` per trasloco dati (ONE-SHOT, eliminare dopo). *(Cap. 15)*
 
 ---
 *Questa checklist è generata basandosi sui capitoli del Modello Universale miniCMS v2.0. Per i dettagli implementativi fare riferimento ai file `.md` corrispondenti.*

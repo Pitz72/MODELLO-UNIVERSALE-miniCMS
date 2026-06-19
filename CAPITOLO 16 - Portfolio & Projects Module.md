@@ -1,4 +1,4 @@
-# CAPITOLO 15: Portfolio & Projects Module (v1.0)
+# CAPITOLO 16: Portfolio & Projects Module (v1.0)
 
 Il modulo Portfolio è un'entità distinta dalla News/Article, progettata per siti di tipo personale, agenzia o showcase. Documentato da **SimonePizziWebSite**, introduce pattern specifici: visibilità granulare, ordinamento manuale, pulsanti azione multipli e gestione per categorie. È il modello di riferimento per qualsiasi sito che debba esporre un catalogo di lavori, prodotti o progetti.
 

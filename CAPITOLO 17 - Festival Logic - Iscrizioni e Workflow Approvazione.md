@@ -1,4 +1,4 @@
-# CAPITOLO 16: Festival Logic - Iscrizioni e Workflow Approvazione (v1.0)
+# CAPITOLO 17: Festival Logic - Iscrizioni e Workflow Approvazione (v1.0)
 
 Il Modello Universale include un sistema gestionale per concorsi e festival, focalizzato sull'acquisizione di talenti e la gestione del loro ciclo di vita.
 

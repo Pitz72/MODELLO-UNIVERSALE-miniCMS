@@ -1,4 +1,4 @@
-# CAPITOLO 17: Festival Logic - Votazioni e Protezione Anti-Frode (v1.0)
+# CAPITOLO 18: Festival Logic - Votazioni e Protezione Anti-Frode (v1.0)
 
 Il Modello Universale implementa un sistema di votazione pubblica robusto, progettato per prevenire manipolazioni e garantire l'equità del concorso.
 

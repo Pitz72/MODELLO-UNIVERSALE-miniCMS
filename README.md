@@ -53,16 +53,17 @@ L'obiettivo è uno standard di sviluppo per Web App moderne leggere che sia:
 - [Capitolo 11: SEO Pre-rendering con PHP Entry-Point](./CAPITOLO%2011%20-%20SEO%20Pre-rendering%20con%20PHP%20Entry-Point.md)
 - [Capitolo 12: RSS Feed & Syndication](./CAPITOLO%2012%20-%20RSS%20Feed%20%26%20Syndication.md)
 - [Capitolo 13: Newsletter & Email System](./CAPITOLO%2013%20-%20Newsletter%20%26%20Email%20System.md)
+- [Capitolo 14: Admin Dashboard & Panels](./CAPITOLO%2014%20-%20Admin%20Dashboard%20%26%20Panels.md)
 
 ### Parte V — I Casi Reali
 *Dove la teoria incontra la produzione. Pattern estratti da progetti reali, con le loro cicatrici.*
 
-- [Capitolo 14: Database Evolution - Da SQLite a MySQL](./CAPITOLO%2014%20-%20Database%20Evolution%20-%20Da%20SQLite%20a%20MySQL.md)
-- [Capitolo 15: Portfolio & Projects Module](./CAPITOLO%2015%20-%20Portfolio%20%26%20Projects%20Module.md)
-- [Capitolo 16: Festival Logic - Iscrizioni e Workflow Approvazione](./CAPITOLO%2016%20-%20Festival%20Logic%20-%20Iscrizioni%20e%20Workflow%20Approvazione.md)
-- [Capitolo 17: Festival Logic - Votazioni e Protezione Anti-Frode](./CAPITOLO%2017%20-%20Festival%20Logic%20-%20Votazioni%20e%20Protezione%20Anti-Frode.md)
-- [Capitolo 18: Festival Logic - Dashboard Admin, Settings e Reporting](./CAPITOLO%2018%20-%20Festival%20Logic%20-%20Dashboard%20Admin%2C%20Settings%20e%20Reporting.md)
-- [Capitolo 19: Social Interactions & Reactions](./CAPITOLO%2019%20-%20Social%20Interactions%20%26%20Reactions.md)
+- [Capitolo 15: Database Evolution - Da SQLite a MySQL](./CAPITOLO%2015%20-%20Database%20Evolution%20-%20Da%20SQLite%20a%20MySQL.md)
+- [Capitolo 16: Portfolio & Projects Module](./CAPITOLO%2016%20-%20Portfolio%20%26%20Projects%20Module.md)
+- [Capitolo 17: Festival Logic - Iscrizioni e Workflow Approvazione](./CAPITOLO%2017%20-%20Festival%20Logic%20-%20Iscrizioni%20e%20Workflow%20Approvazione.md)
+- [Capitolo 18: Festival Logic - Votazioni e Protezione Anti-Frode](./CAPITOLO%2018%20-%20Festival%20Logic%20-%20Votazioni%20e%20Protezione%20Anti-Frode.md)
+- [Capitolo 19: Festival Logic - Dashboard Admin, Settings e Reporting](./CAPITOLO%2019%20-%20Festival%20Logic%20-%20Dashboard%20Admin%2C%20Settings%20e%20Reporting.md)
+- [Capitolo 20: Social Interactions & Reactions](./CAPITOLO%2020%20-%20Social%20Interactions%20%26%20Reactions.md)
 
 ### Allegati
 *Strumenti pratici per iniziare.*

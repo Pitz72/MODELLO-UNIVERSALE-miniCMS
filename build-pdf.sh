@@ -64,14 +64,16 @@ append_chapter "$DIR/CAPITOLO 10 - Security & Auth.md"
 append_chapter "$DIR/CAPITOLO 11 - SEO Pre-rendering con PHP Entry-Point.md"
 append_chapter "$DIR/CAPITOLO 12 - RSS Feed & Syndication.md"
 append_chapter "$DIR/CAPITOLO 13 - Newsletter & Email System.md"
+append_chapter "$DIR/CAPITOLO 14 - Admin Dashboard & Panels.md"
 
 # ---- PARTE V ----
 printf '\n\\part{I Casi Reali}\n\n' >> "$MASTER"
-append_chapter "$DIR/CAPITOLO 14 - Database Evolution - Da SQLite a MySQL.md"
-append_chapter "$DIR/CAPITOLO 15 - Portfolio & Projects Module.md"
-append_chapter "$DIR/CAPITOLO 16 - Festival Logic - Iscrizioni e Workflow Approvazione.md"
-append_chapter "$DIR/CAPITOLO 17 - Festival Logic - Votazioni e Protezione Anti-Frode.md"
-append_chapter "$DIR/CAPITOLO 18 - Festival Logic - Dashboard Admin, Settings e Reporting.md"
+append_chapter "$DIR/CAPITOLO 15 - Database Evolution - Da SQLite a MySQL.md"
+append_chapter "$DIR/CAPITOLO 16 - Portfolio & Projects Module.md"
+append_chapter "$DIR/CAPITOLO 17 - Festival Logic - Iscrizioni e Workflow Approvazione.md"
+append_chapter "$DIR/CAPITOLO 18 - Festival Logic - Votazioni e Protezione Anti-Frode.md"
+append_chapter "$DIR/CAPITOLO 19 - Festival Logic - Dashboard Admin, Settings e Reporting.md"
+append_chapter "$DIR/CAPITOLO 20 - Social Interactions & Reactions.md"
 
 # ---- ALLEGATI ----
 printf '\n\\part{Allegati}\n\n' >> "$MASTER"

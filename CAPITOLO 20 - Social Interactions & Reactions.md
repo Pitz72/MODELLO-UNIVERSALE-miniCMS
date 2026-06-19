@@ -1,4 +1,4 @@
-# CAPITOLO 19: Social Interactions & Reactions (v1.0)
+# CAPITOLO 20: Social Interactions & Reactions (v1.0)
 
 L'engagement degli utenti è fondamentale per un blog moderno. Il Modello Universale integra un sistema di **Reazioni Social** anonime, sicure e totalmente GDPR-compliant, ispirato alla logica di **SimonePizziWebSite (v2.0)**.
 
