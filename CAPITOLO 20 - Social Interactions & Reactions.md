@@ -141,5 +141,12 @@ Lato client la barra delle reazioni aggiorna il conteggio e lo stato del pulsant
 
 La scrittura pubblica anonima è il punto più esposto del CMS, e SimonePizziWebSite lo difende con cura: identità derivata invece dell'IP in chiaro, integrità imposta dallo schema invece che dal codice, rate-limit a due strati invece di uno aggirabile, e input ripulito all'ingresso invece che fidato. La lezione che lega tutto è quella delle due filosofie di sanitizzazione: non esiste un posto giusto in assoluto dove ripulire l'input, esiste la domanda «di chi mi fido», e la risposta cambia il verso della difesa. Resta da ricordare anche cosa il modulo *non* è: l'hash non rende anonimo nessuno, lo offusca; il consenso del form è cortesia, non barriera. Saperlo, e non raccontarsi che il lucchetto è più solido di com'è, è parte della stessa onestà tecnica che attraversa tutto il libro. Qui finisce il giro dentro il CMS: dalle fondamenta del backend fino all'ultimo clic di un visitatore che non sapremo mai chi è.
 
+> [!IMPORTANT]
+> **Il Canone**
+> - Per la scrittura pubblica non autenticata, deriva uno pseudonimo con un hash **salato**: un hash di IP+UA senza salt non è anonimato, è reversibile.
+> - Se la chiave del rate-limit include input del client (lo User-Agent), serve un secondo strato ancorato all'IP; lascia l'integrità allo schema (`UNIQUE` + `INSERT IGNORE`).
+> - Sanitizza l'input pubblico **al write-time** (`strip_tags`) e il contenuto fidato **al render** (DOMPurify): dipende da chi te lo manda.
+> - Tara l'anti-abuso sulla posta in gioco: una reazione leggera non si difende come un voto sorvegliato.
+
 ---
 *Fine della Parte V. Le appendici raccolgono i materiali di servizio: la checklist per partire da zero e il caso del fork (FDCA), il progetto che eredita un intero CMS, debiti di sicurezza compresi.*

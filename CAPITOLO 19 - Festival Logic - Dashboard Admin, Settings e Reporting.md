@@ -36,5 +36,12 @@ Alla chiusura del voto, dice il modulo idealizzato, il backend invia allo staff 
 
 Il pannello del festival è coerente con la filosofia del modulo, gli interruttori semplici e i numeri essenziali, ma porta le crepe del «fatto a interruttori»: una stima di unicità che si fida di un cookie cosmetico, una classifica che può derivare senza accorgersene, uno stato `finalist` mai usato e un report mai acceso. Sono i punti dove il concorso reale diverge dalla sua versione raccontata, e conoscerli è ciò che distingue chi sa governarlo da chi crede di farlo. La struttura che tiene insieme questo pannello (guardia, layout, backup) resta al Capitolo 14, di cui questa è la versione festival.
 
+> [!IMPORTANT]
+> **Il Canone**
+> - È l'istanza-festival dell'area admin (Capitolo 14): struttura, guardia e backup vivono lì, qui restano gli interruttori e i KPI del concorso.
+> - I master switch vanno letti in modo coerente con come sono scritti (niente `'1'` contro `'true'`).
+> - Mostra KPI onesti (votanti unici per IP, consapevoli del drift di `vote_count`, Capitolo 18).
+> - Non spacciare per attive le feature costruite ma disabilitate, e togli gli stati vestigiali (uno stato `finalist` mai impostato).
+
 ---
 *Prossimo Capitolo: Social Interactions & Reactions. L'ultima superficie del CMS, dove a scrivere nel database è il pubblico anonimo.*

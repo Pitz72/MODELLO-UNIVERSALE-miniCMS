@@ -127,5 +127,11 @@ Il multi-tagging molti-a-molti, invece, resta una feature degli **articoli**, no
 > **Il pattern `auth_helper.php`**
 > Anche `projects.php`, come ogni endpoint protetto, si appoggia all'`auth_helper.php` che incapsula `session_start()`, gli header JSON e la classe `Auth` (il dettaglio è al Capitolo 5). Concentrare quelle chiamate in un solo include, invece di ripeterle in ogni file, riduce gli errori da «headers already sent».
 
+> [!IMPORTANT]
+> **Il Canone**
+> - Tabella `projects` con `sort_order`, `is_visible` e i campi CTA; endpoint con `PATCH` per toggle di visibilità e riordino.
+> - URL dei progetti su id numerico, non slug; categoria singola (il multi-tag M:N è degli articoli, Capitolo 9).
+> - Ricerca unificata con un campo `type` che smista i risultati lato client.
+
 ---
 *Prossimo Capitolo: Festival Logic, Iscrizioni e Workflow di Approvazione. Il ciclo di gestione dei concorrenti per DISINTELLIGENZA e FDCA.*

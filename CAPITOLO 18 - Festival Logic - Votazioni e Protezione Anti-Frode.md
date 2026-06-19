@@ -59,5 +59,12 @@ Resta la fragilità più sottile, e la più importante per l'equità del concors
 
 C'è infine il reset stesso: le azioni che azzerano voti e contatori (`reset_votes`, `reset_system`) sono potenti e distruttive, ma **non hanno protezione CSRF** (Capitolo 10). Le circonda solo una conferma nel browser, che ferma il clic distratto ma non una richiesta forgiata da un altro sito mentre l'admin è loggato. La copia `.bak` pre-distruttiva è la rete che attenua il danno; la difesa che manca è il token.
 
+> [!IMPORTANT]
+> **Il Canone**
+> - L'anti-frode reale è il vincolo IP + finestra temporale (24h); il cookie è cosmetico, lo User-Agent solo un indizio.
+> - Per il voto pubblico l'IP grezzo è un pregio anti-spoof (a differenza dell'auth dietro proxy, Capitolo 10).
+> - Se denormalizzi un contatore (`vote_count`), prevedi una riconciliazione periodica con `COUNT(votes)`, oppure accetti il drift silenzioso.
+> - I reset distruttivi passano per un token CSRF più la copia `.bak`; la conferma nel browser non basta.
+
 ---
 *Prossimo Capitolo: Festival Logic, Dashboard Admin, Settings e Reporting. Il pannello di controllo del concorso, e il report finale che non è mai stato acceso.*

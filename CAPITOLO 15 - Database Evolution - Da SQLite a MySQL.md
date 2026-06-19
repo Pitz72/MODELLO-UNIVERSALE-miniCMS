@@ -293,5 +293,12 @@ La sequenza, in ordine, per un passaggio SQLite → MySQL fatto bene. Il primo p
 
 La migrazione di motore non è un gradino di scaling che prima o poi tutti salgono: è un evento, e il *perché* conta quanto il *come*. SitoRuntime è scappato da SQLite dopo una notte storta, e ha portato MySQL con sé senza ripulire la casa, lasciandosi dietro sei fossili, tre versioni della stessa tabella e nessun backup. DISINTELLIGENZA dimostra che SQLite in produzione regge benissimo, finché non gli si chiede un'ottimizzazione che non sa dare sul suo terreno. SimonePizziWebSite ha fatto lo stesso viaggio in silenzio, con la rete sotto. La lezione non è «migra a MySQL» e nemmeno «resta su SQLite»: è che ogni evoluzione di schema, e ancora di più ogni cambio di motore, va completata fino in fondo, con un registro di cosa hai fatto e un backup di cosa avevi prima. Quello che una migrazione lascia indietro pesa più di quello che porta avanti.
 
+> [!IMPORTANT]
+> **Il Canone**
+> - Migra di motore solo per un vincolo concreto (lock ricorrenti, hosting, accesso remoto), non per scaramanzia; fai il backup **prima**, fuori dal repo.
+> - ETL idempotente (`ON DUPLICATE KEY UPDATE`) con verifica dei conteggi a fine trasloco.
+> - A migrazione conclusa, rimuovi i fossili del vecchio motore dal repo.
+> - Una sola definizione per ogni tabella e un registro dello schema (`schema_version`); la cura d'emergenza non sostituisce la prevenzione, cioè il backup automatico.
+
 ---
 *Prossimo Capitolo: Portfolio & Projects Module. Il modulo universale per portfolio e showcase, con riordinamento drag-and-drop e visibilità a interruttore.*

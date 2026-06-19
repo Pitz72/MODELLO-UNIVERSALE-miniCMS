@@ -38,5 +38,12 @@ All'approvazione, l'indirizzo del partecipante viene inserito nella tabella dell
 > **Iscriversi a un concorso non è acconsentire al marketing**
 > Chi invia la propria traccia acconsente a partecipare al festival, non a ricevere una newsletter: sono due basi giuridiche diverse (Capitolo 13). Iscrivere d'ufficio i partecipanti approvati alla mailing list, senza un consenso esplicito e separato, è un problema di conformità GDPR, non un pregio di prodotto. I commenti nel sorgente tradiscono il dubbio dello stesso sviluppatore. La soluzione è semplice e va nella direzione opposta a quella «comoda»: un consenso marketing distinto, opt-in, raccolto al momento dell'iscrizione e registrato; l'approvazione al concorso non deve trascinarsi dietro l'iscrizione alla newsletter come effetto collaterale.
 
+> [!IMPORTANT]
+> **Il Canone**
+> - Workflow `pending → approved/rejected` con master switch `registration_active`.
+> - L'upload pubblico delle tracce è il fronte della catena RCE: gatelo e validalo come ogni upload (Capitolo 7).
+> - L'approvazione è un'azione admin: gate per **ruolo**, non solo per login (niente gate role-blind).
+> - Iscriversi a un concorso non è consenso al marketing: niente sync della newsletter senza opt-in esplicito e separato.
+
 ---
 *Prossimo Capitolo: Festival Logic, Votazioni e Protezione Anti-Frode. Il voto pubblico, le difese che contano davvero e quelle solo cosmetiche.*
