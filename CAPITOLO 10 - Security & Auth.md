@@ -1,4 +1,4 @@
-# CAPITOLO 10: Security & Auth (Terza Edizione)
+# CAPITOLO 10: Security & Auth
 
 La sicurezza è l'unica lente di questo libro in cui i tre siti non scalano in parallelo con l'ingegnerizzazione del backend. Negli altri capitoli vale una regola intuitiva: più un sito è cresciuto, più la sua infrastruttura è ricca. Qui no. Lo stesso scheletro thin-stack (PHP nativo, sessione su cookie, regole Apache nei `.htaccess`) regge tre gradini di difesa decrescenti, ma il gradino più alto non è quello del sito col backend più sofisticato.
 

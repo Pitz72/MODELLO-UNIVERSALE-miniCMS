@@ -1,4 +1,4 @@
-# CAPITOLO 19: Festival Logic - Dashboard Admin, Settings e Reporting (Terza Edizione)
+# CAPITOLO 19: Festival Logic - Dashboard Admin, Settings e Reporting
 
 Questa dashboard è il quadro di comando del concorso, ma non è una console a sé: è la **specializzazione festival** dell'area admin generale del Capitolo 14. La struttura che la regge (la guardia che protegge l'area, il layout, il backup fuori docroot) appartiene a quel capitolo; qui restano le cose proprie del festival, gli interruttori delle fasi, i KPI del concorso, l'approvazione, la classifica e il report. Leggere questo capitolo come l'istanza-festival di un pattern generale, e non come un pannello isolato, evita di duplicare ciò che il Capitolo 14 ha già spiegato.
 

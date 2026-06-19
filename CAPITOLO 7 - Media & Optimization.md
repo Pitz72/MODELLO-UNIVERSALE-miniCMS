@@ -1,4 +1,4 @@
-# CAPITOLO 7: Media & Optimization (Terza Edizione)
+# CAPITOLO 7: Media & Optimization
 
 Questo capitolo segue un file dal disco di chi lo carica al disco del server: come arriva, come viene controllato, come viene alleggerito, dove finisce e come viene riservito. È un percorso breve, e proprio per questo pericoloso. Nei tre siti lo scheletro è lo stesso (un `upload.php` che riceve un `multipart`, lo valida, lo ottimizza con GD e lo mette su disco), ma è il cluster in cui la sicurezza scala **all'inverso del buon senso**.
 

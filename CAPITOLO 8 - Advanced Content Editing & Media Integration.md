@@ -1,4 +1,4 @@
-# CAPITOLO 8: Advanced Content Editing (Terza Edizione)
+# CAPITOLO 8: Advanced Content Editing
 
 L'editor di contenuti è il punto in cui un CMS si fa toccare con mano: è lì che l'autore scrive, formatta, incolla, inserisce un'immagine o un video. Sembra un dettaglio di interfaccia, ma porta con sé due domande di fondo che questo capitolo tiene insieme. La prima è quanto editor ti serve davvero, perché si va da una libreria di una decina di pacchetti fino a zero dipendenze. La seconda, più seria, è dove vive la difesa contro l'XSS: il contenuto che l'autore compone è HTML, quell'HTML finisce nel database, e prima o poi qualcuno lo stampa in pagina. Se nessuno lo ripulisce, un `<script>` scritto da chi ha accesso all'editor diventa codice eseguito nel browser di ogni lettore.
 

@@ -1,4 +1,4 @@
-# APPENDICE B: Ciclo di vita di un fork (Terza Edizione)
+# APPENDICE B: Ciclo di vita di un fork
 
 Il Modello descrive come si costruisce un sito thin stack. Non dice cosa succede quando lo si **forka**, eppure è un evento reale nella vita di questi progetti, e ne abbiamo un esempio mappato dall'interno: FDCA, il «Festival della Canzone Artificiale», nasce come fork di DISINTELLIGENZA, il «Festival della Disintelligenza Naturale». Stesso autore, stesso motore, tema nuovo: dalla comicità dell'errore umano alla musica generativa. Questa appendice racconta quella fase, perché ha rischi tutti suoi, e il primo è il più silenzioso di tutti.
 

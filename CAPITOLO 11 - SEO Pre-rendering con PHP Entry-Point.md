@@ -1,4 +1,4 @@
-# CAPITOLO 11: SEO Pre-rendering con PHP Entry-Point (Terza Edizione)
+# CAPITOLO 11: SEO Pre-rendering con PHP Entry-Point
 
 Una Single Page Application ha un problema di nascita con i motori di ricerca. Il bot di Google, o il crawler di Telegram che genera l'anteprima di un link, riceve dal server un `index.html` quasi vuoto: un `<div id="root"></div>` e un bundle JavaScript. Il contenuto vero arriva solo dopo che quel JavaScript gira, e molti crawler non lo eseguono. Il risultato è una pagina che per il bot non ha né titolo sensato, né descrizione, né immagine di anteprima, né testo da indicizzare.
 

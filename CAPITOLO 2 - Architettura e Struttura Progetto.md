@@ -1,4 +1,4 @@
-# CAPITOLO 2: Architettura e Struttura Progetto (Terza Edizione)
+# CAPITOLO 2: Architettura e Struttura Progetto
 
 Questo capitolo definisce l'architettura fisica e logica del sistema: come sono disposte le cartelle, dove vivono i segreti, come una richiesta trova il suo file PHP, e quali difese sono cablate nella struttura stessa invece che aggiunte dopo.
 

@@ -1,4 +1,4 @@
-# CAPITOLO 4: Frontend Dependencies (Terza Edizione)
+# CAPITOLO 4: Frontend Dependencies
 
 Le dipendenze frontend sono scelte architetturali, non solo righe in `package.json`. Ogni libreria aggiunta ha un costo (dimensione del bundle, superficie di aggiornamento, complessità di integrazione) e deve guadagnarsi il posto. Questo capitolo documenta le scelte fatte nei quattro siti di riferimento, con le motivazioni che le guidano, e dedica spazio anche a un'assenza: le librerie che il Modello sceglie di **non** usare.
 

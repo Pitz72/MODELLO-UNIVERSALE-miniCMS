@@ -1,4 +1,4 @@
-# CAPITOLO 15: Database Evolution - Da SQLite a MySQL (Terza Edizione)
+# CAPITOLO 15: Database Evolution - Da SQLite a MySQL
 
 Il 23 febbraio 2026, alle 2:25 di notte, un commit di SitoRuntime porta un messaggio asciutto: «Risolto crash server e ottimizzate performance con switch SQLite WAL->DELETE». Il giorno dopo, il 24, il sito abbandona SQLite e passa a MySQL. Le due date, a un giorno di distanza, raccontano da sole la storia di questo capitolo: la migrazione non è stata un upgrade pianificato, è stata una fuga.
 

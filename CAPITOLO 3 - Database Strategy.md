@@ -1,4 +1,4 @@
-# CAPITOLO 3: Database Strategy (Terza Edizione)
+# CAPITOLO 3: Database Strategy
 
 Il database è il cuore del miniCMS. Questo capitolo definisce le strategie di connessione, integrità e migrazione, distinguendo con cura due cose che è facile confondere: ciò che il Modello **raccomanda** e ciò che i siti reali **fanno davvero**. Non sempre coincidono, e dirlo apertamente è più utile che spacciare una prescrizione per una fotografia.
 

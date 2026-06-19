@@ -1,4 +1,4 @@
-# CAPITOLO 17: Festival Logic - Iscrizioni e Workflow Approvazione (Terza Edizione)
+# CAPITOLO 17: Festival Logic - Iscrizioni e Workflow Approvazione
 
 Una premessa di onestà, prima del modulo. Il «festival» non è parte del core del miniCMS: è un **modulo opzionale**, presente in **un solo sito su quattro** (DISINTELLIGENZA), che FDCA eredita immutato perché ne è un fork con il backend byte-identico. I tre capitoli che seguono (questo, le votazioni, la dashboard) raccontano un concorso a voto pubblico reale, con i suoi pregi e le sue crepe, non un componente standard da dare per scontato.
 

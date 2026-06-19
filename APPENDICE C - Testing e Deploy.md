@@ -1,4 +1,4 @@
-# APPENDICE C: Testing e Deploy (cenni) (Terza Edizione)
+# APPENDICE C: Testing e Deploy (cenni)
 
 Due temi che il corpo del manuale tocca solo di sfuggita meritano almeno un punto di partenza: come si collauda un thin stack senza un framework che ti regali gli strumenti, e come lo si porta in produzione su un hosting economico. Sono cenni, non una guida completa: indicano la direzione e i tranelli principali, non ogni passo. Ma servono a smentire un equivoco, e cioè che «niente framework» voglia dire «niente test» e «deploy a sentimento».
 

@@ -1,4 +1,4 @@
-# CAPITOLO 20: Social Interactions & Reactions (Terza Edizione)
+# CAPITOLO 20: Social Interactions & Reactions
 
 Quasi tutto, nel CMS, è scrittura riservata: pubblicare un articolo, caricare un file, comporre una newsletter, ognuna di queste azioni vive dietro `Auth::check()`. Ci sono due eccezioni, e questo capitolo parla di loro. Le **reazioni** agli articoli e i **messaggi** del form contatti sono le uniche due superfici in cui un visitatore non autenticato scrive davvero nel database. Sono il fronte più esposto del sito, e proprio per questo concentrano le difese più sofisticate che SimonePizziWebSite abbia costruito.
 

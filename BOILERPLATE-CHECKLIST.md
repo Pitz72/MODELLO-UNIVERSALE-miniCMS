@@ -1,4 +1,4 @@
-# APPENDICE A - Boilerplate Checklist: Avvio Nuovo Progetto miniCMS (Terza Edizione)
+# APPENDICE A - Boilerplate Checklist: Avvio Nuovo Progetto miniCMS
 
 Questa checklist riassume i passi pratici per inizializzare un nuovo progetto Web (Sito o Web App) basato sugli standard del «Modello Universale miniCMS». Per i dettagli implementativi, fare riferimento ai capitoli indicati. I rimandi `(Cap. N)` seguono la numerazione della Terza Edizione (20 capitoli + Appendici A e B).
 

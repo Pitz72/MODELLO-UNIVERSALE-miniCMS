@@ -1,4 +1,4 @@
-# CAPITOLO 12: RSS Feed & Syndication (Terza Edizione)
+# CAPITOLO 12: RSS Feed & Syndication
 
 Il feed RSS è il canale con cui un sito consegna i propri contenuti a chi non viene a leggerli sul sito: aggregatori, lettori di notizie, app podcast, bot di Telegram. Nel Modello è sempre lo stesso gesto thin-stack: un endpoint PHP che, a ogni richiesta, interroga il database e stampa l'XML al volo. Niente cron, niente file `.xml` materializzato su disco, niente libreria di serializzazione. Un articolo pubblicato compare nel feed al primo refresh.
 

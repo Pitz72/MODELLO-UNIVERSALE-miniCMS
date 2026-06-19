@@ -1,4 +1,4 @@
-# CAPITOLO 6: Frontend Bridge (API.ts) (Terza Edizione)
+# CAPITOLO 6: Frontend Bridge (API.ts)
 
 React parla con PHP attraverso un solo punto. Non chiamate `fetch` sparse per i componenti, ma un oggetto `api` che le raccoglie tutte: un metodo per azione (`login`, `getNews`, `uploadImage`, `submitVote`), raggruppati per dominio con qualche commento, importati ovunque con `import { api }`. Niente Axios, niente React Query, niente Redux, nessuno store globale. È la versione thin-stack del data access layer: una facciata piatta sopra `fetch`, coerente con la filosofia del modello (CAP 4), meno dipendenze possibile.
 

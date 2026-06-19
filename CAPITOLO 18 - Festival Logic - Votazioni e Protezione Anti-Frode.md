@@ -1,4 +1,4 @@
-# CAPITOLO 18: Festival Logic - Votazioni e Protezione Anti-Frode (Terza Edizione)
+# CAPITOLO 18: Festival Logic - Votazioni e Protezione Anti-Frode
 
 Il voto è il cuore del concorso, ed è anche il punto in cui un modulo apparentemente robusto rivela quali delle sue difese contano davvero e quali sono solo decorazione. Questo capitolo distingue le une dalle altre, e mette in chiaro due fragilità che il testo idealizzato taceva: la classifica può derivare in silenzio, e il reset non è protetto.
 

@@ -1,4 +1,4 @@
-# CAPITOLO 14: Admin Dashboard & Panels (Terza Edizione)
+# CAPITOLO 14: Admin Dashboard & Panels
 
 Ogni sistema visto finora ha un retro. I contenuti del CAP 9, i media del CAP 7, la newsletter del CAP 13, le reazioni del CAP 20, il festival dei capitoli che seguono: tutti si affacciano, prima o poi, su un pannello da cui un amministratore li guarda e li governa. L'area admin è il tessuto che lega gli altri cluster, il punto in cui diventano numeri da leggere e azioni da compiere. È una superficie che il festival rende facile sottovalutare: l'unica «dashboard» a cui si pensa di solito è quella del concorso, che è invece un caso particolare (lo ritroviamo al CAP 19). Qui ci occupiamo dell'area amministrativa generale, di cui quella del festival è solo una specializzazione.
 

@@ -1,4 +1,4 @@
-# CAPITOLO 13: Newsletter & Email System (Terza Edizione)
+# CAPITOLO 13: Newsletter & Email System
 
 Una lista email è uno dei pochi asset che un sito possiede davvero: non passa da un algoritmo, non rischia lo shadowban, non sparisce se una piattaforma chiude. I tre siti del Modello hanno tutti una newsletter fatta in casa, senza servizi esterni, e tutti la costruiscono sullo stesso scheletro thin-stack: un endpoint PHP che gestisce iscrizione e invio, e l'email composta come stringa HTML al volo.
 

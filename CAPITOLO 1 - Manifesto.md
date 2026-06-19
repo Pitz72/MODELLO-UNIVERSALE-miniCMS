@@ -1,4 +1,4 @@
-# CAPITOLO 1: Manifesto (Terza Edizione)
+# CAPITOLO 1: Manifesto
 
 > *A Valerio Galano, perché lui è come Neo, vede mondi nel codice e mi ha insegnato a ragionare in un modo diverso. Chissà se un po' anche io gli ho insegnato qualcosa.*
 >

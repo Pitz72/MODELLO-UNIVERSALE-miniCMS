@@ -1,4 +1,4 @@
-# CAPITOLO 9: Content Lifecycle (Terza Edizione)
+# CAPITOLO 9: Content Lifecycle
 
 Questo capitolo trasforma un database in un sistema editoriale: come un contenuto nasce bozza, viene programmato, diventa pubblico, e come l'API che lo serve decide forma, conteggio e visibilità. È anche il capitolo in cui si chiude un filo aperto al Capitolo 6: il contratto di payload che il client legge in modo difensivo nasce qui, lato server.
 

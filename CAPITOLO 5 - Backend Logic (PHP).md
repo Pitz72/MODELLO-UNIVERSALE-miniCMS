@@ -1,4 +1,4 @@
-# CAPITOLO 5: Backend Logic (PHP) (Terza Edizione)
+# CAPITOLO 5: Backend Logic (PHP)
 
 Il backend del miniCMS è il motore che elabora i dati e fa da guardiano. Questo capitolo definisce come è fatto un endpoint, come si avvia, come gestisce gli identificatori, il fuso orario e gli errori. Il filo conduttore è sempre lo stesso: niente framework, un file PHP per responsabilità, e tre modi di declinare lo stesso scheletro a seconda di quanto il sito ha scelto di ingegnerizzare.
 
