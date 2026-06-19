@@ -127,10 +127,12 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
   Contiene **7 DECISIONI APERTE per il GATE S4** (con raccomandazioni). È il documento da validare con Simone.
 
 ## S4 — Validazione indice con Simone
-- 🟨 **GATE in attesa di Simone** — 7 decisioni in `S3-scaletta-globale.md` §7 (nuovo CAP Admin + rinumerazione;
-  appendice fork; analytics; ribilanciamento CAP 7; etichetta edizione; profondità riscritture; ordine FASE 3).
+- ✅ **GATE SUPERATO (2026-06-19).** Decisioni in `S3-scaletta-globale.md` §8: nuovo CAP 14 Admin + rinumerazione
+  Parte V (+1) → 20 cap + 2 appendici; appendice Fork a sé; analytics come sezione del CAP Admin; CAP 7
+  ribilanciato (cache→9, SEO→11, "Upload & Sicurezza"); etichetta "Terza Edizione"; riscritture CHIRURGICHE;
+  ordine FASE 3 = CAP 10 → 8 → 11/12/13 → 14 → 6/7/20 → correzioni → App.B/FASE 4. **FASE 2 CHIUSA.**
 
 ---
 
 ### Stato globale FASE 2
-- **FASE 2 — SINTESI: S1 ✅ (14/14) · S2 ✅ (Inventario) · S3 ✅ (Scaletta) · S4 🟨 (GATE in attesa di Simone).** Dopo il gate → FASE 3 (Scrittura).
+- **FASE 2 — SINTESI ✅ CONCLUSA: S1 (14/14) · S2 · S3 · S4 (gate superato).** → **FASE 3 (Scrittura) avviata. Prima unità: CAP 10 Security & Auth (riscrittura chirurgica).**

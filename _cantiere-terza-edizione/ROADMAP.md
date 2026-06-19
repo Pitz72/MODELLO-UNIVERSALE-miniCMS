@@ -117,14 +117,15 @@ Ordine: prima il flagship contenuti, poi scalabilità, poi festival, infine il d
   - [x] S1-FORK FDCA come caso "fork/evoluzione" → `sintesi/S1-FORK-fdca.md` (NON aggiunge pattern, backend byte-identico a DIS = caso-studio del FORKING; CHIUDE i fili di sicurezza — il fork eredita TUTTI i GOLD-bug immutati RCE-upload-S1-C5/auth-grado-zero-S1-C2/no-opt-in-S1-C9/reset-senza-CSRF/vote_count-S1-C10/no-DOMPurify-S1-C6; GOLD il-fork-eredita-i-bug fix-RCE-DIS-non-copre-FDCA, guscio-scollegato frontend-senza-api.ts/fetch, versione-0.0.1-su-backend-v0.5.x-nasconde-il-debito, roadmap-AI-che-ricalca-i-cluster il-progetto-che-si-pianifica-da-solo, un-motore-due-festival modulo-riusabile-S1-C10; il Modello non tratta il forking → proporre sezione/appendice in S3)
 - [x] S2 — Inventario contenuti → `sintesi/S2-inventario-contenuti.md` (mappa capitolo-per-capitolo CAP 1→19+All. con azione CONFERMA/AGGIORNA/RISCRIVI/CORREGGI; 5 RISCRIVI CAP 6/7/8/11/13 + CAP 10/12/19; nuovi capitoli/sezioni Admin-generale/appendice-fork/analytics-first-party/box-4-emettitori; scarti + falsi-pattern; 8 fili trasversali con una-casa+rimandi)
 - [x] S3 — **Scaletta/Indice globale** → `sintesi/S3-scaletta-globale.md` (5 Parti confermate; 20 capitoli + 2 appendici — +1 CAP Admin generale in Parte IV, +App. B Fork; indice rinumerato, mappa card→capitolo con copertura totale, 8 fili trasversali con casa+rimandi, spostamenti di scope, etichetta Terza Edizione; 7 decisioni aperte per il gate).
-- [~] S4 — Validazione indice con Simone — **GATE IN ATTESA**: 7 decisioni in `S3-scaletta-globale.md` §7. Dopo l'OK di Simone la FASE 2 è chiusa e parte la FASE 3 (Scrittura).
+- [x] S4 — Validazione indice con Simone — **GATE SUPERATO (2026-06-19)**. Decisioni in `S3-scaletta-globale.md` §8 (20 cap + 2 appendici, riscritture chirurgiche, ordine FASE 3 deciso). **FASE 2 — SINTESI CONCLUSA.**
 
 ---
 
 ## 5. FASE 3 — SCRITTURA (capitolo per capitolo, micro-step)
 
-Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "raccontata" + blocchi di codice reali (`path:linea` come origine) + box problemi/soluzioni dove pertinente.
-- [ ] (le card di scrittura verranno generate da S3)
+Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "raccontata" + blocchi di codice reali (`path:linea` come origine) + box problemi/soluzioni dove pertinente. **Riscritture CHIRURGICHE** (decisione gate S4): preservare il corretto, sostituire le parti smentite dalle fonti, aggiungere le sezioni mancanti. Fonti per ogni capitolo = mappa card/scheda→capitolo in `sintesi/S3-scaletta-globale.md` §3 + §3/§4 delle schede S1 + card di mappatura per gli stralci di codice.
+Ordine deciso (S3 §8): (1) CAP 10 Security → (2) CAP 8 Editing [box-ancora 4 emettitori] → (3) CAP 11 SEO → (4) CAP 12 RSS → (5) CAP 13 Newsletter → (6) CAP 14 Admin [nuovo] → (7) CAP 6 Bridge → (8) CAP 7 Media/Upload → (9) CAP 20 Reactions → (10) correzioni CAP 1/2/3/4/5/9/15/16/17/18/19 → (11) App. B Fork → (12) FASE 4.
+- [ ] **FASE 3 / CAP 10 Security & Auth** (PRIMA card di scrittura) — riscrittura chirurgica, fonti S1-C2 (+ C3/C5/C11/C12). Vedi `PROSSIMA-SESSIONE.md`.
 
 ---
 
@@ -138,6 +139,6 @@ Regola: un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e "rac
 
 ## 7. Stato globale
 
-- **Fase corrente:** 🟨 **FASE 2 — SINTESI quasi conclusa. S1 ✅ (14/14) · S2 ✅ · S3 ✅ · S4 🟨 GATE in attesa di Simone.** FASE 1 conclusa (4 siti, 34 card). Dopo il gate → FASE 3 (Scrittura).
-- **Prossima unità:** **S4 — GATE di validazione con Simone**: rispondere alle 7 decisioni in `sintesi/S3-scaletta-globale.md` §7 (nuovo CAP Admin + rinumerazione; appendice fork; analytics; ribilanciamento CAP 7; etichetta edizione; profondità riscritture; ordine FASE 3). Validato il gate, si apre la FASE 3 partendo dall'ordine concordato. Vedi `PROSSIMA-SESSIONE.md`.
+- **Fase corrente:** 🟩 **FASE 2 — SINTESI CONCLUSA** (S1 14/14 · S2 · S3 · S4 gate superato 2026-06-19). 🟨 **FASE 3 — SCRITTURA avviata.** FASE 1 conclusa (4 siti, 34 card). Target: 20 capitoli + 2 appendici, riscritture chirurgiche.
+- **Prossima unità:** **FASE 3 / CAP 10 Security & Auth** — prima riscrittura (oggi il capitolo non parla affatto di CSRF/recovery/session_version). Fonti: S1-C2 (princ.) + S1-C3/C5/C11/C12. Ordine completo in `sintesi/S3-scaletta-globale.md` §8. Vedi `PROSSIMA-SESSIONE.md`.
 - **Log completo:** `LOG.md`.

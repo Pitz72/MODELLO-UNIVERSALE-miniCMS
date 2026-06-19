@@ -145,3 +145,28 @@ capitoli" → **"venti capitoli + due appendici"**. (Esecuzione in FASE 4/E2; qu
 
 > Una volta che Simone valida (S4), la FASE 2 è chiusa e si passa alla FASE 3 (scrittura, un capitolo/
 > micro-step per sessione, generati da questa scaletta).
+
+---
+
+## 8. ✅ DECISIONI DEL GATE S4 — prese da Simone il 2026-06-19
+
+1. **Nuovo CAP 14 "Admin Dashboard generale" + rinumerazione Parte V (+1): SÌ.** Si adotta l'Indice a
+   **20 capitoli + 2 appendici** del §2. CAP 19 (festival dashboard) → specializzazione del nuovo CAP 14.
+2. **Appendice B "Fork": SÌ, appendice a sé** (non sezione del CAP DB Evolution).
+3. **Analytics first-party: SÌ, sezione dentro il CAP 14 Admin** ("Misurare senza terze parti").
+4. **CAP 7 ribilanciato: SÌ** — cache→CAP 9, SEO→CAP 11, rinominato "Media & Optimization — Upload & Sicurezza".
+5. **Etichetta "Terza Edizione": SÌ** ovunque (chiude E2) — esecuzione in FASE 4.
+6. **Profondità riscritture: CHIRURGICA** — preservare il corretto, sostituire le parti smentite,
+   aggiungere le sezioni mancanti (vale per CAP 6/7/8/10/11/12/13/20).
+7. **Ordine FASE 3: deciso da Claude "secondo logica".** Sequenza adottata:
+   - **(1) CAP 10 Security & Auth** — fondamenta referenziate ovunque (CSRF, `session_version`, IP-box,
+     role-blind); oggi il capitolo più lacunoso. Stabilisce il vocabolario di sicurezza usato dagli altri.
+   - **(2) CAP 8 Advanced Editing** — ospita il **box-ancora "4 emettitori"** (D1), apre il filo.
+   - **(3) CAP 11 SEO → (4) CAP 12 RSS → (5) CAP 13 Newsletter** — completano il filo dei 4 emettitori in
+     ordine (il buco vivo → il feed che lo chiude per escape/sottrazione → la newsletter che lo chiude del tutto).
+   - **(6) CAP 14 Admin (nuovo)** — sintetizza e referenzia Security/analytics/backup: dopo il CAP 10.
+   - **(7) CAP 6 Frontend Bridge → (8) CAP 7 Media/Upload → (9) CAP 20 Reactions** — le altre riscritture.
+   - **(10) Correzioni** ai capitoli AGGIORNA/CORREGGI (CAP 3, 9, 15, 16, 17, 18, 19, + 1/2/4/5).
+   - **(11) App. B Fork** + **(12) FASE 4**: rinumerazione fisica, etichetta edizione, Boilerplate, build.
+
+**→ FASE 2 CHIUSA. Prossima unità operativa: FASE 3 / scrittura CAP 10 Security & Auth (riscrittura chirurgica).**

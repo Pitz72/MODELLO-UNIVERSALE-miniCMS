@@ -1,44 +1,61 @@
 # PROSSIMA SESSIONE — prompt pronto da incollare
 
-> 🟩 **FASE 2 quasi conclusa: S1 ✅ (14/14) · S2 ✅ (Inventario) · S3 ✅ (Scaletta).**
-> 🔴 **GATE S4 IN ATTESA DI SIMONE** — vanno prima decise le 7 domande in
-> `_cantiere-terza-edizione/sintesi/S3-scaletta-globale.md` §7. Senza quelle risposte NON si scrive.
+> 🟩 **FASE 2 — SINTESI CONCLUSA** (S1 14/14 · S2 · S3 · S4 gate superato il 2026-06-19).
+> 🟨 **FASE 3 — SCRITTURA avviata.** Target: 20 capitoli + 2 appendici, **riscritture CHIRURGICHE**.
+> Questa è la PRIMA card di scrittura: **CAP 10 — Security & Auth**.
 
 ---
 
-## Se Simone NON ha ancora risposto al gate (caso tipico)
+Stiamo lavorando alla TERZA EDIZIONE del manuale miniCMS. Leggi prima
+`_cantiere-terza-edizione/ROADMAP.md`, `LOG.md`, `sintesi/_INDICE-SINTESI.md` e — per la scrittura —
+`sintesi/S2-inventario-contenuti.md` (azioni/correzioni per capitolo) e `sintesi/S3-scaletta-globale.md`
+(indice a 20 capitoli, mappa card→capitolo §3, decisioni del gate §8).
 
-NON iniziare la FASE 3. Apri `sintesi/S3-scaletta-globale.md`, leggi §7 (7 decisioni con raccomandazioni)
-e §0-§2 (cosa cambia, indice proposto a 20 capitoli + 2 appendici), e **riproponi a Simone le 7
-decisioni** in modo conciso, con le tue raccomandazioni, chiedendo conferma o modifiche. Aggiorna S3 con
-le risposte. Solo allora la FASE 2 è chiusa.
+STATO: FASE 1 (mappatura) ✅, FASE 2 (sintesi) ✅. Decisioni del gate (S3 §8): nuovo CAP 14 "Admin
+Dashboard generale" + rinumerazione Parte V; appendice B "Fork"; analytics come sezione; CAP 7
+ribilanciato; etichetta "Terza Edizione"; **riscritture CHIRURGICHE**; ordine FASE 3:
+**(1) CAP 10 Security → (2) CAP 8 Editing → (3) CAP 11 SEO → (4) CAP 12 RSS → (5) CAP 13 Newsletter →
+(6) CAP 14 Admin → (7) CAP 6 Bridge → (8) CAP 7 Media → (9) CAP 20 Reactions → (10) correzioni →
+(11) App. B Fork → (12) FASE 4.**
 
-Le 7 decisioni (sintesi):
-1. Nuovo **CAP 14 "Admin Dashboard generale"** in Parte IV + rinumerazione Parte V (+1)? *(racc. sì)*
-2. **Appendice B "Fork"** a sé *(racc.)* o sezione in coda al CAP DB Evolution?
-3. **Analytics first-party**: sezione dentro CAP Admin *(racc.)* o capitolo a sé?
-4. **CAP 7**: spostare cache→CAP 9 e SEO→CAP 11 e rinominarlo "Upload & Sicurezza"? *(racc. sì)*
-5. **Etichetta edizione**: "Terza Edizione" ovunque (chiude E2)? *(racc. sì)*
-6. **Profondità riscritture** (CAP 6/7/8/10/11/12/13/20): chirurgica *(racc.)* o integrale?
-7. **Ordine FASE 3**: Security(10) → poi 8+11+12+13 insieme (filo 4-emettitori) → poi CAP 14 Admin →
-   correzioni minori. Confermare o riordinare.
+UNITÀ DI QUESTA SESSIONE: **FASE 3 / scrittura del CAP 10 — Security & Auth** (riscrittura chirurgica).
+Motivo della priorità: oggi il capitolo **non parla affatto di CSRF, recovery/reset password,
+`session_version`** — è il più lacunoso e le sue nozioni sono referenziate da molti altri capitoli.
 
-## Quando Simone HA risposto → si apre la FASE 3 (Scrittura)
+Metodo (riscrittura CHIRURGICA — NON da zero):
+1. Leggi il **CAP 10 attuale** (`CAPITOLO 10 - Security & Auth.md`) e la scheda **S1-C2**
+   (`sintesi/S1-C2-security-auth.md`) per intero (pattern §1, tabella §2, GOLD §3, mappa+correzioni §4).
+   Attingi anche a S1-C3 (guard/`session_version` lato client), S1-C5 (delete senza CSRF, upload come
+   superficie), S1-C11 (rate-limit a 2 strati, `voter_hash`), S1-C12 (gate role-blind). Per gli stralci
+   di codice reali usa le **card di mappatura** (`mappatura/*/(*-C2).md`) con riferimento `path:linea`.
+2. **Preserva** ciò che nel CAP 10 è corretto; **sostituisci** le parti smentite; **aggiungi** le sezioni
+   mancanti. Correzioni note (da S1-C2 §4): §1.1 SameSite reale = **Strict** non Lax + solo SPW ha tutti
+   e 3 i flag (SR senza Secure, DIS nessuno); §1.2 `username` assente in sessione in SR; §3 brute-force
+   non è solo `sleep(1)` (è lockout a 3 sedi: DB `login_attempts` SPW / file `.cache` SR / **niente** DIS)
+   + **da quale IP** lo conti (box anti-spoof); §6 il caso DDoS-da-bot va spostato a CAP 11 (lasciare qui
+   solo la lezione "l'UA non è un gatekeeper").
+3. **Aggiungi le sezioni assenti oggi:** CSRF a 3 gradini (Origin/Referer SPW / token sincronizzato SR /
+   niente DIS); recovery/reset password (token, scadenza, email da `SITE_URL`, enumeration-safe — solo
+   SPW); `session_version` (invalidazione sessioni, fail-closed); credenziali di default
+   (random/hardcoded/omessa); gate unico-vs-componibile-vs-inline + **role-blind**; protezione DB-a-file
+   (`.data/` + `.htaccess` runtime, DIS) e script `update_db_*` non protetti.
+4. **Box-ancora da ospitare qui:** D7 "Fidarsi dell'IP: buco o pregio secondo il modello d'abuso"
+   (richiamato da CAP 18 voto e CAP 20 reazioni). Rimando (NON ripetere) al box "4 emettitori" che vive
+   in CAP 8.
+5. Mantieni il **tono narrativo** del libro ("la teoria senza la cicatrice non insegna") + blocchi di
+   codice reali con origine + box problemi/soluzioni. Tesi-filo da innestare: D2 "più ingegnerizzato ≠
+   più sicuro" (SR ricco ma fragile su cookie/rate-limit).
 
-Aggiorna `S3-scaletta-globale.md` (segna le decisioni prese), spunta **S4** in `_INDICE-SINTESI.md` e in
-`ROADMAP.md` §4, aggiorna §7 ("FASE 2 CONCLUSA → FASE 3 avviata"), riga in `LOG.md`. Poi genera la prima
-card di scrittura secondo l'ordine concordato (default: **CAP 10 Security & Auth**, la riscrittura a più
-alto valore — oggi non parla affatto di CSRF/recovery/session_version).
+Criterio di STOP: CAP 10 riscritto (chirurgico) e coerente, con CSRF/recovery/`session_version`/IP-box
+presenti; correzioni applicate. **NB:** la rinumerazione fisica (CAP 10 resta 10 in questa fase — il
+nuovo CAP 14 Admin e la rinumerazione Parte V si applicano quando si scrive il CAP 14 / in FASE 4).
 
-Metodo FASE 3 (da ROADMAP §5): un micro-step = una sezione/capitolo. Ogni capitolo: prosa chiara e
-"raccontata" + blocchi di codice reali (`path:linea` come origine, dalle card di mappatura) + box
-problemi/soluzioni. Fonti per ogni capitolo: la **mappa card/scheda→capitolo** in `S3-scaletta-globale.md`
-§3 + i §3/§4 delle schede S1 corrispondenti + le card di mappatura per gli stralci di codice.
+Ciclo di chiusura OBBLIGATORIO: aggiorna `ROADMAP.md` (§5: spunta CAP 10, indica CAP 8 come prossimo) +
+una riga `LOG.md` + git add/commit/push (verifica sync) + riscrivi QUESTO file (root +
+`_cantiere-terza-edizione/`) con la prossima unità: **FASE 3 / CAP 8 — Advanced Content Editing**
+(riscrittura chirurgica: Tiptap come scala a 3 gradini, DOMPurify render-time come choke-point, paste
+cosmetica ≠ sicurezza; **ospita il box-ancora "I quattro emettitori del content"** che apre il filo
+CAP 8→11→12→13; fonti S1-C6 + S1-C7/C8/C9 per il box).
 
-## Contesto sempre da rileggere a inizio sessione
-`_cantiere-terza-edizione/ROADMAP.md`, `LOG.md`, `sintesi/_INDICE-SINTESI.md`, e — per la scrittura —
-`sintesi/S2-inventario-contenuti.md` (azioni/correzioni per capitolo) + `sintesi/S3-scaletta-globale.md`
-(indice + decisioni del gate).
-
-## Stato sintesi (14 schede S1 + S2 + S3) — tutte in `_cantiere-terza-edizione/sintesi/`
-S1-C1…S1-C13 + S1-FORK (consolidamento) · S2-inventario-contenuti · S3-scaletta-globale.
+Nota metodo: un capitolo per sessione (è materiale corposo). Se resta margine di contesto, si può iniziare
+il CAP 8, ma scrivere/committare un capitolo alla volta.
