@@ -46,11 +46,19 @@ Metodo (riscrittura CHIRURGICA — NON da zero):
    in CAP 10 (CSRF, render-time vs write-time D3 → casa in CAP 20).
 5. Mantieni il **tono narrativo** del libro + blocchi di codice reali con origine `path:linea` + box
    `[!WARNING]`/`[!NOTE]`/`[!TIP]` (stile casa) + footer "Prossimo Capitolo".
+6. **REVISIONE STILISTICA OBBLIGATORIA (regola fissa, vedi memoria `feedback-revisione-stilistica-capitoli`):**
+   a capitolo scritto, passalo per la skill **`prosa-italiana`** (tipografia italiana — caporali «», puntini `…`;
+   prosa/narrativa — ritmo, lessico, niente filler) **e** per la skill **`humanizer`** (antipattern LLM — trattini
+   lunghi abusati, tricolon, signposting tipo «vale la pena»/«conviene», boldface meccanico). Esegui il pass finale
+   «cosa rende ancora questo testo ovviamente LLM?» e correggi. Verifica con grep che non restino `—` in prosa
+   (solo nei commenti dei blocchi codice è OK) né `...`/`"..."` fuori dal codice. È un libro tecnico ma deve essere
+   semplice, narrativo, piacevole da leggere — senza appiattire la tesi.
 
 Criterio di STOP: CAP 8 riscritto (chirurgico) e coerente, con la scala editor a 3 gradini + DOMPurify-render-time
 come choke-point + Paste-Protection ridimensionata + **box-ancora "4 emettitori" presente con tabella completa**;
-correzioni applicate. **NB:** la rinumerazione fisica (il nuovo CAP 14 Admin + rinumerazione Parte V) si applica
-quando si scrive il CAP 14 / in FASE 4 — qui il CAP resta numerato 8.
+correzioni applicate; **revisione stilistica (prosa-italiana + humanizer) eseguita.** **NB:** la rinumerazione fisica
+(il nuovo CAP 14 Admin + rinumerazione Parte V) si applica quando si scrive il CAP 14 / in FASE 4 — qui il CAP
+resta numerato 8.
 
 Ciclo di chiusura OBBLIGATORIO: aggiorna `ROADMAP.md` (§5: spunta CAP 8, indica CAP 11 come prossimo) +
 una riga `LOG.md` + git add/commit/push (verifica sync) + riscrivi QUESTO file (root +
