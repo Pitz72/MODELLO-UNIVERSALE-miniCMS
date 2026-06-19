@@ -1,279 +1,187 @@
-# CAPITOLO 13: Newsletter & Email System (v1.0)
+# CAPITOLO 13: Newsletter & Email System (Terza Edizione)
 
-La newsletter è uno degli strumenti di fidelizzazione più diretti e indipendenti dalle piattaforme. A differenza dei social media, una lista email è un asset *posseduto* — non soggetta a algoritmi, shadowban o chiusure di account. Questo capitolo documenta il pattern completo implementato in SitoRuntime (Runtime Radio).
+Una lista email è uno dei pochi asset che un sito possiede davvero: non passa da un algoritmo, non rischia lo shadowban, non sparisce se una piattaforma chiude. I tre siti del Modello hanno tutti una newsletter fatta in casa, senza servizi esterni, e tutti la costruiscono sullo stesso scheletro thin-stack: un endpoint PHP che gestisce iscrizione e invio, e l'email composta come stringa HTML al volo.
 
-## 1. Schema del Database
+Questo capitolo chiude un filo iniziato cinque capitoli fa. La newsletter è il **quarto e ultimo emettitore** del `content`: dopo il render (CAP 8), il prerender (CAP 11) e il feed (CAP 12), è l'ultimo posto da cui lo stesso HTML salvato grezzo potrebbe uscire verso un browser, quello del client di posta. La buona notizia, che vedremo alla fine, è che nessuno dei tre siti emette il `content` nell'email: il filo si chiude senza riaprire il buco XSS.
 
-La tabella `subscribers` è volutamente minimale. L'iscrizione richiede solo un'email valida — niente nome, niente dati aggiuntivi — in linea con il principio del minimo dato necessario per la conformità GDPR.
+E proprio perché sul rischio XSS i tre convergono, la lente vera del capitolo diventa un'altra: **quanto si può semplificare un sistema di posta** prima che la semplificazione diventi pericolosa. Si va da un sistema completo, con double opt-in e protezione anti-abuso, fino a una `mail()` nuda che chiunque può usare per iscrivere o disiscrivere chiunque. E, come già al CAP 10, il sito col backend più ricco non è il più sicuro.
 
-```sql
--- SQLite
-CREATE TABLE IF NOT EXISTS subscribers (
-    id        INTEGER PRIMARY KEY AUTOINCREMENT,
-    email     TEXT UNIQUE NOT NULL,
-    is_active INTEGER DEFAULT 1,
-    created_at TEXT DEFAULT (datetime('now'))
-);
+> [!NOTE]
+> **Correzioni rispetto alla Seconda Edizione.** Il capitolo precedente aveva tre buchi seri. **Ometteva del tutto il double opt-in**, che è la feature-cardine di due siti su tre, e mostrava al suo posto un'iscrizione attiva da subito e una disiscrizione per sola email: cioè il modello di DIS, il più debole, attribuito a SitoRuntime. Chiamava quella disiscrizione **«GDPR-Compliant»**, quando è la versione insicura (chiunque disiscrive chiunque). E chiamava **«Rate Limiting»** un `usleep`, che è un'altra cosa (§4). Questo capitolo riallinea tutto.
 
--- MySQL (equivalente)
-CREATE TABLE IF NOT EXISTS subscribers (
-    id         INT AUTO_INCREMENT PRIMARY KEY,
-    email      VARCHAR(255) UNIQUE NOT NULL,
-    is_active  TINYINT(1) DEFAULT 1,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
-);
-```
+---
 
-Il campo `is_active` permette la **disiscrizione morbida**: l'utente viene marcato come inattivo senza cancellare il record, preservando la storia dell'iscrizione e prevenendo re-iscrizioni accidentali.
+## 1. Il ciclo di vita di un iscritto
 
-## 2. Architettura degli Endpoint
-
-Il file `newsletter.php` gestisce più azioni via query string `?action=`. La struttura ha un gate chiaro: le azioni pubbliche vengono servite immediatamente, quelle admin richiedono autenticazione.
-
-```
-GET/POST ?action=subscribe  → pubblico
-GET      ?action=unsubscribe → pubblico (via link email)
-GET      ?action=count       → admin only
-POST     ?action=send        → admin only
-```
+Sotto le differenze, l'anatomia è condivisa. L'endpoint smista per `?action=`, con le azioni pubbliche servite prima di un gate centrale e quelle admin dopo. L'email viene sempre validata lato server, senza fidarsi del form, e la ri-iscrizione si gestisce in modo reattivo: si prova l'`INSERT` e si cattura la violazione del vincolo UNIQUE, restituendo un successo neutro che non rivela chi è già in lista.
 
 ```php
-<?php
-require_once 'cors.php';
-require_once 'auth_utils.php';
-session_start();
-
-// Lazy DB Connection — caricata solo se necessario
-function getDB() {
-    static $pdo = null;
-    if ($pdo === null) {
-        require_once 'db.php';
-        $pdo = Database::connect();
-    }
-    return $pdo;
-}
-
-$input = json_decode(file_get_contents('php://input'), true);
-$action = $_GET['action'] ?? '';
-
-// --- AZIONI PUBBLICHE (prima del gate admin) ---
-// ...
-
-// --- GATE ADMIN ---
-if (!isLoggedIn() || $_SESSION['role'] !== 'admin') {
-    http_response_code(403);
-    echo json_encode(['success' => false, 'error' => 'Forbidden']);
-    exit;
-}
-
-// --- AZIONI ADMIN ---
-// ...
-```
-
-## 3. Iscrizione Pubblica
-
-```php
-if ($action === 'subscribe') {
-    $email = filter_var($input['email'] ?? '', FILTER_VALIDATE_EMAIL);
-
-    if (!$email) {
-        echo json_encode(['success' => false, 'error' => 'Email non valida']);
-        exit;
-    }
-
-    try {
-        $stmt = getDB()->prepare("INSERT INTO subscribers (email) VALUES (?)");
-        $stmt->execute([$email]);
-        echo json_encode(['success' => true, 'message' => 'Iscrizione completata']);
-    } catch (PDOException $e) {
-        if ($e->getCode() == 23000) { // UNIQUE constraint violation
-            echo json_encode(['success' => true, 'message' => 'Sei già iscritto!']);
-        } else {
-            echo json_encode(['success' => false, 'error' => 'Errore database']);
-        }
-    }
-    exit;
+// public/api/newsletter.php (DIS) — validazione server-side + idempotenza per cattura del duplicato
+$email = filter_var($input['email'] ?? '', FILTER_VALIDATE_EMAIL);
+if (!$email) { echo json_encode(['status'=>'error','message'=>'Email non valida']); exit; }
+try {
+    getDB()->prepare("INSERT INTO subscribers (email) VALUES (?)")->execute([$email]);
+    echo json_encode(['status'=>'success','message'=>'Iscrizione completata']);
+} catch (PDOException $e) {
+    if ($e->getCode() == 23000) {   // violazione UNIQUE → già iscritto, ma non lo riveliamo come errore
+        echo json_encode(['status'=>'success','message'=>'Sei già iscritto!']);
+    } else { echo json_encode(['status'=>'error','message'=>'Errore database']); }
 }
 ```
 
-**Note implementative:**
-- `FILTER_VALIDATE_EMAIL` è la validazione lato server — obbligatoria anche se il form frontend valida già.
-- Il codice di errore `23000` (UNIQUE constraint violation) viene gestito silenziosamente restituendo un successo: l'utente già iscritto non deve sapere che il suo indirizzo è già nel database (misura anti-enumeration minima).
-- La risposta è sempre JSON — questo endpoint è chiamato da React via `fetch()`.
+La disiscrizione è «morbida»: nessuno cancella il record, l'iscritto viene marcato `is_active = 0`, così si preserva la storia e si evitano re-iscrizioni accidentali. E l'email finale, qualunque sia il sito, è costruita come stringa HTML con layout a tabelle e CSS inline (i client di posta non leggono fogli di stile esterni), con le immagini rese assolute e un placeholder nel link di disiscrizione, sostituito per ogni destinatario.
 
-## 4. Disiscrizione GDPR-Compliant
+> [!NOTE]
+> **Lo schema minimale non è quello reale.** La tabella `subscribers` a quattro colonne (`id`, `email`, `is_active`, `created_at`) è il modello di DIS. Lo schema reale di SPW e SR ha invece i campi del double opt-in: lo stato (`pending`/`confirmed`/`unsubscribed`), uno o più token, la data di conferma. In SR quello schema esteso convive con due versioni più vecchie create da altri script, una delle quali è un fossile SQLite che su MySQL si romperebbe: il runtime presuppone lo schema esteso e una query fallisce finché la migrazione giusta non è stata eseguita. È la stessa storia di «una tabella, più verità» del CAP 15.
 
-La disiscrizione avviene via link personalizzato nell'email. A differenza della subscribe (che riceve JSON da React), questa action restituisce HTML diretto — perché viene visitata dal browser dell'utente che clicca il link nell'email.
+---
+
+## 2. Il double opt-in e il segreto del link di disiscrizione
+
+Il double opt-in è la garanzia che chi iscrive un'email **possiede** quella casella: invece di attivare subito l'indirizzo, si crea un record in attesa e si manda un'email con un link di conferma; solo dopo il click l'iscrizione diventa attiva. È la feature che il vecchio capitolo non menzionava, e i tre siti la implementano su tre gradini.
+
+SPW la fa nel modo da manuale, con **due token distinti**: uno di conferma, monouso, azzerato dopo l'uso; uno di disiscrizione, casuale e stabile, separato dal primo.
 
 ```php
+// public/api/subscribers.php (SPW) — due token con scopi diversi
+$confirmToken     = $forceConfirm ? null : bin2hex(random_bytes(32));   // monouso
+$unsubscribeToken = bin2hex(random_bytes(32));                          // stabile, separato
+$status           = $forceConfirm ? 'confirmed' : 'pending';
+if (!$forceConfirm) { sendConfirmEmail($email, $name ?: 'Amico', $confirmToken); }
+```
+
+SR la fa con **un solo token** che serve a entrambi gli scopi, conferma e disiscrizione, e che non viene mai azzerato né scade. Ne derivano due piccole conseguenze. L'email di conferma promette che «il link scade dopo il primo utilizzo», ma è falso: il token sopravvive all'uso. E poiché lo stesso token finisce nell'URL di disiscrizione di *ogni* newsletter, chi inoltra una mail consegna a un altro il potere di disiscrivere quell'utente.
+
+```php
+// public/api/newsletter.php (SR) — un token, due scopi
+// confirm: attiva l'iscrizione MA non azzera il token
+"UPDATE subscribers SET is_active = 1, confirmed_at = NOW() WHERE confirmation_token = ?"
+// send: l'URL di disiscrizione espone lo stesso confirmation_token
+$unsubUrl = 'https://runtimeradio.com/unsubscribe?token=' . urlencode($sub['confirmation_token']);
+```
+
+DIS non ha né l'uno né l'altro. L'iscrizione è attiva subito, e la disiscrizione avviene per sola email, senza alcun token:
+
+```php
+// public/api/newsletter.php (DIS) — disiscrizione per sola email, via GET, senza token
 if ($action === 'unsubscribe') {
     $email = filter_var($_GET['email'] ?? '', FILTER_VALIDATE_EMAIL);
-
-    if (!$email) {
-        echo "Email non valida.";
-        exit;
-    }
-
-    try {
-        $stmt = getDB()->prepare("UPDATE subscribers SET is_active = 0 WHERE email = ?");
-        $stmt->execute([$email]);
-        echo "<h1>Disiscrizione completata</h1>
-              <p>Ti abbiamo rimosso dalla newsletter. Ci dispiace vederti andare!</p>";
-    } catch (PDOException $e) {
-        echo "Errore durante la disiscrizione.";
-    }
-    exit;
+    getDB()->prepare("UPDATE subscribers SET is_active = 0 WHERE email = ?")->execute([$email]);
+    echo "<h1>Disiscrizione completata</h1>";   // chiunque conosca l'email può disiscriverla
 }
 ```
 
-La URL di disiscrizione nell'email ha questa forma:
-```
-https://runtimeradio.com/api/newsletter.php?action=unsubscribe&email=mario%40example.com
-```
-
-L'email è `urlencode()`-ata al momento della generazione dell'email (vedi Sezione 6).
-
-## 5. Conteggio Iscritti (Admin)
-
-```php
-if ($action === 'count') {
-    try {
-        $stmt = getDB()->query("SELECT COUNT(*) FROM subscribers WHERE is_active = 1");
-        echo json_encode(['success' => true, 'count' => $stmt->fetchColumn()]);
-    } catch (PDOException $e) {
-        echo json_encode(['success' => false, 'error' => 'Database error']);
-    }
-    exit;
-}
-```
-
-Questo endpoint viene tipicamente chiamato al caricamento della dashboard admin per mostrare la dimensione della lista. Solo iscritti attivi (`is_active = 1`).
-
-## 6. Invio Newsletter (Admin)
-
-L'azione più complessa: genera l'HTML dell'email, personalizza il link di disiscrizione per ogni destinatario, e invia con rate limiting.
-
-### 6.1 Generazione HTML con Placeholder
-
-L'email viene costruita una volta sola come stringa HTML con un placeholder `{EMAIL_PLACEHOLDER}` nel link di disiscrizione. Il placeholder viene poi sostituito per ogni destinatario al momento dell'invio:
-
-```php
-// Costruzione HTML con placeholder
-$html .= '<a href="https://runtimeradio.com/api/newsletter.php?action=unsubscribe&email={EMAIL_PLACEHOLDER}">
-              DISISCRIVITI QUI
-          </a>';
-
-// Al momento dell'invio, per ogni destinatario:
-foreach ($subscribers as $to) {
-    $personalHtml = str_replace('{EMAIL_PLACEHOLDER}', urlencode($to), $html);
-    mail($to, $subject, $personalHtml, $headers);
-}
-```
-
-Questo pattern evita di rigenerare l'intero HTML per ogni email — solo la sostituzione del placeholder è per-destinatario.
-
-### 6.2 Headers Email
-
-```php
-$headers  = "MIME-Version: 1.0\r\n";
-$headers .= "Content-type:text/html;charset=UTF-8\r\n";
-$headers .= "From: Runtime Radio <no-reply@runtimeradio.com>\r\n";
-$headers .= "Reply-To: runtimeradio@gmail.com\r\n";
-$headers .= "Return-Path: no-reply@runtimeradio.com\r\n";
-$headers .= "X-Mailer: PHP/" . phpversion() . "\r\n";
-```
-
-- `From` diverso da `Reply-To`: le risposte vanno all'indirizzo reale, non al no-reply.
-- `Return-Path`: gestisce i bounce (email non consegnate) — usato dai server di posta.
-
-### 6.3 Rate Limiting
-
-```php
-$count = 0;
-foreach ($subscribers as $to) {
-    $personalHtml = str_replace('{EMAIL_PLACEHOLDER}', urlencode($to), $html);
-    mail($to, $subject, $personalHtml, $headers);
-    $count++;
-
-    // Pausa ogni 10 email per non sovraccaricare il mail server
-    if ($count % 10 === 0) {
-        usleep(500000); // 0.5 secondi
-    }
-}
-
-echo json_encode(['success' => true, 'message' => "Newsletter inviata a $count iscritti"]);
-```
-
-Il rate limiting con `usleep()` è fondamentale per hosting condivisi, che spesso impongono limiti di invio per-secondo. Senza questa pausa, il server SMTP rifiuta le email dopo un certo threshold, causando una consegna parziale invisibile.
-
-### 6.4 Query degli Articoli (Ottimizzazione)
-
-L'endpoint di invio riceve un array di ID articoli dal frontend. La query che li recupera è deliberatamente priva del campo `content`:
-
-```php
-$placeholders = str_repeat('?,', count($articleIds) - 1) . '?';
-$stmt = getDB()->prepare(
-    "SELECT id, title, slug, summary, cover_image, published_at
-     FROM news WHERE id IN ($placeholders) ORDER BY published_at DESC"
-);
-$stmt->execute($articleIds);
-```
-
-Il campo `content` (HTML completo dell'articolo) non viene mai caricato nelle email: l'email include solo titolo, excerpt/summary e link "Leggi tutto". Questo riduce la dimensione del payload e mantiene le email snelle.
-
-## 7. Struttura Email HTML (Pattern)
-
-Le email HTML devono usare **CSS inline** — i client email (Outlook, Gmail app) non supportano fogli di stile esterni né `<style>` in `<head>`. Il pattern segue questa struttura:
-
-```
-[Header con logo/nome]
-[Testo intro opzionale]
-[Loop articoli: immagine + titolo + excerpt + link]
-[Footer: informativa GDPR + link disiscrizione + copyright]
-```
-
-```php
-$html  = '<!DOCTYPE html><html><body style="font-family: sans-serif; background: #0f172a;">';
-$html .= '<div style="max-width: 600px; margin: 0 auto; background: #1e293b; padding: 20px;">';
-
-// Header
-$html .= '<h1 style="color: #2dd4bf; text-align: center;">Runtime Radio News</h1>';
-
-// Intro (opzionale, inserito dall'admin)
-if ($intro) {
-    $html .= '<div style="background: #334155; padding: 15px; border-radius: 6px;">';
-    $html .= nl2br(htmlspecialchars($intro)); // Preserva a-capo, escapa HTML
-    $html .= '</div>';
-}
-
-// Loop articoli
-foreach ($articles as $art) {
-    $link = "https://runtimeradio.com/news/" . $art['slug'];
-    $html .= '<h2><a href="' . $link . '" style="color: #fff;">'
-           . htmlspecialchars($art['title']) . '</a></h2>';
-    $html .= '<p>' . htmlspecialchars($art['summary']) . '</p>';
-    $html .= '<a href="' . $link . '">Leggi tutto &rarr;</a>';
-}
-
-// Footer GDPR
-$html .= '<p>I tuoi dati sono trattati in conformità al GDPR (UE 2016/679).
-          <a href="https://runtimeradio.com/privacy-policy">Privacy Policy</a></p>';
-$html .= '<a href="...?action=unsubscribe&email={EMAIL_PLACEHOLDER}">DISISCRIVITI</a>';
-$html .= '</div></body></html>';
-```
-
-## 8. Considerazioni per la Scalabilità
-
-Il pattern con `mail()` nativo di PHP funziona per liste fino a qualche migliaio di iscritti. Per volumi maggiori o per migliorare la deliverability (evitare lo spam folder), il passaggio a un servizio SMTP esterno richiede solo la sostituzione del blocco di invio:
-
-- **Brevo** (ex Sendinblue) — API gratuita fino a 300 email/giorno
-- **Mailgun** — API REST, ottima deliverability
-- **Amazon SES** — costo bassissimo a volume alto
-
-La struttura del codice rimane invariata: solo il metodo di consegna cambia.
+> [!WARNING]
+> **Il link di disiscrizione ha bisogno di un segreto**
+> La Seconda Edizione chiamava «GDPR-Compliant» proprio questa disiscrizione per sola email. È l'opposto: senza un token segreto, chiunque conosca o indovini l'indirizzo di un iscritto può disiscriverlo. E poiché è una `GET`, è anche *prefetch-able*: un client di posta che precarica i link può disiscrivere l'utente solo passandoci sopra. La versione corretta è quella di SPW, con un `unsubscribe_token` casuale e stabile (e, idealmente, una conferma con `POST` dalla pagina di atterraggio). Il double opt-in protegge l'ingresso; un token di disiscrizione protegge l'uscita. Servono entrambi.
 
 ---
-*Capitolo correlato: Cap 10 (Security & Auth) per la gestione della sessione admin che protegge gli endpoint di invio.*
+
+## 3. Spedire: `mail()` nativa o SMTP autenticato
+
+Il trasporto è il punto in cui SR si stacca dagli altri due. SPW e DIS usano la `mail()` nativa di PHP, che si appoggia al sendmail di sistema: zero configurazione, ma deliverability fragile, perché senza SPF e DKIM le email finiscono facilmente nello spam (DIS ha persino un commento «Fake domain?» accanto al mittente). SR usa invece PHPMailer con SMTP autenticato e STARTTLS, leggendo le credenziali dai segreti d'ambiente.
+
+```php
+// public/api/newsletter.php (SR) — SMTP autenticato via PHPMailer
+$mail = new \PHPMailer\PHPMailer\PHPMailer(true);
+$mail->isSMTP();
+$mail->Host = $cfg['SMTP_HOST']; $mail->SMTPAuth = true;
+$mail->Username = $cfg['SMTP_USER']; $mail->Password = $cfg['SMTP_PASS'];
+$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS; $mail->Port = $cfg['SMTP_PORT'];
+$mail->setFrom($cfg['SMTP_USER'], $cfg['SMTP_FROM_NAME']);
+```
+
+C'è però una contraddizione interna: SR usa l'SMTP autenticato solo per la newsletter. Il form contatti, `contact.php`, è rimasto sulla `mail()` nativa. Lo stesso sito ha così due meccaniche di posta diverse, e il vecchio capitolo presentava l'SMTP come una scelta «per il futuro, a volumi maggiori» quando in realtà è già in produzione, accanto alla `mail()` che non ha mai dismesso.
 
 ---
-*Prossimo Capitolo: Database Evolution - La migrazione da SQLite a MySQL, documentata ora per ora dalla notte reale di febbraio 2026.*
+
+## 4. Il form che spara email a nome tuo
+
+Arriva qui il difetto più istruttivo del capitolo, e nasce da una confusione comune tra due difese che sembrano simili e non lo sono.
+
+Un **throttle** rallenta l'invio in uscita, per non sovraccaricare il mail server e non farsi mettere in greylisting: è una pausa ogni tot email. Un **rate-limit** limita le richieste in ingresso, per impedire a un estraneo di abusare di un endpoint: è un tetto di tentativi per IP. Sono difese ortogonali, su lati opposti del sistema. La Seconda Edizione chiamava «Rate Limiting» questo, che è un throttle:
+
+```php
+// public/api/newsletter.php (SR) — questo è un THROTTLE in uscita, non un rate-limit in ingresso
+if ($count % 10 === 0) { usleep(500000); }   // mezzo secondo ogni 10 email: protegge il mail server
+```
+
+Il throttle protegge il *tuo* server di posta. Non protegge da chi martella il form di iscrizione. E qui sta il buco di SR: la sua `subscribe` non ha alcun rate-limit. L'IP del richiedente viene perfino registrato, ma solo memorizzato, mai usato come limite, e per giunta letto da `X-Forwarded-For` grezzo (falsificabile, come al CAP 10). Chiunque può quindi mandare richieste di iscrizione con email arbitrarie, e a ognuna parte una vera email di conferma via SMTP verso un terzo che non ha chiesto nulla. È un vettore di mail-bombing che brucia la reputazione del dominio e consuma la quota SMTP.
+
+SPW invece il vettore lo chiude, riusando per la newsletter la stessa tabella `login_attempts` del login (con un prefisso diverso sulla chiave, per non mischiare i contatori):
+
+```php
+// public/api/subscribers.php (SPW) — rate-limit anti-mail-bombing che ricicla login_attempts
+$rl_key = 'sub:' . substr(hash('sha256', $_SERVER['REMOTE_ADDR'] ?? 'unknown'), 0, 40);
+$stmtRl = $pdo->prepare("SELECT COUNT(*) FROM login_attempts WHERE ip_address = ?");
+$stmtRl->execute([$rl_key]);
+if ((int)$stmtRl->fetchColumn() >= 3) { http_response_code(429); exit; }   // max 3 iscrizioni / 15 min
+```
+
+> [!WARNING]
+> **Rate-limit in ingresso ≠ throttle in uscita**
+> SR ha il throttle ma non il rate-limit; SPW ha il rate-limit ma non il throttle. Hanno difese opposte, e quella che manca a SR è quella che conta di più sulla sicurezza: senza un tetto in ingresso, il form di iscrizione diventa un'arma che spara email a nome tuo verso chiunque. È il ribaltamento già visto al CAP 10: SR, il sito più ingegnerizzato, lascia aperto proprio il buco che SPW, più semplice, aveva chiuso. E la beffa è che l'infrastruttura per limitare (la stessa `.cache/ratelimit/` del login) in SR esiste già: semplicemente non è stata riusata qui.
+
+C'è poi un problema che accomuna tutti e tre, su una scala di rozzezza decrescente: l'invio è un `foreach` bloccante dentro la richiesta HTTP. Su una lista grande, la richiesta va in `max_execution_time` e la consegna si interrompe a metà, senza che nessuno lo sappia. SR è il meno peggio (ha il throttle e un `try/catch` per destinatario che conta gli errori); SPW conta solo il valore di ritorno di `mail()`; DIS lo ignora del tutto, e il contatore delle campagne registra i *tentativi*, non i successi. Nessuno dei tre ha una coda o un cron: è lo stesso anti-pattern del «lavoro pesante dentro la richiesta» visto con la conversione delle immagini al CAP 7.
+
+---
+
+## 5. Header injection dal campo nome
+
+Un'ultima trappola, ed è in DIS, nel form contatti. Il nome inserito dall'utente viene ripulito con `strip_tags` prima di finire nel database, e questo va bene per il database. Ma quello stesso nome viene anche messo nell'oggetto dell'email di notifica all'admin, e lì `strip_tags` non basta:
+
+```php
+// public/api/contact.php (DIS) — strip_tags toglie i tag, NON gli a-capo
+$name    = strip_tags($input['name'] ?? '');                       // sanitizzazione per il DB
+$subject = "Nuovo Messaggio da $name - Disintelligenza";           // ...ma $name finisce nell'header Subject
+$headers = "From: no-reply@...\r\nReply-To: $email\r\n";
+mail('runtimeradio@gmail.com', $subject, $body, $headers);
+```
+
+`strip_tags` rimuove i tag HTML, ma non i caratteri di a-capo `\r\n`. Un nome che li contenga può iniettare header aggiuntivi nell'email, per esempio un `Cc` o un `Bcc` verso indirizzi scelti dall'attaccante. L'email del mittente, che finisce nel `Reply-To`, è invece al sicuro perché passata da `FILTER_VALIDATE_EMAIL`: il vettore è il nome, l'unico campo testuale libero che entra in un header.
+
+> [!WARNING]
+> **Sanitizzare per il database non è sanitizzare per gli header email**
+> La sanitizzazione ha sempre un contesto. `strip_tags` neutralizza l'HTML, che è il pericolo quando il dato verrà mostrato in una pagina; ma quando lo stesso dato entra in un'intestazione di posta, il pericolo cambia forma, sono i `\r\n` a contare. La regola: per un header email, rimuovi o rifiuta i caratteri di controllo, e non mettere mai input dell'utente nelle intestazioni se puoi evitarlo. SR, non a caso, costruisce il `From` da un valore fisso, non dall'input.
+
+---
+
+## 6. Il filo dei quattro emettitori si chiude
+
+Torniamo un'ultima volta alla tabella del CAP 8. La newsletter è la quarta casella, e in tutti e tre i siti la query d'invio seleziona titolo, riassunto, immagine e link, **mai il `content`**. L'email rimanda all'articolo con un «Leggi tutto», e il campo HTML grezzo difeso solo a render-time non viene mai toccato.
+
+| # | Emettitore | Cosa emette del `content` | Difesa | Esito |
+|---|---|---|---|---|
+| 1 | **Render React** (CAP 8) | `content` pieno | DOMPurify (SPW, SR) / niente (DIS) | choke-point reale; DIS scoperto |
+| 2 | **Prerender SEO** (CAP 11) | `content` pieno | `strip_tags` allowlist (solo tag) | **buco sugli attributi** (SPW, SR) |
+| 3 | **Feed RSS** (CAP 12) | niente / preview escapata | `htmlspecialchars` / `strip_tags`+escape | sicuro |
+| 4 | **Newsletter** (questo capitolo) | **niente** (solo titolo, riassunto, intro) | `htmlspecialchars` (SR, DIS) / grezzo dietro Auth (SPW) | **sicuro** |
+
+Il vecchio capitolo presentava la query senza `content` come una semplice «ottimizzazione di payload», per tenere le email leggere. È vero, ma è soprattutto la chiusura del filo: non emettere il campo grezzo è ciò che impedisce all'email di diventare un quinto vettore XSS.
+
+C'è una simmetria curiosa tra i due flagship. In SR la newsletter è l'emettitore *più* sicuro dei quattro: non tocca il `content` e per giunta escapa ogni altro campo. In SPW è invece il *meno* sanitizzato, perché il testo introduttivo scritto dall'admin viene emesso grezzo, senza alcun `htmlspecialchars`: è sicuro solo perché chi lo scrive è autenticato, non perché ci sia una difesa. Due posizioni opposte sulla stessa scala.
+
+> [!IMPORTANT]
+> **Il quadro completo: una sanitizzazione, quattro render-path**
+> Con la newsletter il filo dei quattro emettitori si chiude. Feed e newsletter non riaprono il buco, perché o non emettono il `content` o lo escapano. L'unica falla che resta viva in tutto il quadro è il prerender del CAP 11, con il suo `strip_tags` ad allowlist che lascia passare gli attributi. La conclusione, ripetuta da cinque capitoli, è sempre la stessa: la sanitizzazione del contenuto dovrebbe vivere una volta sola, lato server, condivisa da tutti gli emettitori, invece di essere reinventata (o dimenticata) da ognuno. Il fatto che il buco sia rimasto aperto in un solo punto su quattro non è merito dell'architettura: è fortuna, più la disciplina di chi ha scritto gli altri tre.
+
+---
+
+## 7. Il consenso, e dove sparisce
+
+Resta il lato GDPR dell'iscrizione, che non è solo una questione di token ma di consenso. Sul form, SPW chiede il doppio assenso esplicito (trattamento dei dati e dichiarazione di maggiore età); SR ne chiede uno solo, e ha una variante «minimal» del form, pensata per il footer, che non ha alcun checkbox. DIS, sul form, valida e basta.
+
+Ma il caso più interessante è in DIS, e non passa nemmeno dal form. Un'email può entrare nella lista anche da una seconda porta: quando un partecipante al festival viene approvato, il suo indirizzo viene aggiunto agli iscritti con un `INSERT OR IGNORE`, **senza un consenso esplicito alla newsletter**. I commenti nel codice mostrano lo stesso sviluppatore in dubbio se sia corretto.
+
+> [!WARNING]
+> **Il consenso come effetto collaterale**
+> Iscrivere qualcuno a una lista perché ha fatto *un'altra* cosa (candidarsi a un festival) è una raccolta di consenso che il GDPR non considera valida: il consenso deve essere specifico per quella finalità. È una trappola facile, perché il codice che lo fa sembra innocuo: una riga di `INSERT` in coda all'approvazione. La regola: ogni porta d'ingresso a una lista email deve avere il suo consenso, esplicito e separato. Il trattamento completo del workflow del festival è ai capitoli che lo riguardano; qui basta la lezione.
+
+---
+
+## In sintesi
+
+La newsletter mostra una scala di semplificazione che è anche una scala di rischio. SPW è il gradino completo: double opt-in con due token distinti, rate-limit contro il mail-bombing, link di disiscrizione con segreto, consenso doppio. SR aggiunge il trasporto più serio, l'SMTP autenticato, ma toglie il rate-limit (e apre il vettore mail-bombing) e fonde i due token in uno solo. DIS toglie anche il double opt-in e ogni token, e lascia un'iniezione di header nel nome del form contatti, pur conservando due buone abitudini d'igiene (la validazione dell'email ovunque e la pulizia in scrittura). Sul `content`, però, tutti e tre fanno la cosa giusta: non lo emettono, e il filo dei quattro emettitori si chiude. La difesa che manca più spesso non è quella contro l'XSS, che qui è risolta per disciplina: è quella contro l'abuso del proprio stesso form.
+
+---
+*Prossimo Capitolo: Admin Dashboard & Panels. Il pannello di controllo che lega insieme i sistemi visti finora, e i tre modi molto diversi in cui i siti decidono cosa un amministratore può vedere e fare.*

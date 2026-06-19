@@ -1,61 +1,68 @@
 # PROSSIMA SESSIONE — prompt pronto da incollare
 
 > 🟨 **FASE 3 — SCRITTURA in corso.** Riscritture CHIRURGICHE. Target: 20 capitoli + 2 appendici.
-> ✅ CAP 10 Security · ✅ CAP 8 Editing (box-ancora "4 emettitori") · ✅ CAP 11 SEO (falla viva) · ✅ CAP 12 RSS (chiude il filo per escape/sottrazione).
-> 🟦 Questa sessione: **5ª card di scrittura — CAP 13 — Newsletter & Email System** (CHIUDE definitivamente il filo dei 4 emettitori).
+> ✅ CAP 10 Security · ✅ CAP 8 Editing · ✅ CAP 11 SEO · ✅ CAP 12 RSS · ✅ CAP 13 Newsletter
+> 🟢 **FILO DEI 4 EMETTITORI COMPLETO** (CAP 8→11→12→13).
+> 🟦 Questa sessione: **6ª card — CAP 14 — Admin Dashboard & Panels (CAPITOLO NUOVO + rinumerazione Parte V).**
 
 ---
 
 Stiamo lavorando alla TERZA EDIZIONE del manuale miniCMS. Leggi prima
 `_cantiere-terza-edizione/ROADMAP.md`, `LOG.md`, `sintesi/_INDICE-SINTESI.md` e — per la scrittura —
-`sintesi/S2-inventario-contenuti.md` (azioni/correzioni per capitolo) e `sintesi/S3-scaletta-globale.md`
-(indice a 20 capitoli, mappa card→capitolo §3, fili trasversali §4, decisioni del gate §8).
+`sintesi/S2-inventario-contenuti.md` (sezione B1 = il capitolo Admin nuovo) e `sintesi/S3-scaletta-globale.md`
+(indice a 20 capitoli §2 + nota rinumerazione §2 + decisioni gate §8).
 
-STATO: FASE 1 ✅, FASE 2 ✅, FASE 3 in corso — **CAP 10 ✅ · CAP 8 ✅ · CAP 11 ✅ · CAP 12 ✅** (4/9 riscritture).
-Decisioni del gate (S3 §8): riscritture **CHIRURGICHE**; ordine FASE 3: (1) CAP 10 ✅ → (2) CAP 8 ✅ →
-(3) CAP 11 ✅ → (4) CAP 12 ✅ → **(5) CAP 13 Newsletter ← QUESTA SESSIONE** → (6) CAP 14 Admin →
-(7) CAP 6 Bridge → (8) CAP 7 Media → (9) CAP 20 Reactions → (10) correzioni → (11) App. B Fork → (12) FASE 4.
+STATO: FASE 1 ✅, FASE 2 ✅, FASE 3 in corso — **CAP 10 ✅ · 8 ✅ · 11 ✅ · 12 ✅ · 13 ✅** (5/9).
+Ordine (S3 §8): … → (6) **CAP 14 Admin [NUOVO] ← QUESTA SESSIONE** → (7) CAP 6 Bridge → (8) CAP 7 Media →
+(9) CAP 20 Reactions → (10) correzioni → (11) App. B Fork → (12) FASE 4.
 
-UNITÀ DI QUESTA SESSIONE: **FASE 3 / scrittura del CAP 13 — Newsletter & Email System** (riscrittura chirurgica).
-È il **quarto e ultimo capitolo del filo dei 4 emettitori** (aperto in CAP 8, falla viva in CAP 11, feed che chiude
-in CAP 12): qui il filo si **chiude del tutto** perché nessuno dei tre siti emette il `content` nella mail. Ma
-proprio perché il rischio XSS è chiuso, la lente vera diventa un'altra: **quanto si può semplificare un sistema di
-posta** prima che diventi pericoloso.
+UNITÀ DI QUESTA SESSIONE: **FASE 3 / CAP 14 — Admin Dashboard & Panels (generale)** — è il **capitolo NUOVO**
+deciso al gate S4 (S2/B1): oggi NON esiste, l'unica "dashboard" è il CAP 19 festival. Si scrive **quasi da zero**
+(non è una riscrittura chirurgica). **Attenzione:** questa è anche la sessione in cui scatta la **rinumerazione
+fisica della Parte V (+1)**.
 
-Metodo (riscrittura CHIRURGICA — NON da zero):
-1. Leggi il **CAP 13 attuale** (`CAPITOLO 13 - Newsletter & Email System.md`) e la scheda **S1-C9**
-   (`sintesi/S1-C9-newsletter-email.md`) per intero (pattern §1, tabella §2, GOLD §3, mappa+correzioni §4).
-   Richiama (NON riscrivere) il **box-ancora "4 emettitori"** di CAP 8 §4: qui si chiude l'ultima casella.
-   Per gli stralci di codice reali usa le **card di mappatura** (`mappatura/*/(*-C9).md`) con riferimento `path:linea`.
-2. **Preserva** ciò che è corretto; **sostituisci** le parti smentite; **aggiungi** le sezioni mancanti.
-   Correzioni note (da S1-C9 §4): il capitolo **omette il double opt-in** e mostra il modello DIS (mail() nuda)
-   attribuendolo a SR; §4 **unsubscribe-by-email NON è GDPR-compliant** (chiunque disiscrive chiunque, serve token);
-   §6.3 `usleep` è **throttle non rate-limit**; §6.4 query-senza-content è anche una difesa XSS. Aggiungere:
-   **mail-bombing** (SR senza rate-limit), **header-injection via name** (DIS), **SMTP/PHPMailer in prod** vs `mail()`,
-   i **2 token** (conferma + disiscrizione).
-3. **Scala "quanto puoi semplificare la posta" (D5/D2):** double-opt-in pieno + 2 token + rate-limit (SPW) →
-   SMTP-PHPMailer ma un-token-riusato + rate-limit ASSENTE = mail-bombing (SR) → `mail()` nuda senza opt-in né token,
-   header-injection via name (DIS). Tesi D2 "più ingegnerizzato ≠ più sicuro" (SR ricco ma lascia il buco più grave).
-4. **CHIUDE il filo dei 4 emettitori:** nessuno emette il `content` nella mail (SPW manda solo un link/estratto;
-   SR/DIS idem) → il buco XSS non si riapre nemmeno qui. Richiamo finale al box-ancora di CAP 8, con la tabella completata.
-5. Mantieni tono narrativo + blocchi di codice reali con origine `path:linea` + box
-   `[!WARNING]`/`[!NOTE]`/`[!TIP]`/`[!IMPORTANT]` (stile casa) + footer "Prossimo Capitolo" (→ CAP 14 Admin, nuovo).
+⚠️ PASSO 0 — RINUMERAZIONE (da fare PRIMA di scrivere, altrimenti due file "CAP 14"):
+Inserendo il nuovo CAP 14 Admin in Parte IV, tutta la Parte V scala di +1. Rinominare i file + aggiornare gli
+header `# CAPITOLO N` + i cross-reference interni + README + Boilerplate:
+- `CAPITOLO 14 - Database Evolution - Da SQLite a MySQL.md` → **CAP 15**
+- `CAPITOLO 15 - Portfolio & Projects Module.md` → **CAP 16**
+- `CAPITOLO 16 - Festival Logic - Iscrizioni…` → **CAP 17**
+- `CAPITOLO 17 - Festival Logic - Votazioni…` → **CAP 18**
+- `CAPITOLO 18 - Festival Logic - Dashboard Admin…` → **CAP 19** (diventa la *specializzazione festival* del nuovo CAP 14)
+- `CAPITOLO 19 - Social Interactions & Reactions.md` → **CAP 20**
+Poi creare il nuovo file `CAPITOLO 14 - Admin Dashboard & Panels.md`. Verificare con grep i cross-ref ("CAP 14".."CAP 19",
+"Capitolo 14".."19") nei capitoli e in README/_master/Boilerplate e correggerli. (NB: la memoria di progetto dice che
+una rinumerazione è già stata fatta una volta → procedere con cura, un rename alla volta.) Se la sessione si allunga
+troppo, si può fare SOLO la rinumerazione in questa sessione e scrivere il capitolo nella successiva — decidere all'inizio.
+
+Metodo (scrittura del NUOVO capitolo Admin):
+1. Leggi le schede **S1-C12** (`sintesi/S1-C12-admin-dashboard.md`) — principale — e **S1-C11**
+   (`sintesi/S1-C11-engagement-reactions.md`) per la sezione analytics. Per gli stralci di codice reali usa le
+   card di mappatura `mappatura/*/(*-C12).md` (+ SPW-C11 per `analytics.php`) con riferimento `path:linea`.
+2. Materiale (da S2/B1 + S1-C12): i **tre modelli di dashboard** su DUE assi ortogonali — *quanto misura*
+   (Chart.js analitica SPW / non-misura console-CRUD SR / testuale DIS) e *come è costruita* (route-guard-loader
+   SPW / mega-componente SR / AdminLayout+guard-componente DIS); **backup fuori-docroot + `.htaccess` runtime**
+   (SPW ha la rete, SR NIENTE → "cura senza prevenzione", ponte CAP 15); **tabella write-only** (`contacts` mai
+   letti, DIS); **gate role-blind** (rimando CAP 10); **`session_version` server vs logout client** (rimando CAP 10);
+   **console nascosta di manutenzione** (GET senza UI, SR); `confirm()` ≠ CSRF; `app_settings` mass-write.
+3. **Sezione "Misurare senza terze parti"** (S2/B3, analytics first-party): view dedup per IP-giorno, click
+   rate-limited con risposta neutra, niente Google Analytics. Fonti SPW-C11 (`analytics.php`) + S1-C11.
+4. Inquadra il CAP 19 (festival dashboard) come **specializzazione** di questo capitolo generale (rimando).
+5. Tono narrativo + scala a 3 gradini (D5) + box `[!WARNING]`/`[!NOTE]`/`[!TIP]`/`[!IMPORTANT]` + footer
+   "Prossimo Capitolo" (→ CAP 15 Database Evolution, ex-14).
 6. **REVISIONE STILISTICA OBBLIGATORIA (regola fissa, memoria `feedback-revisione-stilistica-capitoli`):**
-   a capitolo scritto, passalo per la skill **`prosa-italiana`** (tipografia — caporali «», puntini `…`;
-   prosa/narrativa — ritmo, lessico, niente filler) **e** per **`humanizer`** (antipattern LLM — trattini
-   lunghi abusati, tricolon, signposting, boldface meccanico). Pass finale «cosa rende ancora LLM?» + correzione.
-   Verifica via grep che non restino `—` in prosa (solo nei commenti codice / celle-tabella «non applicabile» è OK) né `...`/`"..."` fuori dal codice.
+   skill **`prosa-italiana`** (caporali «», puntini `…`, ritmo, niente filler) + **`humanizer`** (trattini lunghi,
+   tricolon, signposting, boldface meccanico) + pass finale «cosa rende ancora LLM?». Verifica grep: niente `—`
+   in prosa (ok nei commenti codice / celle-tabella), niente `...`/`"..."` fuori dal codice.
 
-Criterio di STOP: CAP 13 riscritto (chirurgico) e coerente, con il double-opt-in + la scala di semplificazione +
-mail-bombing/header-injection + il filo dei 4 emettitori **chiuso** (richiamo box-ancora); correzioni applicate
-(unsubscribe-by-email non-GDPR, usleep=throttle, modello-DIS-non-è-SR); **revisione stilistica eseguita.** NB: CAP resta numerato 13.
+Criterio di STOP: rinumerazione Parte V completata e verificata (grep cross-ref puliti) + nuovo CAP 14 Admin
+scritto e coerente (tre-modelli + tre-architetture + backup-placement + write-only + role-blind + sezione analytics
++ CAP 19 come specializzazione); **revisione stilistica eseguita.**
 
-Ciclo di chiusura OBBLIGATORIO: aggiorna `ROADMAP.md` (§5: spunta CAP 13, indica CAP 14 come prossimo) +
-una riga `LOG.md` + git add/commit/push (verifica sync) + riscrivi QUESTO file (root +
-`_cantiere-terza-edizione/`) con la prossima unità: **FASE 3 / CAP 14 — Admin Dashboard & Panels (NUOVO capitolo)**
-(da scrivere quasi da zero — è il capitolo nuovo deciso al gate S4: tre-modelli dashboard + tre-architetture di guardia
-+ backup-fuori-docroot + tabella write-only + sezione "Misurare senza terze parti"/analytics first-party; CAP 19
-festival-dashboard ne diventa la specializzazione. Qui scatta la **rinumerazione Parte V +1** → valutare se applicarla
-ora o in FASE 4. Fonti S1-C12 + S1-C11 per analytics).
+Ciclo di chiusura OBBLIGATORIO: aggiorna `ROADMAP.md` (§5: spunta CAP 14, segna la rinumerazione fatta, indica
+CAP 6 Bridge come prossimo) + una riga `LOG.md` + git add/commit/push (verifica sync) + riscrivi QUESTO file
+(root + `_cantiere-terza-edizione/`) con la prossima unità: **FASE 3 / CAP 6 — Frontend Bridge (API.ts)**
+(riscrittura chirurgica: Double Read corretto — il nome "Double Read"≠response-cloning; CSRF lato client; guard
+loader-vs-componente; messaggio backend perso. Fonti S1-C3).
 
-Nota metodo: un capitolo per sessione (materiale corposo). Scrivere/committare un capitolo alla volta.
+Nota metodo: un capitolo per sessione. La rinumerazione + il capitolo nuovo sono parecchio: se serve, spezzare.
