@@ -113,7 +113,11 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
   (modulo concorso riusabile, ponte S1-C10). Il Modello non tratta il forking → proporre sezione/appendice in S3.
 
 ## S2 — Inventario contenuti
-- ⬜ Cosa entra / aggiorna / è nuovo / si scarta vs i 19 capitoli esistenti.
+- ✅ **S2 — Inventario contenuti** → `sintesi/S2-inventario-contenuti.md`. (A) Mappa capitolo-per-capitolo CAP 1→19+All.
+  con azione CONFERMA/AGGIORNA/RISCRIVI/CORREGGI: 5 RISCRIVI (CAP 6/7/8/11/13) + CAP 10/12/19, CORREGGI/AGGIORNA
+  CAP 3/9/14/16/17/18, AGGIORNA CAP 1/2/4/5/All., CONFERMA solo CAP 15. (B) Nuovi: CAP Admin Dashboard generale,
+  appendice "ciclo di vita di un fork", sezione analytics-first-party, box-ancora "4 emettitori". (C) Scarti +
+  falsi-pattern da rimuovere. (D) 8 fili trasversali con "una casa + rimandi". → prepara S3.
 
 ## S3 — Scaletta / indice globale
 - ⬜ Struttura a Parti + capitoli, con mappa card→capitolo.
