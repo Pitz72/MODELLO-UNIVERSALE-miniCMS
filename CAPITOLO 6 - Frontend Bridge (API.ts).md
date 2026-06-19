@@ -229,5 +229,12 @@ SPW accumula le pagine deduplicando per `id` e calcola `hasMore` sulla lunghezza
 
 Il ponte tra React e PHP è in tutti e tre lo stesso oggetto su `fetch`, ma è cresciuto attorno a un'API senza contratto stabile, e ognuno ci ha messo del suo. SPW nello state layer, con i loader e il Double Read del payload. SR nel token CSRF tenuto in una variabile di modulo. DIS in un codemod che ha rattoppato la gestione errori a posteriori, lasciando le sue impronte (la ripetizione, i metodi sfuggiti, la riga duplicata). Tre investimenti diversi, e nessuno che renda il bridge davvero solido: il messaggio d'errore del backend si perde in tutti e tre, e in tutti e tre manca la cosa che servirebbe di più, un punto unico che gestisca la sessione scaduta. La morale non è «scegli il client più ricco». È che un wrapper su `fetch` non è mai solo trasporto: è il posto dove un'API imperfetta diventa, o non diventa, un'esperienza affidabile. Le decisioni che contano (leggere il body anche sugli errori, dove vive il token, cosa fare quando la sessione muore) stanno tutte lì.
 
+> [!IMPORTANT]
+> **Il Canone**
+> - Un solo oggetto `api` su `fetch`, auth via cookie di sessione; per gli upload multipart togli l'header `Content-Type` e lascia che lo metta il browser.
+> - Definisci una forma di payload stabile e leggila in un punto solo: un contratto uniforme è meglio del «Double Read».
+> - Gestisci il token CSRF sulle mutazioni e centralizza la reazione a 401/403 (un interceptor) per le sessioni scadute.
+> - Leggi il corpo della risposta anche sui rami d'errore: non perdere il messaggio del backend (es. il 429).
+
 ---
 *Prossimo Capitolo: Media & Optimization. L'upload come superficie d'attacco: validare i file davvero, spegnere PHP nelle cartelle pubbliche, e la catena che da un'immagine porta all'esecuzione di codice.*

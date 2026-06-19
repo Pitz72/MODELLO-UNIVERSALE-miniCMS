@@ -245,4 +245,11 @@ Dove i siti divergono davvero è nella rete di sicurezza contro la perdita del l
 
 ---
 
+> [!IMPORTANT]
+> **Il Canone**
+> - Editor Tiptap, HTML come fonte di verità salvato grezzo.
+> - La difesa contro l'XSS è la sanitizzazione **al render** (DOMPurify), choke-point unico; la pulizia all'incolla è cosmetica, non sicurezza.
+> - Guardie all'inserimento dei link (`isSafeLinkUrl`): niente `javascript:` né URL non validati.
+> - I quattro emettitori del `content` (render, prerender SEO, feed, newsletter) condividono la stessa sanitizzazione server-side: se uno la dimentica, il buco XSS si riapre.
+
 *Prossimo Capitolo: Content Lifecycle. Il ciclo di vita dei contenuti, dalla bozza alla pubblicazione programmata, e le tre regole di visibilità che decidono cosa il pubblico vede davvero.*

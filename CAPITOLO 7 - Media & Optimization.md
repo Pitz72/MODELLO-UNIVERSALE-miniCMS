@@ -202,5 +202,12 @@ La differenza che conta è quanta protezione hanno questi script potenti, che sp
 
 Il lato media dei tre siti parte dallo stesso scheletro e diverge su un solo asse che conta davvero: quante difese indipendenti stanno tra un file caricato e l'esecuzione di codice. SPW ne ha tre (PHP spento nella cartella, naming che non genera eseguibili, validazione sui byte reali), e ognuna copre il fallimento dell'altra. SR ne ha una, la validazione applicativa, robusta finché resta l'unica via di scrittura. DIS ne ha quasi nessuna, e per giunta su un upload pubblico: la somma di gate assente, MIME fidato dal client, nome conservato e PHP non spento è la catena RCE che il fork FDCA ha pure ereditato intatta. Le scelte di ottimizzazione (WebP o solo resize, GIF appiattita o animata) e di archiviazione (tabella `media` o filesystem nudo) contano per le prestazioni e per la manutenibilità, ma non spostano il rischio. Il rischio sta nel nome del file, nei byte che non controlli e nel motore che non hai spento. La regola del capitolo è che un upload non va reso «più ricco»: va reso ridondante, perché la prima barriera, prima o poi, cede.
 
+> [!IMPORTANT]
+> **Il Canone**
+> - Valida i file per magic-bytes (`finfo`), mai per il MIME dichiarato dal client.
+> - Rinomina con `uniqid()` e scarta il nome originale; ricostruisci l'estensione da una allowlist.
+> - Difesa in profondità: `.htaccess` con PHP-off nelle cartelle di upload (prima barriera anti-RCE), più validazione e naming. Una barriera sola non è difesa in profondità.
+> - Mai un upload pubblico non gated verso una cartella eseguibile; la delete dei media passa per un path-guard (`realpath`/containment) e un token CSRF.
+
 ---
 *Prossimo Capitolo: Advanced Content Editing & Media Integration. L'editor del contenuto, e come l'HTML che produce viene tenuto al sicuro al momento di mostrarlo.*

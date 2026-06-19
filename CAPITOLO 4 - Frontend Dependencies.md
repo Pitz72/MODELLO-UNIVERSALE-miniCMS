@@ -235,5 +235,11 @@ L'ultima riga è la più importante del Modello: nessun sito ne ha.
 ---
 *Capitoli correlati: Capitolo 2 (struttura del progetto) per la configurazione Vite; Capitolo 6 (Frontend Bridge) per l'oggetto `api` su `fetch`; Capitolo 8 (Advanced Content Editing) per Tiptap e la sanitizzazione; Capitolo 11 (SEO) per il rapporto tra react-helmet-async e l'engine PHP.*
 
+> [!IMPORTANT]
+> **Il Canone**
+> - Parti dal minimo: niente libreria di data-fetching (bastano `fetch` e un oggetto `api`), niente ORM, niente state-manager finché non servono davvero.
+> - Per l'editing ricco usa Tiptap (HTML salvato grezzo + DOMPurify al render); una `textarea` per tutto il resto.
+> - Ogni dipendenza ha un costo: aggiungila solo se ripaga, e distingui il build-time (`sharp`) dal runtime (`GD`).
+
 ---
 *Prossimo Capitolo: Backend Logic (PHP). CRUD unificato, gestione dei buffer e sanitizzazione degli input.*

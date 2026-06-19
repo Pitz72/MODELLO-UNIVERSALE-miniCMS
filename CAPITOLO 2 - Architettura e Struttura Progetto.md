@@ -125,5 +125,12 @@ FDCA e DISINTELLIGENZA condividono una struttura PHP **identica**: stessi file, 
 
 Il vantaggio è l'indipendenza: nessuna dipendenza condivisa, ogni progetto evolve per conto suo. Il rischio è il rovescio esatto di quel vantaggio: ogni bugfix e ogni miglioramento vanno riapplicati a mano su entrambi i rami, e quando il fix riguarda la sicurezza, dimenticarlo significa lasciare una falla aperta in un sito mentre la chiudi nell'altro. È esattamente quello che è successo qui (la catena RCE dell'upload del Capitolo 7 è stata mappata su DISINTELLIGENZA ma vive immutata in FDCA), e il motivo per cui il ciclo di vita di un fork merita un'appendice tutta sua.
 
+> [!IMPORTANT]
+> **Il Canone**
+> - Un file per endpoint, niente router centrale: ogni endpoint PHP include i suoi mattoni ed è autonomo.
+> - Tieni i segreti fuori dal codice versionato (`config.php`/`.env` nel `.gitignore`, con un `.example` committato).
+> - Database-a-file e cartelle sensibili fuori dalla docroot, o protetti da un `.htaccess` di deny generato a runtime: il build può rimuovere le difese statiche.
+> - Separa la `dist/` dai sorgenti e fa' che `clean-dist` tolga i `.sqlite` dalla distribuzione.
+
 ---
 *Prossimo Capitolo: Database Strategy. Lock, indici, migrazioni e la vera storia del WAL.*

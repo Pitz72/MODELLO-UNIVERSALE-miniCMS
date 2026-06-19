@@ -146,5 +146,12 @@ Caricare un file non è un semplice `move_uploaded_file`, è una trasformazione.
 
 Un `Notice` o un `Warning` di PHP stampato in mezzo a una risposta la rende JSON non valido, e il frontend si rompe. La difesa è duplice: `display_errors = 0` in produzione (gli errori vanno nei log, non in pagina) ed eventualmente `ob_start()` per controllare cosa esce. È lo stesso principio dell'errore di connessione del §4: il client riceve dati puliti, la diagnostica resta sul server.
 
+> [!IMPORTANT]
+> **Il Canone**
+> - File-per-endpoint con router su `REQUEST_METHOD`; gate selettivo sul ramo (GET pubblico, mutazioni dietro `Auth::check`).
+> - CORS via allowlist di origini con `Vary`, mai `*` insieme alle credenziali.
+> - L'errore di connessione si scrive nei log e risponde al client in modo generico: mai `getMessage()` in chiaro.
+> - Forza il timezone in **ogni** endpoint con logica temporale, e in produzione `display_errors = 0`.
+
 ---
 *Prossimo Capitolo: Frontend Bridge (API.ts). La connessione tra React e PHP, e i tre modi di leggere un payload che non ha un contratto stabile.*

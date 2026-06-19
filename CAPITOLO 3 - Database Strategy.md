@@ -125,5 +125,13 @@ In pratica, su un tipico hosting condiviso:
 
 La soglia vera non è un numero ma un **sintomo**: quando nei log compaiono errori di lock o di `busy timeout` nonostante il `busy_timeout` configurato, il database ti sta dicendo che la contesa in scrittura ha superato quello che un file-database regge su quell'hosting. È il momento di MySQL, e non un istante prima. Runtime Radio ci è arrivato per un incidente (Capitolo 15); la maggior parte dei siti non ci arriva mai, ed è giusto così.
 
+> [!IMPORTANT]
+> **Il Canone**
+> - SQLite con `journal_mode=DELETE` (mai WAL su hosting condiviso), `busy_timeout`, `foreign_keys=ON`; PDO in `ERRMODE_EXCEPTION`.
+> - Indicizza `slug` (UNIQUE), `published_at` (DESC), `status`; `ANALYZE` dopo i caricamenti massivi.
+> - Migrazioni atomiche, idempotenti e irraggiungibili da web non autenticato; tieni una tabella `schema_version` (i siti reali non ce l'hanno: è un debito da non ereditare).
+> - Backup prima di ogni migrazione, in una cartella protetta fuori docroot.
+> - Passa a MySQL quando i log mostrano `database is locked`/`busy timeout` ricorrenti, non per scaramanzia.
+
 ---
 *Prossimo Capitolo: Frontend Dependencies. La matrice delle dipendenze, le regole di scelta e il costo di ogni libreria.*
