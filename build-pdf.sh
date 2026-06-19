@@ -1,5 +1,5 @@
 #!/bin/bash
-# Build script: React + PHP: The Thin Stack — Seconda Edizione
+# Build script: React + PHP: The Thin Stack — Terza Edizione
 
 PANDOC="/c/Users/Utente/AppData/Local/Microsoft/WinGet/Packages/JohnMacFarlane.Pandoc_Microsoft.Winget.Source_8wekyb3d8bbwe/pandoc-3.9.0.1/pandoc.exe"
 XELATEX="/c/Users/Utente/AppData/Local/Programs/MiKTeX/miktex/bin/x64/xelatex.exe"
@@ -20,7 +20,7 @@ cat > "$MASTER" << 'YAML'
 title: "React + PHP: The Thin Stack"
 subtitle: "Il protocollo miniCMS per Web App moderne"
 author: "Simone Pizzi"
-date: "Maggio 2026 — Seconda Edizione"
+date: "Giugno 2026 — Terza Edizione"
 lang: it
 book: true
 classoption: [oneside]
@@ -75,9 +75,10 @@ append_chapter "$DIR/CAPITOLO 18 - Festival Logic - Votazioni e Protezione Anti-
 append_chapter "$DIR/CAPITOLO 19 - Festival Logic - Dashboard Admin, Settings e Reporting.md"
 append_chapter "$DIR/CAPITOLO 20 - Social Interactions & Reactions.md"
 
-# ---- ALLEGATI ----
-printf '\n\\part{Allegati}\n\n' >> "$MASTER"
+# ---- APPENDICI ----
+printf '\n\\part{Appendici}\n\n' >> "$MASTER"
 append_chapter "$DIR/BOILERPLATE-CHECKLIST.md"
+append_chapter "$DIR/APPENDICE B - Ciclo di vita di un fork.md"
 
 echo "File master creato: $MASTER"
 

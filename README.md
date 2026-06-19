@@ -1,6 +1,6 @@
 # React + PHP: The Thin Stack
 ## Il protocollo miniCMS per Web App moderne
-### A cura di Simone Pizzi — Prima Edizione
+### A cura di Simone Pizzi — Terza Edizione
 
 ---
 
@@ -72,4 +72,4 @@ L'obiettivo è uno standard di sviluppo per Web App moderne leggere che sia:
 - [Appendice B: Ciclo di vita di un fork](./APPENDICE%20B%20-%20Ciclo%20di%20vita%20di%20un%20fork.md)
 
 ---
-*Prima Edizione — Marzo 2026*
+*Terza Edizione — Giugno 2026*

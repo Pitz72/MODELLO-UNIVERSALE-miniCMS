@@ -90,9 +90,9 @@ E poi c'è un secondo motivo, più pratico: **documentare obbliga a capire davve
 
 ## Cosa trovi dentro
 
-Il manuale si chiama ufficialmente *React + PHP: The Thin Stack — Il protocollo miniCMS per Web App moderne*. Seconda edizione. Maggio 2026.
+Il manuale si chiama ufficialmente *React + PHP: The Thin Stack — Il protocollo miniCMS per Web App moderne*. Terza edizione. Giugno 2026.
 
-È organizzato in **cinque parti e un allegato**, per un totale di diciotto capitoli.
+È organizzato in **cinque parti e due appendici**, per un totale di venti capitoli.
 
 **Parte I — La Visione** è un solo capitolo, il Manifesto. È il perché. La tensione irrisolta tra la potenza di React e la semplicità di PHP, e come questa architettura prova a risolverla senza tradire nessuno dei due lati.
 
@@ -100,11 +100,11 @@ Il manuale si chiama ufficialmente *React + PHP: The Thin Stack — Il protocoll
 
 **Parte III — I Componenti** è la cucina. Come si scrive un endpoint PHP che non è mai vulnerabile. Come si costruisce il bridge tra frontend e backend in TypeScript. Come si gestiscono media, upload, editor di contenuto ricco.
 
-**Parte IV — Il Flusso Operativo** è dove i contenuti prendono vita: il ciclo di vita editoriale (bozza, programmato, pubblicato), l'autenticazione e la sicurezza, il SEO per i motori di ricerca e i social, il feed RSS, la newsletter. Con il codice dell'incidente DDoS documentato per intero.
+**Parte IV — Il Flusso Operativo** è dove i contenuti prendono vita: il ciclo di vita editoriale (bozza, programmato, pubblicato), l'autenticazione e la sicurezza, il SEO per i motori di ricerca e i social, il feed RSS, la newsletter, e il pannello di amministrazione che lega insieme tutto. Con il codice dell'incidente DDoS documentato per intero.
 
-**Parte V — I Casi Reali** è forse la parte più onesta. La migrazione vera di Runtime Radio da SQLite a MySQL, con i tre script che l'hanno resa possibile. Il modulo portfolio di SimonePizziWebSite con la logica di riordinamento drag-and-drop. L'intero sistema festival di DISINTELLIGENZA e FDCA, dalle iscrizioni alle votazioni anti-frode alla dashboard di reportistica.
+**Parte V — I Casi Reali** è forse la parte più onesta. La migrazione vera di Runtime Radio da SQLite a MySQL, con i tre script che l'hanno resa possibile e la notte del crash che l'ha provocata. Il modulo portfolio di SimonePizziWebSite con la logica di riordinamento drag-and-drop. L'intero sistema festival di DISINTELLIGENZA e FDCA, dalle iscrizioni alle votazioni anti-frode alla dashboard di reportistica. E le reazioni e i messaggi del pubblico, l'ultima superficie dove a scrivere nel database è un visitatore anonimo.
 
-E infine una **Boilerplate Checklist** — una lista pratica, fase per fase, di tutto quello che serve per avviare un nuovo progetto da zero.
+E infine due appendici: una **Boilerplate Checklist** — una lista pratica, fase per fase, di tutto quello che serve per avviare un nuovo progetto da zero — e **il ciclo di vita di un fork**, il racconto di cosa eredita davvero un progetto quando se ne copia un altro, debiti di sicurezza compresi.
 
 Ogni capitolo è autonomo. Si può leggere dall'inizio alla fine come un libro, o si può usare come reference andando direttamente al capitolo che serve. I cross-reference tra capitoli sono espliciti: quando un pattern richiede di conoscere qualcosa documentato altrove, c'è un rimando diretto.
 
