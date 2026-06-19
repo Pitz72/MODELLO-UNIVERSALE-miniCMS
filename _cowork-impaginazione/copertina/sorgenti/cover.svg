@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="371.1000000000001mm" height="260.35mm" viewBox="0 0 371.100 260.350">
+<defs>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="0.2"><stop offset="0" stop-color="#0a111d"/><stop offset="0.6" stop-color="#0f1b2c"/><stop offset="1" stop-color="#16243a"/></linearGradient>
+<radialGradient id="frontglow" cx="0.752" cy="0.62" r="0.42"><stop offset="0" stop-color="#13384a" stop-opacity="0.85"/><stop offset="1" stop-color="#13384a" stop-opacity="0"/></radialGradient>
+<linearGradient id="topface" x1="0" y1="0" x2="0.4" y2="1"><stop offset="0" stop-color="#2b3e54"/><stop offset="1" stop-color="#1b2a3c"/></linearGradient>
+<linearGradient id="seamg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#9af7e9"/><stop offset="1" stop-color="#2DD4BF"/></linearGradient>
+<filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="1.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<filter id="softglow" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="6"/></filter>
+<pattern id="dots" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="0.35" fill="#33485f" fill-opacity="0.35"/></pattern>
+</defs>
+<rect x="0" y="0" width="371.1000000000001" height="260.35" fill="url(#bg)"/>
+<rect x="0" y="0" width="371.1000000000001" height="260.35" fill="url(#dots)"/>
+<rect x="190.12500000000003" y="0" width="180.97500000000005" height="260.35" fill="url(#frontglow)"/>
+<text x="279.03" y="46.00" font-family="IBM Plex Mono" font-size="2.70" font-weight="500" font-style="normal" fill="#2DD4BF" fill-opacity="1" text-anchor="middle" letter-spacing="3.2">RUNTIME EDIZIONI</text>
+<text x="279.03" y="70.00" font-family="IBM Plex Serif" font-size="8.00" font-weight="600" font-style="normal" fill="#eef3f8" fill-opacity="1" text-anchor="middle">React + PHP:</text>
+<text x="279.03" y="84.00" font-family="IBM Plex Serif" font-size="13.00" font-weight="600" font-style="normal" fill="#eef3f8" fill-opacity="1" text-anchor="middle">The Thin Stack</text>
+<text x="279.03" y="96.00" font-family="IBM Plex Mono" font-size="3.30" font-weight="400" font-style="normal" fill="#9fb3c8" fill-opacity="1" text-anchor="middle">Il protocollo miniCMS per Web App moderne</text>
+<ellipse cx="279.02500000000003" cy="178.0" rx="74" ry="40" fill="#2DD4BF" fill-opacity="0.10" filter="url(#softglow)"/>
+<polygon points="235.03,170.00 279.03,192.00 279.03,204.00 235.03,182.00" fill="#0f1825"/>
+<polygon points="323.03,170.00 279.03,192.00 279.03,204.00 323.03,182.00" fill="#0b121d"/>
+<polyline points="235.03,176.00 279.03,198.00 323.03,176.00" fill="none" stroke="url(#seamg)" stroke-width="1.5" filter="url(#glow)"/>
+<polygon points="235.03,170.00 279.03,192.00 279.03,198.00 235.03,176.00" fill="#16222f"/>
+<polygon points="323.03,170.00 279.03,192.00 279.03,198.00 323.03,176.00" fill="#101a25"/>
+<polygon points="279.03,148.00 323.03,170.00 279.03,192.00 235.03,170.00" fill="url(#topface)" stroke="#3a5066" />
+<polyline points="279.03,148.00 323.03,170.00" fill="none" stroke="#2DD4BF" stroke-width="0.5" stroke-opacity="0.55"/>
+<text x="279.03" y="232.00" font-family="IBM Plex Serif" font-size="6.00" font-weight="500" font-style="normal" fill="#eef3f8" fill-opacity="1" text-anchor="middle">Simone Pizzi</text>
+<text x="279.03" y="244.00" font-family="IBM Plex Mono" font-size="2.80" font-weight="400" font-style="normal" fill="#9fb3c8" fill-opacity="1" text-anchor="middle" letter-spacing="1.5">Terza Edizione</text>
+<g transform="translate(185.55,0) rotate(90)">
+<text x="70" y="1.0" font-family="IBM Plex Serif" font-size="3.0" font-weight="600" fill="#eef3f8" text-anchor="start" dominant-baseline="middle">Simone Pizzi&#160;&#160;·&#160;&#160;The Thin Stack</text>
+<text x="245" y="1.0" font-family="IBM Plex Mono" font-size="2.2" fill="#2DD4BF" text-anchor="end" dominant-baseline="middle" letter-spacing="1.5">RUNTIME</text>
+</g>
+<text x="13.18" y="40.00" font-family="IBM Plex Mono" font-size="2.70" font-weight="500" font-style="normal" fill="#2DD4BF" fill-opacity="1" text-anchor="start" letter-spacing="2.5">IL PROTOCOLLO MINICMS</text>
+<text x="13.18" y="58.00" font-family="IBM Plex Serif" font-size="3.40" font-weight="400" font-style="normal" fill="#cdd9e6" fill-opacity="1" text-anchor="start">Il frontend è diventato magnifico. Ma sotto ci</text>
+<text x="13.18" y="63.00" font-family="IBM Plex Serif" font-size="3.40" font-weight="400" font-style="normal" fill="#cdd9e6" fill-opacity="1" text-anchor="start">mettiamo troppo: Node, container, CMS in</text>
+<text x="13.18" y="68.00" font-family="IBM Plex Serif" font-size="3.40" font-weight="400" font-style="normal" fill="#cdd9e6" fill-opacity="1" text-anchor="start">abbonamento, servizi cloud, per siti che</text>
+<text x="13.18" y="73.00" font-family="IBM Plex Serif" font-size="3.40" font-weight="400" font-style="normal" fill="#cdd9e6" fill-opacity="1" text-anchor="start">girerebbero benissimo su un hosting da pochi euro.</text>
+<text x="13.18" y="81.00" font-family="IBM Plex Serif" font-size="3.40" font-weight="400" font-style="normal" fill="#cdd9e6" fill-opacity="1" text-anchor="start">«The Thin Stack» è il protocollo che separa due</text>
+<text x="13.18" y="86.00" font-family="IBM Plex Serif" font-size="3.40" font-weight="400" font-style="normal" fill="#cdd9e6" fill-opacity="1" text-anchor="start">piani: la presentazione a React e TypeScript, i dati</text>
+<text x="13.18" y="91.00" font-family="IBM Plex Serif" font-size="3.40" font-weight="400" font-style="normal" fill="#cdd9e6" fill-opacity="1" text-anchor="start">a PHP nativo e SQLite (o MySQL quando serve).</text>
+<text x="13.18" y="96.00" font-family="IBM Plex Serif" font-size="3.40" font-weight="400" font-style="normal" fill="#cdd9e6" fill-opacity="1" text-anchor="start">Niente framework di backend, niente overhead: uno</text>
+<text x="13.18" y="101.00" font-family="IBM Plex Serif" font-size="3.40" font-weight="400" font-style="normal" fill="#cdd9e6" fill-opacity="1" text-anchor="start">scheletro minimo ma vero, che scala su tre gradini</text>
+<text x="13.18" y="106.00" font-family="IBM Plex Serif" font-size="3.40" font-weight="400" font-style="normal" fill="#cdd9e6" fill-opacity="1" text-anchor="start">a seconda di ciò che ti serve.</text>
+<text x="13.18" y="114.00" font-family="IBM Plex Serif" font-size="3.40" font-weight="400" font-style="normal" fill="#cdd9e6" fill-opacity="1" text-anchor="start">Venti capitoli e tre appendici costruiti su quattro</text>
+<text x="13.18" y="119.00" font-family="IBM Plex Serif" font-size="3.40" font-weight="400" font-style="normal" fill="#cdd9e6" fill-opacity="1" text-anchor="start">siti reali in produzione: sicurezza fatta a mano, SEO</text>
+<text x="13.18" y="124.00" font-family="IBM Plex Serif" font-size="3.40" font-weight="400" font-style="normal" fill="#cdd9e6" fill-opacity="1" text-anchor="start">che funziona, feed, newsletter, dashboard, e tutte</text>
+<text x="13.18" y="129.00" font-family="IBM Plex Serif" font-size="3.40" font-weight="400" font-style="normal" fill="#cdd9e6" fill-opacity="1" text-anchor="start">le cicatrici di chi l'ha messo online sul serio.</text>
+<text x="13.18" y="247.18" font-family="IBM Plex Mono" font-size="3.00" font-weight="500" font-style="normal" fill="#eef3f8" fill-opacity="1" text-anchor="start" letter-spacing="2.0">RUNTIME EDIZIONI</text>
+<text x="13.18" y="252.18" font-family="IBM Plex Mono" font-size="2.60" font-weight="400" font-style="normal" fill="#9fb3c8" fill-opacity="1" text-anchor="start">www.runtimeradio.com</text>
+<rect x="125.97500000000002" y="220.175" width="46" height="28" rx="1.5" fill="#ffffff" fill-opacity="0.92"/>
+<text x="148.98" y="235.18" font-family="IBM Plex Mono" font-size="2.30" font-weight="400" font-style="normal" fill="#7a8aa0" fill-opacity="1" text-anchor="middle">area codice a barre</text>
+</svg>

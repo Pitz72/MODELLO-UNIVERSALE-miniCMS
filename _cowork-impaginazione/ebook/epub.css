@@ -1,0 +1,39 @@
+body { font-family: serif; line-height: 1.5; }
+h1 { font-size: 1.5em; margin: 1.2em 0 0.6em; line-height: 1.2; }
+h2 { font-size: 1.2em; margin: 1.1em 0 0.4em; }
+h3 { font-size: 1.05em; margin: 0.9em 0 0.3em; }
+p { margin: 0 0 0.7em; text-align: justify; }
+/* CODICE: a-capo automatico leggibile, niente perdita di righe */
+pre {
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  font-family: monospace;
+  font-size: 0.82em;
+  line-height: 1.35;
+  background: #f4f5f7;
+  border: 1px solid #dfe3e8;
+  border-left: 3px solid #2bb6a3;
+  border-radius: 3px;
+  padding: 0.6em 0.7em;
+  margin: 0.8em 0;
+}
+code { font-family: monospace; }
+p code, li code { background: #f0f1f3; padding: 0 0.2em; border-radius: 2px; font-size: 0.9em; }
+/* admonition (GitHub alerts -> div .warning/.tip/.note/.important/.caution) */
+div.warning, div.tip, div.note, div.important, div.caution {
+  border-left: 4px solid #888; background: #f6f7f9;
+  padding: 0.5em 0.8em; margin: 0.8em 0; border-radius: 0 3px 3px 0;
+}
+div.warning { border-left-color: #c47f00; }
+div.caution { border-left-color: #b23b3b; }
+div.important { border-left-color: #6a4fb3; }
+div.note { border-left-color: #2f6fb3; }
+div.tip { border-left-color: #2bb6a3; }
+div.title { font-weight: bold; font-size: 0.85em; letter-spacing: 0.04em; text-transform: uppercase; margin-bottom: 0.3em; }
+table { border-collapse: collapse; font-size: 0.85em; margin: 0.8em 0; }
+th, td { border: 1px solid #ccc; padding: 0.3em 0.5em; text-align: left; }
+th { background: #eef0f2; }
+blockquote { border-left: 3px solid #ccc; margin: 0.8em 0; padding-left: 0.8em; color: #444; font-style: italic; }
+.dedica { text-align: right; font-style: italic; margin: 3em 1em 0 0; }
+hr { border: none; border-top: 1px solid #ddd; margin: 1.2em 20%; }

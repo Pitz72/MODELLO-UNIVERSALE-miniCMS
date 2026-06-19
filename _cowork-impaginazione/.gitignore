@@ -9,3 +9,6 @@ produzione/capitoli-typ/
 produzione/prototipi/*.png
 produzione/_interno_rgb.pdf
 produzione/_check/
+copertina/bg_hires.png
+copertina/_chk*
+ebook/combined.md
