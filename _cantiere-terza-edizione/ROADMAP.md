@@ -139,11 +139,18 @@ Ordine deciso (S3 §8): (1) CAP 10 Security → (2) CAP 8 Editing [box-ancora 4 
 
 ---
 
-## 6. FASE 4 — PASSAGGIO EDITORIALE & PUBBLICAZIONE
+## 6. FASE 4 — PASSAGGIO EDITORIALE (contenuti) → poi COWORK/KDP
 
-- [ ] E1 — Uniformità di tono, footer "Prossimo Capitolo", intro di Parte.
-- [ ] E2 — **Allineamento etichetta edizione**: oggi incoerente (README/_master = "Prima Edizione"; build-pdf.sh/articolo = "Seconda Edizione"). Decidere e uniformare a **Terza Edizione**.
-- [ ] E3 — Build PDF/ebook (`build-pdf.sh`) e verifica.
+> **CONFINE DI SCOPE (decisione Simone 2026-06-19, memoria `scope-claude-code-vs-cowork-kdp`):** in Claude Code
+> si finalizzano i **CONTENUTI** (testo, coerenza, tipografia editoriale dei `.md`). La **composizione tipografica /
+> impaginazione per KDP** (font, margini, gabbia, resa PDF/ebook di stampa, `_master.md` come artefatto) è un
+> **progetto Claude Cowork separato**. Qui si fa E1+E2; E3 NON si fa qui.
+
+- [ ] E1 — (contenuti) Uniformità di tono, footer "Prossimo Capitolo" su tutti i 20 capitoli + appendici, intro di Parte I-V.
+- [ ] E2 — (contenuti) **Etichetta «Terza Edizione» ovunque**: oggi incoerente (README/_master = "Prima Edizione"; build-pdf.sh/articolo = "Seconda Edizione", articolo dice "diciotto capitoli"). Uniformare nei file di testo/README/manifest.
+- [ ] ~~E3 — Build PDF/ebook~~ → **FUORI SCOPE qui: progetto Cowork/KDP.** Qui si consegnano i contenuti finalizzati.
+
+**Mono-sessione finale (vedi `PROSSIMA-SESSIONE.md`):** CAP 15 + App. B Fork + App. A Boilerplate + E1 + E2 + verifica grep, in sei task atomici. Conclusa quella → contenuti FINALIZZATI, pronti per Cowork.
 
 ---
 
