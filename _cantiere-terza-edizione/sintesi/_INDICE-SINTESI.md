@@ -94,7 +94,16 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
   fuori-docroot+htaccess-runtime SPW vs NIENTE SR → S1-C13), tabella-write-only contacts DIS, guard-role-blind DIS,
   session_version-server-vs-logout-client, console-nascosta (manutenzione GET senza UI SR), confirm≠CSRF, app_settings
   mass-write. GAP STRUTTURALE: manca un capitolo Admin generale (CAP 18 è solo festival) → proporre nuovo CAP in S3.
-- ⬜ S1-C13 DB Evolution & Incidenti — fonti SR-C13, DIS-C1 (meccanismo update_db_*), SPW-C1 (init fossile)
+- ✅ **S1-C13 DB Evolution & Incidenti** — fonti SR-C13 (princ.), DIS-C1 (SQLite vivo), SPW-C1/C12 (migrato + backup). → CAP 14 (princ.) + ponti CAP 3/10/13/18.
+  L'evoluzione schema avviene SENZA strumento di migrazione (ALTER+skip-Duplicate idempotente, no schema_version);
+  tre rapporti con la stessa tecnica: DIS SQLite VIVO (il motore che gli altri hanno lasciato, WAL/PRAGMA reali) /
+  SR migrato a MySQL in FUGA da un crash WAL notturno (sei fossili + niente backup) / SPW migrato in silenzio (con
+  backup). Ribaltamento (gemello S1-C2/C5/C9/C12): il flagship-incidenti SR è il meno attrezzato a sopravvivere.
+  GOLD: incidente-WAL (l'ottimizzazione che fa crashare, DIS contrappunto vivo), migrazione-come-fuga-non-upgrade,
+  sei-fossili-igiene-repo, una-tabella-tre-CREATE subscribers, doppio-binario one-shot-vs-self-healing, cura-senza-
+  prevenzione (SR no-backup vs SPW/DIS sì), bug-data-stringa debug_time-T, ETL-2-PDO+COUNT. Init-fossile/versionamento
+  già in S1-C1. Corregge CAP 14 (§1 migrazione motivata da soglie-traffico ma il caso reale è l'incidente; §6 checklist
+  prescrive backup che SR non ha; SR-centrico = manca DIS-SQLite-vivo-in-prod; omette fossili/3-schemi/doppio-binario).
 - ⬜ S1-FORK FDCA come caso "fork/evoluzione" — fonte FDCA-DIFF (non aggiunge pattern: backend = DIS)
 
 ## S2 — Inventario contenuti
@@ -109,4 +118,4 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
 ---
 
 ### Stato globale FASE 2
-- **12 / 14 schede S1 completate** (S1-C1…C12 ✅). Prossima: **S1-C13 DB Evolution & Incidenti**.
+- **13 / 14 schede S1 completate** (S1-C1…C13 ✅). Prossima: **S1-FORK (FDCA come caso fork/evoluzione)** — ULTIMA scheda S1.
