@@ -70,6 +70,7 @@ L'obiettivo è uno standard di sviluppo per Web App moderne leggere che sia:
 
 - [Appendice A: Boilerplate Checklist](./BOILERPLATE-CHECKLIST.md)
 - [Appendice B: Ciclo di vita di un fork](./APPENDICE%20B%20-%20Ciclo%20di%20vita%20di%20un%20fork.md)
+- [Appendice C: Testing e Deploy (cenni)](./APPENDICE%20C%20-%20Testing%20e%20Deploy.md)
 
 ---
 *Terza Edizione — Giugno 2026*

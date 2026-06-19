@@ -79,6 +79,7 @@ append_chapter "$DIR/CAPITOLO 20 - Social Interactions & Reactions.md"
 printf '\n\\part{Appendici}\n\n' >> "$MASTER"
 append_chapter "$DIR/BOILERPLATE-CHECKLIST.md"
 append_chapter "$DIR/APPENDICE B - Ciclo di vita di un fork.md"
+append_chapter "$DIR/APPENDICE C - Testing e Deploy.md"
 
 echo "File master creato: $MASTER"
 
