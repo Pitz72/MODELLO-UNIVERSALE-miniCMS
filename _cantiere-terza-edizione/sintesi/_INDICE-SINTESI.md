@@ -66,7 +66,16 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
   chiuso, consenso-implicito festival DIS. Corregge CAP 13 (omette il double opt-in = mostra il modello DIS
   attribuito a SR; §4 unsubscribe-by-email NON è "GDPR-compliant"; §6.3 usleep è throttle non rate-limit;
   §6.4 query-senza-content è anche sicurezza-XSS; omette mail-bombing/header-injection/SMTP-in-prod/2-token).
-- ⬜ S1-C10 Festival Logic — fonte DIS-C10 (solo DIS; FDCA eredita)
+- ✅ **S1-C10 Festival Logic** — fonte DIS-C10 (solo DIS; FDCA eredita backend byte-identico). → CAP 16/17/18 (princ.) + ponti CAP 10/13/9.
+  Modulo OPZIONALE (1 sito su 4): concorso a voto pubblico gestito a INTERRUTTORI BOOLEANI (status +
+  in_current_round + master switch settings) + contatore DENORMALIZZATO vote_count = fonte di verità classifica.
+  Scheda mono-sito → confronto interno "testo idealizzato CAP 16-18 vs codice reale DIS vs fork FDCA". GOLD:
+  round-a-flag (reset cancella la storia del turno), finalist-VESTIGIALE (enum mai impostato), classifica-che-
+  deriva (drift del contatore senza reconciliation), report-finale-DORMIENTE (sendVotingReport costruito ma
+  commentato "Phase 2"), master-switch difensivo '1'||'true', consenso-implicito (ponte S1-C9), gate-role-blind
+  (ponte S1-C2). Anti-frode voto già in S1-C2 (qui solo richiamato). Corregge CAP 18 §4 (report dato come attivo
+  = è disabilitato), §3 (finalist mai usato + drift non avvertito), CAP 16 §4 (Newsletter Sync = problema GDPR),
+  CAP 17 §2 (cookie cosmetico, la barriera reale è IP/24h); inquadra il festival come modulo opzionale + eredità FDCA.
 - ⬜ S1-C11 Engagement & Reactions — fonte SPW-C11 (solo SPW)
 - ⬜ S1-C12 Admin Dashboard & Panels — fonti SPW-C12, SR-C12, DIS-C12
 - ⬜ S1-C13 DB Evolution & Incidenti — fonti SR-C13, DIS-C1 (meccanismo update_db_*), SPW-C1 (init fossile)
@@ -84,4 +93,4 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
 ---
 
 ### Stato globale FASE 2
-- **9 / 14 schede S1 completate** (S1-C1 ✅, S1-C2 ✅, S1-C3 ✅, S1-C4 ✅, S1-C5 ✅, S1-C6 ✅, S1-C7 ✅, S1-C8 ✅, S1-C9 ✅). Prossima: **S1-C10 Festival Logic**.
+- **10 / 14 schede S1 completate** (S1-C1 ✅, S1-C2 ✅, S1-C3 ✅, S1-C4 ✅, S1-C5 ✅, S1-C6 ✅, S1-C7 ✅, S1-C8 ✅, S1-C9 ✅, S1-C10 ✅). Prossima: **S1-C11 Engagement & Reactions**.
