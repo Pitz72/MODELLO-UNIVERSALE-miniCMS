@@ -55,7 +55,17 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
   (bozze nel feed SR), catch-vuoto-vs-500, monologhi-AI in feed.php (DIS), config-aspirazionale. Corregge CAP 12
   (§3 feed podcast è DIS non SR; §1 catch-vuoto insegnato come pattern = anti-pattern; §4 feed.php non è alias;
   omette quadro-4-emettitori/proxy-CORS/security-theater/status; §2.5 GUID URN da ampliare = SR/DIS non lo seguono).
-- ⬜ S1-C9 Newsletter & Email — fonti SPW-C9, SR-C9, DIS-C9
+- ✅ **S1-C9 Newsletter & Email** — fonti SPW-C9, SR-C9, DIS-C9 (FDCA = DIS). → CAP 13 (princ.) + ponti CAP 8/11/12/10/9/16-18/14.
+  La newsletter CHIUDE il "quadro dei 4 emettitori" (nessuno emette content → buco XSS non si riapre, resta
+  solo il prerender S1-C7). Lente vera = scala "quanto puoi semplificare la posta": double opt-in pieno +
+  2-token + rate-limit SPW / SMTP-PHPMailer ma un-token-riusato + rate-limit ASSENTE (mail-bombing) SR /
+  mail() nuda senza opt-in né token DIS. Ribaltamento (gemello S1-C2/C5): il backend più ricco (SR) lascia il
+  buco operativo più grave. GOLD: quadro-4-emettitori chiuso, form-che-spara-email rate-limit-dimenticato SR,
+  rate-limit-ingresso≠throttle-uscita, double-opt-in 3 gradini + token che diventa uno/zero, header-injection
+  via name DIS, invio-sincrono-senza-coda, 3-schemi-subscribers SR, trasporto mail()-vs-SMTP, Telegram-fossile
+  chiuso, consenso-implicito festival DIS. Corregge CAP 13 (omette il double opt-in = mostra il modello DIS
+  attribuito a SR; §4 unsubscribe-by-email NON è "GDPR-compliant"; §6.3 usleep è throttle non rate-limit;
+  §6.4 query-senza-content è anche sicurezza-XSS; omette mail-bombing/header-injection/SMTP-in-prod/2-token).
 - ⬜ S1-C10 Festival Logic — fonte DIS-C10 (solo DIS; FDCA eredita)
 - ⬜ S1-C11 Engagement & Reactions — fonte SPW-C11 (solo SPW)
 - ⬜ S1-C12 Admin Dashboard & Panels — fonti SPW-C12, SR-C12, DIS-C12
@@ -74,4 +84,4 @@ Un cluster per scheda. Fonde i 2-3 trattamenti per-sito in una visione comparata
 ---
 
 ### Stato globale FASE 2
-- **8 / 14 schede S1 completate** (S1-C1 ✅, S1-C2 ✅, S1-C3 ✅, S1-C4 ✅, S1-C5 ✅, S1-C6 ✅, S1-C7 ✅, S1-C8 ✅). Prossima: **S1-C9 Newsletter & Email**.
+- **9 / 14 schede S1 completate** (S1-C1 ✅, S1-C2 ✅, S1-C3 ✅, S1-C4 ✅, S1-C5 ✅, S1-C6 ✅, S1-C7 ✅, S1-C8 ✅, S1-C9 ✅). Prossima: **S1-C10 Festival Logic**.
