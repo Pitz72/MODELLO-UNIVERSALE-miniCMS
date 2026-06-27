@@ -42,6 +42,14 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | role-blind (guardia) | **role-blind** | invariato |
 | OG-proxy / Dynamic Rendering | invariati | |
 | ponte (verso CAP X) | **bridge (to Ch. X)** | raccordi narrativi |
+| Il Modello Universale / Il Modello | **The Universal Model / The Model** | fissato dal pilota CAP 1 |
+| Il Piano della Presentazione / dei Dati | **The Presentation Plane / The Data Plane** | «separazione dei piani» → *separation of planes* |
+| grado-zero | **base rung** | metafora della scala |
+| MySQL essenziale / ingegnerizzato | **essential MySQL / engineered MySQL** | nomi dei gradini della scala |
+| ridotto all'osso | **pared to the bone** | |
+| in chiaro (password) | **in cleartext** | |
+| senza sconti | **without flinching** | |
+| Il codice non mente. Le cicatrici nemmeno. | **Code doesn’t lie. Neither do scars.** | chiusura ricorrente |
 
 ## 3. Mappa titoli (file `manuale-en/`)
 | # | IT | EN |
