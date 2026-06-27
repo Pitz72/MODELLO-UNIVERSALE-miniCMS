@@ -55,6 +55,13 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | seconda rete (difesa) | **a second net** | tiene la metafora «rete» |
 | Il Pattern Fork | **The Fork Pattern** | rimanda all'App. B |
 | fuori dalla docroot | **outside the docroot** | |
+| crescente paranoia (opzioni PDO) | **escalating paranoia** | fissato dal CAP 3 |
+| finché regge | **as long as it holds** | CAP 3, soglia SQLite→MySQL |
+| la riga che porta una cicatrice | **the line that carries a scar** | CAP 3, tiene la metafora «scars» |
+| a prevalenza/dominante di lettura | **read-heavy / read-dominant** | CAP 3, profilo di carico |
+| contesa in scrittura | **write contention** | CAP 3 |
+| ciclo di vita delle migrazioni | **the migration lifecycle** | CAP 3 |
+| debito di sicurezza / debito da non ereditare | **security debt / a debt not to inherit** | CAP 3 |
 
 ## 3. Mappa titoli (file `manuale-en/`)
 | # | IT | EN |

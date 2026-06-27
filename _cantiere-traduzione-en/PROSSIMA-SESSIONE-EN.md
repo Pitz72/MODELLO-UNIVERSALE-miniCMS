@@ -1,6 +1,6 @@
 # PROSSIMA SESSIONE — Traduzione EN
 
-> ✅ Pianificazione fatta (`ROADMAP-EN.md` + `GLOSSARIO-IT-EN.md`). ✅ **CAP 1 (pilota) e CAP 2 tradotti**
+> ✅ Pianificazione fatta (`ROADMAP-EN.md` + `GLOSSARIO-IT-EN.md`). ✅ **CAP 1 (pilota), CAP 2 e CAP 3 tradotti**
 > in `manuale-en/`. 🟦 Si prosegue in ordine-libro.
 
 ## Prima di tutto
@@ -10,8 +10,9 @@
    tutto il resto). Si prosegue. NB: prima della pubblicazione EN serve un proofread da madrelingua tecnico.
 
 ## Obiettivo: tradurre il prossimo capitolo (un capitolo = una sessione = un commit)
-**CAP 3 — Database Strategy** (`manuale/CAPITOLO 3 - Database Strategy.md`
-→ `manuale-en/CHAPTER 03 - Database Strategy.md`). Ha blocchi codice (PDO/PRAGMA/SQL) e diversi box.
+**CAP 4 — Frontend Dependencies** (`manuale/CAPITOLO 4 - Frontend Dependencies.md`
+→ `manuale-en/CHAPTER 04 - Frontend Dependencies.md`). Matrice delle dipendenze, regole di scelta,
+costo di ogni libreria; attenzione alle tabelle.
 
 ### Ciclo di lavoro (fisso)
 1. Traduci dal sorgente italiano congelato, applicando il glossario.

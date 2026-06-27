@@ -21,3 +21,13 @@ Registro cronologico della traduzione inglese (US). Una riga per step.
   Verifiche clean: 0 caporali, 0 spelling UK, 0 residui IT, em-dash solo in 3 commenti-codice (0 in prosa),
   virgolette dritte solo dentro i blocchi codice. Glossario esteso (file-based database, one file per
   endpoint, second net, The Fork Pattern, outside the docroot). **Prossimo: CAP 3 — Database Strategy.**
+- **CAP 3 (Database Strategy) tradotto.** Blocchi codice PHP (PDO/PRAGMA) + commenti tradotti in EN;
+  identificatori, keyword SQL/`PRAGMA`, nomi-file (`emergency_revert_wal.php`, `optimize_db.php`,
+  `update_db_v*.php`), opzioni PDO e versioni intatti. Tabelle (snapshot opzioni, indici, segnali
+  SQLite→MySQL) tradotte mantenendo i nomi tecnici. Verifiche clean: 0 caporali, 0 spelling UK
+  (`optimize` US), 0 residui IT, **em-dash: 1 (in un commento-codice), 0 in prosa**, virgolette dritte
+  solo dentro i blocchi codice. Resi gli idiomi: «crescente paranoia» → *escalating paranoia*; «finché
+  regge» → *as long as it holds*; «alle tre di notte» → *at 3 a.m.*; «per scaramanzia» → *not out of
+  superstition*; «senza fatica» → *without breaking a sweat*. Glossario esteso (escalating paranoia,
+  as long as it holds, the line that carries a scar, read-heavy, write contention, migration lifecycle,
+  security debt). **Prossimo: CAP 4 — Frontend Dependencies.**
