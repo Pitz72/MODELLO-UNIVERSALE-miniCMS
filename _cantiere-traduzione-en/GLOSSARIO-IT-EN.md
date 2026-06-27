@@ -62,6 +62,19 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | contesa in scrittura | **write contention** | CAP 3 |
 | ciclo di vita delle migrazioni | **the migration lifecycle** | CAP 3 |
 | debito di sicurezza / debito da non ereditare | **security debt / a debt not to inherit** | CAP 3 |
+| busta (forma del payload) / busta zero | **envelope / zero envelope** | CAP 6, contratti API |
+| contratti elastici | **elastic contracts** | CAP 6, box Double Read/type guard/zero envelope |
+| guardia di tipo | **type guard** | CAP 6, `Array.isArray` |
+| codemod / rattoppo per-metodo | **codemod / per-method patch** | CAP 6, `fix_api.cjs` |
+| i metodi «sfuggiti» | **the “slipped-through” methods** | CAP 6 |
+| impronte / tracce (del codemod) | **fingerprints** | CAP 6 |
+| a macchia di leopardo | **in patches** | CAP 6 |
+| prelude inline / prelude condiviso | **inline prelude / shared prelude** | CAP 5, i tre stili di bootstrap |
+| gate selettivo sul ramo | **a gate selective per branch** | CAP 5 |
+| information disclosure gratuita | **information disclosure for free** | CAP 5 |
+| l'assenza che conta | **the absence that counts** | CAP 4, niente data-fetching lib |
+| si guadagna il posto | **earns its place** | CAP 4, costo delle dipendenze |
+| viaggiano in coppia | **travel as a pair** | CAP 4, showdown + DOMPurify |
 
 ## 3. Mappa titoli (file `manuale-en/`)
 | # | IT | EN |

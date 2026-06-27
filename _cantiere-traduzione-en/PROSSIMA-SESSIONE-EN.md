@@ -1,7 +1,8 @@
 # PROSSIMA SESSIONE — Traduzione EN
 
-> ✅ Pianificazione fatta (`ROADMAP-EN.md` + `GLOSSARIO-IT-EN.md`). ✅ **CAP 1 (pilota), CAP 2 e CAP 3 tradotti**
-> in `manuale-en/`. 🟦 Si prosegue in ordine-libro.
+> ✅ Pianificazione fatta (`ROADMAP-EN.md` + `GLOSSARIO-IT-EN.md`). ✅ **CAP 1-6 tradotti** in `manuale-en/`.
+> 🟦 Si prosegue in ordine-libro. **NB: si fanno PIÙ capitoli per sessione** (uno per sessione spreca il
+> ricaricamento della memoria — decisione di Simone, 28/06).
 
 ## Prima di tutto
 1. Leggi `_cantiere-traduzione-en/ROADMAP-EN.md` (policy, tipografia **US**, ciclo per capitolo) e
@@ -9,10 +10,11 @@
 2. **GATE pilota SUPERATO (28/06):** Simone ha approvato il CAP 1 (voce + tipografia = riferimento per
    tutto il resto). Si prosegue. NB: prima della pubblicazione EN serve un proofread da madrelingua tecnico.
 
-## Obiettivo: tradurre il prossimo capitolo (un capitolo = una sessione = un commit)
-**CAP 4 — Frontend Dependencies** (`manuale/CAPITOLO 4 - Frontend Dependencies.md`
-→ `manuale-en/CHAPTER 04 - Frontend Dependencies.md`). Matrice delle dipendenze, regole di scelta,
-costo di ogni libreria; attenzione alle tabelle.
+## Obiettivo: tradurre i prossimi capitoli (più capitoli a sessione, un commit per capitolo o un commit cumulativo)
+**Riparti dal CAP 7 — Media & Optimization** (`manuale/CAPITOLO 7 - Media & Optimization.md`
+→ `manuale-en/CHAPTER 07 - Media & Optimization.md`), poi CAP 8, 9, … in ordine. CAP 7/8/10 sono corposi
+(upload come superficie d'attacco, catena RCE, sanitizzazione): valutare quanti farne in base alla lunghezza.
+Promemoria: **stringhe letterali italiane nel codice restano intatte** (policy D2); traduci solo i commenti.
 
 ### Ciclo di lavoro (fisso)
 1. Traduci dal sorgente italiano congelato, applicando il glossario.
