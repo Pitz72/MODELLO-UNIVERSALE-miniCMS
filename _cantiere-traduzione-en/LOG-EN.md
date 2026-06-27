@@ -16,3 +16,8 @@ Registro cronologico della traduzione inglese (US). Una riga per step.
   NB: Simone ha dichiarato di non avere competenza per giudicare l'inglese nel merito → prima della
   pubblicazione EN va messo in conto un **proofread da madrelingua tecnico** (come la revisione che ha
   trovato i refusi nell'edizione italiana). La skill `humanizer` + il glossario riducono il rischio, non lo azzerano.
+- **CAP 2 (Architecture & Project Structure) tradotto.** Commenti dentro i blocchi codice tradotti in EN;
+  identificatori, percorsi, `define()`, script npm e output letterale del log (`🚨 SECURITY:`) intatti.
+  Verifiche clean: 0 caporali, 0 spelling UK, 0 residui IT, em-dash solo in 3 commenti-codice (0 in prosa),
+  virgolette dritte solo dentro i blocchi codice. Glossario esteso (file-based database, one file per
+  endpoint, second net, The Fork Pattern, outside the docroot). **Prossimo: CAP 3 — Database Strategy.**

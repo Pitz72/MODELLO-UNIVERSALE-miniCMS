@@ -1,7 +1,7 @@
 # PROSSIMA SESSIONE — Traduzione EN
 
-> ✅ Pianificazione fatta (`ROADMAP-EN.md` + `GLOSSARIO-IT-EN.md`). ✅ **Pilota CAP 1 tradotto** in
-> `manuale-en/CHAPTER 01 - Manifesto.md`. 🟦 Si prosegue in ordine-libro.
+> ✅ Pianificazione fatta (`ROADMAP-EN.md` + `GLOSSARIO-IT-EN.md`). ✅ **CAP 1 (pilota) e CAP 2 tradotti**
+> in `manuale-en/`. 🟦 Si prosegue in ordine-libro.
 
 ## Prima di tutto
 1. Leggi `_cantiere-traduzione-en/ROADMAP-EN.md` (policy, tipografia **US**, ciclo per capitolo) e
@@ -10,8 +10,8 @@
    tutto il resto). Si prosegue. NB: prima della pubblicazione EN serve un proofread da madrelingua tecnico.
 
 ## Obiettivo: tradurre il prossimo capitolo (un capitolo = una sessione = un commit)
-**CAP 2 — Architecture & Project Structure** (`manuale/CAPITOLO 2 - Architettura e Struttura Progetto.md`
-→ `manuale-en/CHAPTER 02 - Architecture & Project Structure.md`).
+**CAP 3 — Database Strategy** (`manuale/CAPITOLO 3 - Database Strategy.md`
+→ `manuale-en/CHAPTER 03 - Database Strategy.md`). Ha blocchi codice (PDO/PRAGMA/SQL) e diversi box.
 
 ### Ciclo di lavoro (fisso)
 1. Traduci dal sorgente italiano congelato, applicando il glossario.
@@ -27,4 +27,4 @@
 ## Note
 - Mappa titoli completa e termini in `GLOSSARIO-IT-EN.md` §3/§2.
 - Build EN (Typst/EPUB) e listing KDP separato = a valle, scope Cowork (non ora).
-- Ordine: CAP 2 → 3 → … → 20 → App. A/B/C. I capitoli corposi (es. CAP 10) possono prendere una sessione intera.
+- Ordine: CAP 3 → 4 → … → 20 → App. A/B/C. I capitoli corposi (es. CAP 10) possono prendere una sessione intera.

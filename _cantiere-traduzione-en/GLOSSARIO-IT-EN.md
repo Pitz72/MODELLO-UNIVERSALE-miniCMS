@@ -50,6 +50,11 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | in chiaro (password) | **in cleartext** | |
 | senza sconti | **without flinching** | |
 | Il codice non mente. Le cicatrici nemmeno. | **Code doesn’t lie. Neither do scars.** | chiusura ricorrente |
+| database-a-file | **file-based database** | fissato dal CAP 2 |
+| un file per endpoint / endpoint autonomo | **one file per endpoint / standalone PHP file** | architettura miniCMS |
+| seconda rete (difesa) | **a second net** | tiene la metafora «rete» |
+| Il Pattern Fork | **The Fork Pattern** | rimanda all'App. B |
+| fuori dalla docroot | **outside the docroot** | |
 
 ## 3. Mappa titoli (file `manuale-en/`)
 | # | IT | EN |
