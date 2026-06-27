@@ -38,6 +38,9 @@ CREATE INDEX IF NOT EXISTS idx_projects_category   ON projects(category);
 CREATE INDEX IF NOT EXISTS idx_projects_sort_order ON projects(sort_order ASC);
 ```
 
+> [!NOTE]
+> **Una nota di dialetto.** Lo schema qui sopra è nel dialetto SQLite, la lingua base del libro (Capitolo 3). SimonePizziWebSite oggi gira su MySQL (Capitolo 15), e lì gli stessi costrutti cambiano forma: `INTEGER PRIMARY KEY AUTOINCREMENT` diventa `INT AUTO_INCREMENT PRIMARY KEY`, `DEFAULT (datetime('now'))` diventa `DEFAULT CURRENT_TIMESTAMP`, e il booleano `INTEGER` diventa `TINYINT(1)`, esattamente come nello schema delle reazioni al Capitolo 20. Tradotto male, `datetime('now')` su MySQL non gira affatto: è uno dei fossili che il Capitolo 15 raccoglie.
+
 ## 3. L'API `projects.php`: tutti e cinque i verbi
 
 Il modulo usa l'intera gamma dei metodi HTTP, e `PATCH` è quello che lo distingue: è il verbo giusto per le operazioni di visibilità e riordino, che cambiano un solo campo.

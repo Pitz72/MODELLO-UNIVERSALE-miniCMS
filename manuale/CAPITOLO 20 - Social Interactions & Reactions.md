@@ -53,7 +53,7 @@ $stmtRate = $pdo->prepare("SELECT COUNT(*) FROM article_reactions
     WHERE voter_hash = ? AND created_at >= DATE_SUB(NOW(), INTERVAL 1 MINUTE)");   // >= 20 -> 429
 
 // [v1.19.0] Strato 2: per SOLO IP, max 30/min — riusa login_attempts con namespace 'rea:'
-$rl_key = 'rea:' . substr(hash('sha256', $ip), 0, 40);
+$rl_key = 'rea:' . substr(hash('sha256', $ip), 0, 40);   // troncato per stare nella colonna ip_address riusata
 $stmtIpRate = $pdo->prepare("SELECT COUNT(*) FROM login_attempts
     WHERE ip_address = ? AND attempt_time >= DATE_SUB(NOW(), INTERVAL 1 MINUTE)");  // >= 30 -> 429
 ```

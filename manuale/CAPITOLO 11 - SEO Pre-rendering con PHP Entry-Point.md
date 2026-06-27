@@ -185,7 +185,7 @@ Bot ostile → User-Agent: TelegramBot → richiesta a /news/uno-slug
 → il DB cede → 503/500
 ```
 
-La risposta separò il percorso dei bot da quello degli utenti. Le risposte per i crawler social vennero servite da **file JSON statici precompilati**, scritti al momento della pubblicazione di un articolo: il bot riceve i meta in pochi millisecondi, senza che il database venga mai interrogato. Solo gli utenti veri, con un browser che esegue JavaScript, percorrono la strada normale. E il servizio core, lo streaming audio, restò attivo dietro una pagina di manutenzione statica anche mentre il resto era offline.
+La risposta separò il percorso dei bot da quello degli utenti. L'HTML per i crawler social veniva **generato a partire da file JSON statici precompilati**, scritti su disco al momento della pubblicazione di un articolo: il bot riceve la sua pagina con i meta in pochi millisecondi, letti dalla cache invece che dal database, che così non viene mai interrogato. Solo gli utenti veri, con un browser che esegue JavaScript, percorrono la strada normale. E il servizio core, lo streaming audio, restò attivo dietro una pagina di manutenzione statica anche mentre il resto era offline.
 
 Quei file JSON precompilati hanno un nome familiare: `.cache/seo_*.json`. Sono la stessa seo-cache del paragrafo precedente. È difficile non leggere i due fatti insieme: la cache nacque come scudo anti-DDoS, un percorso per i bot che non toccava il database; poi la riscrittura v3.0 del motore tornò alla query diretta e rimosse il lettore, lasciando la cache scritta-ma-mai-letta. Lo scudo è ancora lì, viene ancora lucidato a ogni salvataggio, ma non è più imbracciato da nessuno.
 
