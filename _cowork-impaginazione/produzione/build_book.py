@@ -4,8 +4,10 @@
 #  pass1 conta pagine e individua indice/Parte I/bianche;
 #  pass2 inserisce le bianche (multiplo di 4) e un footer deterministico
 #  (folio arabo da 1 sul corpo, romano sull'indice, NIENTE folio sulle bianche).
-import os, re, subprocess
+import os, re, subprocess, shutil
 import pypandoc, typst, pypdf, fitz
+
+GS = shutil.which("gs") or shutil.which("gswin64c") or "gs"  # portabile Win/Linux
 
 PROD   = os.path.dirname(os.path.abspath(__file__))
 COWORK = os.path.dirname(PROD)
@@ -164,7 +166,7 @@ if __name__=="__main__":
     write_libro(order,dedica,pad,blanks=blanks,fi=fi,fb=fb)   # pass2
     compile_to(INTER)
     # --- conversione DeviceGray (B/N pre-stampa) ---
-    subprocess.run(["gs","-q","-dBATCH","-dNOPAUSE","-dSAFER","-sDEVICE=pdfwrite",
+    subprocess.run([GS,"-q","-dBATCH","-dNOPAUSE","-dSAFER","-sDEVICE=pdfwrite",
         "-dProcessColorModel=/DeviceGray","-dColorConversionStrategy=/Gray",
         "-dCompatibilityLevel=1.6","-dEmbedAllFonts=true","-dSubsetFonts=true",
         "-dAutoRotatePages=/None","-dDownsampleGrayImages=false",
