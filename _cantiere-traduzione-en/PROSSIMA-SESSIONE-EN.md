@@ -6,8 +6,8 @@
 ## Prima di tutto
 1. Leggi `_cantiere-traduzione-en/ROADMAP-EN.md` (policy, tipografia **US**, ciclo per capitolo) e
    `GLOSSARIO-IT-EN.md` (termini congelati, in crescita).
-2. **GATE pilota:** se Simone NON ha ancora validato il CAP 1, chiediglielo prima di proseguire — voce e
-   tipografia del Manifesto sono il riferimento per tutto il resto.
+2. **GATE pilota SUPERATO (28/06):** Simone ha approvato il CAP 1 (voce + tipografia = riferimento per
+   tutto il resto). Si prosegue. NB: prima della pubblicazione EN serve un proofread da madrelingua tecnico.
 
 ## Obiettivo: tradurre il prossimo capitolo (un capitolo = una sessione = un commit)
 **CAP 2 — Architecture & Project Structure** (`manuale/CAPITOLO 2 - Architettura e Struttura Progetto.md`

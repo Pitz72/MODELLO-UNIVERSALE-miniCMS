@@ -12,4 +12,7 @@ Registro cronologico della traduzione inglese (US). Una riga per step.
 - **Verifiche tipografiche US (clean):** 0 caporali «», 0 virgolette dritte in prosa, 3 em-dash (parsimonia),
   0 spelling UK, 0 residui italiani, virgolette curve presenti.
 - Citazione Saint-Exupéry resa con la traduzione inglese canonica.
-- **GATE:** in attesa che Simone validi voce + tipografia del pilota prima di proseguire con CAP 2.
+- **GATE SUPERATO (28/06):** Simone ha approvato il pilota (voce + tipografia). Si prosegue con CAP 2.
+  NB: Simone ha dichiarato di non avere competenza per giudicare l'inglese nel merito → prima della
+  pubblicazione EN va messo in conto un **proofread da madrelingua tecnico** (come la revisione che ha
+  trovato i refusi nell'edizione italiana). La skill `humanizer` + il glossario riducono il rischio, non lo azzerano.
