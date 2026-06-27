@@ -7,7 +7,7 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | IT | EN proposto | Note |
 |---|---|---|
 | Convenzione «Due Voci» | **“Two Voices”** | sezione introduttiva nel CAP 1 |
-| **Dal vivo** (la voce-autopsia del codice reale) | **In the Wild** *(DA CONFERMARE)* | alt: *From the Field* / *Live*. È la lente «com'è davvero in produzione» |
+| **Dal vivo** (la voce-autopsia del codice reale) | **In the Wild** ✓ | scelto: oppone «In the Wild» (la realtà non addomesticata) a «The Canon» (la regola sancita); è anche idioma tecnico standard |
 | **Il Canone** (box-prescrizione a fine capitolo) | **The Canon** | titolo del box `[!IMPORTANT]` di chiusura |
 | Quando NON usarlo / Quando NON usare questo protocollo | **When NOT to Use It / This Protocol** | |
 | Il Modello | **The Model** | il protocollo thin-stack |
@@ -28,7 +28,7 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | i quattro emettitori del content | **the four content emitters** | filo CAP 8→11→12→13 |
 | scala a tre gradini | **the three-rung scale** | alt: *three-tier scale* — scegliere e tenere fisso |
 | cicatrici (del codice) | **scars** | «pattern with their scars» |
-| dal vivo (autopsia) | vedi §1 | |
+| dal vivo (autopsia) | **In the Wild** (vedi §1) | |
 | choke-point | **choke point** | già inglese nel testo |
 | Double Read | **Double Read** | pattern nominato, invariato |
 | cura senza prevenzione | **treatment without prevention** | paradosso di SR |
@@ -91,7 +91,10 @@ React, TypeScript, Puppeteer, `index.php`, `.htaccess`, WAL, `PRAGMA`, `INSERT I
 termini di sicurezza già inglesi (stored-XSS, CSRF, header injection, mail-bombing, tabnapping, rate-limit,
 brute-force, SSRF, cloaking); annotazioni `path:linea`; numeri di versione.
 
-## Da confermare con Simone (gate pre-pilota)
-- **D-«Dal vivo»:** *In the Wild* vs *From the Field* vs *Live*.
-- **D2:** tradurre i commenti dentro i blocchi codice (proposta: sì).
-- **D3:** titoli libri nella BIO in italiano (proposta: sì, eventuale glossa EN).
+## Decisioni prese (27/06/2026)
+- **«Dal vivo» → In the Wild.** La coppia *In the Wild ↔ The Canon* è l'opposizione voluta:
+  la realtà non addomesticata contro la regola sancita.
+- **D2 → SÌ:** i commenti dentro i blocchi codice si traducono in EN (sono prosa didattica);
+  restano intatti identificatori, keyword, stringhe, `path:linea`, numeri di versione.
+- **D3 → titolo italiano + glossa EN in corsivo:** es. *L'Albero dei Racconti* (The Tree of Tales),
+  *Frequenza di Servizio* (Service Frequency). In inglese i titoli vanno in **corsivo**, mai tra «».

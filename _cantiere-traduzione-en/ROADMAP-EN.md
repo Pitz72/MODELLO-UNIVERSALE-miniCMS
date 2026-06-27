@@ -17,14 +17,14 @@ capitolo per volta, con glossario condiviso e revisione di stile madrelingua.
   vanno resi con una **policy unica**, non improvvisati capitolo per capitolo.
 
 ## 2. Politiche di traduzione (il cuore della qualità)
-1. **Codice intatto.** Identificatori, keyword, stringhe, nomi-file, annotazioni `path:linea` restano
-   invariati. **DA CONFERMARE (D2):** i **commenti esplicativi** dentro i blocchi codice (oggi in
-   italiano, es. `// il pubblico vede solo i visibili`) — proposta: **tradurli in EN** (sono prosa
-   didattica che il lettore legge), lasciando intatto tutto il resto del codice.
+1. **Codice intatto, commenti tradotti (D2 ✓).** Identificatori, keyword, stringhe, nomi-file,
+   annotazioni `path:linea` e numeri di versione restano **invariati**. I **commenti esplicativi**
+   dentro i blocchi codice (oggi in italiano, es. `// il pubblico vede solo i visibili`) **si traducono
+   in EN**: sono prosa didattica che il lettore legge.
 2. **Nomi propri invariati:** SitoRuntime, DISINTELLIGENZA, FDCA, SimonePizziWebSite, Runtime Radio,
-   Runtime Edizioni; dedica (Valerio Galano, Giuseppe Pugliese). **DA CONFERMARE (D3):** i titoli dei
-   libri nella BIO («L'Albero dei Racconti», «Frequenza di Servizio») — proposta: **lasciarli in
-   italiano**, eventualmente con glossa EN tra parentesi.
+   Runtime Edizioni; dedica (Valerio Galano, Giuseppe Pugliese). **Titoli dei libri nella BIO (D3 ✓):**
+   si lasciano in **italiano, in corsivo, con glossa EN** tra parentesi — es. *L'Albero dei Racconti*
+   (The Tree of Tales), *Frequenza di Servizio* (Service Frequency). Mai tra «».
 3. **Transcreazione, non calco**, per idiomi e immagini vivide: es. «il lucchetto con la chiave appesa
    accanto» → *a padlock with the key hanging right beside it*; «teatro della sicurezza» → *security
    theater* (termine già inglese). L'obiettivo è prosa **madrelingua tecnica**, non «traduttese».
@@ -33,13 +33,24 @@ capitolo per volta, con glossario condiviso e revisione di stile madrelingua.
 5. **Convenzioni del libro** → vedi `GLOSSARIO-IT-EN.md` §1 (la coppia «Dal vivo / Il Canone», «Quando
    NON usarlo», i titoli dei box).
 
-## 3. Tipografia EN (l'inverso dell'italiano)
-- Virgolette **curve** “ ” e ‘ ’ in prosa (stile editoriale); **dritte** solo nel codice.
-- **Em-dash** `—` **ammesso** in prosa per gli incisi (US: senza spazi, `word—word`) — ma con parsimonia
-  (regola humanizer: non abusarne). *Questo ROVESCIA la regola italiana che lo vietava.*
-- **En-dash** `–` per intervalli e relazioni (pp. 10–20, SQLite–MySQL).
-- Ellissi `…` carattere unico. **Niente caporali «»**, da nessuna parte.
-- Numeri: one–nine a lettere, 10+ in cifre (stile tecnico US).
+## 3. Tipografia STATUNITENSE (regola assoluta di questa edizione — NON italiana)
+Questa versione segue le convenzioni editoriali **US**, che in più punti **rovesciano** quelle italiane.
+- **Virgolette curve** “ ” (doppie, primarie) e ‘ ’ (singole, per il nidificato e gli scare quotes);
+  **dritte** `"`/`'` **solo** dentro il codice. **Mai caporali «»**, da nessuna parte.
+- **Punteggiatura DENTRO le virgolette** (regola US): la virgola e il punto vanno *dentro* la chiusura —
+  `“like this,”` e `“like this.”`, non `“like this”.`. (`:` e `;` restano fuori.)
+- **Em-dash** `—` **ammesso** in prosa per gli incisi, stile US **chiuso, senza spazi**: `word—word`.
+  Con parsimonia (pass `humanizer`: niente raffiche). *Rovescia la regola italiana che lo vietava.*
+- **En-dash** `–` per intervalli e relazioni: `pp. 10–20`, `SQLite–MySQL`, `2025–2026`.
+- **Ellissi** `…` carattere unico.
+- **Virgola di Oxford** (seriale): **sì** — `A, B, and C` (standard nella saggistica tecnica US).
+- **Spelling US:** `-ize/-yze` (organize, analyze), `-or` (color, behavior), `-er` (center, meter),
+  consonante singola dove l'US la vuole (modeled, labeled, traveled).
+- **Date** in forma US: `June 27, 2026` (oppure `M/D/YYYY`), non `27/06/2026`.
+- **Maiuscole nei titoli:** Title Case per capitoli e sezioni di livello alto.
+- **Numeri:** one–nine a lettere, 10+ in cifre; sempre cifre per versioni, porte, dimensioni, codici HTTP.
+- **Grep di verifica EN:** nessun `«`/`»`; nessun `…`/virgoletta *fuori* posto rispetto alle regole sopra;
+  spelling US (caccia a `-ise`, `colour`, `behaviour`, `centre`).
 
 ## 4. Revisione di stile (al posto di prosa-italiana)
 Ogni capitolo tradotto passa per:
@@ -80,6 +91,8 @@ NB: la skill `prosa-italiana` **non si applica** all'inglese.
 - **Em-dash:** rischio di passare dall'astinenza italiana all'abuso inglese → tenere il pass humanizer.
 
 ## Stato
-- [x] Decisioni 0 prese · piano scritto · glossario proposto (`GLOSSARIO-IT-EN.md`).
-- [ ] **GATE Simone:** confermare D2 (commenti-codice), D3 (titoli BIO) e il nome EN di «Dal vivo».
-- [ ] Sessione pilota CAP 1 → struttura `manuale-en/` + LOG-EN + validazione voce/glossario.
+- [x] Decisioni 0 prese · piano scritto · glossario congelato sui punti di gate.
+- [x] **Decisioni di gate (27/06):** «Dal vivo» → **In the Wild**; **D2** commenti-codice tradotti;
+  **D3** titoli BIO in italiano corsivo + glossa EN. Tipografia **US** blindata (§3).
+- [ ] **Sessione pilota CAP 1** → crea `manuale-en/` (+ `LOG-EN.md`, `PROSSIMA-SESSIONE-EN.md`),
+  traduci il Manifesto, fissa voce e tipografia su un caso reale → validazione di Simone.
