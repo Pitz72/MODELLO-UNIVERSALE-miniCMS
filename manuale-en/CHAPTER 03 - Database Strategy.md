@@ -16,7 +16,7 @@ Before the prescription, here’s what happens in the real code. The three sites
 | **SimonePizziWebSite** | MySQL | `ERRMODE` + `FETCH` + `EMULATE_PREPARES=false` (real prepared statements) |
 | **SitoRuntime** | MySQL | `ERRMODE` + `FETCH` + `ATTR_TIMEOUT=5` + `MYSQL_ATTR_INIT_COMMAND` (`SET NAMES`) |
 
-The surprising figure is the first row: the only site that today **actually** runs on SQLite (DISINTELLIGENZA) sets none of the “optimal” `PRAGMA` directives that most manuals take for granted. It opens the file and that’s it, with two options. It’s a minimal choice that works for its load, but it isn’t the most robust setup possible, and that’s why the prescription below should be taken for what it is: a piece of advice, not a description of the existing code.
+The most surprising metric is the first row: the only site **actually** running on SQLite today (DISINTELLIGENZA) sets none of the “optimal” `PRAGMA` directives that most manuals take for granted. It opens the file and that’s it, with two options. It’s a minimal choice that works for its load, but it isn’t the most robust setup possible, and that’s why the prescription below should be taken for what it is: a piece of advice, not a description of the existing code.
 
 ### 1.2 The Connection Options: The Prescription
 
@@ -39,7 +39,7 @@ The 5000ms `busy_timeout` makes a concurrent write wait instead of failing right
 
 ### 1.3 Hiding the File-Based Database (SQLite Only)
 
-Anyone using SQLite has a problem that MySQL users don’t: the database is a file inside the site’s folders, and a file reachable over the web is the entire database, downloadable by anyone. In **DISINTELLIGENZA**, the defense is generated at runtime by the connection code: on the first `connect()`, if the `.data/` folder doesn’t exist, it gets created, and a `Deny from all` `.htaccess` is written inside it.
+SQLite users face a problem that MySQL users don’t: the database is a file inside the site’s folders, and a file reachable over the web is the entire database, downloadable by anyone. In **DISINTELLIGENZA**, the defense is generated at runtime by the connection code: on the first `connect()`, if the `.data/` folder doesn’t exist, it gets created, and a `Deny from all` `.htaccess` is written inside it.
 
 ```php
 // DISINTELLIGENZA db.php — the file-based DB's protection is created by the app, not pre-deployed
@@ -47,7 +47,7 @@ $dir = dirname($dbPath);                                  // .../.data
 if (!is_dir($dir)) mkdir($dir, 0755, true);
 $htaccessPath = $dir . '/.htaccess';
 if (!file_exists($htaccessPath)) {
-    file_put_contents($htaccessPath, "Require all denied\n");   // second net: <Files> in the global .htaccess
+    file_put_contents($htaccessPath, "Require all denied\n");   // second safety net: <Files> in the global .htaccess
 }
 ```
 
@@ -96,7 +96,7 @@ To avoid inconsistencies between PHP, JS, and the database, the Model normalizes
 ## 5. Maintenance and Integrity
 
 - **VACUUM**: run it after bulk deletions to recompact the file and shrink it (relevant on SQLite).
-- **Backups**: every migration **should** be preceded by a copy of the database in a protected folder. Here too, reality isn’t uniform: SimonePizziWebSite has an automatic backup outside the docroot, DISINTELLIGENZA makes a `.bak` copy before destructive actions, and SitoRuntime (the site that suffered the crash) has no automatic backup at all. The “treatment without prevention” paradox is in Chapter 14.
+- **Backups**: every migration **should** be preceded by a copy of the database in a protected folder. Here too, reality isn’t uniform: SimonePizziWebSite has an automatic backup outside the docroot, DISINTELLIGENZA makes a `.bak` copy before destructive actions, and SitoRuntime (the site that suffered the crash) has no automatic backup at all. The “cure without prevention” paradox is in Chapter 14.
 - **`optimize_db.php`**: SitoRuntime includes a maintenance script (`VACUUM`, `ANALYZE`, integrity check); despite its “throwaway” header, it’s actually non-destructive (it only adds idempotent indexes).
 
 ---
