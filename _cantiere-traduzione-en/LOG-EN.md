@@ -288,3 +288,21 @@ corposo finora (~5k parole, 13 sezioni + In sintesi).
   Glossario esteso (the source of truth for the ranking, three defenses only one counts, for a public vote the
   raw IP is a strength, the ranking that can drift, the on/off rounds, when the reader has to guess how the
   writer wrote). **Prossimo: CAP 19 — Festival Logic — Admin Dashboard, Settings & Reporting.**
+- **CAP 19 (Festival Logic — Admin Dashboard, Settings & Reporting) tradotto.** H1 con **em-dash** (glossario §3).
+  È l'**istanza-festival** del CAP 14 (struttura/guardia/backup vivono lì): qui solo le cose proprie del festival.
+  I **master switch** (`settings` come «fuse box»: `registration_active`/`voting_active`/`current_round`) +
+  l'incoerenza `'1'`/`'true'` già del CAP 18, i **KPI del concorso** (**unique voter = unique IP**, il cookie è
+  cosmetico, CAP 18), **approvazione e classifica** (il **role-blind gate** del CAP 17 vale da qui; la classifica
+  per `vote_count` col rischio drift senza reconciliation, CAP 18), e i **due disallineamenti testo↔codice**: lo
+  stato **`finalist`** mai impostato (**vestigiale = fossile**; si usa `in_current_round`) e il
+  **`sendVotingReport`** scritto ma **commentato «Phase 2»** (**a feature built and disabled**, codice presente/
+  funzione dormiente → regola: **describe what the code does, not what it's ready to do**). Sezione finale **In
+  Summary** (glossario §1). Nessun blocco-codice (solo span inline, tutti intatti: `settings`, `vote_count`,
+  `finalist`, `in_current_round`, `sendVotingReport`, l'etichetta-codice «Phase 2», `'1'`/`'true'`). Box
+  `[!WARNING]`×2 + `[!IMPORTANT]` col titolo tradotto (The Canon). Reso: «quadro elettrico» → *fuse box*; «toppa
+  difensiva» → *defensive patch*. **Verifiche clean:** 0 caporali, 0 spelling UK (`defense`), **em-dash 0 in
+  prosa-corpo** (solo H1; il footer non ne ha), virgolette dritte solo negli span-codice `'1'`/`'true'`, 0
+  residui IT. Glossario esteso (the festival instance of the admin area, unique voter = unique IP, the `finalist`
+  state tells of a plan never carried out, a feature built and disabled/“Phase 2”, describe what the code does
+  not what it's ready to do). **Prossimo: CAP 20 — Social Interactions & Reactions** (l'ultima superficie, il
+  pubblico anonimo scrive nel DB; chiude il libro EN tranne le Appendici A/B/C).

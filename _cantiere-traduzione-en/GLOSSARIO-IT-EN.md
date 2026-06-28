@@ -173,6 +173,11 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | la classifica che può derivare | **the ranking that can drift** | CAP 18, contatore denormalizzato senza **reconciliation** = drift silenzioso |
 | i round a interruttore | **the on/off rounds** | CAP 18, le fasi del concorso = il flag `in_current_round`, non entità con storia |
 | quando il lettore deve indovinare come ha scritto lo scrittore | **when the reader has to guess how the writer wrote** | CAP 18, `'1'` vs `'true'`: lettura difensiva che compensa una convenzione mancante a monte |
+| l'istanza-festival dell'area admin | **the festival instance of the admin area** | CAP 19, specializzazione del CAP 14 (struttura/guardia/backup vivono lì) |
+| votante unico = IP unico | **unique voter = unique IP** | CAP 19, la stima «per IP e cookie» si fida di un cookie cosmetico (il segnale vero è l'IP) |
+| lo stato `finalist` racconta un piano mai realizzato | **the `finalist` state tells of a plan never carried out** | CAP 19, stato vestigiale nell'enum mai impostato = fossile (si usa `in_current_round`) |
+| una feature costruita e disabilitata («Phase 2») | **a feature built and disabled (“Phase 2”)** | CAP 19, `sendVotingReport` implementata ma commentata: codice presente, funzione dormiente |
+| descrivere cosa il codice fa, non cosa è pronto a fare | **describe what the code does, not what it’s ready to do** | CAP 19, regola per la documentazione tecnica (non spacciare per attivo il codice commentato) |
 
 ## 3. Mappa titoli (file `manuale-en/`)
 | # | IT | EN |
