@@ -141,7 +141,7 @@ echo '    <guid isPermaLink="false">' . $stable_guid . "</guid>\n";
 
 This way a change of slug or category doesn’t touch the article’s identity: to consumers it stays the same content. It’s the same concern that, on the URL side, justifies 301 redirects: keeping a page’s identity stable even when its address changes.
 
-The other two sites lost this idea. SR uses the permalink as the GUID, with `isPermaLink="true"`: at the first slug change, the article republishes (and SR doesn’t even have 301s to act as a net). DIS goes lower still and uses the audio file’s URL: all it takes is for `migrate_media` to move the audio and every episode is “new” again in the podcast apps.
+The other two sites lost this idea. SR uses the permalink as the GUID, with `isPermaLink="true"`: at the first slug change, the article republishes (and SR doesn’t even have 301s to act as a safety net). DIS goes lower still and uses the audio file’s URL: all it takes is for `migrate_media` to move the audio and every episode is “new” again in the podcast apps.
 
 > [!TIP]
 > **An article’s stable identity: a URN, not the permalink**
