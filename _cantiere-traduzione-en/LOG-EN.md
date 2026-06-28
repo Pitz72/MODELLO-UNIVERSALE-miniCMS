@@ -412,3 +412,14 @@ corposo finora (~5k parole, 13 sezioni + In sintesi).
   - Capitoli senza modifiche perché già nativi: 5, 6, 8, 9, 13, 16, 17, 19, App. B.
 - **Verifica finale post-edit:** struttura 23/23 ancora allineata (head/fence/box), 0 caporali, 0 virgolette dritte in prosa,
   0 `net` spogli residui, 0 `treatment` del motivo-firma residui. **Gate proofread chiuso → pronto per la build EN (Cowork).**
+
+## 2026-06-28 — Build EN: infrastruttura + EPUB (interno e copertina → Cowork)
+- **EPUB EN buildato in Claude Code** (`_cowork-impaginazione/ebook/React-PHP-The-Thin-Stack-EN.epub`, en-US,
+  paratesti EN, 0 leak IT). ⚠️ usa la **cover ebook IT come placeholder** → da rifare in EN.
+- **Infrastruttura interno EN pronta** (`build_book_en.py` + `template_en.typ`): preview locale = **164 pp**,
+  multiplo di 4, Contents@7, Part I@9, dedica estratta. Lo step ghostscript DeviceGray **segfauta su Windows**
+  (come per l'IT) → fallback all'interno Typst grayscale. **L'interno cartaceo formale (DeviceGray) si finalizza
+  in COWORK** (regola confermata da Simone: l'interno del cartaceo è sempre Cowork). Preview locale rimosso (non è il deliverable).
+- **Copertina EN**: copia tradotta + sorgente `copertina/sorgenti/cover_final_en.typ` con **dorso ricalcolato
+  per 164 pp (9.38 mm; IT 9.15)**, W=371.33, front0=190.355. Render/QA/preflight + immagine ebook EN = Cowork.
+- **Handoff**: `_cowork-impaginazione/ISTRUZIONI-COWORK-BUILD-EN.md` (interno DeviceGray + copertina EN + rebuild EPUB con cover EN).
