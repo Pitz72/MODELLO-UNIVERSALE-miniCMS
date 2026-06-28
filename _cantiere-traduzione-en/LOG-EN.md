@@ -402,4 +402,13 @@ corposo finora (~5k parole, 13 sezioni + In sintesi).
   «più strati uguale più sicuro» → *more engineering equals more security* (anti-collisione con «layers»);
   «engineered tier» sfuggito → *engineered top* (coerenza metafora-scala); de-calchi del revisore
   («must also define its limits», «when that trade-off isn't worth it…»). Glossario + LOG aggiornati.
-  **→ In attesa di validazione di Simone sul pilota prima del rollout sui restanti 22 file.**
+- **Pilota APPROVATO da Simone → rollout completo eseguito (1 commit per capitolo).** Applicate su tutti i 23 file:
+  - **net → safety net/backstop**: CAP 2, 3 (commento-codice), 7 (×3), 12, 14 (×3), 15 (×5), 18, 20, App. C (×3).
+    Restano gli idiomi «with/without a net» (incl. titolo §7 CAP 20 «Optimistic, but with a Net»).
+  - **treatment → cure without prevention**: CAP 3, 10, 14 (titolo box + wordplay treat→cure), 15 (titolo §9 + wordplay + checklist + Canon).
+  - **lessico nativo citato dal revisore**: CAP 3 (most surprising metric / SQLite users face), CAP 7 (counterintuitively / most accommodating),
+    CAP 10 (prevention SR lacked), CAP 11 (UA spoofed), CAP 15 (Switching Engines / toxic fossil), CAP 18 (spoofed UA+XFF), App. A (summarizes/bootstrap), CAP 4 (flagship sites).
+  - **RESPINTI** (come da glossario): inversione analogia estintore/allarme (CAP 14, tenuta com'è); `forged` mantenuto per CSRF.
+  - Capitoli senza modifiche perché già nativi: 5, 6, 8, 9, 13, 16, 17, 19, App. B.
+- **Verifica finale post-edit:** struttura 23/23 ancora allineata (head/fence/box), 0 caporali, 0 virgolette dritte in prosa,
+  0 `net` spogli residui, 0 `treatment` del motivo-firma residui. **Gate proofread chiuso → pronto per la build EN (Cowork).**
