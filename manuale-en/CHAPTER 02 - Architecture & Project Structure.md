@@ -108,7 +108,7 @@ foreach ($paths as $path) {
 }
 ```
 
-Whoever runs on SQLite (DISINTELLIGENZA) generates the `.data/` folder and its `Deny from all` `.htaccess` **at runtime**, inside the connection code: the protection is produced by the application, not pre-deployed, with a `<Files>` block in the global `.htaccess` as a second net. The MySQL sites have no file-based database to hide, but they apply the same principle (create at runtime what the deploy doesn’t bring) to `cache`, `uploads`, and the backups folder (Chapter 14). The shared rule: don’t trust that a folder exists, and don’t trust that a static defense makes it all the way to the server.
+The site that runs on SQLite (DISINTELLIGENZA) generates the `.data/` folder and its `Deny from all` `.htaccess` **at runtime**, inside the connection code: the protection is produced by the application, not pre-deployed, with a `<Files>` block in the global `.htaccess` as a second safety net. The MySQL sites have no file-based database to hide, but they apply the same principle (create at runtime what the deploy doesn’t bring) to `cache`, `uploads`, and the backups folder (Chapter 14). The shared rule: don’t trust that a folder exists, and don’t trust that a static defense makes it all the way to the server.
 
 ---
 
