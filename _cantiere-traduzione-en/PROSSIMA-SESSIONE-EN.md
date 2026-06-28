@@ -1,6 +1,6 @@
 # PROSSIMA SESSIONE — Traduzione EN
 
-> ✅ Pianificazione fatta (`ROADMAP-EN.md` + `GLOSSARIO-IT-EN.md`). ✅ **CAP 1-12 tradotti** in `manuale-en/`.
+> ✅ Pianificazione fatta (`ROADMAP-EN.md` + `GLOSSARIO-IT-EN.md`). ✅ **CAP 1-15 tradotti** in `manuale-en/`.
 > 🟦 Si prosegue in ordine-libro. **NB: si fanno PIÙ capitoli per sessione** (uno per sessione spreca il
 > ricaricamento della memoria — decisione di Simone, 28/06).
 
@@ -11,13 +11,13 @@
    tutto il resto). Si prosegue. NB: prima della pubblicazione EN serve un proofread da madrelingua tecnico.
 
 ## Obiettivo: tradurre i prossimi capitoli (più capitoli a sessione, un commit per capitolo)
-**Riparti dal CAP 13 — Newsletter & Email System** (`manuale/CAPITOLO 13 - Newsletter ...md`
-→ `manuale-en/CHAPTER 13 - Newsletter & Email System.md`), poi 14, … in ordine. CAP 13 chiude del tutto il
-filo dei quattro emettitori del `content` (è l'ultimo emettitore, quello che non emette il `content`) e
-racconta una scala di quanto si può semplificare un sistema di posta prima che diventi pericoloso. Valutare
-quanti capitoli farne in base alla lunghezza. Promemoria: **stringhe letterali italiane nel codice restano
-intatte** (policy D2); traduci solo i commenti. H1: se il sorgente IT accorcia il titolo rispetto al
-nome-file (come CAP 8), rispetta il sorgente.
+**Riparti dal CAP 16 — Portfolio & Projects Module** (`manuale/CAPITOLO 16 - Portfolio ...md`
+→ `manuale-en/CHAPTER 16 - Portfolio & Projects Module.md`), poi 17, 18, 19 (trittico Festival Logic), 20, e
+infine le Appendici A/B/C. CAP 16 è il modulo universale portfolio/showcase (riordino drag-and-drop, visibilità
+a interruttore). Valutare quanti capitoli farne in base alla lunghezza. Promemoria: **stringhe letterali
+italiane nel codice restano intatte** (policy D2); traduci solo i commenti. H1: se il sorgente IT accorcia il
+titolo rispetto al nome-file (come CAP 8), rispetta il sorgente; se usa un trattino lungo nel titolo (come CAP
+15/17/18/19), il glossario §3 dà la forma EN con **em-dash**.
 
 ### Ciclo di lavoro (fisso)
 1. Traduci dal sorgente italiano congelato, applicando il glossario.
@@ -33,4 +33,4 @@ nome-file (come CAP 8), rispetta il sorgente.
 ## Note
 - Mappa titoli completa e termini in `GLOSSARIO-IT-EN.md` §3/§2.
 - Build EN (Typst/EPUB) e listing KDP separato = a valle, scope Cowork (non ora).
-- Ordine: CAP 13 → 14 → … → 20 → App. A/B/C. I capitoli corposi (es. CAP 15) possono prendere una sessione intera.
+- Ordine: CAP 16 → 17 → 18 → 19 → 20 → App. A/B/C. Restano 5 capitoli + 3 appendici.

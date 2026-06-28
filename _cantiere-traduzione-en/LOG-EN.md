@@ -204,3 +204,28 @@ corposo finora (~5k parole, 13 sezioni + In sintesi).
   defense, hidden console, `confirm()` is not a security defense, collect and forget/write-only table).
   **Prossimo: CAP 15 — Database Evolution (From SQLite to MySQL)** (la notte del crash di febbraio + la
   migrazione d'emergenza ora-per-ora; capitolo corposo, può prendere una sessione intera).
+
+## 2026-06-28 (CAP 15)
+- **CAP 15 (Database Evolution — From SQLite to MySQL) tradotto.** H1 con **em-dash** come da glossario §3.
+  Capitolo-evento (non «come si migra» ma **cosa una migrazione lascia indietro**): la **notte del WAL**
+  (l'ottimizzazione che innesca il crash, 23/02/2026), DIS che gira ancora su SQLite senza cicatrici (la
+  soglia SQLite→MySQL qualificata, non smentita), l'evoluzione di schema senza tool (`ALTER…ADD COLUMN`
+  idempotente, versione nei nomi-file = **schema-as-code debt**), il **trasloco di motore a tre script** +
+  l'ETL **due PDO e un COUNT**, la tabella SQLite-vs-MySQL riga per riga, i **sei fossili** (codice SQLite in
+  repo MySQL, inerte/rotto), **una tabella tre `CREATE`** (`subscribers`), il **bug della data come stringa**,
+  e **«il defibrillatore ma non l'allarme antincendio»** (cura senza prevenzione = niente backup). Checklist
+  di migrazione tradotta. Codice PHP/Apache + commenti tradotti EN; **intatte** (policy D2): il messaggio di
+  commit IT citato in prosa con **glossa EN una volta** (`«Risolto crash server…WAL->DELETE»`), le stringhe-
+  output IT (`"SUCCESSO: …ripristinato…"`, `"OK: colonna 'status' già presente."`, `"ERRORE: "`, l'oggetto
+  `sendSuccess`/`sendError` IT, `"potresti dover eliminare…via FTP"`), i placeholder credenziali
+  (`'mysql.tuohoster.com'`, `'nome_database'`, `'utente_mysql'`, `'password_sicura'`), e i commenti già-inglesi
+  (`// FIX: Use T separator to match DB`, log `"Added 'role' column…"`); intatti keyword SQL/`PRAGMA`/PDO,
+  nomi-file, versioni, prefissi `.htaccess`. Box `[!WARNING]`/`[!TIP]`/`[!IMPORTANT]` col titolo tradotto.
+  Resi dal glossario: «per scaramanzia» → *out of superstition*; «la prova del nove» → *the cross-check*;
+  «usa-e-getta» → *throwaway*. **Verifiche clean:** 0 caporali, 0 spelling UK, **em-dash in prosa solo nel
+  titolo** (consentito §3); gli altri em-dash sono in annotazioni `file:linea` dei commenti; virgolette dritte
+  solo dentro i blocchi codice; 0 residui IT in prosa (i match «colonna» sono dentro stringhe-codice IT
+  intatte). Glossario esteso (when the optimization is the disaster, the engine move/three-script pattern,
+  two PDOs and a COUNT, schema-as-code debt, one table/three CREATEs, the date-as-string bug, having the
+  defibrillator but not the fire alarm, the six fossils/repo hygiene). **Prossimo: CAP 16 — Portfolio &
+  Projects Module** (modulo universale portfolio/showcase, riordino drag-and-drop, visibilità a interruttore).
