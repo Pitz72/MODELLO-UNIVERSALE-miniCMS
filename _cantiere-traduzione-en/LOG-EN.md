@@ -54,4 +54,18 @@ Contesto già caldo (ROADMAP + glossario + voce CAP 1-2-3) → tradotti 3 capito
   IT volute), virgolette dritte solo dentro i blocchi codice, curve in prosa, em-dash 0 in prosa.
 - Glossario esteso (envelope/zero envelope, elastic contracts, type guard, codemod, slipped-through methods,
   fingerprints, in patches, inline/shared prelude, gate selective per branch, the absence that counts).
-- **Prossimo: CAP 7 — Media & Optimization** (upload come superficie d'attacco, catena RCE; capitolo corposo).
+- **CAP 7 (Media & Optimization) tradotto.** Capitolo corposo di sicurezza: upload come superficie d'attacco,
+  validazione magic-bytes, scala dell'elisione del naming, difesa in profondità (tre barriere/una/zero),
+  catena RCE da upload pubblico (blocco `bash` con commenti `#` tradotti), delete con path-guard. Codice PHP +
+  `.htaccess` + `curl` con commenti EN; stringhe (`'Invalid file format'` già EN), identificatori e
+  `$_FILES['type']` intatti. em-dash: 11, **tutti in commenti-codice**, 0 in prosa. 0 caporali, 0 UK.
+- **CAP 8 (Advanced Content Editing & Media Integration) tradotto.** H1 corto «Advanced Content Editing»
+  (fedele al sorgente IT, che accorcia rispetto al nome-file). Tiptap/contentEditable, choke-point DOMPurify
+  a render-time, le **guardie all'inserimento**, la **tabella dei quattro emettitori del content** (header
+  tradotti), Paste Protection = pulizia cosmetica. Stringa UI italiana **intatta** `prompt('Inserisci URL:')`
+  (policy D2). em-dash: 4, tutti in commenti-codice, 0 in prosa. 0 caporali, 0 UK, 0 residui IT in prosa.
+- **Verifiche aggregate CH7-8 (clean):** 0 `«»`, 0 spelling UK, 0 residui IT in prosa, virgolette dritte solo
+  nei blocchi codice, em-dash 0 in prosa. Glossario esteso (defense in depth, RCE chain, magic bytes/real
+  bytes, the scale of erasure, the perfect storm, path guard, cosmetic cleanup, emitter, insertion guards,
+  attribute hole, compatibility shim).
+- **Prossimo: CAP 9 — Content Lifecycle** (bozza→pubblicazione programmata, le tre regole di visibilità).

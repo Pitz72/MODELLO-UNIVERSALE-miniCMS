@@ -1,6 +1,6 @@
 # PROSSIMA SESSIONE — Traduzione EN
 
-> ✅ Pianificazione fatta (`ROADMAP-EN.md` + `GLOSSARIO-IT-EN.md`). ✅ **CAP 1-6 tradotti** in `manuale-en/`.
+> ✅ Pianificazione fatta (`ROADMAP-EN.md` + `GLOSSARIO-IT-EN.md`). ✅ **CAP 1-8 tradotti** in `manuale-en/`.
 > 🟦 Si prosegue in ordine-libro. **NB: si fanno PIÙ capitoli per sessione** (uno per sessione spreca il
 > ricaricamento della memoria — decisione di Simone, 28/06).
 
@@ -10,11 +10,12 @@
 2. **GATE pilota SUPERATO (28/06):** Simone ha approvato il CAP 1 (voce + tipografia = riferimento per
    tutto il resto). Si prosegue. NB: prima della pubblicazione EN serve un proofread da madrelingua tecnico.
 
-## Obiettivo: tradurre i prossimi capitoli (più capitoli a sessione, un commit per capitolo o un commit cumulativo)
-**Riparti dal CAP 7 — Media & Optimization** (`manuale/CAPITOLO 7 - Media & Optimization.md`
-→ `manuale-en/CHAPTER 07 - Media & Optimization.md`), poi CAP 8, 9, … in ordine. CAP 7/8/10 sono corposi
-(upload come superficie d'attacco, catena RCE, sanitizzazione): valutare quanti farne in base alla lunghezza.
-Promemoria: **stringhe letterali italiane nel codice restano intatte** (policy D2); traduci solo i commenti.
+## Obiettivo: tradurre i prossimi capitoli (più capitoli a sessione, un commit cumulativo)
+**Riparti dal CAP 9 — Content Lifecycle** (`manuale/CAPITOLO 9 - Content Lifecycle.md`
+→ `manuale-en/CHAPTER 09 - Content Lifecycle.md`), poi CAP 10 (Security & Auth, corposo), 11, … in ordine.
+Valutare quanti farne in base alla lunghezza. Promemoria: **stringhe letterali italiane nel codice restano
+intatte** (policy D2); traduci solo i commenti. H1: se il sorgente IT accorcia il titolo rispetto al
+nome-file (come CAP 8), rispetta il sorgente.
 
 ### Ciclo di lavoro (fisso)
 1. Traduci dal sorgente italiano congelato, applicando il glossario.

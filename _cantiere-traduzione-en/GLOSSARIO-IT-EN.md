@@ -75,6 +75,20 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | l'assenza che conta | **the absence that counts** | CAP 4, niente data-fetching lib |
 | si guadagna il posto | **earns its place** | CAP 4, costo delle dipendenze |
 | viaggiano in coppia | **travel as a pair** | CAP 4, showdown + DOMPurify |
+| difesa in profondità | **defense in depth** | CAP 7/8 |
+| catena RCE | **RCE chain** | CAP 7, upload pubblico DIS |
+| magic-bytes / byte reali | **magic bytes / real bytes** | CAP 7, validazione upload |
+| dangling media | **dangling media** | invariato (già inglese), CAP 7 |
+| la scala dell'elisione | **the scale of erasure** | CAP 7, naming file |
+| la tempesta perfetta | **the perfect storm** | CAP 7, §5 |
+| path-guard / containment | **path guard / containment** | CAP 7, delete media |
+| pulizia cosmetica | **cosmetic cleanup** | CAP 8, Paste Protection |
+| emettitore (del content) | **emitter** | CAP 8, «the four content emitters» |
+| guardie all'inserimento | **insertion guards** | CAP 8, `isSafeLinkUrl` |
+| buco attributi | **attribute hole** | CAP 8, `strip_tags` non tocca gli attributi |
+| stored-XSS da autore autenticato | **stored XSS from an authenticated author** | CAP 8 |
+| compatibility shim | **compatibility shim** | invariato, CAP 8 (migrazione Quill→Tiptap) |
+| choke-point | **choke point** | CAP 8 (già in §2) |
 
 ## 3. Mappa titoli (file `manuale-en/`)
 | # | IT | EN |
