@@ -191,7 +191,7 @@ Those precompiled JSON files have a familiar name: `.cache/seo_*.json`. They’r
 
 > [!WARNING]
 > **Every public endpoint that queries the DB is a target; the User-Agent is not a gatekeeper**
-> Three things to take home. First: any unauthenticated endpoint that, to respond, queries the database is a lever for a volumetric attack. If the response to a repetitive request can come from a static cache, that cache isn’t just performance, it’s a security layer. Second, already met in Chapter 10: social bots are recognized by their `User-Agent`, and the `User-Agent` can be forged. You can use it to *optimize* (serving a cache to recognized bots), never as an access barrier. Third, the most uncomfortable: a defense that works can be dismantled without meaning to, in a rewrite that looks only at features. Runtime Radio’s SEO cache wasn’t “removed”: it was orphaned, and with it the protection it gave.
+> Three things to take home. First: any unauthenticated endpoint that, to respond, queries the database is a lever for a volumetric attack. If the response to a repetitive request can come from a static cache, that cache isn’t just performance, it’s a security layer. Second, already met in Chapter 10: social bots are recognized by their `User-Agent`, and the `User-Agent` can be spoofed. You can use it to *optimize* (serving a cache to recognized bots), never as an access barrier. Third, the most uncomfortable: a defense that works can be dismantled without meaning to, in a rewrite that looks only at features. Runtime Radio’s SEO cache wasn’t “removed”: it was orphaned, and with it the protection it gave.
 
 ---
 
