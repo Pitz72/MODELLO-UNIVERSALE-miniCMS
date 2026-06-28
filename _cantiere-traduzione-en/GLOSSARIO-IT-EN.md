@@ -178,6 +178,18 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | lo stato `finalist` racconta un piano mai realizzato | **the `finalist` state tells of a plan never carried out** | CAP 19, stato vestigiale nell'enum mai impostato = fossile (si usa `in_current_round`) |
 | una feature costruita e disabilitata («Phase 2») | **a feature built and disabled (“Phase 2”)** | CAP 19, `sendVotingReport` implementata ma commentata: codice presente, funzione dormiente |
 | descrivere cosa il codice fa, non cosa è pronto a fare | **describe what the code does, not what it’s ready to do** | CAP 19, regola per la documentazione tecnica (non spacciare per attivo il codice commentato) |
+| un GOLD che vale la lettura | **a standout worth the read** | CAP 20, le due filosofie opposte di sanitizzazione nello stesso codebase |
+| difendere all'ingresso | **defend at the entrance** | CAP 20, due superfici (reazioni + messaggi), un solo principio |
+| un hash non è anonimato | **a hash isn’t anonymity** | CAP 20, `SHA256(IP+UA)` non salato = pseudonimizzazione reversibile, non anonimato |
+| serve un salt segreto | **you need a secret salt** | CAP 20, senza salt l'hash è *a padlock with the key hanging right beside it* (§4) |
+| il rate-limit a due strati | **the two-layer rate limit** | CAP 20, strato 1 `voter_hash` (aggirabile, lo UA lo sceglie il client) + strato 2 solo-IP |
+| se la chiave del rate-limit include input del client | **if the rate-limit key includes client input** | CAP 20, serve un secondo strato ancorato all'IP |
+| una tabella, tre lavori | **one table, three jobs** | CAP 20, `login_attempts` riusata via namespace (`rea:`): login + newsletter + reazioni |
+| l'integrità vive nello schema, non nel codice | **integrity lives in the schema, not in the code** | CAP 20, `UNIQUE KEY` + `INSERT IGNORE` regge sotto race; il DB come guardiano dell'integrità |
+| le due filosofie di sanitizzazione | **the two philosophies of sanitization** | CAP 20, input pubblico al **write-time** (`strip_tags`) vs contenuto fidato al **render-time** (DOMPurify) |
+| dove ripulire dipende da chi te lo manda | **where to clean depends on who sends it to you** | CAP 20, la domanda non è write/render ma «di chi mi fido» |
+| tarare l'anti-abuso sulla posta in gioco | **tuning the anti-abuse to what’s at stake** | CAP 20, reazione leggera vs voto sorvegliato (stessa meccanica, due tarature) |
+| optimistic UI, ma con rete | **optimistic UI, but with a net** | CAP 20, aggiornamento ottimistico + rollback + degradazione a conteggio zero |
 
 ## 3. Mappa titoli (file `manuale-en/`)
 | # | IT | EN |

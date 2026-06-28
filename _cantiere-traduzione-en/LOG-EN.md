@@ -306,3 +306,34 @@ corposo finora (~5k parole, 13 sezioni + In sintesi).
   state tells of a plan never carried out, a feature built and disabled/“Phase 2”, describe what the code does
   not what it's ready to do). **Prossimo: CAP 20 — Social Interactions & Reactions** (l'ultima superficie, il
   pubblico anonimo scrive nel DB; chiude il libro EN tranne le Appendici A/B/C).
+- **CAP 20 (Social Interactions & Reactions) tradotto — ULTIMO CAPITOLO, corpo del libro EN COMPLETO.** Le due
+  uniche superfici di scrittura pubblica anonima (reazioni SPW + messaggi/form contatti), **un GOLD** =
+  *a standout worth the read* (le **due filosofie opposte di sanitizzazione** nello stesso codebase). Cinque
+  tratti condivisi (**defend at the entrance**: gate selettivo, pseudonimo derivato, integrità nel DB, write-time
+  cleaning, degradazione graziosa), l'**identità anonima e perché un hash non è anonimato** (`SHA256(IP+UA)` non
+  salato → reversibile per brute-force; *a hash isn’t anonymity* = pseudonimizzazione; serve un **salt segreto**,
+  altrimenti *a padlock with the key hanging right beside it*, idioma §4; `REMOTE_ADDR` grezzo vs `getClientIp()`),
+  il **rate-limit a due strati** (strato 1 `voter_hash` aggirabile perché lo UA lo sceglie il client + strato 2
+  solo-IP v1.19.0; **one table, three jobs** = `login_attempts` riusata via namespace `rea:`; **if the rate-limit
+  key includes client input** serve un secondo strato), **l'integrità nello schema non nel codice** (`UNIQUE KEY`
+  + `INSERT IGNORE` regge sotto race, ciò che manca al contatore del festival CAP 18; *let the database guarantee
+  integrity*), **i messaggi e le due filosofie di sanitizzazione** (write-time `strip_tags` per l'input pubblico
+  vs render-time DOMPurify per il contenuto fidato, chiude il filo dei quattro emettitori/CAP 8; *where to clean
+  depends on who sends it to you*; CSRF assente è corretto, consenso GDPR solo client-side), **reazione vs voto**
+  (*tuning the anti-abuse to what's at stake*: stessa meccanica del voto-festival CAP 18, due tarature), e la
+  **micro-interazione optimistic UI con rollback** (*optimistic UI, but with a net* + degradazione a conteggio
+  zero). Sezione **In Summary** + footer **End of Part V** (→ Appendici). Tre blocchi-codice (PHP hash, PHP
+  rate-limit a due strati, SQL+PHP toggle/UNIQUE) con commenti tradotti EN; **intatti** identificatori, keyword
+  SQL/PDO, annotazioni `path:linea`, versioni (v1.19.0), stringhe-codice (`'rea:'`, `'unknown'`,
+  `FILTER_SANITIZE_EMAIL`), nomi-tabella (`article_reactions`, `login_attempts`, `messages.php`), `Auth::check()`,
+  `getClientIp()`, `dangerouslySetInnerHTML`. UI-string «messaggio inviato» resa in EN in prosa (descrittiva, non
+  literal-code). Box `[!WARNING]`/`[!TIP]`/`[!NOTE]`/`[!IMPORTANT]`×2 col titolo tradotto (The Canon). Pass
+  rilettura: corretto **1 em-dash sfuggito in prosa** al §intro (newsletter list → spezzato in due frasi + due
+  punti, come la virgola del sorgente). **Verifiche clean:** 0 caporali, 0 spelling UK (`defense`, `neutralized`),
+  **em-dash 0 in prosa-corpo** (gli altri sono in annotazioni `file:linea`/`>= N -> 429` nei commenti-codice),
+  virgolette dritte solo dentro i blocchi codice, 0 residui IT in prosa. Glossario esteso (a standout worth the
+  read, defend at the entrance, a hash isn't anonymity, you need a secret salt, the two-layer rate limit, if the
+  rate-limit key includes client input, one table three jobs, integrity lives in the schema not the code, the two
+  philosophies of sanitization, where to clean depends on who sends it to you, tuning the anti-abuse to what's at
+  stake, optimistic UI but with a net).
+  **🎉 CORPO DEL LIBRO EN COMPLETO (CAP 1-20). Restano solo le Appendici A/B/C (sessione successiva).**
