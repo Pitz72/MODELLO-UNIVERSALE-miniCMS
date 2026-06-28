@@ -368,3 +368,21 @@ corposo finora (~5k parole, 13 sezioni + In sintesi).
   dritte (nemmeno inline), 0 `Cap.` residuo, 0 residui IT (i nomi-festival sono propri, glossati). Glossario
   esteso (the backend freezes the frontend restarts, the fork inherits the debt, the version tells of a birth,
   the fork that writes its own roadmap, one engine two festivals). **Prossimo: Appendice C.**
+- **Appendice C (Testing & Deployment, an Outline) tradotta — ULTIMO FILE, TRADUZIONE EN INTEGRALE COMPLETA.**
+  H1 col sottotitolo «(cenni)» reso *(an Outline)*. Testing senza framework (**no framework doesn't mean no
+  tests**): backend PHP con PHPUnit + endpoint funzionali con **DB-a-file effimero** (`sqlite::memory:`) invece
+  del mock PDO (**a real ephemeral DB beats a PDO mock**), frontend con Vitest/Testing Library + mock dell'`api`
+  in un punto solo, le due reti che ripagano (**contract smoke test / security non-regression test**); Deploy
+  dalla `dist/` all'hosting economico (`clean-dist.js`, `index.html`→`index_react.html`, cosa si carica e cosa
+  no, le tre vie git-pull/SFTP/FTP, CI minima coi segreti in env); **the limit of these notes** (**a map, not
+  the territory**; **start from the minimum that keeps you safe**). Un blocco-codice PHP (test endpoint) con
+  commenti tradotti EN; **intatti** `'sqlite::memory:'`, `'schema_test.sql'`, `$_GET`/`$_POST`, `npm run build`,
+  nomi-file/script, codici HTTP. Box `[!IMPORTANT]` col titolo tradotto (The Canon). Resi dal glossario:
+  «database-a-file» → *file-based database*, «usa-e-getta» → *throwaway*, «contratto instabile» → *unstable
+  contract*. **Verifiche clean:** 0 caporali, 0 spelling UK, **em-dash 0 in prosa** (nessuno), virgolette dritte
+  solo dentro il blocco-codice, 0 residui IT (i match «non» sono l'inglese *non-regression*). Glossario esteso
+  (no framework doesn't mean no tests, a real ephemeral DB beats a PDO mock, contract smoke test/security
+  non-regression test, a map not the territory, start from the minimum that keeps you safe).
+  **🎉🎉 TRADUZIONE EN DEL LIBRO COMPLETA: CAP 1-20 + Appendici A/B/C. Resta solo la build Typst/EPUB EN (Cowork).**
+  **Paratesti (frontespizio/dedica/colophon/BIO/Part titles): vivono nello STRUCT dei build script IT → vanno
+  tradotti nella variante EN dello STRUCT, in fase di build (vedi audit paratesti a fine sessione).**

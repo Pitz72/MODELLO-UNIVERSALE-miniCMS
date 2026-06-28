@@ -195,6 +195,11 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | la versione racconta una nascita, il codice racconta un'eredità | **the version tells of a birth, the code tells of an inheritance** | App. B, `v0.0.1` sopra un backend `v0.5.x` col suo debito |
 | il fork che si scrive la roadmap da solo | **the fork that writes its own roadmap** | App. B, la `ROADMAP-EVOLUZIONE-miniCMS` ricalca i cluster del manuale (conferma dall'interno) |
 | un motore, due festival | **one engine, two festivals** | App. B, il lato luminoso del fork: il modulo festival (CAP 17-18) è davvero riusabile |
+| niente framework non vuol dire niente test | **no framework doesn’t mean no tests** | App. C, la forma minimale rende alcuni test più facili (DB-a-file effimero invece del mock PDO) |
+| un DB reale effimero batte un mock di PDO | **a real ephemeral DB beats a PDO mock** | App. C, `sqlite::memory:` popolato con dati noti e buttato a fine test |
+| smoke test del contratto / test di non-regressione sulla sicurezza | **contract smoke test / security non-regression test** | App. C, le due reti che ripagano (status+forma del payload; gate/upload/CSRF) |
+| una mappa, non il territorio | **a map, not the territory** | App. C, questi cenni indicano la direzione, non ogni passo |
+| parti dal minimo che ti tiene al sicuro | **start from the minimum that keeps you safe** | App. C, aggiungi disciplina solo quando un bisogno concreto lo chiede |
 
 ## 3. Mappa titoli (file `manuale-en/`)
 | # | IT | EN |
