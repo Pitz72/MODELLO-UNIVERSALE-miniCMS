@@ -190,6 +190,11 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | dove ripulire dipende da chi te lo manda | **where to clean depends on who sends it to you** | CAP 20, la domanda non è write/render ma «di chi mi fido» |
 | tarare l'anti-abuso sulla posta in gioco | **tuning the anti-abuse to what’s at stake** | CAP 20, reazione leggera vs voto sorvegliato (stessa meccanica, due tarature) |
 | optimistic UI, ma con rete | **optimistic UI, but with a net** | CAP 20, aggiornamento ottimistico + rollback + degradazione a conteggio zero |
+| il backend si congela, il frontend riparte | **the backend freezes, the frontend restarts** | App. B, fisiologia del fork (`public/api/` copiata byte per byte, lavoro nuovo solo sul guscio) |
+| il fork eredita il debito | **the fork inherits the debt** | App. B, copiare un backend insicuro moltiplica le falle (estende [[the fix doesn't follow the fork]]) |
+| la versione racconta una nascita, il codice racconta un'eredità | **the version tells of a birth, the code tells of an inheritance** | App. B, `v0.0.1` sopra un backend `v0.5.x` col suo debito |
+| il fork che si scrive la roadmap da solo | **the fork that writes its own roadmap** | App. B, la `ROADMAP-EVOLUZIONE-miniCMS` ricalca i cluster del manuale (conferma dall'interno) |
+| un motore, due festival | **one engine, two festivals** | App. B, il lato luminoso del fork: il modulo festival (CAP 17-18) è davvero riusabile |
 
 ## 3. Mappa titoli (file `manuale-en/`)
 | # | IT | EN |

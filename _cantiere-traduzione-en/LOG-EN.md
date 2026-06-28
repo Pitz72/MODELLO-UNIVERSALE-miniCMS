@@ -351,3 +351,20 @@ corposo finora (~5k parole, 13 sezioni + In sintesi).
   «nascondere la pagina è UX, bloccare l'azione è sicurezza», «il fix non segue il fork». **Verifiche clean:**
   0 caporali, 0 spelling UK, **em-dash 0 in prosa-corpo** (solo H1), 0 `Cap.` residuo, 0 residui IT, virgolette
   curve in prosa. Glossario: nessun termine nuovo (è un riassunto operativo dei CAP). **Prossimo: Appendice B.**
+- **Appendice B (The Life of a Fork) tradotta.** Il ciclo di vita di un fork (FDCA da DISINTELLIGENZA): **the
+  backend freezes, the frontend restarts** (`public/api/` copiata byte per byte, 28 file), **the fork inherits
+  the debt** (la **tabella delle 6 vulnerabilità ereditate** immutate: RCE chain CAP 7, base-rung auth CAP 10,
+  newsletter CAP 13, reset senza CSRF CAP 10/14, `vote_count` drift CAP 18, render senza DOMPurify CAP 8) +
+  **the fix doesn't follow the fork**, **the disconnected shell** (`a disconnected shell`, glossario: il frontend
+  nuovo non chiama `/api/`), **the version tells of a birth, the code tells of an inheritance** (`v0.0.1` su
+  backend `v0.5.x`), **the fork that writes its own roadmap** (la `ROADMAP-EVOLUZIONE-miniCMS` ricalca i cluster
+  del manuale), e **one engine, two festivals** (il lato luminoso: il modulo festival è riusabile). I **nomi-
+  festival italiani** «Festival della Canzone Artificiale» / «Festival della Disintelligenza Naturale» tenuti in
+  corsivo-virgolettato con **glossa EN una volta** (D3-style: *Festival of the Artificial Song* / *of Natural
+  Disintelligence*). Nessun blocco-codice (solo span inline: `public/api/`, `src/api.ts`, `fetch`, `package.json`,
+  `metadata.json`, `v0.0.1`, `v0.5.x`, `vote_count`, `ROADMAP-EVOLUZIONE-miniCMS` — tutti intatti). Box
+  `[!WARNING]`×2 col titolo tradotto. Sezione **In Summary**. `(CAP N)` → `(Ch. N)`. **Verifiche clean:** 0
+  caporali, 0 spelling UK, **em-dash 0 in prosa** (nessuno, nemmeno H1: titolo col due-punti), 0 virgolette
+  dritte (nemmeno inline), 0 `Cap.` residuo, 0 residui IT (i nomi-festival sono propri, glossati). Glossario
+  esteso (the backend freezes the frontend restarts, the fork inherits the debt, the version tells of a birth,
+  the fork that writes its own roadmap, one engine two festivals). **Prossimo: Appendice C.**
