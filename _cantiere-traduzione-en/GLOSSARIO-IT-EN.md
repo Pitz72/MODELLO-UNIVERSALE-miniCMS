@@ -31,8 +31,9 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | dal vivo (autopsia) | **In the Wild** (vedi §1) | |
 | choke-point | **choke point** | già inglese nel testo |
 | Double Read | **Double Read** | pattern nominato, invariato |
-| cura senza prevenzione | **treatment without prevention** | paradosso di SR |
+| cura senza prevenzione | **cure without prevention** | paradosso di SR; eco del proverbio US «prevention is better than cure» (revisione madrelingua 28/06) |
 | più ingegnerizzato ≠ più sicuro | **more engineered ≠ more secure** | tesi D2 |
+| più strati uguale più sicuro (equazione da diffidare) | **more engineering equals more security** | CAP 1: «strati» (difesa) reso così per non collidere con «layers» (architettura, vedi *Plane→Layer*) e per allinearsi alla tesi sopra (revisione 28/06) |
 | teatro della sicurezza / security-theater | **security theater** | |
 | guscio scollegato (fork) | **a disconnected shell** | App. B |
 | il fix non segue il fork | **the fix doesn’t follow the fork** | App. B |
@@ -43,7 +44,7 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | OG-proxy / Dynamic Rendering | invariati | |
 | ponte (verso CAP X) | **bridge (to Ch. X)** | raccordi narrativi |
 | Il Modello Universale / Il Modello | **The Universal Model / The Model** | fissato dal pilota CAP 1 |
-| Il Piano della Presentazione / dei Dati | **The Presentation Plane / The Data Plane** | «separazione dei piani» → *separation of planes* |
+| Il Piano della Presentazione / dei Dati | **The Presentation Layer / The Data Layer** | «separazione dei piani» → *separation of layers* (revisione madrelingua 28/06: «Plane» non idiomatico per il layering di una web app US → **Layer**) |
 | grado-zero | **base rung** | metafora della scala |
 | MySQL essenziale / ingegnerizzato | **essential MySQL / engineered MySQL** | nomi dei gradini della scala |
 | ridotto all'osso | **pared to the bone** | |
@@ -52,7 +53,7 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | Il codice non mente. Le cicatrici nemmeno. | **Code doesn’t lie. Neither do scars.** | chiusura ricorrente |
 | database-a-file | **file-based database** | fissato dal CAP 2 |
 | un file per endpoint / endpoint autonomo | **one file per endpoint / standalone PHP file** | architettura miniCMS |
-| seconda rete (difesa) | **a second net** | tiene la metafora «rete» |
+| seconda rete (difesa) | **a second safety net / a backstop** | revisione 28/06: «net» da solo è ambiguo in US → standardizzare su «safety net»/«backstop»; gli idiomi «with/without a net» restano |
 | Il Pattern Fork | **The Fork Pattern** | rimanda all'App. B |
 | fuori dalla docroot | **outside the docroot** | |
 | crescente paranoia (opzioni PDO) | **escalating paranoia** | fissato dal CAP 3 |
@@ -262,3 +263,17 @@ brute-force, SSRF, cloaking); annotazioni `path:linea`; numeri di versione.
   restano intatti identificatori, keyword, stringhe, `path:linea`, numeri di versione.
 - **D3 → titolo italiano + glossa EN in corsivo:** es. *L'Albero dei Racconti* (The Tree of Tales),
   *Frequenza di Servizio* (Service Frequency). In inglese i titoli vanno in **corsivo**, mai tra «».
+
+## Decisioni di revisione madrelingua US (28/06/2026)
+Da un proofread di un madrelingua tecnico (gate pre-pubblicazione). Triage applicato:
+- **Plane → Layer** (architettura): *Presentation/Data Plane* → *Presentation/Data Layer*. L'idioma «on the GDPR/anti-fraud plane» (CAP 18) **resta** (uso diverso).
+- **treatment without prevention → cure without prevention** (frase-firma, tutte le occorrenze + titolo §9 CAP 15).
+- **net → safety net / backstop**: standardizzare gli usi spogli («a second net», «it's the net»). Restano gli idiomi «with/without a net».
+- **rung / scale → INVARIATO**: metafora deliberata e pervasiva (≈24 occ.); rimosso solo lo «engineered **tier**» sfuggito nel CAP 1 (ora «engineered top»).
+- **The Canon → INVARIATO**: scelta di tono voluta (coppia *In the Wild ↔ The Canon*).
+- De-calco sintattico (a mano, non find/replace): `It is X that` → voce attiva; comma splice → punto/em-dash; `The` astratto rimosso solo dove non è un referente specifico.
+- Lessico nativo puntuale: `summarize`/`bootstrap`/`scaffold`, `counterintuitively`, `accommodating` (non *polite*), `toxic` (non *poisonous*), `metric` (non *figure*), `Switching Engines` (non *Engine Move*), `spoofed`/`tampered` **solo** per UA/header.
+
+### Suggerimenti del revisore RESPINTI (non applicare)
+- **Inversione dell'analogia estintore/allarme (CAP 14)**: il revisore propone «installing a smoke alarm but throwing away the fire extinguisher». **Rifiutato**: rovescia la tesi «cure without prevention» (backup = prevenzione/allarme, emergency script = cura/estintore). L'IT usa di proposito due immagini, *estintore* (CAP 14) e *defibrillatore* (CAP 15), fedelmente rispecchiate. Tenere com'è.
+- **`forged request` → `spoofed`/`tampered`**: per CSRF `forged` è canonico (la F di *Forgery*). Tenere `forged` per CSRF; `spoofed` solo per UA falsificato (CAP 11).

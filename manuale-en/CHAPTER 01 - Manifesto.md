@@ -20,17 +20,17 @@ The answer, built on months of real work on real projects, is yes.
 
 ---
 
-## The Founding Principle: The Separation of Planes
+## The Founding Principle: The Separation of Layers
 
 The Universal Model isn’t a technology. It’s a mental architecture.
 
-It draws a sharp line between two planes that often get confused.
+It draws a sharp line between two layers that often get confused.
 
-**The Presentation Plane** belongs to React. It’s the place of form, of interaction, of animation, of typography, of the color palette. It’s where aesthetic talent lives, where Tailwind turns visual intent into precise CSS, where framer-motion gives weight and breath to its movements. This plane is compiled, optimized, served as a static asset.
+**The Presentation Layer** belongs to React. It’s the place of form, of interaction, of animation, of typography, of the color palette. It’s where aesthetic talent lives, where Tailwind turns visual intent into precise CSS, where framer-motion gives weight and breath to its movements. This layer is compiled, optimized, served as a static asset.
 
-**The Data Plane** belongs to PHP and SQLite (or MySQL when it’s needed). It’s the place of persistence, of business logic, of security, of the content lifecycle. It isn’t “the backend” in the heavy sense of the word: no framework, no ORM, no external dependencies. Just native PHP, PDO, and a file-based database that needs no server configuration.
+**The Data Layer** belongs to PHP and SQLite (or MySQL when it’s needed). It’s the place of persistence, of business logic, of security, of the content lifecycle. It isn’t “the backend” in the heavy sense of the word: no framework, no ORM, no external dependencies. Just native PHP, PDO, and a file-based database that needs no server configuration.
 
-These two planes talk through a precise contract: the REST API. The frontend knows nothing about the database. The backend knows nothing about React. Their separation is the source of all the scalability and maintainability in the system.
+These two layers talk through a precise contract: the REST API. The frontend knows nothing about the database. The backend knows nothing about React. Their separation is the source of all the scalability and maintainability in the system.
 
 ---
 
@@ -38,7 +38,7 @@ These two planes talk through a precise contract: the REST API. The frontend kno
 
 “Thin stack” doesn’t mean “no backend.” It means a backend pared to the bone but real, and above all it means a scale. The same skeleton—native PHP, one PDO singleton per request, one file per endpoint, no framework—plays out at different rungs depending on what you need. At the base rung sits SQLite, a database that is a single file, with no server to configure and no secret to guard. One rung up is essential MySQL, when the data or the traffic calls for it. Higher still is engineered MySQL, with hardened connections, shared preludes, and dedicated scaffolding. These aren’t three different architectures: they’re the same model at three heights.
 
-This book is built on four real sites that sit at different points on that scale, and it reads them exactly that way. When a chapter shows “three ways to do the same thing,” it isn’t listing options at random: it’s measuring how much you can strip away, or add, to the same skeleton before it changes nature. The three-rung scale, from the base rung to the engineered tier, is the lens for the whole book.
+This book is built on four real sites that sit at different points on that scale, and it reads them exactly that way. When a chapter shows “three ways to do the same thing,” it isn’t listing options at random: it’s measuring how much you can strip away, or add, to the same skeleton before it changes nature. The three-rung scale, from the base rung to the engineered top, is the lens for the whole book.
 
 ---
 
@@ -56,7 +56,7 @@ It’s not for someone who wants a site in ten minutes. It’s for someone who w
 
 ## When NOT to Use This Protocol
 
-An honest manifesto has to say where it ends, too. The thin stack trades infrastructural complexity for the discipline of whoever writes it: it removes the framework and puts your attention in its place. When that trade doesn’t pay off, another stack does. Here are the cases where I’d reach for something else without hesitating.
+An honest manifesto must also define its limits. The thin stack trades infrastructural complexity for the discipline of whoever writes it: it removes the framework and puts your attention in its place. When that trade-off isn’t worth it, it’s time to choose another stack. Here are the cases where I’d reach for something else without hesitating.
 
 **When the team is large.** The conventions here aren’t enforced by a framework; they’re held together by people. With one or two developers it works; past four or five, the absence of a rigid structure becomes a cost rather than a freedom, and an opinionated framework (Laravel, Next.js with its rules) repays the learning curve.
 
@@ -80,7 +80,7 @@ The rule that ties these cases together is simple: the thin stack is excellent a
 
 **Security as architecture, not as a patch.** The security decisions are built into the design of the system: the database outside the public root, a build script that never leaves the database in the deploy, PHP sessions with HttpOnly cookies, passwords never in cleartext. These aren’t measures bolted on afterward, they’re the structure itself.
 
-**More engineered doesn’t mean more secure.** It’s the most uncomfortable lesson these sites teach, and it comes back in almost every chapter. The technically richest site, with the most hardened connections and the most carefully tended infrastructure, is often the one with the most fragile fundamentals: a default password written into the code, no automatic backup, an anti-abuse barrier missing exactly where it’s needed. Adding complexity doesn’t pay security interest on its own, and sometimes it distracts from the two lines that actually matter. Distrusting the equation “more layers equals more secure” is one of the threads that hold this book together.
+**More engineered doesn’t mean more secure.** It’s the most uncomfortable lesson these sites teach, and it comes back in almost every chapter. The technically richest site, with the most hardened connections and the most carefully tended infrastructure, is often the one with the most fragile fundamentals: a default password written into the code, no automatic backup, an anti-abuse barrier missing exactly where it’s needed. Adding complexity doesn’t pay security interest on its own, and sometimes it distracts from the two lines that actually matter. Distrusting the equation “more engineering equals more security” is one of the threads that hold this book together.
 
 **Documentation as part of the code.** A system you can’t understand is a system you can’t maintain. This protocol is documented with the same care it’s built with, because knowledge has to stay accessible even when the context changes.
 
@@ -132,9 +132,9 @@ Code doesn’t lie. Neither do scars.
 
 > [!IMPORTANT]
 > **The Canon**
-> - Separate the two planes: compiled React for presentation, native PHP with PDO for data, a REST contract between them.
+> - Separate the two layers: compiled React for presentation, native PHP with PDO for data, a REST contract between them.
 > - Pick the right rung of the scale (SQLite base rung → essential MySQL → engineered MySQL), never more than you need.
-> - Treat security as architecture, not as a patch, and distrust the equation “more layers equals more secure.”
+> - Treat security as architecture, not as a patch, and distrust the equation “more engineering equals more security.”
 > - Document the code as it is, not as it looks: the scar teaches more than theory.
 > - Use the thin stack as long as the problem’s complexity stays below what a framework would impose; past that point, choose the framework.
 

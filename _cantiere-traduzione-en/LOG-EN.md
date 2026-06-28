@@ -386,3 +386,20 @@ corposo finora (~5k parole, 13 sezioni + In sintesi).
   **🎉🎉 TRADUZIONE EN DEL LIBRO COMPLETA: CAP 1-20 + Appendici A/B/C. Resta solo la build Typst/EPUB EN (Cowork).**
   **Paratesti (frontespizio/dedica/colophon/BIO/Part titles): vivono nello STRUCT dei build script IT → vanno
   tradotti nella variante EN dello STRUCT, in fase di build (vedi audit paratesti a fine sessione).**
+
+## 2026-06-28 — Audit completezza + revisione madrelingua US
+- **Audit 1:1 completezza (read-only):** confrontate tutte le 23 coppie IT↔EN su heading (numero **e**
+  sequenza-livelli), box admonition, blocchi-codice (numero + lingua), tabelle, checkbox, righe di prosa.
+  **Risultato: 23/23 allineate, delta 0 ovunque.** Tipografia EN pulita (0 caporali, 0 spelling UK reale,
+  0 virgolette dritte in prosa, 0 residui IT — i match erano nomi propri/falsi positivi). Paratesti
+  (PARATESTI-EN.md) verificati contro STRUCT/BIO di `build_book.py` + `metadata.yaml`: copertura completa.
+- **Proofread madrelingua tecnico US ricevuto** (il gate pre-pubblicazione previsto dal LOG 28/06 §GATE).
+  Triage applicato (dettaglio + suggerimenti respinti nel glossario, sez. «Decisioni di revisione madrelingua US»):
+  decise 4 voci di glossario (**Plane→Layer**, **treatment→cure without prevention**, **net→safety net/backstop**,
+  **rung/scale invariato**); respinta l'inversione dell'analogia estintore/allarme (CAP 14, rovescerebbe la tesi)
+  e il cambio `forged`→`spoofed` per i contesti CSRF.
+- **Pilota CAP 1 editato (native-US pass):** Plane→Layer (heading «Separation of Layers» + 5 occorrenze + Canon);
+  «più strati uguale più sicuro» → *more engineering equals more security* (anti-collisione con «layers»);
+  «engineered tier» sfuggito → *engineered top* (coerenza metafora-scala); de-calchi del revisore
+  («must also define its limits», «when that trade-off isn't worth it…»). Glossario + LOG aggiornati.
+  **→ In attesa di validazione di Simone sul pilota prima del rollout sui restanti 22 file.**
