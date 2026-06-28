@@ -229,3 +229,24 @@ corposo finora (~5k parole, 13 sezioni + In sintesi).
   two PDOs and a COUNT, schema-as-code debt, one table/three CREATEs, the date-as-string bug, having the
   defibrillator but not the fire alarm, the six fossils/repo hygiene). **Prossimo: CAP 16 — Portfolio &
   Projects Module** (modulo universale portfolio/showcase, riordino drag-and-drop, visibilità a interruttore).
+
+## 2026-06-28 (CAP 16, sessione multi-capitolo CAP 16-20)
+- **CAP 16 (Portfolio & Projects Module) tradotto.** Modulo universale showcase (mappato su SimonePizziWebSite):
+  la **tabella delle differenze** Articles↔Projects (header tradotti; `slug` parlante vs `id` numerico, `status`
+  vs `is_visible`, ordinamento per data vs `sort_order` manuale), lo schema SQLite + il box `[!NOTE]` **«A note
+  on dialect»** (i costrutti che cambiano su MySQL, `datetime('now')` = uno dei fossili del CAP 15), l'API
+  `projects.php` coi **cinque verbi** (`PATCH` per toggle visibilità + riordino drag-to-sort), i **CTA**
+  `button_a`/`button_b` (`rel="noopener noreferrer"` anti-tabnapping) + lo **switch Web/Email** (`mailto:`
+  anteposto, UX distraction-proof), la **ricerca unificata** `search.php` (un `LIKE` su articoli+progetti,
+  campo `type` smistato lato client), i tre componenti React, e le **categorie da statiche a DB-driven** (niente
+  rebuild Vite). Codice SQL/PHP/TS + commenti tradotti EN; **intatte** (policy D2) le stringhe-default IT nello
+  schema (`'Nuovo Progetto'`, `'progetti-software'`, `'Scopri'`) e il fallback TS `|| 'Scopri'`; il default
+  `'Scopri'` glossato **una volta** in prosa al §4 (Discover); intatti identificatori, keyword SQL,
+  `datetime('now')`, `MediaPicker`, `PROJECT_CATEGORIES`, `'article'`/`'project'` come type-tag, versioni
+  (v1.6, v1.7.x, v1.7.10), nomi-file. Box `[!NOTE]`/`[!IMPORTANT]` col titolo tradotto (The Canon). Reso dal
+  glossario: «a prova di distrazione» → *distraction-proof*. **Verifiche clean:** 0 caporali, 0 spelling UK,
+  **em-dash 0 in prosa-corpo** (1 in commento-codice `search.php`, 1 nel footer-titolo del CAP 17, consentito
+  §3), virgolette dritte solo dentro i blocchi/span codice, 0 residui IT in prosa (i match sono stringhe-default
+  IT volute). Glossario esteso (URLs on a numeric id not a slug, creation with auto-sort, the Web/Email switch,
+  unified search/the `type` field, categories from static to DB-driven, editable on the fly). **Prossimo: CAP 17
+  — Festival Logic — Submissions & Approval Workflow.**

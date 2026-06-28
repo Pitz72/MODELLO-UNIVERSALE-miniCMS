@@ -161,6 +161,12 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | il bug della data come stringa | **the date-as-string bug** | CAP 15, `published_at` confrontato come testo (fuso/formato) |
 | avere il defibrillatore ma non l'allarme antincendio | **having the defibrillator but not the fire alarm** | CAP 15, cura reattiva senza prevenzione (backup) |
 | i sei fossili (igiene del repo) | **the six fossils (repo hygiene)** | CAP 15, codice SQLite in repo MySQL: inerte o rotto (estende «the fossils») |
+| URL su id numerico, non slug | **URLs on a numeric id, not a slug** | CAP 16, i progetti non generano slug (la logica accenti vive una volta al CAP 5) |
+| creazione con auto-sort | **creation with auto-sort** | CAP 16, `MAX(sort_order)+1` nella categoria → il nuovo progetto va in fondo |
+| lo switch Web/Email | **the Web / Email switch** | CAP 16, toggle «tipo di link» che antepone `mailto:` da solo (UX distraction-proof) |
+| ricerca unificata / campo `type` | **unified search / the `type` field** | CAP 16, un `LIKE` su articoli+progetti, marcati con `type`, smistati lato client |
+| categorie da statiche a DB-driven | **categories from static to DB-driven** | CAP 16, da `PROJECT_CATEGORIES` in React a tabella interrogata a runtime (niente rebuild Vite) |
+| modificabili a caldo | **editable on the fly** | CAP 16, spostare le categorie dal codice al DB |
 
 ## 3. Mappa titoli (file `manuale-en/`)
 | # | IT | EN |
