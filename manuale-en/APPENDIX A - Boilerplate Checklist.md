@@ -1,6 +1,6 @@
 # APPENDIX A — Boilerplate Checklist: Starting a New miniCMS Project
 
-This checklist sums up the practical steps to initialize a new web project (Site or Web App) based on the standards of the “Universal miniCMS Model.” For implementation details, refer to the chapters indicated. The `(Ch. N)` cross-references follow the numbering of the Third Edition (20 chapters + Appendices A and B).
+This checklist summarizes the practical steps to bootstrap a new web project (Site or Web App) based on the standards of the “Universal miniCMS Model.” For implementation details, refer to the chapters indicated. The `(Ch. N)` cross-references follow the numbering of the Third Edition (20 chapters + Appendices A and B).
 
 ---
 
