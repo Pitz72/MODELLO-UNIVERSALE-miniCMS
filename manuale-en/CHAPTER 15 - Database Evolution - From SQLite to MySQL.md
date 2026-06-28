@@ -110,7 +110,7 @@ Two philosophies coexist: the script to FTP and then remove, and the maintenance
 
 ---
 
-## 4. The Engine Move: the Three-Script Pattern
+## 4. Switching Engines: the Three-Script Pattern
 
 When the engine migration was decided, SitoRuntime carried it out with three dedicated scripts, each with a precise role. It’s a hand-rolled ETL, with no tools, and it’s a positive, citable pattern.
 
@@ -203,7 +203,7 @@ After the switch, the SQLite layer wasn’t removed. In a MySQL repository there
 | `optimize_db.php` | `PRAGMA journal_mode`, `CREATE INDEX IF NOT EXISTS` | **broken** |
 | `emergency_revert_wal.php` | `PRAGMA`, `VACUUM` | **inert** (WAL doesn’t exist on MySQL) |
 
-The most poisonous fossil is the first. `fix_users_table.php` queries the schema with SQLite dialect, on a database that is now MySQL:
+The most toxic fossil is the first. `fix_users_table.php` queries the schema with SQLite dialect, on a database that is now MySQL:
 
 ```php
 // SitoRuntime fix_users_table.php:12,20 — code that speaks the wrong engine's language
@@ -212,7 +212,7 @@ $stmt = $pdo->query("PRAGMA table_info(users)");        // on MySQL → syntax e
 $pdo->exec("UPDATE users SET created_at = datetime('now') WHERE created_at IS NULL");        // datetime() = SQLite
 ```
 
-The only net keeping them in check is the by-prefix `.htaccess` deny, which blocks HTTP execution of every script with a maintenance name:
+The only safety net keeping them in check is the by-prefix `.htaccess` deny, which blocks HTTP execution of every script with a maintenance name:
 
 ```apache
 # SitoRuntime public/.htaccess:32-35 — the only barrier against the fossils
@@ -259,21 +259,21 @@ The revealing detail is that this fix was never applied to the runtime. The prod
 
 ---
 
-## 9. The Treatment Without the Prevention
+## 9. The Cure Without the Prevention
 
-What remains is the most painful row of the §5 table: the backup. SitoRuntime has the defibrillator, `emergency_revert_wal.php`, the script that revives the site after the incident. But it doesn’t have the check-up: no automatic backup, no cron, no scheduled `mysqldump`. The only net is a `_BACKUP_BEFORE_OPTIMIZATION/` folder, a manual snapshot of the project committed to the repo before the risky operation. It’s a gesture, not a system, and on top of that it’s versioned noise.
+What remains is the most painful row of the §5 table: the backup. SitoRuntime has the defibrillator, `emergency_revert_wal.php`, the script that revives the site after the incident. But it doesn’t have the check-up: no automatic backup, no cron, no scheduled `mysqldump`. The only safety net is a `_BACKUP_BEFORE_OPTIMIZATION/` folder, a manual snapshot of the project committed to the repo before the risky operation. It’s a gesture, not a system, and on top of that it’s versioned noise.
 
 The contrast with the other two is sharp. SimonePizziWebSite has the automatic backup written outside the document root, with rotation and a protected cron (Chapter 14). DISINTELLIGENZA makes a `.bak` before every destructive reset (Chapter 10). If SitoRuntime’s MySQL corrupts, there’s no recent dump to start over from.
 
 > [!WARNING]
 > **Having the defibrillator but not the fire alarm**
-> It’s the paradox at the heart of the chapter. The site mapped precisely for its incidents is the one without the most basic net: a backup. It learned to *treat* the disaster, the emergency script is proof that the pain was real, but it didn’t learn to *prevent* it. Treating an emergency is reactive: it keeps you alive this time. An automatic backup is preventive: it keeps you alive for the next one, the one you didn’t see coming. The checklist below prescribes a backup, and it’s the ought-to-be; SitoRuntime tells you what happens when you skip it.
+> It’s the paradox at the heart of the chapter. The site mapped precisely for its incidents is the one without the most basic safety net: a backup. It learned to *cure* the disaster, the emergency script is proof that the pain was real, but it didn’t learn to *prevent* it. Curing an emergency is reactive: it keeps you alive this time. An automatic backup is preventive: it keeps you alive for the next one, the one you didn’t see coming. The checklist below prescribes a backup, and it’s the ought-to-be; SitoRuntime tells you what happens when you skip it.
 
 ---
 
 ## 10. Migration Checklist
 
-The sequence, in order, for a SQLite → MySQL move done right. The first point is also the one SitoRuntime didn’t have: it isn’t a detail, it’s the net.
+The sequence, in order, for a SQLite → MySQL move done right. The first point is also the one SitoRuntime didn’t have: it isn’t a detail, it’s the safety net.
 
 - [ ] Make a full backup of the production `.sqlite` file, and archive it outside the repo.
 - [ ] Create the MySQL database on the hosting provider.
@@ -285,20 +285,20 @@ The sequence, in order, for a SQLite → MySQL move done right. The first point 
 - [ ] Test all the APIs in production, including those that assume migrations beyond the base schema.
 - [ ] Delete `migrate_to_mysql.php` and the `.sqlite` file from the server.
 - [ ] **Remove the old engine’s fossils from the repo** (`init_db.php` SQLite, `fix_*`, `optimize_db.php`, `emergency_revert_wal.php`): the migration isn’t finished while they remain.
-- [ ] Configure an automatic MySQL backup, outside the document root: the treatment doesn’t replace the prevention.
+- [ ] Configure an automatic MySQL backup, outside the document root: the cure doesn’t replace the prevention.
 
 ---
 
 ## In Summary
 
-The engine migration isn’t a scaling rung everyone climbs sooner or later: it’s an event, and the *why* matters as much as the *how*. SitoRuntime fled SQLite after a bad night, and brought MySQL along without cleaning house, leaving behind six fossils, three versions of the same table, and no backup. DISINTELLIGENZA proves that SQLite in production holds up just fine, until you ask it for an optimization it can’t deliver on its own ground. SimonePizziWebSite made the same journey quietly, with a net underneath. The lesson isn’t “migrate to MySQL” and it isn’t “stay on SQLite” either: it’s that every schema evolution, and even more every engine change, has to be carried all the way through, with a registry of what you did and a backup of what you had before. What a migration leaves behind weighs more than what it carries forward.
+The engine migration isn’t a scaling rung everyone climbs sooner or later: it’s an event, and the *why* matters as much as the *how*. SitoRuntime fled SQLite after a bad night, and brought MySQL along without cleaning house, leaving behind six fossils, three versions of the same table, and no backup. DISINTELLIGENZA proves that SQLite in production holds up just fine, until you ask it for an optimization it can’t deliver on its own ground. SimonePizziWebSite made the same journey quietly, with a safety net underneath. The lesson isn’t “migrate to MySQL” and it isn’t “stay on SQLite” either: it’s that every schema evolution, and even more every engine change, has to be carried all the way through, with a registry of what you did and a backup of what you had before. What a migration leaves behind weighs more than what it carries forward.
 
 > [!IMPORTANT]
 > **The Canon**
 > - Migrate engines only for a concrete constraint (recurring locks, hosting, remote access), not out of superstition; make the backup **first**, outside the repo.
 > - An idempotent ETL (`ON DUPLICATE KEY UPDATE`) with count verification at the end of the move.
 > - Once the migration is done, remove the old engine’s fossils from the repo.
-> - A single definition for each table and a schema registry (`schema_version`); emergency treatment doesn’t replace prevention, that is, the automatic backup.
+> - A single definition for each table and a schema registry (`schema_version`); the emergency cure doesn’t replace prevention, that is, the automatic backup.
 
 ---
 *Next Chapter: Portfolio & Projects Module. The universal module for portfolios and showcases, with drag-and-drop reordering and switch-based visibility.*

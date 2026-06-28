@@ -155,7 +155,7 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | il `confirm()` non è una difesa di sicurezza | **`confirm()` is not a security defense** | CAP 14, conferma = UX, non ferma una richiesta forgiata (serve CSRF) |
 | raccogliere e dimenticare / tabella di sola scrittura | **collect and forget / a write-only table** | CAP 14, `contacts` salvata e mai letta (debito, non archivio) |
 | quando l'ottimizzazione è il disastro | **when the optimization is the disaster** | CAP 15, il WAL su hosting condiviso = crash notturno |
-| il trasloco di motore / pattern a tre script | **the engine move / the three-script pattern** | CAP 15, ETL a mano (credenziali + connettore + `init_mysql`) |
+| il trasloco di motore / pattern a tre script | **switching engines / the three-script pattern** | CAP 15, ETL a mano (credenziali + connettore + `init_mysql`); revisione 28/06: «engine move» suonava come trasloco di casa → «switching engines» |
 | due PDO e un COUNT | **two PDOs and a COUNT** | CAP 15, l'ETL minimale (`ON DUPLICATE KEY UPDATE` + verifica conteggi) |
 | debito schema-as-code | **schema-as-code debt** | CAP 15, niente registro migrazioni → la verità vive nel DB |
 | una tabella, tre `CREATE` / dove vive la verità di una tabella | **one table, three CREATEs / where a table's truth lives** | CAP 15, `subscribers` con 3 definizioni divergenti |
