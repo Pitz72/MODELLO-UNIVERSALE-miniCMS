@@ -120,6 +120,19 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | simulare i crawler dei social | **impersonate the social crawlers** | CAP 11, vettore DDoS feb 2026 (UA falsificato) |
 | scudo anti-DDoS / cache orfanata | **anti-DDoS shield / orphaned cache** | CAP 11, la seo-cache nata come difesa, poi orfanata |
 | lo User-Agent non è un gatekeeper | **the User-Agent is not a gatekeeper** | CAP 11, UA per ottimizzare, mai come barriera d'accesso |
+| syndication / aggregatori | **syndication / aggregators** | CAP 12, il feed consegna i contenuti fuori dal sito |
+| sicuro per sottrazione / per escape | **safe by subtraction / safe by escaping** | CAP 12, le due strade del feed (SPW non emette, SR escapa tutto) |
+| proxy inbound (CORS) | **inbound (CORS) proxy** | CAP 12, SR scarica feed altrui same-origin; difese allowlist+https-only |
+| open proxy / fallback stale | **open proxy / stale fallback** | CAP 12, anti-SSRF + cache scaduta meglio di niente |
+| il lucchetto sulla porta accanto | **the lock on the door next to it** | CAP 12, gate sul dispenser di un URL, endpoint pubblico |
+| sicurezza per oscurità | **security through obscurity** | CAP 12, `feed_config.php` (l'oscurità non c'è: nome prevedibile) |
+| il GUID che ripubblica | **the GUID that republishes** | CAP 12, GUID = permalink/URL audio → ripubblicazione al cambio |
+| GUID stabile (URN), non il permalink | **stable GUID (a URN), not the permalink** | CAP 12, `urn:...:article:<id>`, disaccoppiato dall'URL |
+| il catch vuoto | **the empty catch** | CAP 12, anti-pattern: feed troncato con HTTP 200 |
+| fallback silenzioso / guasto silenziato | **silent fallback / silenced failure** | CAP 12, un errore mascherato da risposta valida |
+| cicatrici minori | **minor scars** | CAP 12, configurabilità annunciata, MIME enclosure errato, bozze nel feed |
+| configurabilità annunciata | **announced configurability** | CAP 12, commento «dai settings» mai cablato |
+| quando il codice racconta i suoi dubbi | **when the code narrates its doubts** | CAP 12, monologhi LLM lasciati in produzione (DIS) |
 
 ## 3. Mappa titoli (file `manuale-en/`)
 | # | IT | EN |

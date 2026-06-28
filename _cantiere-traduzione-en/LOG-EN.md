@@ -133,3 +133,29 @@ corposo finora (~5k parole, 13 sezioni + In sintesi).
   anti-DDoS shield/orphaned cache, the User-Agent is not a gatekeeper). **Prossimo: CAP 12 — RSS Feed &
   Syndication** (il feed è l'emettitore più sicuro, chiude il filo dei quattro emettitori; CORS proxy +
   security theater).
+
+## 2026-06-28 (CAP 12, stessa sessione del CAP 11)
+- **CAP 12 (RSS Feed & Syndication) tradotto.** Capitolo che **chiude** il filo dei quattro emettitori (il
+  feed è il punto sicuro: o non emette il `content`, o lo escapa per intero). Anatomia comune del feed PHP
+  real-time (RFC-822, fuso riforzato, `htmlspecialchars`), la **tabella aggiornata dei quattro emettitori**
+  (header tradotti; segnaposto `—` come nel sorgente IT), sicuro-per-sottrazione (SPW) vs sicuro-per-escape
+  (SR), la geografia (un file / trittico / feed podcast DIS), il **proxy CORS inbound** anti-SSRF
+  (allowlist+https-only+stale fallback), `feed_config.php` = **il lucchetto sulla porta accanto** (security
+  through obscurity), il **GUID che ripubblica** (URN vs permalink/URL audio), il **catch vuoto** che
+  nasconde un DB giù (HTTP 200 + feed vuoto), cicatrici minori (bozze nel feed, MIME `image/jpeg` vs WebP,
+  configurabilità annunciata), e i **monologhi LLM in produzione** di DIS. Codice PHP/HTML + commenti tradotti
+  EN; **intatti** identificatori, keyword, annotazioni `path:linea`, stringhe-codice già-inglesi
+  (`'Feed URL not allowed'`, `'Forbidden'`, `<error>Database Error</error>`), la stringa-UI IT
+  `title="Feed Notizie"` (policy D2), i nomi-file (`rss.php`, `feed_news_rss.php`, `feed_config.php`,
+  `feed.php`), l'URN `urn:simonepizzi:article:<id>`, e i **commenti già-inglesi** del `feed.php` di DIS
+  (i monologhi `// During init_db.php step…`) lasciati verbatim. Commento-virgolettato di `feed_config.php`
+  tradotto in prosa (D2). Pass `humanizer`/rilettura: prosa senza calchi, em-dash 0 in prosa. Resi idiomatici:
+  «il lucchetto sulla porta accanto» → *the lock on the door next to it*; «ragiona ad alta voce con sé stesso»
+  → *reasons out loud with itself*; «caso da manuale» → *textbook case*; «una cache scaduta è meglio di niente»
+  → *a stale cache beats nothing*. **Verifiche clean:** 0 caporali, 0 spelling UK, **em-dash 0 in prosa**
+  (presenti solo in segnaposto-tabella e commenti-codice), virgolette dritte solo dentro i blocchi/span codice,
+  0 residui IT in prosa. Glossario esteso (safe by subtraction/escaping, inbound CORS proxy, open proxy/stale
+  fallback, the lock on the door next to it, security through obscurity, the GUID that republishes, stable GUID/
+  URN, the empty catch, silent fallback/silenced failure, minor scars, announced configurability, when the code
+  narrates its doubts). **Prossimo: CAP 13 — Newsletter & Email System** (l'ultimo emettitore, chiude del tutto
+  il filo dei quattro emettitori; scala di semplificazione di un sistema di posta).

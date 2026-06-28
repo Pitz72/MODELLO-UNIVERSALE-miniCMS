@@ -1,6 +1,6 @@
 # PROSSIMA SESSIONE — Traduzione EN
 
-> ✅ Pianificazione fatta (`ROADMAP-EN.md` + `GLOSSARIO-IT-EN.md`). ✅ **CAP 1-10 tradotti** in `manuale-en/`.
+> ✅ Pianificazione fatta (`ROADMAP-EN.md` + `GLOSSARIO-IT-EN.md`). ✅ **CAP 1-12 tradotti** in `manuale-en/`.
 > 🟦 Si prosegue in ordine-libro. **NB: si fanno PIÙ capitoli per sessione** (uno per sessione spreca il
 > ricaricamento della memoria — decisione di Simone, 28/06).
 
@@ -11,12 +11,13 @@
    tutto il resto). Si prosegue. NB: prima della pubblicazione EN serve un proofread da madrelingua tecnico.
 
 ## Obiettivo: tradurre i prossimi capitoli (più capitoli a sessione, un commit per capitolo)
-**Riparti dal CAP 11 — SEO Pre-rendering con PHP Entry-Point** (`manuale/CAPITOLO 11 - SEO Pre-rendering ...md`
-→ `manuale-en/CHAPTER 11 - SEO Pre-rendering with a PHP Entry Point.md`), poi 12, … in ordine. CAP 11 è
-corposo (motore SEO invisibile + attacco DDoS-da-bot feb 2026: è il «pagamento» del vettore anticipato al
-§13 del CAP 10). Valutare quanti farne in base alla lunghezza. Promemoria: **stringhe letterali italiane nel
-codice restano intatte** (policy D2); traduci solo i commenti. H1: se il sorgente IT accorcia il titolo
-rispetto al nome-file (come CAP 8), rispetta il sorgente.
+**Riparti dal CAP 13 — Newsletter & Email System** (`manuale/CAPITOLO 13 - Newsletter ...md`
+→ `manuale-en/CHAPTER 13 - Newsletter & Email System.md`), poi 14, … in ordine. CAP 13 chiude del tutto il
+filo dei quattro emettitori del `content` (è l'ultimo emettitore, quello che non emette il `content`) e
+racconta una scala di quanto si può semplificare un sistema di posta prima che diventi pericoloso. Valutare
+quanti capitoli farne in base alla lunghezza. Promemoria: **stringhe letterali italiane nel codice restano
+intatte** (policy D2); traduci solo i commenti. H1: se il sorgente IT accorcia il titolo rispetto al
+nome-file (come CAP 8), rispetta il sorgente.
 
 ### Ciclo di lavoro (fisso)
 1. Traduci dal sorgente italiano congelato, applicando il glossario.
@@ -32,4 +33,4 @@ rispetto al nome-file (come CAP 8), rispetta il sorgente.
 ## Note
 - Mappa titoli completa e termini in `GLOSSARIO-IT-EN.md` §3/§2.
 - Build EN (Typst/EPUB) e listing KDP separato = a valle, scope Cowork (non ora).
-- Ordine: CAP 11 → 12 → … → 20 → App. A/B/C. I capitoli corposi (es. CAP 11, 15) possono prendere una sessione intera.
+- Ordine: CAP 13 → 14 → … → 20 → App. A/B/C. I capitoli corposi (es. CAP 15) possono prendere una sessione intera.
