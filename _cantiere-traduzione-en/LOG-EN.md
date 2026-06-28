@@ -250,3 +250,20 @@ corposo finora (~5k parole, 13 sezioni + In sintesi).
   IT volute). Glossario esteso (URLs on a numeric id not a slug, creation with auto-sort, the Web/Email switch,
   unified search/the `type` field, categories from static to DB-driven, editable on the fly). **Prossimo: CAP 17
   — Festival Logic — Submissions & Approval Workflow.**
+- **CAP 17 (Festival Logic — Submissions & Approval Workflow) tradotto.** H1 con **em-dash** (glossario §3; il
+  sorgente IT usa trattino corto). Premessa di onestà: il festival è un **modulo opzionale** (1 sito su 4, DIS;
+  FDCA lo eredita byte-identico come fork). La pipeline a tre stati `pending → approved/rejected` mossa da una
+  colonna `status` (non una macchina a stati), il **gate role-blind** che confonde «loggato» con «admin»
+  (`update_status` protetto solo da sessione → anche un editor approva; richiama CAP 10 + «hiding a page is UX;
+  preventing an action is security» del CAP 14), le **email transazionali** `mail()` *fire-and-forget* (fonte di
+  verità = il record, email best-effort, CAP 13), l'**upload pubblico delle tracce** senza login = il fronte
+  della **catena RCE** del CAP 7 (4 debolezze sommate: pubblico + Content-Type fidato + estensione conservata +
+  PHP non spento), e l'**iscrizione alla newsletter all'approvazione** = **consent as a side effect** (GDPR, due
+  basi giuridiche diverse, CAP 13; i commenti del sorgente tradiscono il dubbio dello sviluppatore). Nessun
+  blocco-codice (solo span inline: `status`, `update_status`, `pending`, `mail()`, `INSERT OR IGNORE`,
+  `registration_active`, `uploads/audio/participants/`, Content-Type — tutti intatti). Box `[!WARNING]`×3 +
+  `[!IMPORTANT]` col titolo tradotto (The Canon). Reso: «il framing da rovesciare» → *the framing to flip*;
+  «fire-and-forget» invariato. **Verifiche clean:** 0 caporali, 0 spelling UK, **em-dash 0 in prosa-corpo**
+  (solo H1 + footer-titolo, consentito §3), 0 virgolette dritte (nemmeno inline, solo backtick), 0 residui IT.
+  Glossario: nessun termine nuovo (riusa role-blind, RCE chain, consent as a side effect, hiding a page is UX).
+  **Prossimo: CAP 18 — Festival Logic — Voting & Anti-Fraud Protection.**
