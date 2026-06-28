@@ -22,7 +22,7 @@ $pdo->exec(file_get_contents('schema_test.sql'));   // a known schema
 
 **The tests that pay off most.** In a system like this, two families of test are worth more than a thousand detail assertions:
 
-- **Contract smoke test.** A test that calls every public endpoint and verifies the status plus the shape of the payload catches almost all the regressions of the “unstable contract” discussed in Chapter 6. It’s the net missing exactly where the API has no formal schema.
+- **Contract smoke test.** A test that calls every public endpoint and verifies the status plus the shape of the payload catches almost all the regressions of the “unstable contract” discussed in Chapter 6. It’s the safety net missing exactly where the API has no formal schema.
 - **Security non-regression test.** An admin endpoint must answer 401 or 403 without a session; a `.php` file uploaded into the upload folder must not be executable (Chapter 7); a mutation without a CSRF token must fail (Chapter 10). These are the checks that keep an already-closed flaw from silently reopening.
 
 ---
@@ -37,7 +37,7 @@ The model is born to run on cheap shared hosting, and the deploy is deliberately
 
 **How you upload.** The three ways, in order of robustness: a `git pull` on the server if the hosting allows it (the cleanest); a scripted SFTP deploy; manual FTP upload (the most fragile, because forgetting a file is easy). Whatever the way, it’s best for the deploy to be *repeatable*: a script in `scripts/` that always does the same steps is worth more than a procedure kept in memory.
 
-**A minimal CI.** Even without complex pipelines, a single GitHub Action that on every push runs the build, the lint, and the tests from the previous section catches regressions before they reach production. The secrets (credentials, keys) live in the CI’s environment variables, never in the repository. A possible automatic deploy step via FTP/SFTP is a handy addition, but it comes later: first the net of tests, then the automation of delivery.
+**A minimal CI.** Even without complex pipelines, a single GitHub Action that on every push runs the build, the lint, and the tests from the previous section catches regressions before they reach production. The secrets (credentials, keys) live in the CI’s environment variables, never in the repository. A possible automatic deploy step via FTP/SFTP is a handy addition, but it comes later: first the safety net of tests, then the automation of delivery.
 
 ---
 
@@ -49,6 +49,6 @@ The above is a map, not the territory. A site with serious availability requirem
 > **The Canon**
 > - Test the endpoints with an ephemeral SQLite (`:memory:` or a temporary file), not by mocking PDO.
 > - Mock the `api` object in just one place for the React component tests.
-> - Keep two nets that pay off: a contract smoke test (status + shape of the payload) and a security non-regression test (gate, upload, CSRF).
+> - Keep two safety nets that pay off: a contract smoke test (status + shape of the payload) and a security non-regression test (gate, upload, CSRF).
 > - Build with `clean-dist` (away with the `.sqlite` files); upload `dist/` + `public/api/`, never `db_credentials.php` from the repo or the development `.data/`.
 > - A minimal CI (build + lint + test on every push), with the secrets in the environment variables, not in the code.
