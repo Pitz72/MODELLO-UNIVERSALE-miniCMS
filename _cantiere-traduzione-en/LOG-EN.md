@@ -337,3 +337,17 @@ corposo finora (~5k parole, 13 sezioni + In sintesi).
   philosophies of sanitization, where to clean depends on who sends it to you, tuning the anti-abuse to what's at
   stake, optimistic UI but with a net).
   **🎉 CORPO DEL LIBRO EN COMPLETO (CAP 1-20). Restano solo le Appendici A/B/C (sessione successiva).**
+
+## 2026-06-28 (Appendici A/B/C — stessa sessione, chiusura traduzione)
+- **Appendice A (Boilerplate Checklist) tradotta.** Checklist operativa a 8 fasi (Setup/Backend/Frontend/Media/
+  SEO/Deploy/Security/Per-tipologia). H1 col sottotitolo del sorgente esteso (*Starting a New miniCMS Project*,
+  em-dash §3). Tutti i rimandi `(Cap. N)` → **`(Ch. N)`** in corsivo; `(Appendice B)` → `(Appendix B)`. Voci-
+  checkbox `- [ ]` preservate. **Intatti** identificatori, nomi-file, keyword, stringhe-codice (`Deny from all`,
+  `VITE_API_URL=...`, `password_hash()`, `date_default_timezone_set('Europe/Rome')`, `display_errors = 0`,
+  `die($e->getMessage())`, `window.location.reload()`, `key={item.id}`, `uniqid()`, `{EMAIL_PLACEHOLDER}`,
+  `usleep(500000)`, `NOW()`, `Cache-Control: max-age=31536000`, gli schemi tabella). Resi dal glossario: «Double
+  Read» invariato, «i quattro emettitori del content» → *the four content emitters*, «CSRF a 3 gradini» →
+  *three-rung CSRF*, «throttle ≠ rate-limit» → *throttle ≠ rate limit*, «i fossili» → *the old engine's fossils*,
+  «nascondere la pagina è UX, bloccare l'azione è sicurezza», «il fix non segue il fork». **Verifiche clean:**
+  0 caporali, 0 spelling UK, **em-dash 0 in prosa-corpo** (solo H1), 0 `Cap.` residuo, 0 residui IT, virgolette
+  curve in prosa. Glossario: nessun termine nuovo (è un riassunto operativo dei CAP). **Prossimo: Appendice B.**
