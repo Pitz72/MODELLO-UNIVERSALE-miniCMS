@@ -159,3 +159,25 @@ corposo finora (~5k parole, 13 sezioni + In sintesi).
   URN, the empty catch, silent fallback/silenced failure, minor scars, announced configurability, when the code
   narrates its doubts). **Prossimo: CAP 13 — Newsletter & Email System** (l'ultimo emettitore, chiude del tutto
   il filo dei quattro emettitori; scala di semplificazione di un sistema di posta).
+
+## 2026-06-28 (CAP 13)
+- **CAP 13 (Newsletter & Email System) tradotto.** **Chiude del tutto** il filo dei quattro emettitori (la
+  newsletter è il 4° emettitore: nessuno emette il `content` → niente quinto vettore XSS). Lente del capitolo:
+  **quanto si può semplificare un sistema di posta** prima che diventi pericoloso. Ciclo di vita iscritto
+  (validazione server-side, idempotenza per cattura UNIQUE, soft-delete), il **double opt-in** a tre gradini
+  (SPW due token distinti / SR un token unico mai azzerato / DIS nessuno → disiscrizione per sola email via
+  `GET`, prefetch-able), trasporto `mail()` nativa vs **SMTP autenticato** (PHPMailer/STARTTLS), il **form che
+  spara email a nome tuo** (throttle in uscita ≠ rate-limit in ingresso; il buco mail-bombing di SR), **header
+  injection dal campo nome** (`strip_tags` non tocca i `\r\n`), la **tabella finale dei quattro emettitori**, e
+  il **consenso come effetto collaterale** (iscrizione da approvazione festival senza consenso specifico, GDPR).
+  Codice PHP + commenti tradotti EN; **intatte** le stringhe-UI italiane (policy D2): `'Email non valida'`,
+  `'Iscrizione completata'`, `'Sei già iscritto!'`, `'Errore database'`, default `'Amico'`, l'oggetto-email
+  `"Nuovo Messaggio da $name - Disintelligenza"` e l'HTML `<h1>Disiscrizione completata</h1>`; intatti
+  identificatori, keyword PHPMailer/PDO, il commento già-inglese `// Fake domain?` citato in prosa. Box
+  `[!NOTE]`/`[!WARNING]`/`[!IMPORTANT]` col titolo tradotto (The Canon). **Verifiche clean:** 0 caporali,
+  0 spelling UK, **em-dash 0 in prosa** (solo annotazioni `file:linea` nei commenti), virgolette dritte solo
+  dentro i blocchi/span codice, 0 residui IT in prosa. Glossario esteso (double opt-in, two distinct tokens/
+  single token, soft unsubscribe, the unsubscribe link needs a secret, the form that fires emails in your name,
+  outbound throttle ≠ inbound rate limit, header injection from the name field, sanitizing for the DB ≠ email
+  headers, consent as a side effect, one sanitization/four render paths). **Prossimo: CAP 14 — Admin Dashboard
+  & Panels** (il pannello di controllo + i tre modi di decidere cosa un admin può vedere/fare).

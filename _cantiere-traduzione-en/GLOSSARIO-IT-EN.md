@@ -133,6 +133,16 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | cicatrici minori | **minor scars** | CAP 12, configurabilità annunciata, MIME enclosure errato, bozze nel feed |
 | configurabilità annunciata | **announced configurability** | CAP 12, commento «dai settings» mai cablato |
 | quando il codice racconta i suoi dubbi | **when the code narrates its doubts** | CAP 12, monologhi LLM lasciati in produzione (DIS) |
+| double opt-in | **double opt-in** | invariato, CAP 13 (record pending + link di conferma) |
+| due token distinti / un solo token | **two distinct tokens / a single token** | CAP 13, conferma monouso + disiscrizione stabile (SPW) vs token unico (SR) |
+| disiscrizione morbida | **a “soft” unsubscribe** | CAP 13, `is_active = 0`, niente DELETE |
+| il link di disiscrizione ha bisogno di un segreto | **the unsubscribe link needs a secret** | CAP 13, no token = chiunque disiscrive chiunque (anche prefetch) |
+| il form che spara email a nome tuo | **the form that fires emails in your name** | CAP 13, subscribe senza rate-limit = mail-bombing |
+| throttle in uscita ≠ rate-limit in ingresso | **outbound throttle ≠ inbound rate limit** | CAP 13, `usleep` non è rate-limit |
+| header injection dal campo nome | **header injection from the name field** | CAP 13, `strip_tags` non tocca i `\r\n` |
+| sanitizzare per il DB ≠ per gli header email | **sanitizing for the DB isn't sanitizing for email headers** | CAP 13, il contesto della sanitizzazione |
+| il consenso come effetto collaterale | **consent as a side effect** | CAP 13, iscrizione da approvazione festival senza consenso specifico |
+| una sanitizzazione, quattro render-path | **one sanitization, four render paths** | CAP 13, chiusura del filo dei quattro emettitori |
 
 ## 3. Mappa titoli (file `manuale-en/`)
 | # | IT | EN |
