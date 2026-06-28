@@ -97,6 +97,17 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | doppia scrittura (M:N + CSV legacy) | **double write** | CAP 9, `syncArticleTags` + campo CSV in parallelo |
 | cache di retrocompatibilità | **backward-compatibility cache** | CAP 9, `articles.tags` CSV tenuto vivo |
 | cache su file con TTL | **file cache with a TTL** | CAP 9, `.cache/` JSON, header `X-Cache: HIT/MISS` |
+| scala di sottrazione | **scale of subtraction** | CAP 10, leggere ogni difesa per cosa si rompe togliendola |
+| gate unico / componibile / inline | **single gate / composable gate / inline gate** | CAP 10, le tre architetture di protezione endpoint |
+| il gate che si dimentica | **the gate you forget** | CAP 10, rischio del gate componibile/inline |
+| anti session-fixation | **anti session-fixation** | invariato, CAP 10 (`session_regenerate_id`) |
+| fail-closed / fail-open | **fail-closed / fail-open** | invariati, CAP 10 (ramo `catch` di `session_version`) |
+| backup giusto-in-tempo | **just-in-time backup** | CAP 10, `copy()` del `.sqlite` prima del `DELETE` |
+| contatore brute-force | **brute-force counter** | CAP 10, file/DB/assenza |
+| credenziali di default | **default credentials** | CAP 10, random/hardcoded/omesse |
+| il seeding dell'admin | **seeding the admin** | CAP 10, primo amministratore |
+| enumeration-safe / password-reset poisoning | **enumeration-safe / password-reset poisoning** | invariati, CAP 10 (recovery) |
+| debito di tracciabilità | **traceability debt** | CAP 10, schema non ricostruibile (`password_resets`) |
 
 ## 3. Mappa titoli (file `manuale-en/`)
 | # | IT | EN |

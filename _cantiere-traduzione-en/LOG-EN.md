@@ -83,3 +83,28 @@ Contesto già caldo (ROADMAP + glossario + voce CAP 1-2-3) → tradotti 3 capito
   (dynamic/persistent states, scheduled, the source of the present, the deliberate 404, extending a
   contract instead of versioning it, double write, backward-compatibility cache, file cache with a TTL).
   **Prossimo: CAP 10 — Security & Auth** (sessioni, CSRF, ruoli, anti-abuso; capitolo corposo, ~5k parole).
+
+## 2026-06-28 (CAP 10, sessione estesa dopo CAP 9)
+Simone ha scelto di proseguire nella stessa sessione (contesto caldo) → tradotto anche il CAP 10, il più
+corposo finora (~5k parole, 13 sezioni + In sintesi).
+- **CAP 10 (Security & Auth) tradotto.** La tesi-firma «più ingegnerizzato ≠ più sicuro» letta come *scale
+  of subtraction*; perimetro comune (auth a mano), le tre architetture di gate (single/composable/inline),
+  CSRF a tre gradini (Origin/Referer ↔ token sincronizzato ↔ niente), cookie+anti session-fixation, il
+  contatore brute-force (file/DB/assenza) col box-ancora **«Trusting the IP»** (`X-Forwarded-For` vs
+  `REMOTE_ADDR`), `session_version` (logout-everywhere a costo zero) + **fail-closed**, recovery/reset
+  (token monouso, password-reset poisoning, enumeration-safe), credenziali di default, `.htaccess` come
+  perimetro, information disclosure, azioni distruttive/pubbliche (one-click reset, **just-in-time backup**,
+  anti-frode voto + privacy hash), client non-è-la-difesa + lezione bot/User-Agent. Codice PHP/Apache/TS +
+  commenti tradotti EN; **stringhe-codice intatte** per D2: 4 stringhe-UI IT volute (`'Origine della
+  richiesta non valida'`, `'Token di sicurezza non valido…'`, `'Sessione scaduta…'`, `'Sessione non
+  verificabile…'`), stringa EN già inglese (`'Too many failed login attempts…'`), e `"almeno 12 caratteri'`
+  lasciata nel commento. Box `[!NOTE]`/`[!WARNING]`/`[!TIP]`/`[!IMPORTANT]` col titolo tradotto (The Canon).
+  Resi dal glossario: «cura senza prevenzione» → *treatment without prevention*, «in chiaro» → *in cleartext*,
+  «information disclosure gratuita» → *information disclosure for free*, «fidarsi dell'IP» → *trusting the IP*.
+  **Verifiche clean:** 0 caporali, 0 spelling UK, **em-dash 6 (tutti in annotazioni `file:linea` nei commenti),
+  0 in prosa**, virgolette dritte solo dentro i blocchi codice (12), 0 residui IT in prosa. Glossario esteso
+  (scale of subtraction, single/composable/inline gate, the gate you forget, anti session-fixation,
+  fail-closed/fail-open, just-in-time backup, brute-force counter, default credentials, seeding the admin,
+  enumeration-safe/password-reset poisoning, traceability debt).
+  **Prossimo: CAP 11 — SEO Pre-rendering with a PHP Entry Point** (motore SEO invisibile + attacco DDoS-da-bot
+  feb 2026; capitolo corposo, è il «pagamento» del vettore anticipato qui al §13).
