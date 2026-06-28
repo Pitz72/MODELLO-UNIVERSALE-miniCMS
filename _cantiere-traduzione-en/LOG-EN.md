@@ -181,3 +181,26 @@ corposo finora (~5k parole, 13 sezioni + In sintesi).
   outbound throttle ≠ inbound rate limit, header injection from the name field, sanitizing for the DB ≠ email
   headers, consent as a side effect, one sanitization/four render paths). **Prossimo: CAP 14 — Admin Dashboard
   & Panels** (il pannello di controllo + i tre modi di decidere cosa un admin può vedere/fare).
+
+## 2026-06-28 (CAP 14)
+- **CAP 14 (Admin Dashboard & Panels) tradotto.** I due assi indipendenti dell'admin (*come è costruito* /
+  *quanto misura*) e il ribaltamento-firma: SR (il sito delle cicatrici di scalabilità) è l'admin meno
+  attrezzato — non misura e non fa backup. «L'admin è un aggregatore, non un'applicazione» (**one guard, N
+  pages**), le tre architetture di guardia (route-guard dichiarativo SPW vs componente SR vs ibrido DIS, col
+  buco «protegge l'area ma non il ruolo»), i tre livelli di misura (analitico/menu/**cruscotto testuale**),
+  l'analytics in casa (`analytics.php` a doppio pubblico), la **rete di salvataggio** (backup fuori docroot +
+  il box «**il build può tradire la tua difesa statica**: difenditi a runtime» + **treatment without
+  prevention** = il paradosso di SR), le azioni potenti (**console nascosta** GET, il **`confirm()` non è una
+  difesa**), **raccogliere e dimenticare** (`contacts` di sola scrittura), e il festival come caso particolare
+  (→ CAP 19). Codice TS/PHP + commenti tradotti EN; **intatte** le stringhe-UI italiane (policy D2): i due
+  `confirm('⚠️ RESET EDIZIONE…')` / `confirm('ULTIMA CONFERMA…')` e `die("Accesso negato.")`; intatti
+  identificatori, `Auth::check`, `session_version`, `Require all denied`, `clean-dist.js`, percorsi `.data/`,
+  permessi ottali. Box `[!WARNING]`/`[!TIP]`/`[!IMPORTANT]` col titolo tradotto (The Canon). Reso dal glossario:
+  «cura senza prevenzione» → *treatment without prevention*; «fuori dalla docroot» → *outside the docroot*.
+  **Verifiche clean:** 0 caporali, 0 spelling UK, **em-dash 0 in prosa** (solo annotazioni `file:linea` nei
+  commenti), virgolette dritte solo dentro i blocchi/span codice, 0 residui IT in prosa. Glossario esteso
+  (the admin is an aggregator, one guard/N pages, route guard/check on mount, hiding a page is UX/preventing an
+  action is security, text-based dashboard, measuring without third parties, the build can betray your static
+  defense, hidden console, `confirm()` is not a security defense, collect and forget/write-only table).
+  **Prossimo: CAP 15 — Database Evolution (From SQLite to MySQL)** (la notte del crash di febbraio + la
+  migrazione d'emergenza ora-per-ora; capitolo corposo, può prendere una sessione intera).

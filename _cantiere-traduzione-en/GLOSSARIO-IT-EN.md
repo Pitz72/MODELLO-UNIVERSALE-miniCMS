@@ -143,6 +143,16 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | sanitizzare per il DB ≠ per gli header email | **sanitizing for the DB isn't sanitizing for email headers** | CAP 13, il contesto della sanitizzazione |
 | il consenso come effetto collaterale | **consent as a side effect** | CAP 13, iscrizione da approvazione festival senza consenso specifico |
 | una sanitizzazione, quattro render-path | **one sanitization, four render paths** | CAP 13, chiusura del filo dei quattro emettitori |
+| l'admin è un aggregatore, non un'applicazione | **the admin is an aggregator, not an application** | CAP 14, telaio che monta i pannelli degli altri cluster |
+| una guardia, N pagine | **one guard, N pages** | CAP 14, route-guard che protegge l'intero sotto-albero |
+| route-guard / guardia al montaggio | **route guard / check on mount** | CAP 14, dichiarativo (SPW) vs imperativo (SR/DIS) |
+| nascondere una pagina è UX; impedire un'azione è sicurezza | **hiding a page is UX; preventing an action is security** | CAP 14, va fatto sul ruolo, client+server |
+| cruscotto testuale | **text-based dashboard** | CAP 14, DIS misura in testo, senza grafici (i `COUNT` giusti) |
+| misurare senza terze parti | **measuring without third parties** | CAP 14, analytics in casa (`analytics.php`), niente Google Analytics |
+| il build può tradire la tua difesa statica | **the build can betray your static defense** | CAP 14, `.htaccess` di deny strippato dal build → ricrealo a runtime |
+| console nascosta | **hidden console** | CAP 14, azioni potenti via `GET` senza UI né ruolo (SR `admin.php`) |
+| il `confirm()` non è una difesa di sicurezza | **`confirm()` is not a security defense** | CAP 14, conferma = UX, non ferma una richiesta forgiata (serve CSRF) |
+| raccogliere e dimenticare / tabella di sola scrittura | **collect and forget / a write-only table** | CAP 14, `contacts` salvata e mai letta (debito, non archivio) |
 
 ## 3. Mappa titoli (file `manuale-en/`)
 | # | IT | EN |
