@@ -1,54 +1,33 @@
 # PROSSIMA SESSIONE — Traduzione EN
 
-> ✅ Pianificazione fatta (`ROADMAP-EN.md` + `GLOSSARIO-IT-EN.md`). ✅ **CAP 1-20 TRADOTTI** in `manuale-en/`.
-> 🎉 **IL CORPO DEL LIBRO EN È COMPLETO** (tutti e 20 i capitoli, un commit per capitolo).
-> 🟦 **OBIETTIVO DI QUESTA SESSIONE: tradurre le 3 APPENDICI (A, B, C)** — l'ultimo passo prima che l'edizione
-> inglese sia integralmente tradotta. Stesso metodo dei capitoli: **atomico, una appendice alla volta, un commit
-> per appendice, con tutte le verifiche** — più appendici in fila nella stessa sessione (contesto caldo).
+> 🎉🎉 **TRADUZIONE EN INTEGRALE COMPLETA.** Tutti e 20 i capitoli + le 3 Appendici (A Boilerplate, B Fork,
+> C Testing & Deployment) sono tradotti in `manuale-en/` (un commit per file). Anche i **paratesti**
+> (frontespizio, colophon, dedica, Parti, BIO, metadata EPUB) sono tradotti: vedi `PARATESTI-EN.md`.
+> La dedica è già dentro `CHAPTER 01 - Manifesto.md`. **Non resta nulla da tradurre.**
 
-## Prima di tutto
-1. Leggi `_cantiere-traduzione-en/ROADMAP-EN.md` (policy, tipografia **US**, ciclo per capitolo) e
-   `GLOSSARIO-IT-EN.md` (termini congelati, ormai ricchissimo: §2 copre tutti i CAP 1-20, §3 mappa i titoli,
-   §4 gli idiomi). Leggi le ultime righe di `LOG-EN.md` per la voce e le convenzioni già fissate.
-2. **GATE pilota SUPERATO (28/06):** voce + tipografia approvate sul CAP 1, riferimento per tutto.
-   NB: prima della pubblicazione EN serve comunque un **proofread da madrelingua tecnico**.
+## Stato del cantiere (28/06/2026)
+- `manuale-en/`: **23 file** — `CHAPTER 01…20` + `APPENDIX A/B/C`. ✅
+- Verifica tipografica US su TUTTI i file: **0 caporali «», 0 spelling UK**, em-dash 0 in prosa-corpo
+  (solo titoli/footer e annotazioni `file:linea` nei commenti-codice), virgolette dritte solo dentro il codice,
+  0 residui IT in prosa (solo stringhe-codice IT volute, policy D2). ✅
+- `GLOSSARIO-IT-EN.md`: congelato e ricco (§2 copre CAP 1-20 + App. A/B/C; §3 mappa titoli; §4 idiomi; §5 invariati).
+- `LOG-EN.md`: una voce per ogni file, con le decisioni prese.
+- `PARATESTI-EN.md`: tutti i testi di servizio EN pronti per la build.
 
-## Obiettivo: tradurre le 3 Appendici (una alla volta, un commit per appendice)
-**Chiudi la traduzione del libro con le tre appendici, in ordine (mappa titoli in `GLOSSARIO-IT-EN.md` §3):**
-- **Appendice A — Boilerplate Checklist** (sorgente: `manuale/BOILERPLATE-CHECKLIST.md` →
-  `manuale-en/APPENDIX A - Boilerplate Checklist.md`): la checklist per partire da zero.
-- **Appendice B — The Life of a Fork** (sorgente: `manuale/APPENDICE B - Ciclo di vita di un fork.md` →
-  `manuale-en/APPENDIX B - The Life of a Fork.md`): FDCA, il guscio scollegato, «il fix non segue il fork»,
-  i termini-firma sono già nel glossario §2 (a disconnected shell, the fix doesn't follow the fork, The Fork Pattern).
-- **Appendice C — Testing & Deployment** (sorgente: `manuale/APPENDICE C - Testing e Deploy.md` →
-  `manuale-en/APPENDIX C - Testing & Deployment.md`): la più snella.
+## L'UNICO passo rimasto: BUILD EN (scope Cowork/impaginazione — NON traduzione)
+La traduzione è finita. Quel che resta è **produrre i deliverable inglesi**, ed è lavoro di build, non di testo:
+1. **Variante EN dello `STRUCT`** in `_cowork-impaginazione/produzione/build_book.py`:
+   - puntare ai file `manuale-en/CHAPTER NN - …` e `APPENDIX A/B/C - …` (oggi punta ai nomi IT `CAPITOLO N`);
+   - sostituire i paratesti cablati (frontespizio, colophon, Part titles+descrizioni, BIO, «Indice»→«Contents»,
+     «L'autore»→«The Author») con le versioni EN di `PARATESTI-EN.md`;
+   - `extract_dedica()` funziona identico sul `CHAPTER 01 - Manifesto.md` (la dedica EN è già un blockquote in testa).
+2. **Variante EN di `metadata.yaml`** (EPUB): blocco già pronto in `PARATESTI-EN.md` §7 (`language: en-US`, subtitle/
+   rights EN).
+3. Stessa gabbia 7×10", stessi font IBM Plex. Limite noto: ghostscript DeviceGray segfaulta su Windows
+   (l'interno è già grayscale → stampabile lo stesso). Vedi `_cowork-impaginazione/ISTRUZIONI-COWORK-BUILD.md`.
+4. **Copertina EN** (quarta/retro + metadati) e **listing KDP separato** (ISBN/ASIN proprio).
 
-Falle **una alla volta, completando il ciclo per ciascuna prima di passare alla successiva** (NON tutte insieme):
-traduci → humanizer → tipografia US → glossario+LOG → grep-clean → **commit della singola appendice** → poi la
-prossima. A fine sessione: **push** + verifica sync, aggiorna `PROSSIMA-SESSIONE-EN.md` (a quel punto: traduzione
-EN FINITA, resta solo la build Typst/EPUB EN, scope Cowork) + memoria di progetto.
-
-Promemoria di metodo: **stringhe letterali italiane nel codice restano intatte** (policy D2), si traducono solo
-i commenti; le stringhe-UI IT citate in prosa che portano il senso prendono una **glossa EN una volta**. H1: se
-il sorgente IT accorcia il titolo rispetto al nome-file, rispetta il sorgente; per i titoli con trattino lungo
-usa la forma EN con **em-dash** già fissata nel glossario §3. La forma-titolo EN delle appendici è
-«Appendix X — Titolo» (em-dash nel titolo: consentito §3).
-
-### Ciclo di lavoro (fisso)
-1. Traduci dal sorgente italiano congelato, applicando il glossario.
-2. **Commenti dentro il codice:** tradurli in EN; identificatori/keyword/stringhe/`path:linea`/versioni intatti.
-3. Pass **rilettura madrelingua** + skill **`humanizer`** (NON `prosa-italiana`) + pass «what still reads as translated/AI?».
-4. **Tipografia US:** virgolette curve “ ”/‘ ’ (mai «»), punteggiatura DENTRO le virgolette, em-dash chiuso e
-   con parsimonia (0 in prosa-corpo: tienilo a virgola/punto/due-punti; em-dash solo in titoli/footer e nelle
-   annotazioni `file:linea` dei commenti-codice), en-dash per intervalli, virgola di Oxford, spelling -ize/-or,
-   Title Case nei titoli.
-5. Aggiorna il **glossario** con i termini nuovi; aggiorna **LOG-EN.md**.
-6. **Grep di verifica:** `grep "«\|»"` = 0; virgolette dritte solo dentro i blocchi codice; niente spelling UK
-   (`colour|behaviour|centre|-ise|defence`); nessun residuo italiano fuori dai nomi propri/stringhe-codice volute.
-7. **Commit + push + verifica sync.**
-
-## Note
-- Mappa titoli completa e termini in `GLOSSARIO-IT-EN.md` §3/§2; idiomi in §4; INVARIATI in §5.
-- Build EN (Typst/EPUB) e listing KDP separato = a valle, scope Cowork (non ora): a quel punto serve la variante
-  EN dello `STRUCT` (nomi-file, Part titles, BIO, colophon EN) — vedi ROADMAP §7.
-- Ordine di questa sessione: Appendice A → B → C. **Dopo le appendici, la traduzione EN del libro è integrale.**
+## Promemoria finale
+- Prima della **pubblicazione** EN: mettere in conto un **proofread da madrelingua tecnico** (la skill `humanizer`
+  + il glossario riducono il rischio di traduttese, non lo azzerano; Simone non giudica l'inglese nel merito).
+- Convenzioni di traduzione (per eventuali ritocchi): `ROADMAP-EN.md` + `GLOSSARIO-IT-EN.md`. Tipografia US in §3.
