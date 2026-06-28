@@ -108,3 +108,28 @@ corposo finora (~5k parole, 13 sezioni + In sintesi).
   enumeration-safe/password-reset poisoning, traceability debt).
   **Prossimo: CAP 11 — SEO Pre-rendering with a PHP Entry Point** (motore SEO invisibile + attacco DDoS-da-bot
   feb 2026; capitolo corposo, è il «pagamento» del vettore anticipato qui al §13).
+
+## 2026-06-28 (CAP 11)
+- **CAP 11 (SEO Pre-rendering with a PHP Entry Point) tradotto.** H1 lungo dal glossario §3 (il sorgente IT
+  non accorcia). Il filo a tre tappe della SSG abbandonata (Puppeteer → Dynamic Rendering), il `index.php`
+  front controller con `isCrawler()` UA-sniff, la **scala a tre gradini** (Dynamic Rendering SPW/SR vs
+  OG-proxy DIS), il buco XSS riaperto dal prerender (`strip_tags` allowlist ≠ DOMPurify, **la falla viva dei
+  quattro emettitori** che chiude il filo del CAP 8), la SEO che indicizza le bozze (manca `AND status =
+  'published'`), la seo-cache orfanata che sopravvive al suo lettore, e l'**attacco DDoS-da-bot di feb 2026**
+  (UA social falsificati → query DB → 503/500; la cache come layer di sicurezza). Codice PHP/Apache + commenti
+  tradotti EN; **intatti** identificatori, keyword SQL, annotazioni `path:linea`, versioni (v1.7.3, v2, v3.0),
+  nomi-file (`prerender.php`, `clean-dist.js`, `rebuild_seo_cache.php`), la costante `IS_PRERENDERING`, lo slug
+  URL `'tutti-i-progetti'` e il commento già-inglese `// Injected for consistency with index.php reader`.
+  Diagramma ASCII del vettore d'attacco con prosa tradotta. Box `[!NOTE]`/`[!TIP]`/`[!WARNING]`/`[!IMPORTANT]`
+  col titolo tradotto (The Canon). Pass `humanizer`: corretti calchi («discarded along the way a solution» →
+  riordinato; «vertical traffic spikes» → *near-vertical … that organic growth couldn't explain*; «an HTML
+  completo» → *complete HTML* senza articolo) e parola-spia AI *nestled* (footer) → *lurk*. Resi idiomatici:
+  «la prova del delitto» → *the smoking gun*; «un attrezzo dimenticato in un angolo» → *a tool forgotten in a
+  corner*; «simulavano i crawler» → *impersonated the social crawlers*. **Verifiche clean:** 0 caporali,
+  0 spelling UK reale (`compromise`/`precise` sono US), **em-dash 0 in prosa** (7 in commenti-codice/`.htaccess`),
+  virgolette dritte solo dentro i blocchi/span codice, 0 residui IT in prosa (il match «come» = inglese *come
+  from*). Glossario esteso (Dynamic Rendering, social-preview proxy/OG-proxy, the double truth of the routes,
+  escape-safe injection, the cache that outlives its reader, fossil imprint, impersonate the social crawlers,
+  anti-DDoS shield/orphaned cache, the User-Agent is not a gatekeeper). **Prossimo: CAP 12 — RSS Feed &
+  Syndication** (il feed è l'emettitore più sicuro, chiude il filo dei quattro emettitori; CORS proxy +
+  security theater).

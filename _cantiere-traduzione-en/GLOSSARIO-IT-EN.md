@@ -108,6 +108,18 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | il seeding dell'admin | **seeding the admin** | CAP 10, primo amministratore |
 | enumeration-safe / password-reset poisoning | **enumeration-safe / password-reset poisoning** | invariati, CAP 10 (recovery) |
 | debito di tracciabilità | **traceability debt** | CAP 10, schema non ricostruibile (`password_resets`) |
+| Dynamic Rendering / front controller | **Dynamic Rendering / front controller** | invariati, CAP 11 (entry-point PHP davanti alla SPA) |
+| OG-proxy / proxy di anteprime social | **OG-proxy / social-preview proxy** | CAP 11, il gradino leggero (DIS): solo meta escaped, niente corpo |
+| la doppia verità delle rotte | **the double truth of the routes** | CAP 11, rotte duplicate in `App.tsx` + `index.php` |
+| iniezione sicura per escape | **escape-safe (meta) injection** | CAP 11, DIS passa ogni valore per `htmlspecialchars` |
+| quando copi un pattern, copi anche la sua falla | **when you copy a pattern, you copy its flaw too** | CAP 11, SR eredita il buco `strip_tags` di SPW |
+| la SEO che indicizza le bozze | **the SEO that indexes drafts** | CAP 11, manca `AND status = 'published'` nel ramo crawler |
+| due idee di «pubblico» | **two ideas of “public”** | CAP 11, pubblico-per-utente ≠ pubblico-per-bot |
+| la cache che sopravvive al suo lettore | **the cache that outlives its reader** | CAP 11, scrittori vivi, lettore rimosso nella v3.0 |
+| impronta fossile | **fossil imprint** | CAP 11, codice morto della SSG abbandonata (estende «the fossils») |
+| simulare i crawler dei social | **impersonate the social crawlers** | CAP 11, vettore DDoS feb 2026 (UA falsificato) |
+| scudo anti-DDoS / cache orfanata | **anti-DDoS shield / orphaned cache** | CAP 11, la seo-cache nata come difesa, poi orfanata |
+| lo User-Agent non è un gatekeeper | **the User-Agent is not a gatekeeper** | CAP 11, UA per ottimizzare, mai come barriera d'accesso |
 
 ## 3. Mappa titoli (file `manuale-en/`)
 | # | IT | EN |
@@ -152,6 +164,9 @@ Sottotitolo libro: «Il protocollo miniCMS per Web App moderne» → **“The mi
 | cura le proporzioni (tabella) | minds its proportions |
 | un'ora prima del previsto | an hour ahead of schedule |
 | compare o sparisce con uno scarto | appears or disappears off by (an hour) |
+| un attrezzo dimenticato in un angolo | a tool forgotten in a corner |
+| lo scudo non è più imbracciato da nessuno | no one carries the shield anymore |
+| il vettore era elegante | the vector was elegant |
 
 ## 5. Restano INVARIATI (non tradurre)
 Nomi siti/marchi (SitoRuntime, DISINTELLIGENZA, FDCA, SimonePizziWebSite, Runtime Radio, Runtime
