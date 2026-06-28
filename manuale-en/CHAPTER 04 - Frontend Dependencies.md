@@ -70,11 +70,11 @@ Present in every site as a devDependency. It adds the `prose` class, which appli
 
 ## 3. Content Editing and Rendering
 
-### Tiptap v3: the flagships’ rich-text editor
+### Tiptap v3: the flagship sites’ rich-text editor
 
 **Used in:** SimonePizziWebSite and SitoRuntime (the two sites with an editorial workflow).
 
-The rich-text editor on the two flagships is **Tiptap v3**, not a monolithic editor but a set of `@tiptap/*` packages that compose like building blocks: about a dozen modules for the core and the extensions actually in use.
+The rich-text editor on the two flagship sites is **Tiptap v3**, not a monolithic editor but a set of `@tiptap/*` packages that compose like building blocks: about a dozen modules for the core and the extensions actually in use.
 
 ```json
 "@tiptap/react": "^3.x",
