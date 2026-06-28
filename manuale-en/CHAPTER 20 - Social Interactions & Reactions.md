@@ -111,7 +111,7 @@ $subject = trim(strip_tags($data['subject'] ?? ''));
 $message = trim(strip_tags($data['message'] ?? ''));
 ```
 
-Here the thread of public input closes, and it does so with a polarity reversed from the articles. The content of an article (Ch. 8) is written by an admin you trust, is saved raw so as not to lose its rich formatting, and is cleaned with DOMPurify only **at the moment of showing it** (render-time). The text of a message comes from a stranger, and is cleaned with `strip_tags` **at the moment of saving it** (write-time): what ends up in the database is already free of tags, and stored XSS is neutralized at the source. There’s even a second net: the admin panel shows the message as a React text node, which rewrites the special characters on its own, and never uses `dangerouslySetInnerHTML`.
+Here the thread of public input closes, and it does so with a polarity reversed from the articles. The content of an article (Ch. 8) is written by an admin you trust, is saved raw so as not to lose its rich formatting, and is cleaned with DOMPurify only **at the moment of showing it** (render-time). The text of a message comes from a stranger, and is cleaned with `strip_tags` **at the moment of saving it** (write-time): what ends up in the database is already free of tags, and stored XSS is neutralized at the source. There’s even a second safety net: the admin panel shows the message as a React text node, which rewrites the special characters on its own, and never uses `dangerouslySetInnerHTML`.
 
 > [!IMPORTANT]
 > **Write-time or render-time: where to clean input depends on who sends it to you**
