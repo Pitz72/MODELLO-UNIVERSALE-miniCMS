@@ -167,6 +167,12 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | ricerca unificata / campo `type` | **unified search / the `type` field** | CAP 16, un `LIKE` su articoli+progetti, marcati con `type`, smistati lato client |
 | categorie da statiche a DB-driven | **categories from static to DB-driven** | CAP 16, da `PROJECT_CATEGORIES` in React a tabella interrogata a runtime (niente rebuild Vite) |
 | modificabili a caldo | **editable on the fly** | CAP 16, spostare le categorie dal codice al DB |
+| la fonte di verità della classifica | **the source of truth for the ranking** | CAP 18, ordinamento per `vote_count` denormalizzato, non `COUNT(votes)` |
+| tre difese, una sola conta | **three defenses, only one counts** | CAP 18, IP-window regge / cookie cosmetico / User-Agent solo registro |
+| per il voto pubblico l'IP grezzo è un pregio | **for a public vote the raw IP is a strength** | CAP 18, `REMOTE_ADDR` non falsificabile vs `X-Forwarded-For` (rovescia l'auth-dietro-proxy del CAP 10) |
+| la classifica che può derivare | **the ranking that can drift** | CAP 18, contatore denormalizzato senza **reconciliation** = drift silenzioso |
+| i round a interruttore | **the on/off rounds** | CAP 18, le fasi del concorso = il flag `in_current_round`, non entità con storia |
+| quando il lettore deve indovinare come ha scritto lo scrittore | **when the reader has to guess how the writer wrote** | CAP 18, `'1'` vs `'true'`: lettura difensiva che compensa una convenzione mancante a monte |
 
 ## 3. Mappa titoli (file `manuale-en/`)
 | # | IT | EN |

@@ -267,3 +267,24 @@ corposo finora (~5k parole, 13 sezioni + In sintesi).
   (solo H1 + footer-titolo, consentito §3), 0 virgolette dritte (nemmeno inline, solo backtick), 0 residui IT.
   Glossario: nessun termine nuovo (riusa role-blind, RCE chain, consent as a side effect, hiding a page is UX).
   **Prossimo: CAP 18 — Festival Logic — Voting & Anti-Fraud Protection.**
+- **CAP 18 (Festival Logic — Voting & Anti-Fraud Protection) tradotto.** H1 con **em-dash** (glossario §3). Il
+  voto come punto in cui un modulo «robusto» rivela quali difese contano: la **sessione di voto** (1–3 preferenze,
+  transazione `INSERT votes` + incremento del `vote_count` denormalizzato = **the source of truth for the
+  ranking**), le **tre difese anti-abuso in ordine di efficacia reale** (IP-window 24h regge / cookie `dis_voted`
+  cosmetico / User-Agent solo registro → **three defenses, only one counts**), l'**IP grezzo come pregio** per il
+  voto pubblico (`REMOTE_ADDR` vs `X-Forwarded-For`, rovescia il CAP 10; rovescio = NAT collision), il
+  **contrappunto privacy** (IP+UA **in cleartext** vs lo pseudonimo `SHA256(IP+UA)` delle reazioni del CAP 20,
+  hash reversibile, GDPR), i **round a interruttore** (`in_current_round`, `reset_votes` cancella la storia del
+  turno salvo `.bak`), il **master switch** `voting_active` + l'incoerenza `'1'`/`'true'` (**when the reader has
+  to guess how the writer wrote**), e **la classifica che può derivare** (drift silenzioso del contatore
+  denormalizzato senza **reconciliation** `COUNT(votes)`; reset distruttivi senza CSRF, `confirm()` non basta).
+  Un blocco-codice PHP (transazione) con commento tradotto EN; **intatti** identificatori, keyword SQL/PDO,
+  `status='approved'`, `in_current_round=1`, `dis_voted`, `voting_active`, `settings`, `reset_votes`/`reset_system`,
+  `REMOTE_ADDR`/`X-Forwarded-For`, `SHA256(IP+UA)`, `.bak`, `403`, `'1'`/`'true'`, `COUNT(votes)`. Box
+  `[!WARNING]`×3 + `[!NOTE]` + `[!IMPORTANT]` col titolo tradotto (The Canon). Resi dal glossario: «in chiaro» →
+  *in cleartext*; richiamati *trusting the IP*, *just-in-time backup* (`.bak`), *`confirm()` is not a security
+  defense*. **Verifiche clean:** 0 caporali, 0 spelling UK (`defense` US, non `defence`), **em-dash 0 in
+  prosa-corpo** (solo H1 + footer-titolo), virgolette dritte solo dentro il blocco-codice PHP, 0 residui IT.
+  Glossario esteso (the source of truth for the ranking, three defenses only one counts, for a public vote the
+  raw IP is a strength, the ranking that can drift, the on/off rounds, when the reader has to guess how the
+  writer wrote). **Prossimo: CAP 19 — Festival Logic — Admin Dashboard, Settings & Reporting.**
