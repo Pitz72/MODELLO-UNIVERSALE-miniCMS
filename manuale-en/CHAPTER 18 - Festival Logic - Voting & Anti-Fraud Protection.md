@@ -27,9 +27,9 @@ The module presents three defenses against multiple voting. The point, though, i
 
 > [!WARNING]
 > **Three defenses, only one counts**
-> Listing cookie, IP, and User-Agent as if they were three equivalent locks is a common and dangerous mistake, because the reader believes they have a three-layer defense when they have only one. The cookie and the User-Agent are under the client’s control: the first gets deleted, the second gets forged. The only barrier that lives on the server, and that can therefore really limit abuse, is the IP-based one. Knowing which defense actually holds is what keeps you from leaving a contest defenseless while believing it’s armored.
+> Listing cookie, IP, and User-Agent as if they were three equivalent locks is a common and dangerous mistake, because the reader believes they have a three-layer defense when they have only one. The cookie and the User-Agent are under the client’s control: the first gets deleted, the second gets spoofed. The only barrier that lives on the server, and that can therefore really limit abuse, is the IP-based one. Knowing which defense actually holds is what keeps you from leaving a contest defenseless while believing it’s armored.
 
-On the IP there’s a counterintuitive observation (Chapter 10): the module uses the raw `REMOTE_ADDR`, not a helper that reads the forwarding headers. For authentication behind a proxy that would be a flaw, but for a public vote it’s a **strength**: the `X-Forwarded-For` header is written by the client and gets forged, while `REMOTE_ADDR` doesn’t. The flip side is NAT collision: behind a single corporate or university network, many legitimate voters share an IP and block one another.
+On the IP there’s a counterintuitive observation (Chapter 10): the module uses the raw `REMOTE_ADDR`, not a helper that reads the forwarding headers. For authentication behind a proxy that would be a flaw, but for a public vote it’s a **strength**: the `X-Forwarded-For` header is written by the client and gets spoofed, while `REMOTE_ADDR` doesn’t. The flip side is NAT collision: behind a single corporate or university network, many legitimate voters share an IP and block one another.
 
 > [!NOTE]
 > **The privacy counterpoint: the hashed identity of the reactions**
@@ -57,7 +57,7 @@ The subtlest fragility remains, and the most important one for the fairness of t
 > **Denormalizing a counter: speed against truth**
 > Keeping the vote total in a column makes the ranking instant, but it also makes it fragile: a transaction interrupted halfway, a manual import, a correction made by hand on the database, and the counter no longer matches the real votes. The trouble is that the divergence is **silent**: the ranking shows an order that looks right, and no one notices it’s wrong until someone counts the votes by hand. When a denormalized number decides an outcome (a ranking, a prize), you need a reconciliation query that periodically compares the counter against `COUNT(votes)` and flags the gaps. The module doesn’t have one, and it’s the first thing to add before entrusting it with a real contest.
 
-There’s the reset itself, finally: the actions that zero out votes and counters (`reset_votes`, `reset_system`) are powerful and destructive, but they have **no CSRF protection** (Chapter 10). All that surrounds them is a browser confirmation, which stops the careless click but not a request forged by another site while the admin is logged in. The pre-destruction `.bak` copy is the net that softens the damage; the defense that’s missing is the token.
+There’s the reset itself, finally: the actions that zero out votes and counters (`reset_votes`, `reset_system`) are powerful and destructive, but they have **no CSRF protection** (Chapter 10). All that surrounds them is a browser confirmation, which stops the careless click but not a request forged by another site while the admin is logged in. The pre-destruction `.bak` copy is the safety net that softens the damage; the defense that’s missing is the token.
 
 > [!IMPORTANT]
 > **The Canon**
