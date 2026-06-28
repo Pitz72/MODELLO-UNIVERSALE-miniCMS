@@ -1,8 +1,8 @@
 # CHAPTER 7: Media & Optimization
 
-This chapter follows a file from the disk of whoever uploads it to the disk of the server: how it arrives, how it’s checked, how it’s slimmed down, where it ends up, and how it’s served back. It’s a short path, and that’s exactly what makes it dangerous. In the three sites the skeleton is the same (an `upload.php` that receives a `multipart`, validates it, optimizes it with GD, and puts it on disk), but it’s the cluster where security scales **the opposite way from common sense**.
+This chapter follows a file from the disk of whoever uploads it to the disk of the server: how it arrives, how it’s checked, how it’s slimmed down, where it ends up, and how it’s served back. It’s a short path, and that’s exactly what makes it dangerous. In the three sites the skeleton is the same (an `upload.php` that receives a `multipart`, validates it, optimizes it with GD, and puts it on disk), but it’s the cluster where security scales **counterintuitively**.
 
-The defense against code execution from an upload runs from **three independent barriers** (SimonePizziWebSite) to **a single one** (SitoRuntime) to **almost zero on a public upload** (DISINTELLIGENZA), where the chain that leads from the image to a shell is verified. And two details flip your intuition: the “most minimal” naming (SR, which throws the file name away) is the **most secure**, while the “most polite” one (DIS, which keeps the name and the extension) is what opens the door. The question that runs through the chapter is a single one: *how much can you take away from an upload system before it becomes insecure*. And DIS shows what lies one step past that line, because an upload open to the public changes all the rules.
+The defense against code execution from an upload runs from **three independent barriers** (SimonePizziWebSite) to **a single one** (SitoRuntime) to **almost zero on a public upload** (DISINTELLIGENZA), where the chain that leads from the image to a shell is verified. And two details flip your intuition: the “most minimal” naming (SR, which throws the file name away) is the **most secure**, while the “most accommodating” one (DIS, which keeps the name and the extension) is what opens the door. The question that runs through the chapter is a single one: *how much can you take away from an upload system before it becomes insecure*. And DIS shows what lies one step past that line, because an upload open to the public changes all the rules.
 
 A note from the field: this is about **media**, not cache or SEO. The cache of the content lists lives in the content lifecycle (Ch. 9); the prerendering of metadata for bots is the PHP entry-point chapter (Ch. 11). This chapter stays on the file: uploading it, validating it, optimizing it, serving it.
 
@@ -77,7 +77,7 @@ $filename = preg_replace('/[^a-zA-Z0-9_.-]/', '', $filename);   // the "." stays
 
 > [!TIP]
 > **The less you trust the name, the safer you are: the scale of erasure**
-> This is the most counterintuitive point in the chapter. The “most polite” choice, keeping the name the user gave the file, is the riskiest, because it leaves the attacker in control of the final extension. The “most brutal” choice, deleting the name and replacing it with a server-generated identifier, is the safest, because it removes every foothold. SR sits at the protective extreme not because it added a defense, but because it removed a surface: the file name isn’t data to preserve, it’s input to neutralize.
+> This is the most counterintuitive point in the chapter. The “most accommodating” choice—keeping the user-provided filename—is the riskiest, because it leaves the attacker in control of the final extension. The “most brutal” choice, deleting the name and replacing it with a server-generated identifier, is the safest, because it removes every foothold. SR sits at the protective extreme not because it added a defense, but because it removed a surface: the file name isn’t data to preserve, it’s input to neutralize.
 
 ---
 
@@ -93,9 +93,9 @@ php_flag engine off
 </FilesMatch>
 ```
 
-It’s easy to look at the `uploads/` `.htaccess` as a matter of **cache control** (`Expires`, `max-age`), a performance detail, and stop there. Its critical use is another: it’s the shutdown of PHP, and it’s the first of SPW’s three independent barriers. We’ve already seen the other two: the naming that doesn’t generate executable names (§3) and the validation on the real bytes (§2). Three nets for the same risk, and each covers the other’s gap: if the `.htaccess` weren’t read, the naming saves you; if the naming failed, the `.htaccess` saves you; disguised content is stopped by the MIME check.
+It’s easy to look at the `uploads/` `.htaccess` as a matter of **cache control** (`Expires`, `max-age`), a performance detail, and stop there. Its critical use is another: it’s the shutdown of PHP, and it’s the first of SPW’s three independent barriers. We’ve already seen the other two: the naming that doesn’t generate executable names (§3) and the validation on the real bytes (§2). Three safety nets for the same risk, and each covers the other’s gap: if the `.htaccess` weren’t read, the naming saves you; if the naming failed, the `.htaccess` saves you; disguised content is stopped by the MIME check.
 
-SR has only one of these nets, the application validation: there’s no `uploads/.htaccess` (the folder is created at runtime and isn’t in the repository), and the global `.htaccess` doesn’t turn PHP off. As long as `upload.php` stays the only write path, it holds; but there’s no second net. DIS has practically none of the three.
+SR has only one of these safety nets, the application validation: there’s no `uploads/.htaccess` (the folder is created at runtime and isn’t in the repository), and the global `.htaccess` doesn’t turn PHP off. As long as `upload.php` stays the only write path, it holds; but there’s no second safety net. DIS has practically none of the three.
 
 > [!WARNING]
 > **A single barrier is not defense in depth**
