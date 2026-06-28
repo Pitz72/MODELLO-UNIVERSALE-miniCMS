@@ -442,7 +442,7 @@ if (file_exists($dbPath)) {
 $pdo->exec("DELETE FROM votes");
 ```
 
-It’s exactly the prevention SR was missing (in Chapter 15 we call it “treatment without prevention”): the site weakest on identity is the only one to do the just-in-time backup right. More secure doesn’t mean more complete on every point.
+This is exactly the prevention SR lacked (in Chapter 15 we call it “cure without prevention”): the site weakest on identity is the only one to do the just-in-time backup right. More secure doesn’t mean more complete on every point.
 
 ### 12.3 Anti-Fraud for a Public Action, and Privacy
 
