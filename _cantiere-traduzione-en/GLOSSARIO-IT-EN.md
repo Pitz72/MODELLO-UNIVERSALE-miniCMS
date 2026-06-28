@@ -89,6 +89,14 @@ Glossario **vivo**: si congela alla sessione pilota (CAP 1) e cresce a ogni capi
 | stored-XSS da autore autenticato | **stored XSS from an authenticated author** | CAP 8 |
 | compatibility shim | **compatibility shim** | invariato, CAP 8 (migrazione Quill→Tiptap) |
 | choke-point | **choke point** | CAP 8 (già in §2) |
+| stati dinamici / persistenti | **dynamic states / persistent states** | CAP 9, `status` DB vs stato calcolato a runtime |
+| programmato (stato) | **scheduled** | CAP 9, terza riga della matrice di visibilità (`published` nel futuro) |
+| la fonte del presente | **the source of the present** | CAP 9, «adesso» = una sola fonte (PHP o DB), mai mescolarle |
+| il 404 deliberato | **the deliberate 404** | CAP 9, non confermare l'esistenza di una bozza (404, non 403) |
+| estendere un contratto invece di versionarlo | **extending a contract instead of versioning it** | CAP 9, busta per-endpoint |
+| doppia scrittura (M:N + CSV legacy) | **double write** | CAP 9, `syncArticleTags` + campo CSV in parallelo |
+| cache di retrocompatibilità | **backward-compatibility cache** | CAP 9, `articles.tags` CSV tenuto vivo |
+| cache su file con TTL | **file cache with a TTL** | CAP 9, `.cache/` JSON, header `X-Cache: HIT/MISS` |
 
 ## 3. Mappa titoli (file `manuale-en/`)
 | # | IT | EN |
@@ -130,6 +138,9 @@ Sottotitolo libro: «Il protocollo miniCMS per Web App moderne» → **“The mi
 | a prova di distrazione | distraction-proof |
 | fidarsi dell'IP | trusting the IP |
 | niente scaramanzia | not out of superstition |
+| cura le proporzioni (tabella) | minds its proportions |
+| un'ora prima del previsto | an hour ahead of schedule |
+| compare o sparisce con uno scarto | appears or disappears off by (an hour) |
 
 ## 5. Restano INVARIATI (non tradurre)
 Nomi siti/marchi (SitoRuntime, DISINTELLIGENZA, FDCA, SimonePizziWebSite, Runtime Radio, Runtime

@@ -68,4 +68,18 @@ Contesto già caldo (ROADMAP + glossario + voce CAP 1-2-3) → tradotti 3 capito
   nei blocchi codice, em-dash 0 in prosa. Glossario esteso (defense in depth, RCE chain, magic bytes/real
   bytes, the scale of erasure, the perfect storm, path guard, cosmetic cleanup, emitter, insertion guards,
   attribute hole, compatibility shim).
-- **Prossimo: CAP 9 — Content Lifecycle** (bozza→pubblicazione programmata, le tre regole di visibilità).
+- **CAP 9 (Content Lifecycle) tradotto.** La matrice stati persistenti (`status`) vs dinamici (calcolati
+  a runtime), le tre strategie del «presente» (PHP forzato/string-compare/`CURRENT_TIMESTAMP` UTC) ciascuna
+  col suo modo di sbagliare, il contratto-busta esteso-non-versionato che chiude il Double Read del CAP 6,
+  la cache JSON su file con TTL e header `X-Cache`, le tassonomie (M:N solo dove serve) con la doppia
+  scrittura M:N+CSV legacy, il **404 deliberato** (non 403, per non confermare una bozza), il doppio gate
+  sessione+`?admin=true`. Codice PHP/TS + commenti tradotti in EN; **stringhe-codice IT intatte** per
+  policy D2 (`'Articolo non trovato'`, default `'generale'`); identificatori, `published_at`, `PARAM_INT`,
+  `CURRENT_TIMESTAMP`, `X-Cache: HIT/MISS` intatti. Box `[!WARNING]`/`[!NOTE]`/`[!TIP]`/`[!IMPORTANT]` col
+  titolo tradotto (The Canon). Resi: «cura le proporzioni» → *minds its proportions*; «un'ora prima del
+  previsto» → *an hour ahead of schedule*; «busta zero» → *zero envelope* (già glossario). **Verifiche
+  clean:** 0 caporali, 0 spelling UK, **em-dash 3 (tutti in commenti-codice), 0 in prosa**, virgolette
+  dritte solo dentro i blocchi codice (4, stringhe PHP/SQL), 0 residui IT in prosa. Glossario esteso
+  (dynamic/persistent states, scheduled, the source of the present, the deliberate 404, extending a
+  contract instead of versioning it, double write, backward-compatibility cache, file cache with a TTL).
+  **Prossimo: CAP 10 — Security & Auth** (sessioni, CSRF, ruoli, anti-abuso; capitolo corposo, ~5k parole).
