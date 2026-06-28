@@ -4,7 +4,7 @@ Every system seen so far has a back office. The content of Chapter 9, the media 
 
 The three sites build their console on two independent questions. The first is *how it’s built*: a route structure with a declarative guard, a single mega-component, or something in between. The second is *how much it measures*: an analytical dashboard with charts, a menu that counts nothing, or real numbers written in text. The two questions don’t go hand in hand, and their combination yields three very different admins.
 
-There’s a reversal worth flagging up front, because it’s the through-line. SitoRuntime is the site of the scalability scars, the one that lived through the nighttime crash and the emergency migration of Chapter 15. And yet it’s the one with the least-equipped admin: it measures nothing and has no backup. That is, it has neither the eye to notice a problem nor the net to survive it. It’s confirmation, once again, that more engineered doesn’t mean more protected.
+There’s a reversal worth flagging up front, because it’s the through-line. SitoRuntime is the site of the scalability scars, the one that lived through the nighttime crash and the emergency migration of Chapter 15. And yet it’s the one with the least-equipped admin: it measures nothing and has no backup. That is, it has neither the eye to notice a problem nor the safety net to survive it. It’s confirmation, once again, that more engineered doesn’t mean more protected.
 
 ---
 
@@ -134,8 +134,8 @@ if (!$is_admin && (empty($configured_secret) || !hash_equals($configured_secret,
 SR has none of this. No backup, no export, no cron, and, as we saw in §3, no metrics.
 
 > [!WARNING]
-> **Treatment without prevention: the site that doesn’t back itself up**
-> It’s the paradox at the heart of this chapter. SitoRuntime lived through a nighttime database crash and an emergency migration (Chapter 15), and carries around a WAL “emergency revert” script: it has the *treatment*. But it doesn’t have the *prevention*: no automatic backup, no metric to warn it before things get worse. The site mapped precisely for its incidents is the one least equipped to see them coming and to recover. Having the emergency script but not the backup is like keeping the fire extinguisher and not the smoke alarm.
+> **Cure without prevention: the site that doesn’t back itself up**
+> It’s the paradox at the heart of this chapter. SitoRuntime lived through a nighttime database crash and an emergency migration (Chapter 15), and carries around a WAL “emergency revert” script: it has the *cure*. But it doesn’t have the *prevention*: no automatic backup, no metric to warn it before things get worse. The site mapped precisely for its incidents is the one least equipped to see them coming and to recover. Having the emergency script but not the backup is like keeping the fire extinguisher and not the smoke alarm.
 
 ---
 
@@ -183,7 +183,7 @@ Everything we’ve seen (the frame with the guard, the dashboard, the settings a
 
 ## In Summary
 
-The admin area is measured on two independent axes, and the three sites occupy them revealingly. SPW is high on both: an analytical dashboard and a declarative architecture, with the out-of-docroot backup acting as a net. SR is low on both: a mega-component that measures nothing and saves nothing, the paradox of the site that suffered the most without having equipped itself to see it coming. DIS is in the middle in an instructive way: the first one’s structure, the second one’s guard (and holes), and a text-based dashboard that proves how much you can measure with little. The chapter’s lesson isn’t “add more charts”: it’s that a good admin lets you *see* the state of the system and gives you the *net* for when something goes wrong. The apparatus matters less than the question it answers.
+The admin area is measured on two independent axes, and the three sites occupy them revealingly. SPW is high on both: an analytical dashboard and a declarative architecture, with the out-of-docroot backup acting as a safety net. SR is low on both: a mega-component that measures nothing and saves nothing, the paradox of the site that suffered the most without having equipped itself to see it coming. DIS is in the middle in an instructive way: the first one’s structure, the second one’s guard (and holes), and a text-based dashboard that proves how much you can measure with little. The chapter’s lesson isn’t “add more charts”: it’s that a good admin lets you *see* the state of the system and gives you the *safety net* for when something goes wrong. The apparatus matters less than the question it answers.
 
 > [!IMPORTANT]
 > **The Canon**
