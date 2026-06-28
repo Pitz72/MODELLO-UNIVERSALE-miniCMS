@@ -12,10 +12,13 @@
   segfauta su Windows). Gli **script EN sono pronti** (vedi sotto).
 
 ## Cosa deve fare Cowork
-1. **Interno cartaceo EN** (DeviceGray, print-ready).
-2. **Copertina EN** (sia print integrale sia immagine ebook), perché il testo è IT e il **dorso cambia**
-   (l'interno EN è **164 pp**, non 160 → dorso diverso → copertina da rigenerare per forza).
-3. **Rebuild EPUB EN** con la copertina ebook EN.
+1. **Interno cartaceo EN** (DeviceGray, print-ready) — l'UNICA cosa che richiede gs/Linux.
+2. **Preflight KDP** della copertina print EN già renderizzata (`copertina/cover_finale_en.pdf`) e **conferma
+   del conteggio pagine** dell'interno (atteso 164): se ≠ 164, ricalcolare il dorso e ri-renderizzare la cover.
+
+> **Già fatto in Claude Code (non serve rifarlo):** EPUB EN con copertina EN; copertina print EN
+> (`cover_finale_en.pdf`, dorso 164 pp) renderizzata da `cover_final_en.typ` (Typst, NIENTE gs);
+> immagine ebook EN (`ebook_cover_16_en.jpg`, sottotitolo EN + THIRD EDITION).
 
 ## File EN già predisposti (commit su `main`)
 ```
@@ -49,24 +52,18 @@ python build_book_en.py
   riferimento identico a quello IT (vedi `ISTRUZIONI-COWORK-BUILD.md` §gs, ma su `_interno_rgb_en.pdf`).
 - Verifica colorspace **DeviceGray**, conteggio pagine **multiplo di 4**.
 
-## 2) Copertina EN  ⚠️ il dorso cambia (164 pp ≠ 160 pp)
-- **Copia tradotta** già pronta in `copertina/sorgenti/cover_final_en.typ`:
-  - sottotitolo fronte → **The miniCMS protocol for modern web apps**
-  - **THIRD EDITION**; retro header **THE MINICMS PROTOCOL**; blurb retro tradotto (3 paragrafi);
-  - glossario applicato (thin stack, two **layers**, three **rungs**, **scars**).
-- **Geometria ricalcolata per 164 pp** (KDP B/W carta bianca = 0,0572 mm/pagina):
-  `spine = 164 × 0,0572 = 9,38 mm` (IT era 9,15 mm). `W = 371,33 mm`, `front0 = 190,355 mm`.
-  → **Riconferma il conteggio pagine** stampato da build_book_en.py e, se ≠ 164, ricalcola lo `spine`
-  e di conseguenza `W` e `front0` in `cover_final_en.typ` (e in `gen_cover.py` se usi la variante SVG).
-- Render copertina print: `typst compile cover_final_en.typ cover_finale_en.pdf` dalla cartella `sorgenti/`
-  (font path `../../fonts/IBM_Plex`), poi QA visivo e **preflight KDP** (bleed, dorso, area codice a barre).
-- **Immagine ebook EN**: la `copertina/ebook_cover_16.jpg` attuale ha sottotitolo IT
-  («Il protocollo miniCMS per Web App moderne») e «TERZA EDIZIONE». Va rifatta in EN
-  (sottotitolo **The miniCMS protocol for modern web apps**, **THIRD EDITION**) e salvata come
-  `copertina/ebook_cover_16_en.jpg`.
+## 2) Copertina EN — GIÀ RENDERIZZATA (solo preflight + conferma dorso)
+- **Print integrale:** `copertina/cover_finale_en.pdf` (renderizzata da `copertina/sorgenti/cover_final_en.typ`
+  con Typst, nessun ghostscript). Testo tradotto (sottotitolo **The miniCMS protocol for modern web apps**,
+  **THIRD EDITION**, retro **THE MINICMS PROTOCOL** + blurb EN; glossario: two **layers**, three **rungs**, **scars**).
+- **Dorso ricalcolato per 164 pp**: `spine = 164 × 0,0572 = 9,38 mm` (IT 9,15), `W = 371,33 mm`, `front0 = 190,355 mm`.
+  → **Cowork:** conferma che build_book_en.py riporta **164 pp**; se diverso, aggiorna `spine`/`W`/`front0` in
+  `cover_final_en.typ` e ri-renderizza. Poi **preflight KDP** (bleed, dorso, area codice a barre).
+- **Immagine ebook EN:** `copertina/ebook_cover_16_en.jpg` (ritaglio del pannello fronte, 1611×2301, ratio 1.428).
+  Se vuoi parità col listing IT (ratio 1.6) puoi ricomporla, ma è già valida.
 
-## 3) Rebuild EPUB EN (con cover EN)
-- In `ebook/build_epub_en.py` aggiorna `--epub-cover-image` a `copertina/ebook_cover_16_en.jpg`, poi:
+## 3) EPUB EN — GIÀ BUILDATO con cover EN
+- `ebook/React-PHP-The-Thin-Stack-EN.epub` usa già `ebook_cover_16_en.jpg`. Per ri-buildare:
 ```bash
 cd _cowork-impaginazione/ebook && python build_epub_en.py   # → React-PHP-The-Thin-Stack-EN.epub
 ```

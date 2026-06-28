@@ -60,7 +60,7 @@ epub=os.path.join(HERE,"React-PHP-The-Thin-Stack-EN.epub")
 cmd=[PANDOC, combined, "-o", epub,
      "-f","gfm+alerts+fenced_divs","--toc","--toc-depth=1","--split-level=1",
      "--css",os.path.join(HERE,"epub.css"),
-     "--epub-cover-image",os.path.join(COWORK,"copertina","ebook_cover_16.jpg"),
+     "--epub-cover-image",os.path.join(COWORK,"copertina","ebook_cover_16_en.jpg"),
      "--metadata-file",os.path.join(HERE,"metadata_en.yaml")]
 r=subprocess.run(cmd,capture_output=True,text=True)
 print("pandoc rc:",r.returncode)
