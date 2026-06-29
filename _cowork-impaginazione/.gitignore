@@ -12,3 +12,8 @@ produzione/_check/
 copertina/bg_hires.png
 copertina/_chk*
 ebook/combined.md
+# artefatti generati EN (rigenerabili con produzione/build_book_en.py / ebook/build_epub_en.py)
+produzione/libro_en.typ
+produzione/capitoli-typ-en/
+produzione/_interno_rgb_en.pdf
+ebook/combined_en.md
