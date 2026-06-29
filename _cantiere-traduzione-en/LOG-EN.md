@@ -423,3 +423,13 @@ corposo finora (~5k parole, 13 sezioni + In sintesi).
 - **Copertina EN**: copia tradotta + sorgente `copertina/sorgenti/cover_final_en.typ` con **dorso ricalcolato
   per 164 pp (9.38 mm; IT 9.15)**, W=371.33, front0=190.355. Render/QA/preflight + immagine ebook EN = Cowork.
 - **Handoff**: `_cowork-impaginazione/ISTRUZIONI-COWORK-BUILD-EN.md` (interno DeviceGray + copertina EN + rebuild EPUB con cover EN).
+
+## 2026-06-29 — Interno cartaceo EN finalizzato in Cowork (commit `2247d3a`)
+- **Cowork (Linux) ha prodotto l'interno DeviceGray formale**: `_cowork-impaginazione/master/Interno_The-Thin-Stack_3ed_7x10_BN_EN.pdf`.
+  Verifiche oggettive (ricontrollate qui prima del commit): **164 pp, multiplo di 4**; producer **GPL Ghostscript 9.55.0**;
+  **DeviceRGB=0, DeviceCMYK=0** (DeviceGray formale, niente fallback Typst); **504×720 pt = 7×10"**; font IBM Plex embedded+subset;
+  paratesti EN senza residui IT (Contents, PART×5, The Author, Third Edition, box WARNING/NOTE/TIP/IMPORTANT).
+- Copertina `cover_finale_en.pdf` confermata per 164 pp (dorso 9,38 mm): nessun ricalcolo, invariata.
+- `.gitignore` di `_cowork-impaginazione/`: aggiunte le voci EN a specchio dell'IT (`libro_en.typ`, `capitoli-typ-en/`, `_interno_rgb_en.pdf`, `combined_en.md`).
+- **DELIVERABLE EN COMPLETI** (committati + pushati su `main`): interno cartaceo DeviceGray, EPUB EN (cover EN), copertina print EN, cover ebook EN.
+- **Resta solo (fuori da Code/Cowork-build):** upload sul **listing KDP EN separato** (ISBN/ASIN proprio) + **copia di prova fisica**. Edizione IT: non toccata.
