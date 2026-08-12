@@ -1,9 +1,13 @@
 # STATO DEL PROGETTO — entrambe le edizioni pubblicate e in distribuzione
 
-> 🏁 **Il lavoro è chiuso.** «React + PHP: The Thin Stack» (Terza Edizione) è pubblicato su Amazon KDP
+> 🏁 **La Terza Edizione è chiusa.** «React + PHP: The Thin Stack» è pubblicato su Amazon KDP
 > in **due listing separati** (italiano e inglese US, ISBN/ASIN propri) ed è **in distribuzione da
 > tempo**. Stato confermato da Simone il **12/08/2026**; la data di messa in vendita non è registrata
-> in repo. Non c'è lavoro pendente: questo file descrive dove sta cosa, per quando servirà.
+> in repo. Questo file descrive dove sta cosa, per quando servirà.
+>
+> ➡️ **C'è però un fronte aperto:** le **ricognizioni dai siti reali**, che continuano a evolvere e a
+> produrre appunti per il manuale. Punto di ingresso:
+> **[_ricognizioni/PROSSIMA-SESSIONE.md](./_ricognizioni/PROSSIMA-SESSIONE.md)**.
 
 ---
 
