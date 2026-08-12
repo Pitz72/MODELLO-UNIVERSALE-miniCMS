@@ -433,3 +433,14 @@ corposo finora (~5k parole, 13 sezioni + In sintesi).
 - `.gitignore` di `_cowork-impaginazione/`: aggiunte le voci EN a specchio dell'IT (`libro_en.typ`, `capitoli-typ-en/`, `_interno_rgb_en.pdf`, `combined_en.md`).
 - **DELIVERABLE EN COMPLETI** (committati + pushati su `main`): interno cartaceo DeviceGray, EPUB EN (cover EN), copertina print EN, cover ebook EN.
 - **Resta solo (fuori da Code/Cowork-build):** upload sul **listing KDP EN separato** (ISBN/ASIN proprio) + **copia di prova fisica**. Edizione IT: non toccata.
+
+## 2026-08-12 — Chiusura del cantiere EN: pubblicato e in distribuzione
+- Simone conferma che **entrambe le edizioni sono pubblicate su KDP e in distribuzione da tempo**
+  (listing IT e listing EN separati, ISBN/ASIN propri). La data esatta di messa in vendita non è
+  registrata qui: al 12/08/2026 i libri sono online.
+- Cadono quindi gli ultimi «resta da fare» dei documenti di cantiere (upload KDP EN + copia di prova):
+  **non resta nulla**. Allineati `PROSSIMA-SESSIONE-EN.md` (ora chiusura, non prompt), `ROADMAP-EN.md`
+  (§7 a valle = fatto, checklist §Stato completata), `PROSSIMA-SESSIONE.md` a root e l'handoff
+  `_cowork-impaginazione/ISTRUZIONI-COWORK-BUILD-EN.md` (marcato come eseguito).
+- I documenti restano in repo come **riferimento per eventuali correzioni future** (convenzioni di
+  traduzione, tipografia US, procedura di rebuild) — non come lavoro pendente.

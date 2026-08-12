@@ -1,33 +1,41 @@
-# PROSSIMA SESSIONE — Traduzione EN
+# CANTIERE EN — CHIUSO
 
-> 🎉🎉 **TRADUZIONE EN INTEGRALE COMPLETA.** Tutti e 20 i capitoli + le 3 Appendici (A Boilerplate, B Fork,
-> C Testing & Deployment) sono tradotti in `manuale-en/` (un commit per file). Anche i **paratesti**
-> (frontespizio, colophon, dedica, Parti, BIO, metadata EPUB) sono tradotti: vedi `PARATESTI-EN.md`.
-> La dedica è già dentro `CHAPTER 01 - Manifesto.md`. **Non resta nulla da tradurre.**
+> 🏁 **Non c'è una «prossima sessione».** L'edizione inglese di «React + PHP: The Thin Stack» è
+> **tradotta, revisionata, impaginata, pubblicata su KDP e in distribuzione** (stato confermato da
+> Simone il **12/08/2026**; il listing è online da tempo, data esatta non registrata qui).
+> Questo file resta come chiusura del cantiere, non come prompt di lavoro.
 
-## Stato del cantiere (28/06/2026)
-- `manuale-en/`: **23 file** — `CHAPTER 01…20` + `APPENDIX A/B/C`. ✅
-- Verifica tipografica US su TUTTI i file: **0 caporali «», 0 spelling UK**, em-dash 0 in prosa-corpo
-  (solo titoli/footer e annotazioni `file:linea` nei commenti-codice), virgolette dritte solo dentro il codice,
-  0 residui IT in prosa (solo stringhe-codice IT volute, policy D2). ✅
-- `GLOSSARIO-IT-EN.md`: congelato e ricco (§2 copre CAP 1-20 + App. A/B/C; §3 mappa titoli; §4 idiomi; §5 invariati).
-- `LOG-EN.md`: una voce per ogni file, con le decisioni prese.
-- `PARATESTI-EN.md`: tutti i testi di servizio EN pronti per la build.
+## Cosa è stato completato
 
-## L'UNICO passo rimasto: BUILD EN (scope Cowork/impaginazione — NON traduzione)
-La traduzione è finita. Quel che resta è **produrre i deliverable inglesi**, ed è lavoro di build, non di testo:
-1. **Variante EN dello `STRUCT`** in `_cowork-impaginazione/produzione/build_book.py`:
-   - puntare ai file `manuale-en/CHAPTER NN - …` e `APPENDIX A/B/C - …` (oggi punta ai nomi IT `CAPITOLO N`);
-   - sostituire i paratesti cablati (frontespizio, colophon, Part titles+descrizioni, BIO, «Indice»→«Contents»,
-     «L'autore»→«The Author») con le versioni EN di `PARATESTI-EN.md`;
-   - `extract_dedica()` funziona identico sul `CHAPTER 01 - Manifesto.md` (la dedica EN è già un blockquote in testa).
-2. **Variante EN di `metadata.yaml`** (EPUB): blocco già pronto in `PARATESTI-EN.md` §7 (`language: en-US`, subtitle/
-   rights EN).
-3. Stessa gabbia 7×10", stessi font IBM Plex. Limite noto: ghostscript DeviceGray segfaulta su Windows
-   (l'interno è già grayscale → stampabile lo stesso). Vedi `_cowork-impaginazione/ISTRUZIONI-COWORK-BUILD.md`.
-4. **Copertina EN** (quarta/retro + metadati) e **listing KDP separato** (ISBN/ASIN proprio).
+### 1. Traduzione (chiusa il 28/06/2026)
+- `manuale-en/`: **23 file** — `CHAPTER 01…20` + `APPENDIX A/B/C`, un commit per file.
+- Paratesti tradotti in `PARATESTI-EN.md` (frontespizio, colophon, dedica, Parti, BIO, metadata EPUB).
+- Verifica tipografica US su tutti i file: 0 caporali «», 0 spelling UK, em-dash 0 in prosa-corpo,
+  0 residui IT in prosa (restano solo le stringhe-codice IT volute, policy D2).
 
-## Promemoria finale
-- Prima della **pubblicazione** EN: mettere in conto un **proofread da madrelingua tecnico** (la skill `humanizer`
-  + il glossario riducono il rischio di traduttese, non lo azzerano; Simone non giudica l'inglese nel merito).
-- Convenzioni di traduzione (per eventuali ritocchi): `ROADMAP-EN.md` + `GLOSSARIO-IT-EN.md`. Tipografia US in §3.
+### 2. Gate linguistico — proofread madrelingua tecnico US (chiuso il 28/06/2026)
+Triage applicato su tutti i 23 file: **Plane→Layer**, **treatment→cure without prevention**,
+**net→safety net/backstop**, **rung/scale invariato**, più de-calchi nativi puntuali.
+Respinte: l'inversione dell'analogia estintore/allarme (CAP 14) e `forged`→`spoofed` per il CSRF.
+Dettaglio in `GLOSSARIO-IT-EN.md` §«Decisioni di revisione madrelingua US» e in `LOG-EN.md`.
+
+### 3. Build EN (chiusa il 29/06/2026)
+- **Interno cartaceo**: `_cowork-impaginazione/master/Interno_The-Thin-Stack_3ed_7x10_BN_EN.pdf` —
+  DeviceGray formale (Ghostscript 9.55.0, prodotto in **Cowork**), **164 pp** multiplo di 4,
+  504×720 pt (7×10"), font IBM Plex embedded.
+- **EPUB**: `ebook/React-PHP-The-Thin-Stack-EN.epub` (en-US, cover EN).
+- **Copertina**: `copertina/cover_finale_en.pdf` (dorso 9,38 mm per 164 pp) + `ebook_cover_16_en.jpg`.
+- Script: `produzione/build_book_en.py` + `template_en.typ`; `ebook/build_epub_en.py` + `metadata_en.yaml`.
+
+### 4. Pubblicazione KDP
+Listing **EN separato** da quello italiano (ISBN/ASIN proprio). Caricato e **in distribuzione**.
+
+## Se un giorno servisse una correzione all'edizione EN
+1. Correggi i `.md` in `manuale-en/` — convenzioni in `ROADMAP-EN.md` §3 (tipografia **US**, non italiana)
+   e `GLOSSARIO-IT-EN.md`. Revisione con la skill **`humanizer`**, **non** `prosa-italiana`.
+2. Commit + push su `main`, e registra la modifica in `LOG-EN.md`.
+3. Rigenera i deliverable seguendo `_cowork-impaginazione/ISTRUZIONI-COWORK-BUILD-EN.md`
+   (l'interno DeviceGray va fatto in **Cowork**: `gs` segfaulta su Windows).
+4. ⚠️ Se il conteggio pagine cambia (≠ 164 o non multiplo di 4) va **rigenerata anche la copertina**,
+   perché cambia il dorso.
+5. Ricarica su KDP il listing EN (e ordina una copia di prova se l'interno è cambiato).

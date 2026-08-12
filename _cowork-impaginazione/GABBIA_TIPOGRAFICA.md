@@ -62,4 +62,6 @@ Interno **print-ready**: **160 pp**, multiplo di 4, formato 504×720 pt, font tu
 **DeviceGray verificato** (0 DeviceRGB, scarto canali ≤1 = solo antialiasing). Numerazione: indice
 romano, corpo arabo **da 1 sulla Parte I**, **nessun folio sulle bianche**. Dedica e bio confermate.
 `build_book.py` esegue tutto: Typst → intermedio RGB → Ghostscript DeviceGray → `master/`.
-Da fare: **copertina** (dorso su 160 pp + carta KDP), **eBook**, **copia di prova fisica** (regola assoluta).
+✅ **Completati anche copertina** (dorso su 160 pp + carta KDP), **eBook** e copia di prova: l'edizione
+italiana è **pubblicata su KDP e in distribuzione**. La stessa gabbia è stata riusata per l'**edizione
+inglese** (`template_en.typ`, interno di **164 pp** → dorso 9,38 mm), anch'essa pubblicata.

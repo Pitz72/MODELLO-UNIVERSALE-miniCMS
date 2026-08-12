@@ -1,5 +1,10 @@
 # ISTRUZIONI PER COWORK — Build print-ready «The Thin Stack» (ristampa urgente)
 
+> ✅ **HANDOFF GIÀ ESEGUITO (27/06/2026).** L'interno DeviceGray IT è stato prodotto
+> (`master/Interno_The-Thin-Stack_3ed_7x10_BN.pdf`, 160 pp) e l'edizione italiana è **pubblicata su KDP
+> e in distribuzione**. Questo documento resta come **procedura di rebuild** per un'eventuale ristampa
+> futura, non come lavoro da fare. Variante inglese: `ISTRUZIONI-COWORK-BUILD-EN.md`.
+
 > **Documento di handoff autosufficiente.** Lo legge una sessione **Claude Cowork** che non ha memoria
 > della sessione Code in cui sono state fatte le correzioni. Qui dentro c'è tutto: dove pescare il
 > materiale, come compilare, dove consegnare, come verificare.

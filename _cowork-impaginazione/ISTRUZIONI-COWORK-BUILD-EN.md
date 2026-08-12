@@ -1,5 +1,10 @@
 # ISTRUZIONI PER COWORK — Build print-ready EN «React + PHP: The Thin Stack»
 
+> ✅ **HANDOFF GIÀ ESEGUITO (29/06/2026).** Cowork ha prodotto l'interno DeviceGray EN
+> (`master/Interno_The-Thin-Stack_3ed_7x10_BN_EN.pdf`, 164 pp) e l'edizione inglese è poi stata
+> **pubblicata su KDP ed è in distribuzione**. Questo documento resta come **procedura di rebuild**
+> per un'eventuale ristampa futura, non come lavoro da fare.
+
 > **Documento di handoff autosufficiente.** Lo legge una sessione **Claude Cowork** senza memoria della
 > sessione Code. Riguarda l'**edizione inglese (US)**, un listing KDP separato da quello italiano.
 

@@ -1,5 +1,10 @@
 # ROADMAP — Traduzione integrale in inglese (US)
 
+> 🏁 **CANTIERE CHIUSO.** Traduzione (28/06/2026), gate madrelingua US (28/06), build EN (29/06) e
+> **pubblicazione KDP** sono tutte completate: l'edizione inglese è **in distribuzione**. Questo
+> documento resta come **riferimento delle convenzioni** (tipografia US §3, politiche §2) per eventuali
+> correzioni future, non come piano di lavoro. Chiusura del cantiere: `PROSSIMA-SESSIONE-EN.md`.
+
 Piano per tradurre «React + PHP: The Thin Stack» (Terza Edizione, IT congelata) in **inglese
 americano**. Metodo coerente col cantiere italiano: **microscopico, atomico, multi-sessione**, un
 capitolo per volta, con glossario condiviso e revisione di stile madrelingua.
@@ -75,13 +80,15 @@ NB: la skill `prosa-italiana` **non si applica** all'inglese.
 - `_cantiere-traduzione-en/LOG-EN.md` (registro) + `PROSSIMA-SESSIONE-EN.md` (prompt atomico successivo).
 - `README-EN.md` (o sezione EN nel README) con l'indice inglese.
 
-## 7. A valle (scope Cowork/impaginazione, NON ora)
-- **Build EN:** `build_book.py` e `build_epub.py` hanno lo `STRUCT` IT cablato (nomi-file, titoli di
-  Parte, BIO, colophon «Terza Edizione — Giugno 2026»). Serve una **variante EN** dello STRUCT + Part
-  titles/descrizioni EN + colophon EN. Stessa gabbia 7×10", stessi font IBM Plex.
-- **Copertina EN:** nuova quarta/retro e metadati; il fronte «React + PHP: The Thin Stack» è già inglese.
-- **KDP:** l'edizione inglese è un **listing KDP separato** (ISBN/ASIN proprio).
-- Tutto questo segue le `_cowork-impaginazione/ISTRUZIONI-COWORK-BUILD.md`, adattate all'EN.
+## 7. A valle (scope Cowork/impaginazione) — ✅ FATTO
+- **Build EN ✅:** create le varianti EN della toolchain — `produzione/build_book_en.py` +
+  `template_en.typ` (STRUCT che punta a `manuale-en/`, paratesti EN da `PARATESTI-EN.md`, `lang: "en"`)
+  e `ebook/build_epub_en.py` + `metadata_en.yaml` (en-US). Stessa gabbia 7×10", stessi font IBM Plex.
+  Interno DeviceGray **164 pp** prodotto in Cowork (`gs` segfaulta su Windows).
+- **Copertina EN ✅:** `copertina/cover_finale_en.pdf` (dorso 9,38 mm per 164 pp) da
+  `sorgenti/cover_final_en.typ`, più `ebook_cover_16_en.jpg` per l'EPUB.
+- **KDP ✅:** listing inglese separato (ISBN/ASIN proprio), **pubblicato e in distribuzione**.
+- Procedimento completo in `_cowork-impaginazione/ISTRUZIONI-COWORK-BUILD-EN.md`.
 
 ## 8. Rischi / trappole
 - **Incoerenza terminologica** tra capitoli → mitigata dal glossario congelato e dal pilota-gate.
@@ -94,5 +101,10 @@ NB: la skill `prosa-italiana` **non si applica** all'inglese.
 - [x] Decisioni 0 prese · piano scritto · glossario congelato sui punti di gate.
 - [x] **Decisioni di gate (27/06):** «Dal vivo» → **In the Wild**; **D2** commenti-codice tradotti;
   **D3** titoli BIO in italiano corsivo + glossa EN. Tipografia **US** blindata (§3).
-- [ ] **Sessione pilota CAP 1** → crea `manuale-en/` (+ `LOG-EN.md`, `PROSSIMA-SESSIONE-EN.md`),
-  traduci il Manifesto, fissa voce e tipografia su un caso reale → validazione di Simone.
+- [x] **Sessione pilota CAP 1** → creata `manuale-en/` (+ `LOG-EN.md`, `PROSSIMA-SESSIONE-EN.md`),
+  Manifesto tradotto, voce e tipografia fissate su un caso reale → **validato da Simone**.
+- [x] **Traduzione integrale (28/06/2026):** 23/23 file, un commit ciascuno.
+- [x] **Gate madrelingua tecnico US (28/06/2026):** proofread esterno triato e steso su tutti i file.
+- [x] **Build EN (29/06/2026):** interno DeviceGray 164 pp (Cowork) + EPUB en-US + copertina print/ebook EN.
+- [x] **Pubblicazione KDP:** listing EN separato, **online e in distribuzione**.
+- 🏁 **Cantiere chiuso.**

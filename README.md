@@ -73,4 +73,21 @@ L'obiettivo è uno standard di sviluppo per Web App moderne leggere che sia:
 - [Appendice C: Testing e Deploy (cenni)](./manuale/APPENDICE%20C%20-%20Testing%20e%20Deploy.md)
 
 ---
+
+## Stato: pubblicato
+
+La Terza Edizione è **pubblicata su Amazon KDP e in distribuzione**, in due listing separati con
+ISBN/ASIN propri:
+
+- 🇮🇹 **Edizione italiana** — sorgenti in [`manuale/`](./manuale), interno 7×10" B/N di 160 pagine + EPUB.
+- 🇺🇸 **Edizione inglese (US)** — «React + PHP: The Thin Stack», sorgenti in
+  [`manuale-en/`](./manuale-en) (`CHAPTER 01…20` + `APPENDIX A/B/C`), interno di 164 pagine + EPUB en-US.
+  Traduzione integrale con proofread madrelingua tecnico; convenzioni in
+  [`_cantiere-traduzione-en/`](./_cantiere-traduzione-en).
+
+La toolchain di impaginazione (Typst per l'interno e la copertina, pandoc per l'EPUB) e le procedure di
+rebuild stanno in [`_cowork-impaginazione/`](./_cowork-impaginazione). Per la procedura in caso di
+correzioni o ristampa, vedi [PROSSIMA-SESSIONE.md](./PROSSIMA-SESSIONE.md).
+
+---
 *Terza Edizione — Giugno 2026*
