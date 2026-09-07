@@ -1,6 +1,6 @@
 # PROSSIMA SESSIONE — ricognizioni dai siti verso il manuale
 
-> Prompt pronto da incollare. Aggiornato al **12/08/2026**.
+> Prompt pronto da incollare. Aggiornato al **14/08/2026**.
 
 ---
 
@@ -10,17 +10,56 @@
 Riprendiamo il canale ricognizioni: i siti reali producono appunti, io li porto
 qui e decidiamo cosa farne per il manuale.
 
-Leggi prima la memoria, poi la mappa già fatta:
+Leggi prima la memoria, poi le mappe già fatte:
 _ricognizioni/2026-08-12-SitoRuntime.md
+_ricognizioni/2026-08-14-RuntimeMagazine-senza-React.md
 
 Ho altri appunti da portarti. [dire quale sito / quale file]
 ```
 
 ---
 
-## Stato al 12/08/2026
+## Novità del 07/09/2026 — l'omologazione degli editor, e il verdetto sul libro
 
-### Cosa è già stato fatto
+- **[2026-09-07-omologazione-editor-tre-siti.md](2026-09-07-omologazione-editor-tre-siti.md)**:
+  fotografia degli editor di Festival, SimonePizzi e Runtime Radio, matrice dei divari, piano in tre
+  fasi (A Festival, C Runtime **fatte lo stesso giorno**; B SimonePizzi rimandata alla migrazione),
+  fattibilità della migrazione di SPW a PHP puro (6-10 sessioni, dopo la Fase A), e la Parte 4 sul
+  manuale: **verdetto «libro nuovo, non quarta edizione»**, con l'ossatura proposta e la condizione
+  (prima i `NOTE_PER_IL_MANUALE.md` di Festival e SPW, che non esistono).
+- Decisione (a)/(b)/(c)/(d) qui sotto: la proposta è **(b) subito**, **(c) scartata** a favore del
+  libro nuovo, **(d) capitolo del libro nuovo**. Attende il sì di Simone.
+- Dall'omologazione nasce un pezzo che il libro nuovo non aveva: **l'editor di casa** (Festival
+  v1.14.0, `assets/js/editor.js`), reference implementation per il capitolo sull'editing senza
+  Tiptap, con le due allowlist gemelle (JS e PHP) tenute uguali da una prova.
+
+## Stato al 14/08/2026
+
+### Novità del 14/08 — la ricognizione «senza React»
+- **[2026-08-14-RuntimeMagazine-senza-React.md](2026-08-14-RuntimeMagazine-senza-React.md)**.
+  Non è una ricognizione di deriva come quella di SR: è la mappatura di un **quinto sito che nasce
+  applicando il Modello ma togliendo React** (Runtime Magazine, HTML+PHP puro, Tailwind mantenuto).
+- Quattro rilievi che riguardano **il libro, non il sito**:
+  1. **Il CAP 11 è per intero una protesi.** Sette costi che il capitolo presenta come inevitabili —
+     doppia mappa rotte, `isCrawler()`, buco XSS del prerender, bozze indicizzate, cache orfana,
+     vettore DDoS, fossili SSG — sono costi *di React*, non del thin stack. Il capitolo non lo dichiara mai.
+  2. **Il filo dei quattro emettitori si chiude da solo** appena si toglie il render client: senza
+     DOMPurify la sanitizzazione *deve* stare lato server. Il vincolo architetturale produce la
+     prescrizione che quattro capitoli di disciplina non avevano prodotto.
+  3. **Sei cicatrici su sei hanno un'unica radice** (una regola di dominio scritta a mano in più posti,
+     che diverge) e il libro la nomina solo di sfuggita, parlando del gate. Meriterebbe un principio
+     con un nome, accanto a «più ingegnerizzato non vuol dire più sicuro».
+  4. **Il CAP 1 e il CAP 4 fanno scivolare insieme Tailwind e React.** Solo framer-motion dipende
+     davvero dal framework: la distinzione manca e costerebbe una riga.
+- Più: **tre difetti che il libro nomina e non risolve** (feed senza URL pulito, resize senza limite
+  in altezza, invio newsletter bloccante) e la **conferma dell'Appendice B per una via nuova** — la
+  password `runtime2026` del CAP 10 §9 è ricomparsa in un repo che *non* è un fork, propagata dalla
+  memoria di chi scrive invece che da un `git clone`.
+- Possibile **quinto sito di riferimento**: sarebbe il primo «gradino-zero del frontend», e renderebbe
+  vera la scala del CAP 1 anche sul piano della presentazione, dove oggi c'è un gradino solo. Vale
+  però **solo dopo** che il sito sarà in produzione con cicatrici proprie.
+
+### Cosa è già stato fatto (12/08/2026)
 - **Ricognizione SitoRuntime** completata e committata (`a75bcb2`):
   [2026-08-12-SitoRuntime.md](2026-08-12-SitoRuntime.md). Sito a **v2.21.0**, il libro lo fotografa
   a v2.9.13. Verifica fatta sul codice, non sul changelog.
